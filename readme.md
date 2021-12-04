@@ -22,22 +22,19 @@
 
 ### /verilog_wb_2
 
-* get rid of Fire-specific stuff (extra interfaces/logic in TL?)
+* get rid of Gemini-specific stuff (GEMINI_NOT_APOLLO=0) - not much stuff
 
-* module/signal renames (host-side)
-
-* signal resizing for 32b
+* create wb_omi_host to start connecting minimal interfaces to omi_host to execute wb rd/wr
 
 
 ### /verilog_wb_3
 
-* buffer, credits, etc. removal for simple WB-type bus
 
-* create wb_omi_host.v
+* module/signal renames (host-side)
+
+* clean out modules that will never be used in this version (cmd fifo's etc. - see yosys.txt)
 
 * create litex wrapper
 
 * init verilator tb
-
-
 
