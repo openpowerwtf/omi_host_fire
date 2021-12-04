@@ -1,486 +1,70 @@
-%Warning-PINMISSING: wb_omi_host.v:188:14: Cell has missing pin: 'phy_id'
-  188 | omi_host #() omi_host
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_id'
+  392 | omi_host #() omi_host
       |              ^~~~~~~~
                      ... For warning description see https://verilator.org/warn/PINMISSING?v=4.215
                      ... Use "/* verilator lint_off PINMISSING */" and lint_on around source to disable this message.
-%Warning-PINMISSING: wb_omi_host.v:188:14: Cell has missing pin: 'phy_in'
-  188 | omi_host #() omi_host
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_in'
+  392 | omi_host #() omi_host
       |              ^~~~~~~~
-%Warning-PINMISSING: wb_omi_host.v:188:14: Cell has missing pin: 'phy_out'
-  188 | omi_host #() omi_host
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_out'
+  392 | omi_host #() omi_host
       |              ^~~~~~~~
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'clk_156_25MHz'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_all_out'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'hb_gtwiz_reset_all_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_tx_done_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_rx_done_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_buffbypass_tx_done_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_buffbypass_rx_done_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_userclk_tx_active_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_userclk_rx_active_in'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'send_first'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_rx_datapath_out'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state2_to_3'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state4_to_5'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state6_to_1'
   372 | ocx_dlx_top #() dl
       |                 ^~
-                     wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-IMPLICIT: dl/ocx_dlx_tx_flt.v:950:8: Signal definition not found, creating implicitly: 'fsm_rpl_start'
-  950 | assign fsm_rpl_start = o[0];
-      |        ^~~~~~~~~~~~~
-                   dl/ocx_dlx_txdf.v:403:1: ... note: In file included from ocx_dlx_txdf.v
-                   dl/ocx_dlx_top.v:435:1: ... note: In file included from ocx_dlx_top.v
-                   omi_host.v:374:1: ... note: In file included from omi_host.v
-                   wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-IMPLICIT: dl/ocx_dlx_rx_lane.v:871:8: Signal definition not found, creating implicitly: 'EDPL_pchk'
-  871 | assign EDPL_pchk = ~(^{deskew_sync_hdr_q[1:0],chk_data_q[63:0]});                             
-      |        ^~~~~~~~~
-                   dl/ocx_dlx_rxdf.v:423:1: ... note: In file included from ocx_dlx_rxdf.v
-                   dl/ocx_dlx_top.v:351:1: ... note: In file included from ocx_dlx_top.v
-                   omi_host.v:374:1: ... note: In file included from omi_host.v
-                   wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-IMPLICIT: wb_omi_host.v:192:19: Signal definition not found, creating implicitly: 'tlx_afu_ready'
-  192 |    .tlx_afu_ready(tlx_afu_ready),
-      |                   ^~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:193:32: Signal definition not found, creating implicitly: 'afu_tlx_cmd_initial_credit'
-  193 |    .afu_tlx_cmd_initial_credit(afu_tlx_cmd_initial_credit),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:194:24: Signal definition not found, creating implicitly: 'afu_tlx_cmd_credit'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_initial_credit'
-  194 |    .afu_tlx_cmd_credit(afu_tlx_cmd_credit),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:195:23: Signal definition not found, creating implicitly: 'tlx_afu_cmd_valid'
-  195 |    .tlx_afu_cmd_valid(tlx_afu_cmd_valid),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:196:24: Signal definition not found, creating implicitly: 'tlx_afu_cmd_opcode'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_valid'
-  196 |    .tlx_afu_cmd_opcode(tlx_afu_cmd_opcode),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:197:20: Signal definition not found, creating implicitly: 'tlx_afu_cmd_dl'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_valid'
-  197 |    .tlx_afu_cmd_dl(tlx_afu_cmd_dl),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:198:21: Signal definition not found, creating implicitly: 'tlx_afu_cmd_end'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  198 |    .tlx_afu_cmd_end(tlx_afu_cmd_end),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:199:20: Signal definition not found, creating implicitly: 'tlx_afu_cmd_pa'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  199 |    .tlx_afu_cmd_pa(tlx_afu_cmd_pa),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:200:22: Signal definition not found, creating implicitly: 'tlx_afu_cmd_flag'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  200 |    .tlx_afu_cmd_flag(tlx_afu_cmd_flag),
-      |                      ^~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:201:20: Signal definition not found, creating implicitly: 'tlx_afu_cmd_os'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  201 |    .tlx_afu_cmd_os(tlx_afu_cmd_os),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:202:25: Signal definition not found, creating implicitly: 'tlx_afu_cmd_capptag'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_flag'
-  202 |    .tlx_afu_cmd_capptag(tlx_afu_cmd_capptag),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:203:20: Signal definition not found, creating implicitly: 'tlx_afu_cmd_pl'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  203 |    .tlx_afu_cmd_pl(tlx_afu_cmd_pl),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:204:20: Signal definition not found, creating implicitly: 'tlx_afu_cmd_be'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_dl'
-  204 |    .tlx_afu_cmd_be(tlx_afu_cmd_be),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:205:28: Signal definition not found, creating implicitly: 'cfg_tlx_initial_credit'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_initial_credit'
-  205 |    .cfg_tlx_initial_credit(cfg_tlx_initial_credit),
-      |                            ^~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:206:27: Signal definition not found, creating implicitly: 'cfg_tlx_credit_return'
-  206 |    .cfg_tlx_credit_return(cfg_tlx_credit_return),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:207:19: Signal definition not found, creating implicitly: 'tlx_cfg_valid'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_valid'
-  207 |    .tlx_cfg_valid(tlx_cfg_valid),
-      |                   ^~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:208:20: Signal definition not found, creating implicitly: 'tlx_cfg_opcode'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_opcode'
-  208 |    .tlx_cfg_opcode(tlx_cfg_opcode),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:209:16: Signal definition not found, creating implicitly: 'tlx_cfg_pa'
-                                       : ... Suggested alternative: 'tlx_cfg_valid'
-  209 |    .tlx_cfg_pa(tlx_cfg_pa),
-      |                ^~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:210:15: Signal definition not found, creating implicitly: 'tlx_cfg_t'
-                                       : ... Suggested alternative: 'tlx_cfg_pa'
-  210 |    .tlx_cfg_t(tlx_cfg_t),
-      |               ^~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:211:16: Signal definition not found, creating implicitly: 'tlx_cfg_pl'
-                                       : ... Suggested alternative: 'tlx_cfg_pa'
-  211 |    .tlx_cfg_pl(tlx_cfg_pl),
-      |                ^~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:212:21: Signal definition not found, creating implicitly: 'tlx_cfg_capptag'
-                                       : ... Suggested alternative: 'tlx_cfg_pa'
-  212 |    .tlx_cfg_capptag(tlx_cfg_capptag),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:213:22: Signal definition not found, creating implicitly: 'tlx_cfg_data_bus'
-  213 |    .tlx_cfg_data_bus(tlx_cfg_data_bus),
-      |                      ^~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:214:22: Signal definition not found, creating implicitly: 'tlx_cfg_data_bdi'
-                                       : ... Suggested alternative: 'tlx_cfg_data_bus'
-  214 |    .tlx_cfg_data_bdi(tlx_cfg_data_bdi),
-      |                      ^~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:215:33: Signal definition not found, creating implicitly: 'afu_tlx_resp_initial_credit'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_initial_credit'
-  215 |    .afu_tlx_resp_initial_credit(afu_tlx_resp_initial_credit),
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:216:25: Signal definition not found, creating implicitly: 'afu_tlx_resp_credit'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_credit'
-  216 |    .afu_tlx_resp_credit(afu_tlx_resp_credit),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:217:24: Signal definition not found, creating implicitly: 'tlx_afu_resp_valid'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_valid'
-  217 |    .tlx_afu_resp_valid(tlx_afu_resp_valid),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:218:25: Signal definition not found, creating implicitly: 'tlx_afu_resp_opcode'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_opcode'
-  218 |    .tlx_afu_resp_opcode(tlx_afu_resp_opcode),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:219:25: Signal definition not found, creating implicitly: 'tlx_afu_resp_afutag'
-                                       : ... Suggested alternative: 'tlx_afu_resp_opcode'
-  219 |    .tlx_afu_resp_afutag(tlx_afu_resp_afutag),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:220:23: Signal definition not found, creating implicitly: 'tlx_afu_resp_code'
-                                       : ... Suggested alternative: 'tlx_afu_resp_opcode'
-  220 |    .tlx_afu_resp_code(tlx_afu_resp_code),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:221:26: Signal definition not found, creating implicitly: 'tlx_afu_resp_pg_size'
-                                       : ... Suggested alternative: 'tlx_afu_resp_code'
-  221 |    .tlx_afu_resp_pg_size(tlx_afu_resp_pg_size),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:222:21: Signal definition not found, creating implicitly: 'tlx_afu_resp_dl'
-                                       : ... Suggested alternative: 'tlx_afu_resp_code'
-  222 |    .tlx_afu_resp_dl(tlx_afu_resp_dl),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:223:21: Signal definition not found, creating implicitly: 'tlx_afu_resp_dp'
-                                       : ... Suggested alternative: 'tlx_afu_resp_dl'
-  223 |    .tlx_afu_resp_dp(tlx_afu_resp_dp),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:224:27: Signal definition not found, creating implicitly: 'tlx_afu_resp_host_tag'
-                                       : ... Suggested alternative: 'tlx_afu_resp_afutag'
-  224 |    .tlx_afu_resp_host_tag(tlx_afu_resp_host_tag),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:225:30: Signal definition not found, creating implicitly: 'tlx_afu_resp_cache_state'
-                                       : ... Suggested alternative: 'tlx_afu_resp_afutag'
-  225 |    .tlx_afu_resp_cache_state(tlx_afu_resp_cache_state),
-      |                              ^~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:226:27: Signal definition not found, creating implicitly: 'tlx_afu_resp_addr_tag'
-                                       : ... Suggested alternative: 'tlx_afu_resp_afutag'
-  226 |    .tlx_afu_resp_addr_tag(tlx_afu_resp_addr_tag),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:227:24: Signal definition not found, creating implicitly: 'afu_tlx_cmd_rd_req'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_credit'
-  227 |    .afu_tlx_cmd_rd_req(afu_tlx_cmd_rd_req),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:228:24: Signal definition not found, creating implicitly: 'afu_tlx_cmd_rd_cnt'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_rd_req'
-  228 |    .afu_tlx_cmd_rd_cnt(afu_tlx_cmd_rd_cnt),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:229:28: Signal definition not found, creating implicitly: 'tlx_afu_cmd_data_valid'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_valid'
-  229 |    .tlx_afu_cmd_data_valid(tlx_afu_cmd_data_valid),
-      |                            ^~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:230:26: Signal definition not found, creating implicitly: 'tlx_afu_cmd_data_bus'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_valid'
-  230 |    .tlx_afu_cmd_data_bus(tlx_afu_cmd_data_bus),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:231:26: Signal definition not found, creating implicitly: 'tlx_afu_cmd_data_bdi'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_bus'
-  231 |    .tlx_afu_cmd_data_bdi(tlx_afu_cmd_data_bdi),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:232:25: Signal definition not found, creating implicitly: 'afu_tlx_resp_rd_req'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_rd_req'
-  232 |    .afu_tlx_resp_rd_req(afu_tlx_resp_rd_req),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:233:25: Signal definition not found, creating implicitly: 'afu_tlx_resp_rd_cnt'
-                                       : ... Suggested alternative: 'afu_tlx_resp_rd_req'
-  233 |    .afu_tlx_resp_rd_cnt(afu_tlx_resp_rd_cnt),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:234:29: Signal definition not found, creating implicitly: 'tlx_afu_resp_data_valid'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_valid'
-  234 |    .tlx_afu_resp_data_valid(tlx_afu_resp_data_valid),
-      |                             ^~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:235:27: Signal definition not found, creating implicitly: 'tlx_afu_resp_data_bus'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_bus'
-  235 |    .tlx_afu_resp_data_bus(tlx_afu_resp_data_bus),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:236:27: Signal definition not found, creating implicitly: 'tlx_afu_resp_data_bdi'
-                                       : ... Suggested alternative: 'tlx_afu_resp_data_bus'
-  236 |    .tlx_afu_resp_data_bdi(tlx_afu_resp_data_bdi),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:237:32: Signal definition not found, creating implicitly: 'tlx_afu_cmd_initial_credit'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_initial_credit'
-  237 |    .tlx_afu_cmd_initial_credit(tlx_afu_cmd_initial_credit),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:238:24: Signal definition not found, creating implicitly: 'tlx_afu_cmd_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_be'
-  238 |    .tlx_afu_cmd_credit(tlx_afu_cmd_credit),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:239:23: Signal definition not found, creating implicitly: 'afu_tlx_cmd_valid'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_credit'
-  239 |    .afu_tlx_cmd_valid(afu_tlx_cmd_valid),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:240:24: Signal definition not found, creating implicitly: 'afu_tlx_cmd_opcode'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_valid'
-  240 |    .afu_tlx_cmd_opcode(afu_tlx_cmd_opcode),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:241:27: Signal definition not found, creating implicitly: 'afu_tlx_cmd_pa_or_obj'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_opcode'
-  241 |    .afu_tlx_cmd_pa_or_obj(afu_tlx_cmd_pa_or_obj),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:242:24: Signal definition not found, creating implicitly: 'afu_tlx_cmd_afutag'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_credit'
-  242 |    .afu_tlx_cmd_afutag(afu_tlx_cmd_afutag),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:243:20: Signal definition not found, creating implicitly: 'afu_tlx_cmd_dl'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_valid'
-  243 |    .afu_tlx_cmd_dl(afu_tlx_cmd_dl),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:244:20: Signal definition not found, creating implicitly: 'afu_tlx_cmd_pl'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_dl'
-  244 |    .afu_tlx_cmd_pl(afu_tlx_cmd_pl),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:245:20: Signal definition not found, creating implicitly: 'afu_tlx_cmd_be'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_dl'
-  245 |    .afu_tlx_cmd_be(afu_tlx_cmd_be),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:246:22: Signal definition not found, creating implicitly: 'afu_tlx_cmd_flag'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_afutag'
-  246 |    .afu_tlx_cmd_flag(afu_tlx_cmd_flag),
-      |                      ^~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:247:21: Signal definition not found, creating implicitly: 'afu_tlx_cmd_bdf'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_be'
-  247 |    .afu_tlx_cmd_bdf(afu_tlx_cmd_bdf),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:248:27: Signal definition not found, creating implicitly: 'afu_tlx_cmd_resp_code'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_opcode'
-  248 |    .afu_tlx_cmd_resp_code(afu_tlx_cmd_resp_code),
-      |                           ^~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:249:25: Signal definition not found, creating implicitly: 'afu_tlx_cmd_capptag'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_afutag'
-  249 |    .afu_tlx_cmd_capptag(afu_tlx_cmd_capptag),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:250:37: Signal definition not found, creating implicitly: 'tlx_afu_cmd_data_initial_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_initial_credit'
-  250 |    .tlx_afu_cmd_data_initial_credit(tlx_afu_cmd_data_initial_credit),
-      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:251:29: Signal definition not found, creating implicitly: 'tlx_afu_cmd_data_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_bdi'
-  251 |    .tlx_afu_cmd_data_credit(tlx_afu_cmd_data_credit),
-      |                             ^~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:252:25: Signal definition not found, creating implicitly: 'afu_tlx_cdata_valid'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_valid'
-  252 |    .afu_tlx_cdata_valid(afu_tlx_cdata_valid),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:253:23: Signal definition not found, creating implicitly: 'afu_tlx_cdata_bus'
-                                       : ... Suggested alternative: 'afu_tlx_cdata_valid'
-  253 |    .afu_tlx_cdata_bus(afu_tlx_cdata_bus),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:254:23: Signal definition not found, creating implicitly: 'afu_tlx_cdata_bdi'
-                                       : ... Suggested alternative: 'afu_tlx_cdata_bus'
-  254 |    .afu_tlx_cdata_bdi(afu_tlx_cdata_bdi),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:255:33: Signal definition not found, creating implicitly: 'tlx_afu_resp_initial_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_initial_credit'
-  255 |    .tlx_afu_resp_initial_credit(tlx_afu_resp_initial_credit),
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:256:25: Signal definition not found, creating implicitly: 'tlx_afu_resp_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_credit'
-  256 |    .tlx_afu_resp_credit(tlx_afu_resp_credit),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:257:24: Signal definition not found, creating implicitly: 'afu_tlx_resp_valid'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_valid'
-  257 |    .afu_tlx_resp_valid(afu_tlx_resp_valid),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:258:25: Signal definition not found, creating implicitly: 'afu_tlx_resp_opcode'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_opcode'
-  258 |    .afu_tlx_resp_opcode(afu_tlx_resp_opcode),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:259:21: Signal definition not found, creating implicitly: 'afu_tlx_resp_dl'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_dl'
-  259 |    .afu_tlx_resp_dl(afu_tlx_resp_dl),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:260:26: Signal definition not found, creating implicitly: 'afu_tlx_resp_capptag'
-                                       : ... Suggested alternative: 'afu_tlx_cmd_capptag'
-  260 |    .afu_tlx_resp_capptag(afu_tlx_resp_capptag),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:261:21: Signal definition not found, creating implicitly: 'afu_tlx_resp_dp'
-                                       : ... Suggested alternative: 'afu_tlx_resp_dl'
-  261 |    .afu_tlx_resp_dp(afu_tlx_resp_dp),
-      |                     ^~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:262:23: Signal definition not found, creating implicitly: 'afu_tlx_resp_code'
-                                       : ... Suggested alternative: 'afu_tlx_resp_opcode'
-  262 |    .afu_tlx_resp_code(afu_tlx_resp_code),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:263:38: Signal definition not found, creating implicitly: 'tlx_afu_resp_data_initial_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_initial_credit'
-  263 |    .tlx_afu_resp_data_initial_credit(tlx_afu_resp_data_initial_credit),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:264:30: Signal definition not found, creating implicitly: 'tlx_afu_resp_data_credit'
-                                       : ... Suggested alternative: 'tlx_afu_cmd_data_credit'
-  264 |    .tlx_afu_resp_data_credit(tlx_afu_resp_data_credit),
-      |                              ^~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:265:25: Signal definition not found, creating implicitly: 'afu_tlx_rdata_valid'
-                                       : ... Suggested alternative: 'afu_tlx_cdata_valid'
-  265 |    .afu_tlx_rdata_valid(afu_tlx_rdata_valid),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:266:23: Signal definition not found, creating implicitly: 'afu_tlx_rdata_bus'
-                                       : ... Suggested alternative: 'afu_tlx_cdata_bus'
-  266 |    .afu_tlx_rdata_bus(afu_tlx_rdata_bus),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:267:23: Signal definition not found, creating implicitly: 'afu_tlx_rdata_bdi'
-                                       : ... Suggested alternative: 'afu_tlx_cdata_bdi'
-  267 |    .afu_tlx_rdata_bdi(afu_tlx_rdata_bdi),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:268:24: Signal definition not found, creating implicitly: 'cfg_tlx_resp_valid'
-                                       : ... Suggested alternative: 'afu_tlx_resp_valid'
-  268 |    .cfg_tlx_resp_valid(cfg_tlx_resp_valid),
-      |                        ^~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:269:25: Signal definition not found, creating implicitly: 'cfg_tlx_resp_opcode'
-                                       : ... Suggested alternative: 'afu_tlx_resp_opcode'
-  269 |    .cfg_tlx_resp_opcode(cfg_tlx_resp_opcode),
-      |                         ^~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:270:26: Signal definition not found, creating implicitly: 'cfg_tlx_resp_capptag'
-                                       : ... Suggested alternative: 'afu_tlx_resp_capptag'
-  270 |    .cfg_tlx_resp_capptag(cfg_tlx_resp_capptag),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:271:23: Signal definition not found, creating implicitly: 'cfg_tlx_resp_code'
-                                       : ... Suggested alternative: 'afu_tlx_resp_code'
-  271 |    .cfg_tlx_resp_code(cfg_tlx_resp_code),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:272:22: Signal definition not found, creating implicitly: 'tlx_cfg_resp_ack'
-                                       : ... Suggested alternative: 'tlx_afu_resp_dl'
-  272 |    .tlx_cfg_resp_ack(tlx_cfg_resp_ack),
-      |                      ^~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:273:26: Signal definition not found, creating implicitly: 'cfg_tlx_rdata_offset'
-                                       : ... Suggested alternative: 'afu_tlx_rdata_bus'
-  273 |    .cfg_tlx_rdata_offset(cfg_tlx_rdata_offset),
-      |                          ^~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:274:23: Signal definition not found, creating implicitly: 'cfg_tlx_rdata_bus'
-                                       : ... Suggested alternative: 'afu_tlx_rdata_bus'
-  274 |    .cfg_tlx_rdata_bus(cfg_tlx_rdata_bus),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:275:23: Signal definition not found, creating implicitly: 'cfg_tlx_rdata_bdi'
-                                       : ... Suggested alternative: 'afu_tlx_rdata_bdi'
-  275 |    .cfg_tlx_rdata_bdi(cfg_tlx_rdata_bdi),
-      |                       ^~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:276:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_tmpl_config_0'
-  276 |    .cfg_tlx_xmit_tmpl_config_0(cfg_tlx_xmit_tmpl_config_0),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:277:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_tmpl_config_1'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_tmpl_config_0'
-  277 |    .cfg_tlx_xmit_tmpl_config_1(cfg_tlx_xmit_tmpl_config_1),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:278:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_tmpl_config_2'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_tmpl_config_0'
-  278 |    .cfg_tlx_xmit_tmpl_config_2(cfg_tlx_xmit_tmpl_config_2),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:279:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_tmpl_config_3'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_tmpl_config_0'
-  279 |    .cfg_tlx_xmit_tmpl_config_3(cfg_tlx_xmit_tmpl_config_3),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:280:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_rate_config_0'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_tmpl_config_0'
-  280 |    .cfg_tlx_xmit_rate_config_0(cfg_tlx_xmit_rate_config_0),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:281:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_rate_config_1'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_rate_config_0'
-  281 |    .cfg_tlx_xmit_rate_config_1(cfg_tlx_xmit_rate_config_1),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:282:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_rate_config_2'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_rate_config_0'
-  282 |    .cfg_tlx_xmit_rate_config_2(cfg_tlx_xmit_rate_config_2),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:283:32: Signal definition not found, creating implicitly: 'cfg_tlx_xmit_rate_config_3'
-                                       : ... Suggested alternative: 'cfg_tlx_xmit_rate_config_0'
-  283 |    .cfg_tlx_xmit_rate_config_3(cfg_tlx_xmit_rate_config_3),
-      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:284:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_tmpl_capability_0'
-  284 |    .tlx_cfg_in_rcv_tmpl_capability_0(tlx_cfg_in_rcv_tmpl_capability_0),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:285:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_tmpl_capability_1'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_tmpl_capability_0'
-  285 |    .tlx_cfg_in_rcv_tmpl_capability_1(tlx_cfg_in_rcv_tmpl_capability_1),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:286:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_tmpl_capability_2'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_tmpl_capability_0'
-  286 |    .tlx_cfg_in_rcv_tmpl_capability_2(tlx_cfg_in_rcv_tmpl_capability_2),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:287:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_tmpl_capability_3'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_tmpl_capability_0'
-  287 |    .tlx_cfg_in_rcv_tmpl_capability_3(tlx_cfg_in_rcv_tmpl_capability_3),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:288:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_rate_capability_0'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_tmpl_capability_0'
-  288 |    .tlx_cfg_in_rcv_rate_capability_0(tlx_cfg_in_rcv_rate_capability_0),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:289:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_rate_capability_1'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_rate_capability_0'
-  289 |    .tlx_cfg_in_rcv_rate_capability_1(tlx_cfg_in_rcv_rate_capability_1),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:290:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_rate_capability_2'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_rate_capability_0'
-  290 |    .tlx_cfg_in_rcv_rate_capability_2(tlx_cfg_in_rcv_rate_capability_2),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:291:38: Signal definition not found, creating implicitly: 'tlx_cfg_in_rcv_rate_capability_3'
-                                       : ... Suggested alternative: 'tlx_cfg_in_rcv_rate_capability_0'
-  291 |    .tlx_cfg_in_rcv_rate_capability_3(tlx_cfg_in_rcv_rate_capability_3),
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:292:29: Signal definition not found, creating implicitly: 'tlx_cfg_oc3_tlx_version'
-  292 |    .tlx_cfg_oc3_tlx_version(tlx_cfg_oc3_tlx_version),
-      |                             ^~~~~~~~~~~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:293:20: Signal definition not found, creating implicitly: 'ro_dlx_version'
-  293 |    .ro_dlx_version(ro_dlx_version),
-      |                    ^~~~~~~~~~~~~~
-%Warning-IMPLICIT: wb_omi_host.v:350:14: Signal definition not found, creating implicitly: 'opt_gckn'
-  350 |    .opt_gckn(opt_gckn),
-      |              ^~~~~~~~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: dl/ocx_dlx_tx_flt.v:756:40: Operator COND expects 12 bits on the Conditional True, but Conditional True's CONST '7'h0' generates 7 bits.
                                           : ... In instance wb_omi_host.omi_host.dl.tx.flt
   756 | assign rx_ack_ptr_din[11:0] = reset_q  ? 7'b0000000:
@@ -488,7 +72,7 @@
                 dl/ocx_dlx_txdf.v:403:1: ... note: In file included from ocx_dlx_txdf.v
                 dl/ocx_dlx_top.v:435:1: ... note: In file included from ocx_dlx_top.v
                 omi_host.v:374:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: dl/ocx_dlx_tx_flt.v:781:52: Operator COND expects 12 bits on the Conditional True, but Conditional True's CONST '7'h0' generates 7 bits.
                                           : ... In instance wb_omi_host.omi_host.dl.tx.flt
   781 | assign tx_ack_ptr_din[11:0] = reset_q              ? 7'b0000000:
@@ -496,7 +80,7 @@
                 dl/ocx_dlx_txdf.v:403:1: ... note: In file included from ocx_dlx_txdf.v
                 dl/ocx_dlx_top.v:435:1: ... note: In file included from ocx_dlx_top.v
                 omi_host.v:374:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: dl/ocx_dlx_rx_main.v:476:28: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's CONST '2'h0' generates 2 bits.
                                            : ... In instance wb_omi_host.omi_host.dl.rx.main
   476 | assign x2_inside_write[2]  = 2'b0;  
@@ -504,408 +88,248 @@
                 dl/ocx_dlx_rxdf.v:341:1: ... note: In file included from ocx_dlx_rxdf.v
                 dl/ocx_dlx_top.v:351:1: ... note: In file included from ocx_dlx_top.v
                 omi_host.v:374:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: dl/ocx_dlx_top.v:345:22: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
                                        : ... In instance wb_omi_host.omi_host.dl
   345 | assign reg_07_update = reg_EDPL_error[7:0];
       |                      ^
                 omi_host.v:374:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:434:5: Output port connection 'dlx_l0_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l0_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   434 |    .dlx_l0_tx_seq(dlx_l0_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:435:5: Output port connection 'dlx_l1_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l1_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   435 |    .dlx_l1_tx_seq(dlx_l1_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:436:5: Output port connection 'dlx_l2_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l2_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   436 |    .dlx_l2_tx_seq(dlx_l2_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:437:5: Output port connection 'dlx_l3_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l3_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   437 |    .dlx_l3_tx_seq(dlx_l3_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:438:5: Output port connection 'dlx_l4_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l4_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   438 |    .dlx_l4_tx_seq(dlx_l4_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:439:5: Output port connection 'dlx_l5_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l5_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   439 |    .dlx_l5_tx_seq(dlx_l5_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:440:5: Output port connection 'dlx_l6_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l6_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   440 |    .dlx_l6_tx_seq(dlx_l6_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:441:5: Output port connection 'dlx_l7_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l7_tx_seq' generates 2 bits.
                                 : ... In instance wb_omi_host.omi_host
   441 |    .dlx_l7_tx_seq(dlx_l7_tx_seq),
       |     ^~~~~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
 %Warning-WIDTH: omi_host.v:444:5: Input port connection 'reg_04_val' expects 32 bits on the pin connection, but pin connection's VARREF 'reg_04_val' generates 1 bits.
                                 : ... In instance wb_omi_host.omi_host
   444 |    .reg_04_val(reg_04_val),
       |     ^~~~~~~~~~
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-WIDTH: wb_omi_host.v:193:5: Input port connection 'afu_tlx_cmd_initial_credit' expects 7 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_initial_credit' generates 1 bits.
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Error: wb_omi_host.v:267:34: Illegal bit or array select; type does not have a bit range, or bad dimension: data type is 'logic'
+                            : ... In instance wb_omi_host
+  267 |    assign wb_dat_o = rsp_data_bus[31:0];   
+      |                                  ^
+%Warning-SELRANGE: wb_omi_host.v:267:34: Extracting 32 bits from only 1 bit number
+                                       : ... In instance wb_omi_host
+  267 |    assign wb_dat_o = rsp_data_bus[31:0];   
+      |                                  ^
+%Warning-WIDTH: wb_omi_host.v:312:59: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  312 |    assign cmd_data_credits_d = ({4{cmd_data_credits_inc}} & cmd_data_credits_q + 1) |
+      |                                                           ^
+%Warning-WIDTH: wb_omi_host.v:313:59: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  313 |                                ({4{cmd_data_credits_dec}} & cmd_data_credits_q - 1) |
+      |                                                           ^
+%Warning-WIDTH: wb_omi_host.v:314:60: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  314 |                                ({4{cmd_data_credits_hold}} & cmd_data_credits_q);
+      |                                                            ^
+%Warning-WIDTH: wb_omi_host.v:358:17: Operator COND expects 64 bits on the Conditional False, but Conditional False's CONST '4'h0' generates 4 bits.
+                                    : ... In instance wb_omi_host
+  358 |       wb_cmd_we ? cmd_be : 4'b0,     
+      |                 ^
+%Warning-WIDTH: wb_omi_host.v:357:18: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's REPLICATE generates 124 bits.
+                                    : ... In instance wb_omi_host
+  357 |    assign cmd_pa = {
+      |                  ^
+%Warning-WIDTH: wb_omi_host.v:381:22: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's CONST '?32?h7' generates 32 or 3 bits.
+                                    : ... In instance wb_omi_host
+  381 |    assign rsp_rd_cnt = 'b111;  
+      |                      ^
+%Warning-WIDTH: wb_omi_host.v:383:32: Operator EQ expects 8 bits on the LHS, but LHS's VARREF 'rsp_opcode' generates 1 bits.
+                                    : ... In instance wb_omi_host
+  383 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |                                ^~
+%Warning-WIDTH: wb_omi_host.v:383:56: Operator EQ expects 8 bits on the LHS, but LHS's VARREF 'rsp_opcode' generates 1 bits.
+                                    : ... In instance wb_omi_host
+  383 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |                                                        ^~
+%Warning-WIDTH: wb_omi_host.v:402:5: Input port connection 'cfg_tlx_xmit_rate_config_0' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_0' generates 1 bits.
                                    : ... In instance wb_omi_host
-  193 |    .afu_tlx_cmd_initial_credit(afu_tlx_cmd_initial_credit),
+  402 |    .cfg_tlx_xmit_rate_config_0(tl_xmit_rate_config_0),
       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:196:5: Output port connection 'tlx_afu_cmd_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_opcode' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:403:5: Input port connection 'cfg_tlx_xmit_rate_config_1' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_1' generates 1 bits.
                                    : ... In instance wb_omi_host
-  196 |    .tlx_afu_cmd_opcode(tlx_afu_cmd_opcode),
-      |     ^~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:197:5: Output port connection 'tlx_afu_cmd_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_dl' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  197 |    .tlx_afu_cmd_dl(tlx_afu_cmd_dl),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:199:5: Output port connection 'tlx_afu_cmd_pa' expects 64 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_pa' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  199 |    .tlx_afu_cmd_pa(tlx_afu_cmd_pa),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:200:5: Output port connection 'tlx_afu_cmd_flag' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_flag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  200 |    .tlx_afu_cmd_flag(tlx_afu_cmd_flag),
-      |     ^~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:202:5: Output port connection 'tlx_afu_cmd_capptag' expects 16 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_capptag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  202 |    .tlx_afu_cmd_capptag(tlx_afu_cmd_capptag),
-      |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:203:5: Output port connection 'tlx_afu_cmd_pl' expects 3 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_pl' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  203 |    .tlx_afu_cmd_pl(tlx_afu_cmd_pl),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:204:5: Output port connection 'tlx_afu_cmd_be' expects 64 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_be' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  204 |    .tlx_afu_cmd_be(tlx_afu_cmd_be),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:205:5: Input port connection 'cfg_tlx_initial_credit' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  205 |    .cfg_tlx_initial_credit(cfg_tlx_initial_credit),
-      |     ^~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:208:5: Output port connection 'tlx_cfg_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_opcode' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  208 |    .tlx_cfg_opcode(tlx_cfg_opcode),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:209:5: Output port connection 'tlx_cfg_pa' expects 64 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_pa' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  209 |    .tlx_cfg_pa(tlx_cfg_pa),
-      |     ^~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:211:5: Output port connection 'tlx_cfg_pl' expects 3 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_pl' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  211 |    .tlx_cfg_pl(tlx_cfg_pl),
-      |     ^~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:212:5: Output port connection 'tlx_cfg_capptag' expects 16 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_capptag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  212 |    .tlx_cfg_capptag(tlx_cfg_capptag),
-      |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:213:5: Output port connection 'tlx_cfg_data_bus' expects 32 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_data_bus' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  213 |    .tlx_cfg_data_bus(tlx_cfg_data_bus),
-      |     ^~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:215:5: Input port connection 'afu_tlx_resp_initial_credit' expects 7 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  215 |    .afu_tlx_resp_initial_credit(afu_tlx_resp_initial_credit),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:218:5: Output port connection 'tlx_afu_resp_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_opcode' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  218 |    .tlx_afu_resp_opcode(tlx_afu_resp_opcode),
-      |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:219:5: Output port connection 'tlx_afu_resp_afutag' expects 16 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_afutag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  219 |    .tlx_afu_resp_afutag(tlx_afu_resp_afutag),
-      |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:220:5: Output port connection 'tlx_afu_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_code' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  220 |    .tlx_afu_resp_code(tlx_afu_resp_code),
-      |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:221:5: Output port connection 'tlx_afu_resp_pg_size' expects 6 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_pg_size' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  221 |    .tlx_afu_resp_pg_size(tlx_afu_resp_pg_size),
-      |     ^~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:222:5: Output port connection 'tlx_afu_resp_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_dl' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  222 |    .tlx_afu_resp_dl(tlx_afu_resp_dl),
-      |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:223:5: Output port connection 'tlx_afu_resp_dp' expects 2 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_dp' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  223 |    .tlx_afu_resp_dp(tlx_afu_resp_dp),
-      |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:224:5: Output port connection 'tlx_afu_resp_host_tag' expects 24 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_host_tag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  224 |    .tlx_afu_resp_host_tag(tlx_afu_resp_host_tag),
-      |     ^~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:225:5: Output port connection 'tlx_afu_resp_cache_state' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_cache_state' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  225 |    .tlx_afu_resp_cache_state(tlx_afu_resp_cache_state),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:226:5: Output port connection 'tlx_afu_resp_addr_tag' expects 18 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_addr_tag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  226 |    .tlx_afu_resp_addr_tag(tlx_afu_resp_addr_tag),
-      |     ^~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:228:5: Input port connection 'afu_tlx_cmd_rd_cnt' expects 3 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_rd_cnt' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  228 |    .afu_tlx_cmd_rd_cnt(afu_tlx_cmd_rd_cnt),
-      |     ^~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:230:5: Output port connection 'tlx_afu_cmd_data_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_data_bus' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  230 |    .tlx_afu_cmd_data_bus(tlx_afu_cmd_data_bus),
-      |     ^~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:233:5: Input port connection 'afu_tlx_resp_rd_cnt' expects 3 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_rd_cnt' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  233 |    .afu_tlx_resp_rd_cnt(afu_tlx_resp_rd_cnt),
-      |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:235:5: Output port connection 'tlx_afu_resp_data_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_data_bus' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  235 |    .tlx_afu_resp_data_bus(tlx_afu_resp_data_bus),
-      |     ^~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:237:5: Output port connection 'tlx_afu_cmd_initial_credit' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  237 |    .tlx_afu_cmd_initial_credit(tlx_afu_cmd_initial_credit),
+  403 |    .cfg_tlx_xmit_rate_config_1(tl_xmit_rate_config_1),
       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:240:5: Input port connection 'afu_tlx_cmd_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_opcode' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:404:5: Input port connection 'cfg_tlx_xmit_rate_config_2' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_2' generates 1 bits.
                                    : ... In instance wb_omi_host
-  240 |    .afu_tlx_cmd_opcode(afu_tlx_cmd_opcode),
-      |     ^~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:241:5: Input port connection 'afu_tlx_cmd_pa_or_obj' expects 64 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_pa_or_obj' generates 1 bits.
+  404 |    .cfg_tlx_xmit_rate_config_2(tl_xmit_rate_config_2),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:405:5: Input port connection 'cfg_tlx_xmit_rate_config_3' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_3' generates 1 bits.
                                    : ... In instance wb_omi_host
-  241 |    .afu_tlx_cmd_pa_or_obj(afu_tlx_cmd_pa_or_obj),
-      |     ^~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:242:5: Input port connection 'afu_tlx_cmd_afutag' expects 16 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_afutag' generates 1 bits.
+  405 |    .cfg_tlx_xmit_rate_config_3(tl_xmit_rate_config_3),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:410:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_0' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_0' generates 1 bits.
                                    : ... In instance wb_omi_host
-  242 |    .afu_tlx_cmd_afutag(afu_tlx_cmd_afutag),
-      |     ^~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:243:5: Input port connection 'afu_tlx_cmd_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_dl' generates 1 bits.
+  410 |    .tlx_cfg_in_rcv_rate_capability_0(rcv_rate_capability_0),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:411:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_1' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_1' generates 1 bits.
                                    : ... In instance wb_omi_host
-  243 |    .afu_tlx_cmd_dl(afu_tlx_cmd_dl),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:244:5: Input port connection 'afu_tlx_cmd_pl' expects 3 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_pl' generates 1 bits.
+  411 |    .tlx_cfg_in_rcv_rate_capability_1(rcv_rate_capability_1),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:412:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_2' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_2' generates 1 bits.
                                    : ... In instance wb_omi_host
-  244 |    .afu_tlx_cmd_pl(afu_tlx_cmd_pl),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:245:5: Input port connection 'afu_tlx_cmd_be' expects 64 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_be' generates 1 bits.
+  412 |    .tlx_cfg_in_rcv_rate_capability_2(rcv_rate_capability_2),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:413:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_3' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_3' generates 1 bits.
                                    : ... In instance wb_omi_host
-  245 |    .afu_tlx_cmd_be(afu_tlx_cmd_be),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:246:5: Input port connection 'afu_tlx_cmd_flag' expects 4 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_flag' generates 1 bits.
+  413 |    .tlx_cfg_in_rcv_rate_capability_3(rcv_rate_capability_3),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:425:5: Input port connection 'afu_tlx_cmd_bdf' expects 16 bits on the pin connection, but pin connection's VARREF 'acmd_bdf' generates 1 bits.
                                    : ... In instance wb_omi_host
-  246 |    .afu_tlx_cmd_flag(afu_tlx_cmd_flag),
-      |     ^~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:247:5: Input port connection 'afu_tlx_cmd_bdf' expects 16 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_bdf' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  247 |    .afu_tlx_cmd_bdf(afu_tlx_cmd_bdf),
+  425 |    .afu_tlx_cmd_bdf(acmd_bdf),
       |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:248:5: Input port connection 'afu_tlx_cmd_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_resp_code' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:428:5: Output port connection 'tlx_afu_cmd_data_initial_credit' expects 6 bits on the pin connection, but pin connection's VARREF 'cmd_data_initial_credits' generates 4 bits.
                                    : ... In instance wb_omi_host
-  248 |    .afu_tlx_cmd_resp_code(afu_tlx_cmd_resp_code),
-      |     ^~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:249:5: Input port connection 'afu_tlx_cmd_capptag' expects 16 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cmd_capptag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  249 |    .afu_tlx_cmd_capptag(afu_tlx_cmd_capptag),
-      |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:250:5: Output port connection 'tlx_afu_cmd_data_initial_credit' expects 6 bits on the pin connection, but pin connection's VARREF 'tlx_afu_cmd_data_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  250 |    .tlx_afu_cmd_data_initial_credit(tlx_afu_cmd_data_initial_credit),
+  428 |    .tlx_afu_cmd_data_initial_credit(cmd_data_initial_credits),
       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:253:5: Input port connection 'afu_tlx_cdata_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'afu_tlx_cdata_bus' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:434:5: Input port connection 'afu_tlx_resp_initial_credit' expects 7 bits on the pin connection, but pin connection's VARREF 'rsp_initial_credit' generates 1 bits.
                                    : ... In instance wb_omi_host
-  253 |    .afu_tlx_cdata_bus(afu_tlx_cdata_bus),
-      |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:255:5: Output port connection 'tlx_afu_resp_initial_credit' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  255 |    .tlx_afu_resp_initial_credit(tlx_afu_resp_initial_credit),
+  434 |    .afu_tlx_resp_initial_credit(rsp_initial_credit),
       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:258:5: Input port connection 'afu_tlx_resp_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_opcode' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:437:5: Output port connection 'tlx_afu_resp_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'rsp_opcode' generates 1 bits.
                                    : ... In instance wb_omi_host
-  258 |    .afu_tlx_resp_opcode(afu_tlx_resp_opcode),
+  437 |    .tlx_afu_resp_opcode(rsp_opcode),
       |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:259:5: Input port connection 'afu_tlx_resp_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_dl' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:438:5: Output port connection 'tlx_afu_resp_afutag' expects 16 bits on the pin connection, but pin connection's VARREF 'rsp_afutag' generates 1 bits.
                                    : ... In instance wb_omi_host
-  259 |    .afu_tlx_resp_dl(afu_tlx_resp_dl),
-      |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:260:5: Input port connection 'afu_tlx_resp_capptag' expects 16 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_capptag' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  260 |    .afu_tlx_resp_capptag(afu_tlx_resp_capptag),
-      |     ^~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:261:5: Input port connection 'afu_tlx_resp_dp' expects 2 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_dp' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  261 |    .afu_tlx_resp_dp(afu_tlx_resp_dp),
-      |     ^~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:262:5: Input port connection 'afu_tlx_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'afu_tlx_resp_code' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  262 |    .afu_tlx_resp_code(afu_tlx_resp_code),
-      |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:263:5: Output port connection 'tlx_afu_resp_data_initial_credit' expects 6 bits on the pin connection, but pin connection's VARREF 'tlx_afu_resp_data_initial_credit' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  263 |    .tlx_afu_resp_data_initial_credit(tlx_afu_resp_data_initial_credit),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:266:5: Input port connection 'afu_tlx_rdata_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'afu_tlx_rdata_bus' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  266 |    .afu_tlx_rdata_bus(afu_tlx_rdata_bus),
-      |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:269:5: Input port connection 'cfg_tlx_resp_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_resp_opcode' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  269 |    .cfg_tlx_resp_opcode(cfg_tlx_resp_opcode),
+  438 |    .tlx_afu_resp_afutag(rsp_afutag),
       |     ^~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:270:5: Input port connection 'cfg_tlx_resp_capptag' expects 16 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_resp_capptag' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:439:5: Output port connection 'tlx_afu_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'rsp_code' generates 1 bits.
                                    : ... In instance wb_omi_host
-  270 |    .cfg_tlx_resp_capptag(cfg_tlx_resp_capptag),
-      |     ^~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:271:5: Input port connection 'cfg_tlx_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_resp_code' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  271 |    .cfg_tlx_resp_code(cfg_tlx_resp_code),
+  439 |    .tlx_afu_resp_code(rsp_code),
       |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:273:5: Input port connection 'cfg_tlx_rdata_offset' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_rdata_offset' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:440:5: Output port connection 'tlx_afu_resp_pg_size' expects 6 bits on the pin connection, but pin connection's VARREF 'rsp_pg_size' generates 1 bits.
                                    : ... In instance wb_omi_host
-  273 |    .cfg_tlx_rdata_offset(cfg_tlx_rdata_offset),
+  440 |    .tlx_afu_resp_pg_size(rsp_pg_size),
       |     ^~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:274:5: Input port connection 'cfg_tlx_rdata_bus' expects 32 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_rdata_bus' generates 1 bits.
+%Warning-WIDTH: wb_omi_host.v:441:5: Output port connection 'tlx_afu_resp_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'rsp_dl' generates 1 bits.
                                    : ... In instance wb_omi_host
-  274 |    .cfg_tlx_rdata_bus(cfg_tlx_rdata_bus),
-      |     ^~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:280:5: Input port connection 'cfg_tlx_xmit_rate_config_0' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_xmit_rate_config_0' generates 1 bits.
+  441 |    .tlx_afu_resp_dl(rsp_dl),
+      |     ^~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:442:5: Output port connection 'tlx_afu_resp_dp' expects 2 bits on the pin connection, but pin connection's VARREF 'rsp_dp' generates 1 bits.
                                    : ... In instance wb_omi_host
-  280 |    .cfg_tlx_xmit_rate_config_0(cfg_tlx_xmit_rate_config_0),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:281:5: Input port connection 'cfg_tlx_xmit_rate_config_1' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_xmit_rate_config_1' generates 1 bits.
+  442 |    .tlx_afu_resp_dp(rsp_dp),
+      |     ^~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:443:5: Output port connection 'tlx_afu_resp_host_tag' expects 24 bits on the pin connection, but pin connection's VARREF 'rsp_host_tag' generates 1 bits.
                                    : ... In instance wb_omi_host
-  281 |    .cfg_tlx_xmit_rate_config_1(cfg_tlx_xmit_rate_config_1),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:282:5: Input port connection 'cfg_tlx_xmit_rate_config_2' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_xmit_rate_config_2' generates 1 bits.
+  443 |    .tlx_afu_resp_host_tag(rsp_host_tag),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:444:5: Output port connection 'tlx_afu_resp_cache_state' expects 4 bits on the pin connection, but pin connection's VARREF 'rsp_cache_state' generates 1 bits.
                                    : ... In instance wb_omi_host
-  282 |    .cfg_tlx_xmit_rate_config_2(cfg_tlx_xmit_rate_config_2),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:283:5: Input port connection 'cfg_tlx_xmit_rate_config_3' expects 4 bits on the pin connection, but pin connection's VARREF 'cfg_tlx_xmit_rate_config_3' generates 1 bits.
+  444 |    .tlx_afu_resp_cache_state(rsp_cache_state),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:445:5: Output port connection 'tlx_afu_resp_addr_tag' expects 18 bits on the pin connection, but pin connection's VARREF 'rsp_addr_tag' generates 1 bits.
                                    : ... In instance wb_omi_host
-  283 |    .cfg_tlx_xmit_rate_config_3(cfg_tlx_xmit_rate_config_3),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:288:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_0' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_in_rcv_rate_capability_0' generates 1 bits.
+  445 |    .tlx_afu_resp_addr_tag(rsp_addr_tag),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:449:5: Input port connection 'afu_tlx_resp_rd_cnt' expects 3 bits on the pin connection, but pin connection's VARREF 'rsp_rd_cnt' generates 1 bits.
                                    : ... In instance wb_omi_host
-  288 |    .tlx_cfg_in_rcv_rate_capability_0(tlx_cfg_in_rcv_rate_capability_0),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:289:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_1' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_in_rcv_rate_capability_1' generates 1 bits.
+  449 |    .afu_tlx_resp_rd_cnt(rsp_rd_cnt),
+      |     ^~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:451:5: Output port connection 'tlx_afu_resp_data_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'rsp_data_bus' generates 1 bits.
                                    : ... In instance wb_omi_host
-  289 |    .tlx_cfg_in_rcv_rate_capability_1(tlx_cfg_in_rcv_rate_capability_1),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:290:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_2' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_in_rcv_rate_capability_2' generates 1 bits.
+  451 |    .tlx_afu_resp_data_bus(rsp_data_bus),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:509:5: Input port connection 'ln0_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln0_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  290 |    .tlx_cfg_in_rcv_rate_capability_2(tlx_cfg_in_rcv_rate_capability_2),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:291:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_3' expects 4 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_in_rcv_rate_capability_3' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  291 |    .tlx_cfg_in_rcv_rate_capability_3(tlx_cfg_in_rcv_rate_capability_3),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:292:5: Output port connection 'tlx_cfg_oc3_tlx_version' expects 32 bits on the pin connection, but pin connection's VARREF 'tlx_cfg_oc3_tlx_version' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  292 |    .tlx_cfg_oc3_tlx_version(tlx_cfg_oc3_tlx_version),
-      |     ^~~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:293:5: Output port connection 'ro_dlx_version' expects 32 bits on the pin connection, but pin connection's VARREF 'ro_dlx_version' generates 1 bits.
-                                   : ... In instance wb_omi_host
-  293 |    .ro_dlx_version(ro_dlx_version),
-      |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:296:5: Input port connection 'ln0_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln0_rx_data' generates 8 bits.
-                                   : ... In instance wb_omi_host
-  296 |    .ln0_rx_data(ln0_rx_data),
+  509 |    .ln0_rx_data(ln0_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:300:5: Input port connection 'ln1_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln1_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:513:5: Input port connection 'ln1_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln1_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  300 |    .ln1_rx_data(ln1_rx_data),
+  513 |    .ln1_rx_data(ln1_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:304:5: Input port connection 'ln2_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln2_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:517:5: Input port connection 'ln2_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln2_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  304 |    .ln2_rx_data(ln2_rx_data),
+  517 |    .ln2_rx_data(ln2_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:308:5: Input port connection 'ln3_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln3_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:521:5: Input port connection 'ln3_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln3_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  308 |    .ln3_rx_data(ln3_rx_data),
+  521 |    .ln3_rx_data(ln3_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:312:5: Input port connection 'ln4_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln4_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:525:5: Input port connection 'ln4_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln4_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  312 |    .ln4_rx_data(ln4_rx_data),
+  525 |    .ln4_rx_data(ln4_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:316:5: Input port connection 'ln5_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln5_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:529:5: Input port connection 'ln5_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln5_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  316 |    .ln5_rx_data(ln5_rx_data),
+  529 |    .ln5_rx_data(ln5_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:320:5: Input port connection 'ln6_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln6_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:533:5: Input port connection 'ln6_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln6_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  320 |    .ln6_rx_data(ln6_rx_data),
+  533 |    .ln6_rx_data(ln6_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:324:5: Input port connection 'ln7_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln7_rx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:537:5: Input port connection 'ln7_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln7_rx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  324 |    .ln7_rx_data(ln7_rx_data),
+  537 |    .ln7_rx_data(ln7_rx_data),
       |     ^~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:326:5: Output port connection 'dlx_l0_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l0_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:539:5: Output port connection 'dlx_l0_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l0_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  326 |    .dlx_l0_tx_data(dlx_l0_tx_data),
+  539 |    .dlx_l0_tx_data(dlx_l0_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:327:5: Output port connection 'dlx_l1_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l1_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:540:5: Output port connection 'dlx_l1_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l1_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  327 |    .dlx_l1_tx_data(dlx_l1_tx_data),
+  540 |    .dlx_l1_tx_data(dlx_l1_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:328:5: Output port connection 'dlx_l2_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l2_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:541:5: Output port connection 'dlx_l2_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l2_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  328 |    .dlx_l2_tx_data(dlx_l2_tx_data),
+  541 |    .dlx_l2_tx_data(dlx_l2_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:329:5: Output port connection 'dlx_l3_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l3_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:542:5: Output port connection 'dlx_l3_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l3_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  329 |    .dlx_l3_tx_data(dlx_l3_tx_data),
+  542 |    .dlx_l3_tx_data(dlx_l3_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:330:5: Output port connection 'dlx_l4_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l4_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:543:5: Output port connection 'dlx_l4_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l4_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  330 |    .dlx_l4_tx_data(dlx_l4_tx_data),
+  543 |    .dlx_l4_tx_data(dlx_l4_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:331:5: Output port connection 'dlx_l5_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l5_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:544:5: Output port connection 'dlx_l5_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l5_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  331 |    .dlx_l5_tx_data(dlx_l5_tx_data),
+  544 |    .dlx_l5_tx_data(dlx_l5_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:332:5: Output port connection 'dlx_l6_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l6_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:545:5: Output port connection 'dlx_l6_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l6_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  332 |    .dlx_l6_tx_data(dlx_l6_tx_data),
+  545 |    .dlx_l6_tx_data(dlx_l6_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-WIDTH: wb_omi_host.v:333:5: Output port connection 'dlx_l7_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l7_tx_data' generates 8 bits.
+%Warning-WIDTH: wb_omi_host.v:546:5: Output port connection 'dlx_l7_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l7_tx_data' generates 8 bits.
                                    : ... In instance wb_omi_host
-  333 |    .dlx_l7_tx_data(dlx_l7_tx_data),
+  546 |    .dlx_l7_tx_data(dlx_l7_tx_data),
       |     ^~~~~~~~~~~~~~
-%Warning-UNSIGNED: tl/ocx_tlx_framer.v:1919:104: Comparison is constant due to unsigned arithmetic
-                                               : ... In instance wb_omi_host.omi_host.tl.OCX_TLX_FRAMER
- 1919 |     assign  there_are_enough_dcp0_credits  =   (vc0_dsegs_lookahead == 2'b00)  ?  (dcp0_tlxcrd_counter >= 16'h0000)  :    
-      |                                                                                                        ^~
-                   tl/ocx_tlx_top.v:537:1: ... note: In file included from ocx_tlx_top.v
-                   omi_host.v:256:1: ... note: In file included from omi_host.v
-                   wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-UNSIGNED: tl/ocx_tlx_framer.v:1923:104: Comparison is constant due to unsigned arithmetic
-                                               : ... In instance wb_omi_host.omi_host.tl.OCX_TLX_FRAMER
- 1923 |     assign  there_are_enough_dcp3_credits  =   (vc3_dsegs_lookahead == 2'b00)  ?  (dcp3_tlxcrd_counter >= 16'h0000)  :    
-      |                                                                                                        ^~
-                   tl/ocx_tlx_top.v:537:1: ... note: In file included from ocx_tlx_top.v
-                   omi_host.v:256:1: ... note: In file included from omi_host.v
-                   wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-CASEOVERLAP: tl/ocx_tlx_parser_err_mac.v:136:18: Case values overlap (example pattern 0x8)
-  136 |                  8'h08: err_resv_opcode_reg <= 1'b0;
-      |                  ^~~~~
-                      tl/ocx_tlx_rcv_top.v:283:1: ... note: In file included from ocx_tlx_rcv_top.v
-                      tl/ocx_tlx_top.v:420:1: ... note: In file included from ocx_tlx_top.v
-                      omi_host.v:256:1: ... note: In file included from omi_host.v
-                      wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-CASEX: tl/ocx_tlx_framer.v:1338:9: Suggest casez (with ?'s) in place of casex (with X's)
- 1338 |         casex (afu_reg_cmd_opcode)
-      |         ^~~~~
-                tl/ocx_tlx_top.v:537:1: ... note: In file included from ocx_tlx_top.v
-                omi_host.v:256:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
-%Warning-CASEX: tl/ocx_tlx_framer.v:3421:9: Suggest casez (with ?'s) in place of casex (with X's)
- 3421 |         casex (detected_error_vector)
-      |         ^~~~~
-                tl/ocx_tlx_top.v:537:1: ... note: In file included from ocx_tlx_top.v
-                omi_host.v:256:1: ... note: In file included from omi_host.v
-                wb_omi_host.v:190:1: ... note: In file included from wb_omi_host.v
+%Error: Exiting due to 1 error(s)

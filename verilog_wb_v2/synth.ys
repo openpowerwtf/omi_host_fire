@@ -2,5 +2,5 @@
 
 read_verilog tl/*
 read_verilog dl/*
-read_verilog omi_host.v
-hierarchy -top omi_host
+read_verilog ./*.v
+hierarchy -top wb_omi_host

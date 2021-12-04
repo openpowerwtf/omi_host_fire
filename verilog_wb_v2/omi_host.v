@@ -245,7 +245,7 @@ wire   [3:0]      tlx_dlx_debug_encode;
 wire   [31:0]     tlx_dlx_debug_info;
 wire              dlx_tlx_flit_valid;
 wire              dlx_tlx_flit_crc_err;
-wire              dlx_tlx_link_up;
+wire              dlx_tlx_link_up /* verilator public */;
 wire              dlx_tlx_flit_credit;
 wire   [2:0]      dlx_tlx_init_flit_depth;
 wire   [31:0]     dlx_tlx_dlx_config_info;
