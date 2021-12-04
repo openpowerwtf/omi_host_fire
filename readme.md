@@ -18,14 +18,15 @@
 * create omi_host.v
 
 
-## ToDo
-
 ### /verilog_wb_2
 
 * get rid of Gemini-specific stuff (GEMINI_NOT_APOLLO=0) - not much stuff
 
 * create wb_omi_host to start connecting minimal interfaces to omi_host to execute wb rd/wr
 
+## ToDo
+
+* continue wb_omi_host
 
 ### /verilog_wb_3
 
