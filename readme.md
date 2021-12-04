@@ -2,7 +2,7 @@
 
 * new top-level verilog for WB/CSR interfaces
 
-* 'virtual' PHY interface for various potential usages
+* 'virtual' PHY interface 
 
    * I/O can be GPIO(s) or SERDES
 
