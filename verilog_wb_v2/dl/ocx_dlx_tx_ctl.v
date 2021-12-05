@@ -832,16 +832,16 @@ end
 endfunction
 
     wire [2:0]   tsm_din;
-    (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q = 3'b110;
+    (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q  /*verilator public*/ = 3'b110;
     wire [7:0]   good_tx_lanes_din;
     reg [2:0]   tsm_int;
     reg  [7:0]   good_tx_lanes_q;
     wire [8:0]   seq_cnt_din;
     reg  [8:0]   seq_cnt_q;
     wire [3:0]   a_cnt_din;
- (*mark_debug = "true"*)   reg  [3:0]   a_cnt_q;
+ (*mark_debug = "true"*)   reg  [3:0]   a_cnt_q 		/*verilator public*/;
     wire [3:0]   b_cnt_din;
-  (*mark_debug = "true"*)  reg  [3:0]   b_cnt_q;
+  (*mark_debug = "true"*)  reg  [3:0]   b_cnt_q 		/*verilator public*/;
     wire [9:0]   timer_din;
     reg  [9:0]   timer_q;
     wire [0:22]  lfsr_din;
@@ -853,7 +853,7 @@ endfunction
     wire         det_sync_din;
     reg          det_sync_q;
     wire         flt_ready_din;
- (*mark_debug = "true"*)   reg          flt_ready_q;
+ (*mark_debug = "true"*)   reg          flt_ready_q 		/*verilator public*/;
     wire         good_tx_outsides_din;
     reg          good_tx_outsides_q;
     wire         good_tx_insides_din;
@@ -881,7 +881,7 @@ endfunction
     reg          reset_d1_q;
     wire         reset_d1_din;
     wire         start_train;
- (*mark_debug = "true"*)   reg          start_retrain_q;
+ (*mark_debug = "true"*)   reg          start_retrain_q 		/*verilator public*/;
     wire         start_retrain_din;
     reg [2:0]    start_retrain_dly_q;
     wire [2:0]   start_retrain_dly_din;
@@ -896,11 +896,11 @@ endfunction
     wire         ts4_done;
     wire         block_locked;
 
- (*mark_debug = "true"*)   reg         ts1_done_q;
-  (*mark_debug = "true"*)  reg         ts2_done_q;
-   (*mark_debug = "true"*) reg         ts3_done_q;
-    (*mark_debug = "true"*)reg         ts4_done_q;
-    (*mark_debug = "true"*) reg        block_locked_q;
+ (*mark_debug = "true"*)   reg         ts1_done_q 		/*verilator public*/;
+  (*mark_debug = "true"*)  reg         ts2_done_q 		/*verilator public*/;
+   (*mark_debug = "true"*) reg         ts3_done_q 		/*verilator public*/;
+    (*mark_debug = "true"*)reg         ts4_done_q 		/*verilator public*/;
+    (*mark_debug = "true"*) reg        block_locked_q 		/*verilator public*/;
 
     wire         tsm_advance;
     wire         tpulse;

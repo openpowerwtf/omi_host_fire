@@ -280,7 +280,7 @@ wire [63:0]     ln6_data;
 wire [63:0]     ln7_data;
 //-- from lanes
 wire [7:0]      data_flit;
-(*mark_debug = "true" *)wire [7:0]      deskew_valid;
+(*mark_debug = "true" *)wire [7:0]      deskew_valid 		/*verilator public*/;
 wire [7:0]      deskew_overflow;
 
 wire            deskew_all_valid_l0;
@@ -413,7 +413,7 @@ wire [7:0] found_sync;
 wire [7:0] find_a;
 wire [7:0] find_b;
 wire [7:0] find_first_b;
-(*mark_debug = "true" *)wire [7:0] valid_ln;
+(*mark_debug = "true" *)wire [7:0] valid_ln 		/*verilator public*/;
 wire [7:0] slip_ln;
 //-------------------------------------------
 wire [63:0] data_ln0;

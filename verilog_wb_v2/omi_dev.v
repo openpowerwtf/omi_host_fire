@@ -22,7 +22,7 @@
 
 `timescale 1ns / 10ps
 
-module omi_host #()
+module omi_dev #()
 (
         input                       clk,
         input                       rst,

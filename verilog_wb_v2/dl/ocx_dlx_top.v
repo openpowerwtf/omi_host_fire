@@ -188,7 +188,7 @@ output            ln7_rx_slip;
 // -- tlx interface
 output            dlx_tlx_flit_credit;
 output [2:0]      dlx_tlx_init_flit_depth;
-(*mark_debug = "true" *)input             tlx_dlx_flit_valid;
+(*mark_debug = "true" *)input             tlx_dlx_flit_valid 		/*verilator public*/;
 input  [511:0]    tlx_dlx_flit;
 // -- Phy interface
 output [63:0]     dlx_l0_tx_data;
@@ -264,7 +264,7 @@ wire            tx_rx_reset;
 wire            train_ts2;
 wire            train_ts67;
 wire            rx_tx_crc_error;
-(*mark_debug = "true" *)wire            rx_tx_retrain;
+(*mark_debug = "true" *)wire            rx_tx_retrain 		/*verilator public*/;
 wire            rx_tx_nack;
 wire [4:0]      rx_tx_tx_ack_rtn;
 wire [3:0]      rx_tx_rx_ack_inc;

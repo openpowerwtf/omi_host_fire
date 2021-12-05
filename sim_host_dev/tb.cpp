@@ -19,27 +19,7 @@ obj_dir/Vtop
 #include "verilated.h"
 
 #ifdef TRACING
-
 #include "Vtop__Syms.h"
-/*
-// INCLUDE MODEL CLASS
-#include "Vtop.h"
-
-// INCLUDE MODULE CLASSES
-#include "Vtop___024root.h"
-#include "Vtop_top.h"
-#include "Vtop_wb_omi_host.h"
-#include "Vtop_omi_host.h"
-#include "Vtop_ocx_dlx_top.h"
-#include "Vtop_ocx_dlx_rxdf.h"
-#include "Vtop_ocx_dlx_txdf.h"
-#include "Vtop_ocx_dlx_rx_main.h"
-#include "Vtop_ocx_dlx_rx_lane.h"
-#include "Vtop_ocx_dlx_tx_ctl.h"
-#include "Vtop_ocx_dlx_tx_flt.h"
-#include "Vtop_ocx_dlx_rx_bs.h"
-*/
-
 #include "verilated_vcd_c.h"
 VerilatedVcdC *t;
 std::string f = "wtf.vcd";
@@ -51,6 +31,8 @@ unsigned int t = 0;
 Vtop* m;
 
 vluint64_t main_time = 0;     // in units of timeprecision used in verilog or --timescale-override
+
+using namespace std;
 
 double sc_time_stamp() {      // $time in verilog
    return main_time;
@@ -76,10 +58,8 @@ void tick(void) {
    }
 }
 
-
 int main(int argc, char **argv) {
 
-   using namespace std;
    cout << setfill('0');
 
    Verilated::commandArgs(argc, argv);
@@ -96,7 +76,7 @@ int main(int argc, char **argv) {
    bool done = false;
    int i;
    unsigned int quiescing = 0;
-   unsigned int runCycles = 1000;
+   unsigned int runCycles = 2500;
    unsigned adrMask = 0x0000003C; // restrict address range
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
@@ -127,24 +107,19 @@ int main(int argc, char **argv) {
 
    //guessing!
    m->clk_156_25MHz = 0;
-   m->hb_gtwiz_reset_all_in = 1;
+   m->hb_gtwiz_reset_all_in = 0;
+   /* need to release this
+   assign dlx_reset = (send_first)                ? ~(gtwiz_reset_tx_done_in & gtwiz_buffbypass_tx_done_in) :
+                      (rec_first_xtsm_q == 1'b0)  ? ~(gtwiz_reset_rx_done_in & gtwiz_buffbypass_rx_done_in) :
+                                                    1'b0;
+   */
    m->send_first = 1;
-   m->gtwiz_reset_rx_done_in = 1;
-   m->gtwiz_reset_tx_done_in = 1;
+   m->gtwiz_reset_rx_done_in = 0;
+   m->gtwiz_reset_tx_done_in = 0;
    m->gtwiz_buffbypass_rx_done_in = 1;
    m->gtwiz_buffbypass_tx_done_in = 1;
-   m->gtwiz_userclk_rx_active_in = 1;
-   m->gtwiz_userclk_tx_active_in = 1;
-
-   //wtf not sure how you can load the refs to array
-   m->ln0_rx_valid = 1;
-   m->ln1_rx_valid = 1;
-   m->ln2_rx_valid = 1;
-   m->ln3_rx_valid = 1;
-   m->ln4_rx_valid = 1;
-   m->ln5_rx_valid = 1;
-   m->ln6_rx_valid = 1;
-   m->ln7_rx_valid = 1;
+   m->gtwiz_userclk_rx_active_in = 0;
+   m->gtwiz_userclk_tx_active_in = 0;
 
    cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
@@ -161,6 +136,9 @@ int main(int argc, char **argv) {
    tick();
    //cout << "Enabling link..." << endl;
    //m->cfg &= 0x7FFFFFFF;      // enable link after phy clock running
+
+   m->gtwiz_reset_rx_done_in = 1;
+   m->gtwiz_reset_tx_done_in = 1;
 
    dlx_config_info = m->top->host->omi_host->dlx_config_info;
    cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;

@@ -276,8 +276,8 @@ reg  [63:0]     deskew_buffer4_q;
 reg  [63:0]     deskew_buffer5_q;
 reg  [63:0]     deskew_buffer6_q;
 reg  [63:0]     deskew_buffer7_q;
-(*mark_debug = "true" *)reg  [3:0]      deskew_write_ptr_q;     //-- write pointer into the deskew buffer
-(*mark_debug = "true" *)reg  [3:0]      deskew_read_ptr_q ;      //-- read pointer from the deskew buffer
+(*mark_debug = "true" *)reg  [3:0]      deskew_write_ptr_q 		/*verilator public*/;     //-- write pointer into the deskew buffer
+(*mark_debug = "true" *)reg  [3:0]      deskew_read_ptr_q  		/*verilator public*/;      //-- read pointer from the deskew buffer
 //--reg             data_flit_q   ;           //-- make sure data_flit output aligns with data since rx cannot see header
 reg             data_flit0_q   ;           //-- make sure data_flit output aligns with data since rx cannot see header
 reg             data_flit1_q   ;
@@ -287,7 +287,7 @@ reg             data_flit4_q   ;
 reg             data_flit5_q   ;
 reg             data_flit6_q   ;
 reg             data_flit7_q   ;
-(*mark_debug = "true" *)reg             deskew_found_q ;         //-- found a deskew block and thus have stuff in the buffer even if not locked
+(*mark_debug = "true" *)reg             deskew_found_q  		/*verilator public*/;         //-- found a deskew block and thus have stuff in the buffer even if not locked
 reg             deskew_locked_q;        //-- deskew locked with other lanes (normal operation)
 reg             valid_q        ;
 
@@ -321,7 +321,7 @@ wire            is_deskew_din;              //-- is a deskew block
 
 //wire [7:0]      data_flit_dlyd_din;
 
-(*mark_debug = "true" *)reg             is_deskew_q;
+(*mark_debug = "true" *)reg             is_deskew_q 		/*verilator public*/;
 wire            found_pattern_a_din;
 reg             found_pattern_a_q;
 wire [7:0]      rx_tx_last_byte_ts3_din;
@@ -373,16 +373,16 @@ wire            EDPL_ready_din;
 wire  [63:0]  data_in_d1_din;
 wire  [63:0] data_in_d2_din;
 reg  [63:0]  data_in_d1_q;
-(*mark_debug = "true" *)reg  [63:0] data_in_d2_q;
+(*mark_debug = "true" *)reg  [63:0] data_in_d2_q 		/*verilator public*/;
 wire         valid_in_d1_din;
 wire         valid_in_d2_din;
 reg          valid_in_d1_q;
-(*mark_debug = "true" *)reg          valid_in_d2_q;
+(*mark_debug = "true" *)reg          valid_in_d2_q 		/*verilator public*/;
 
 wire [0:63] descrambled_data_raw_d1_din;
 wire [0:63]  descrambled_data_raw_d2_din;
 reg  [0:63] descrambled_data_raw_d1_q;
-(*mark_debug = "true" *)reg  [0:63]  descrambled_data_raw_d2_q;
+(*mark_debug = "true" *)reg  [0:63]  descrambled_data_raw_d2_q 		/*verilator public*/;
 
 //---------------------------------------- end declarations ------------------------------------------------
 //---------------------------------------- functions ------------------------------------------------

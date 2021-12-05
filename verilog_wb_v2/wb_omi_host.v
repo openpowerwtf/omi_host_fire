@@ -154,7 +154,34 @@ module wb_omi_host #(
         // could use these to control bits, etc. dynamically
         input   [3:0]                phy_id,
         input   [31:0]               phy_in,
-        output  [31:0]               phy_out
+        output  [31:0]               phy_out,
+
+   //wtf need these resets for sim and to connect to phy?
+   //-- Xilinx PHY interface with DLx
+      input clk_156_25MHz,                 // --  < input
+      output gtwiz_reset_all_out,           // --  > output
+      input hb_gtwiz_reset_all_in      ,   // --  < input
+      input gtwiz_reset_tx_done_in      ,  // --  < input
+      input gtwiz_reset_rx_done_in       , // --  < input
+      input gtwiz_buffbypass_tx_done_in   ,// --  < input
+      input gtwiz_buffbypass_rx_done_in ,  // --  < input
+      input gtwiz_userclk_tx_active_in   , // --  < input
+      input gtwiz_userclk_rx_active_in ,   // --  < input
+      input send_first                  ,  // --  < input
+// Signal used to indicate if the DLx should wait to transmit data before or after it starts receiving data.
+// ************************************************************
+// Determine when to first start sending pattern 'A'
+// ************************************************************
+// -- Note: In the 2 DLx/Transceiver design, one DLx should start transmitting pattern 'A' first while the other one waits
+//          to receive it before it starts transmitting the same pattern 'A'.
+//
+//          send_first = 1'b0 : wait until the Xilinx receiver is initialized (receiving data) before transmitting pattern 'A'
+//          send_first = 1'b1 : start transmitting pattern 'A' as soon as the Xilinx transmitter is initialized
+
+      output gtwiz_reset_rx_datapath_out  , // --  > output
+      output tsm_state2_to_3,
+      output tsm_state4_to_5,
+      output tsm_state6_to_1
 
     ) ;
 
@@ -566,8 +593,24 @@ omi_host #() omi_host
    .reg_06_hwwe(reg_06_hwwe),
    .reg_06_update(reg_06_update),
    .reg_07_hwwe(reg_07_hwwe),
-   .reg_07_update(reg_07_update)
+   .reg_07_update(reg_07_update),
 
+   //wtf need these resets for sim and to connect to phy?
+//-- Xilinx PHY interface with DLx
+   .clk_156_25MHz(clk_156_25MHz)    ,             // --  < input
+   .gtwiz_reset_all_out(gtwiz_reset_all_out) ,         // --  > output
+   .hb_gtwiz_reset_all_in(hb_gtwiz_reset_all_in) ,        // --  < input
+   .gtwiz_reset_tx_done_in(gtwiz_reset_tx_done_in),        // --  < input
+   .gtwiz_reset_rx_done_in(gtwiz_reset_rx_done_in) ,       // --  < input
+   .gtwiz_buffbypass_tx_done_in(gtwiz_buffbypass_tx_done_in),   // --  < input
+   .gtwiz_buffbypass_rx_done_in(gtwiz_buffbypass_rx_done_in) ,  // --  < input
+   .gtwiz_userclk_tx_active_in(gtwiz_userclk_tx_active_in) ,   // --  < input
+   .gtwiz_userclk_rx_active_in(gtwiz_userclk_rx_active_in)  ,  // --  < input
+   .send_first(send_first) ,                   // --  < input
+   .gtwiz_reset_rx_datapath_out(gtwiz_reset_rx_datapath_out),   // --  > output
+   .tsm_state2_to_3(tsm_state2_to_3),
+   .tsm_state4_to_5(tsm_state4_to_5),
+   .tsm_state6_to_1(tsm_state6_to_1)
 );
 
 // Generated

@@ -88,7 +88,7 @@ module ocx_dlx_tx_flt (
     output [31:0]  tx_flt_reg_update;       // -- Contribution to DLX control register update value 
 
     output [2:0]   dlx_tlx_init_flit_depth; // -- Static signal to TL indicated storage capacity of flit buffer
-   (*mark_debug = "true" *)  output         dlx_tlx_flit_credit;     // -- Signal to TL that it can send another flit
+   (*mark_debug = "true" *)  output         dlx_tlx_flit_credit 		/*verilator public*/;     // -- Signal to TL that it can send another flit
     input          tlx_dlx_flit_valid;      // -- Incoming valid data from TL for flit buffer
     input  [511:0] tlx_dlx_flit;            // -- ECC from TL for flit buffer
     input          cfg_transmit_order;
@@ -132,20 +132,20 @@ endfunction
 
     wire [511:0] zeros = 512'h0;
     wire         reset_din; 
-   (*mark_debug = "true" *) wire         no_fwd_progress; 
+   (*mark_debug = "true" *) wire         no_fwd_progress 		/*verilator public*/; 
     reg          reset_q;
     wire [1:0]   flit_type;  
     wire [1:0]   flit_type_din;  
-   (*mark_debug = "true" *) reg  [1:0]   flit_type_q;
+   (*mark_debug = "true" *) reg  [1:0]   flit_type_q 		/*verilator public*/;
     wire [3:0]   run_length_din;
-   (*mark_debug = "true" *) reg  [3:0]   run_length_q;
+   (*mark_debug = "true" *) reg  [3:0]   run_length_q 		/*verilator public*/;
     wire         train_done;
     wire         train_done_din;
     reg          train_done_q;
     wire [7:0]   link_errors_din;
     reg  [7:0]   link_errors_q;
     wire [7:0]   lane_inverted_din;
- (*mark_debug = "true" *)   reg  [7:0]   lane_inverted_q;
+ (*mark_debug = "true" *)   reg  [7:0]   lane_inverted_q 		/*verilator public*/;
     wire [7:0]   sync_was_detected_din;
     reg  [7:0]   sync_was_detected_q;
     wire [63:0]  link_info_din;
@@ -153,15 +153,15 @@ endfunction
     wire [11:0]   rx_ack_ptr_din;  
     reg  [11:0] rx_ack_ptr_q;
     wire [11:0]  tx_ack_ptr_din;
-   (*mark_debug = "true" *) reg  [11:0] tx_ack_ptr_q;
+   (*mark_debug = "true" *) reg  [11:0] tx_ack_ptr_q 		/*verilator public*/;
     wire [5:0]   no_progress_cnt_din;
-  (*mark_debug = "true" *)  reg  [5:0]   no_progress_cnt_q;
+  (*mark_debug = "true" *)  reg  [5:0]   no_progress_cnt_q 		/*verilator public*/;
     wire [5:0]   rtn_ack_cnt_din;   // -- count of rx flits received that need to be returned
     reg  [5:0]   rtn_ack_cnt_q;
-  (*mark_debug = "true" *)  wire [5:0]   rtn_acks;  // -- actual acks returned in a cmd or replay flits
+  (*mark_debug = "true" *)  wire [5:0]   rtn_acks 		/*verilator public*/;  // -- actual acks returned in a cmd or replay flits
     wire         acks_sent;
     wire         max_ack_cnt;
-(*mark_debug = "true" *)    wire [1:0]   dl2dl_ack;
+(*mark_debug = "true" *)    wire [1:0]   dl2dl_ack 		/*verilator public*/;
     wire         replay_start;
     wire         idle;
     wire         crc_zero_din;
@@ -189,16 +189,16 @@ endfunction
     wire [511:0] flit_buf1_data_din;
     wire [511:0] flit_buf2_data_din;
     wire [511:0] flit_buf3_data_din;
-(*mark_debug = "true" *)    reg  [511:0] flit_buf0_data_q;
- (*mark_debug = "true" *)   reg  [511:0] flit_buf1_data_q;
- (*mark_debug = "true" *)   reg  [511:0] flit_buf2_data_q;
- (*mark_debug = "true" *)   reg  [511:0] flit_buf3_data_q;
+(*mark_debug = "true" *)    reg  [511:0] flit_buf0_data_q 		/*verilator public*/;
+ (*mark_debug = "true" *)   reg  [511:0] flit_buf1_data_q 		/*verilator public*/;
+ (*mark_debug = "true" *)   reg  [511:0] flit_buf2_data_q 		/*verilator public*/;
+ (*mark_debug = "true" *)   reg  [511:0] flit_buf3_data_q 		/*verilator public*/;
     wire [1:0]   flit_wr_ptr_din;
-  (*mark_debug = "true" *)  reg  [1:0]   flit_wr_ptr_q;
+  (*mark_debug = "true" *)  reg  [1:0]   flit_wr_ptr_q 		/*verilator public*/;
     wire [1:0]   flit_rd_ptr_din;
-(*mark_debug = "true" *)    reg  [1:0]   flit_rd_ptr_q; 
- (*mark_debug = "true" *)   wire         flit_vld;
- (*mark_debug = "true" *)   wire         ftb_empty;
+(*mark_debug = "true" *)    reg  [1:0]   flit_rd_ptr_q 		/*verilator public*/; 
+ (*mark_debug = "true" *)   wire         flit_vld 		/*verilator public*/;
+ (*mark_debug = "true" *)   wire         ftb_empty 		/*verilator public*/;
     wire         flit_vld_din;
     reg          flit_vld_q;
     wire         x4_replay_restart;
@@ -366,7 +366,7 @@ endfunction
     wire [511:0]        flt_que_data_int_d1_din;     
     wire [511:0]        flt_que_data_int_d2_din;     
     reg [511:0]        flt_que_data_int_d1_q;     
-(*mark_debug = "true" *)(*keep = "true" *)  reg [511:0]        flt_que_data_int_d2_q;     
+(*mark_debug = "true" *)(*keep = "true" *)  reg [511:0]        flt_que_data_int_d2_q 		/*verilator public*/;     
     wire [9:0]   recal_status_cnt_din;
     reg  [9:0]   recal_status_cnt_q;
     wire [1:0]   recal_status_din;
@@ -374,8 +374,8 @@ endfunction
     wire [1:0]   recal_status_in_din;
     reg  [1:0]   recal_status_in_q;
     wire         first_recal_change_din;
-(*mark_debug = "true" *)    reg          first_recal_change_q;
-(*mark_debug = "true" *)    wire         recal_status_change;
+(*mark_debug = "true" *)    reg          first_recal_change_q 		/*verilator public*/;
+(*mark_debug = "true" *)    wire         recal_status_change 		/*verilator public*/;
     wire         recal_status_cnt_eq_0;
     wire not_x8;
 assign ocmb_mode = 1'b1;    

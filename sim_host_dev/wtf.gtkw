@@ -1,0 +1,139 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Sun Dec  5 23:37:26 2021
+[*]
+[dumpfile] "/home/wtf/projects/omi_host_fire/sim_host_dev/wtf.vcd"
+[dumpfile_mtime] "Sun Dec  5 23:36:17 2021"
+[dumpfile_size] 350681982
+[savefile] "/home/wtf/projects/omi_host_fire/sim_host_dev/wtf.gtkw"
+[timestart] 8
+[size] 4118 2513
+[pos] 328 179
+*-8.000000 3331 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.top.
+[treeopen] TOP.top.dev.dl.
+[treeopen] TOP.top.dev.dl.tx.
+[treeopen] TOP.top.host.
+[treeopen] TOP.top.host.omi_host.
+[treeopen] TOP.top.host.omi_host.dl.
+[treeopen] TOP.top.host.omi_host.dl.tx.
+[sst_width] 626
+[signals_width] 539
+[sst_expanded] 1
+[sst_vpaned_height] 788
+@28
+TOP.clk
+TOP.rst
+TOP.top.host.omi_host.opt_gckn
+TOP.top.host.omi_host.dl.hb_gtwiz_reset_all_in
+TOP.top.host.omi_host.dl.gtwiz_reset_rx_done_in
+TOP.top.host.omi_host.dl.gtwiz_reset_tx_done_in
+TOP.top.host.omi_host.dl.gtwiz_userclk_rx_active_in
+TOP.top.host.omi_host.dl.gtwiz_userclk_tx_active_in
+TOP.top.host.omi_host.dl.gtwiz_buffbypass_rx_done_in
+TOP.top.host.omi_host.dl.gtwiz_buffbypass_tx_done_in
+TOP.top.host.omi_host.dl.gtwiz_reset_all_out
+TOP.top.host.omi_host.dl.gtwiz_reset_rx_datapath_out
+TOP.top.ln0_rx_valid
+TOP.top.dev_ln0_rx_valid
+TOP.top.ln0_tx_data
+TOP.top.ln0_tx_header
+TOP.top.ln0_tx_seq
+TOP.top.ln0_tx_data
+TOP.top.ln1_tx_data
+TOP.top.ln2_tx_data
+TOP.top.ln3_tx_data
+TOP.top.ln4_tx_data
+TOP.top.ln5_tx_data
+TOP.top.ln6_tx_data
+@29
+TOP.top.ln7_tx_data
+@200
+-WB
+@28
+[color] 2
+TOP.wb_cyc
+[color] 2
+TOP.wb_stb
+[color] 2
+TOP.wb_we
+@22
+[color] 2
+TOP.wb_sel[3:0]
+[color] 2
+TOP.wb_dat_i[31:0]
+@28
+[color] 2
+TOP.wb_ack
+@22
+[color] 2
+TOP.wb_adr[31:0]
+[color] 2
+TOP.wb_dat_o[31:0]
+@200
+-WB_OMI_HOST
+@28
+TOP.top.host.wb_cmd_val
+TOP.top.host.cmdseq_q[1:0]
+TOP.top.host.cmd_valid
+@200
+-TL
+@28
+[color] 3
+TOP.top.host.omi_host.tl.tlx_afu_ready
+[color] 3
+TOP.top.host.omi_host.tl.afu_tlx_cmd_valid
+@200
+-DL
+@28
+TOP.top.host.omi_host.dl.tx.dlx_clk
+TOP.top.host.omi_host.dl.tx.ctl.dlx_reset
+@22
+TOP.top.host.omi_host.dl.tx.ctl.tsm_q[2:0]
+TOP.top.host.omi_host.dl.tx.ctl.seq_cnt_q[8:0]
+@28
+TOP.top.host.omi_host.dl.rx.ln0_rx_valid
+TOP.top.host.omi_host.dl.rx.ln0_rx_header[1:0]
+@22
+TOP.top.host.omi_host.dl.rx.ln0_rx_data[63:0]
+@28
+TOP.top.host.omi_host.dl.rx.tx_rx_phy_training
+TOP.top.host.omi_host.dl.rx.phy_training_q
+TOP.top.host.omi_host.dl.rx.tx_rx_training
+TOP.top.host.omi_host.dl.tx.rx_tx_retrain
+TOP.top.host.omi_host.dl.clk_156_25MHz
+TOP.top.host.omi_host.dl.rx_tx_linkup
+TOP.top.host.omi_host.dl.rx_tx_retrain
+TOP.top.host.omi_host.dl.rx_tx_recal_status[1:0]
+TOP.top.host.omi_host.dl.train_ts2
+TOP.top.host.omi_host.dl.train_ts67
+TOP.top.host.omi_host.dl.tx_rx_phy_training
+TOP.top.host.omi_host.dl.tx_rx_reset
+TOP.top.host.omi_host.dl.tx_rx_training
+TOP.top.host.omi_host.dl.ln_cfg_q[2:0]
+TOP.top.ln0_tx_seq
+TOP.top.ln0_tx_header
+TOP.top.ln0_tx_data
+TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_tx_a_pattern
+TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_tx_b_pattern
+TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_tx_sync_pattern
+TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_tx_zeros
+@200
+-Device
+@28
+TOP.top.dev.dl.tx.ctl.dlx_clk
+@22
+TOP.top.dev.dl.tx.ctl.tsm_q[2:0]
+@28
+TOP.top.dev.ln0_rx_valid
+TOP.top.dev.ln0_rx_header[1:0]
+@22
+TOP.top.dev.ln0_rx_data[63:0]
+@28
+TOP.top.dev.dl.rx.phy_training_q
+TOP.top.dev.dl.rx.tx_rx_reset
+TOP.top.dev.dl.rx.tx_rx_phy_training
+TOP.top.dev.dl.rx.tx_rx_training
+[pattern_trace] 1
+[pattern_trace] 0
