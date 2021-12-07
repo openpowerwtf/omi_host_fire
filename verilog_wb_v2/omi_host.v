@@ -248,9 +248,9 @@ module omi_host #()
       input gtwiz_userclk_rx_active_in ,   // --  < input
       input send_first                  ,  // --  < input
       output gtwiz_reset_rx_datapath_out  , // --  > output
-      output tsm_state2_to_3,
-      output tsm_state4_to_5,
-      output tsm_state6_to_1
+      input tsm_state2_to_3,
+      input tsm_state4_to_5,
+      input tsm_state6_to_1
     ) ;
 
 

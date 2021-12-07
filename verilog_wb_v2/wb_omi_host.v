@@ -179,9 +179,9 @@ module wb_omi_host #(
 //          send_first = 1'b1 : start transmitting pattern 'A' as soon as the Xilinx transmitter is initialized
 
       output gtwiz_reset_rx_datapath_out  , // --  > output
-      output tsm_state2_to_3,
-      output tsm_state4_to_5,
-      output tsm_state6_to_1
+      input tsm_state2_to_3,
+      input tsm_state4_to_5,
+      input tsm_state6_to_1
 
     ) ;
 

@@ -3,7 +3,7 @@
 `timescale 1 ns / 1 ns
 
 module top #(
-   parameter PHY_BITS = 8
+   parameter PHY_BITS = 64
 ) (
    input                       clk,
    input                       rst,
@@ -32,9 +32,12 @@ module top #(
       input gtwiz_userclk_rx_active_in ,   // --  < input
       input send_first                  ,  // --  < input
       output gtwiz_reset_rx_datapath_out  , // --  > output
-      output tsm_state2_to_3,
-      output tsm_state4_to_5,
-      output tsm_state6_to_1
+   input host_tsm_state2_to_3,
+   input host_tsm_state4_to_5,
+   input host_tsm_state6_to_1,
+   input dev_tsm_state2_to_3,
+   input dev_tsm_state4_to_5,
+   input dev_tsm_state6_to_1
 );
 
 wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
@@ -117,12 +120,94 @@ wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
    .gtwiz_userclk_rx_active_in(gtwiz_userclk_rx_active_in)  ,  // --  < input
    .send_first(send_first),
    .gtwiz_reset_rx_datapath_out(gtwiz_reset_rx_datapath_out),   // --  > output
-   .tsm_state2_to_3(tsm_state2_to_3),
-   .tsm_state4_to_5(tsm_state4_to_5),
-   .tsm_state6_to_1(tsm_state6_to_1)
+   .tsm_state2_to_3(host_tsm_state2_to_3),
+   .tsm_state4_to_5(host_tsm_state4_to_5),
+   .tsm_state6_to_1(host_tsm_state6_to_1)
 );
 
 // phy
+wire   [1:0]  ln0_rx_header;
+wire   [1:0]  ln1_rx_header;
+wire   [1:0]  ln2_rx_header;
+wire   [1:0]  ln3_rx_header;
+wire   [1:0]  ln4_rx_header;
+wire   [1:0]  ln5_rx_header;
+wire   [1:0]  ln6_rx_header;
+wire   [1:0]  ln7_rx_header;
+wire   [63:0] ln0_rx_data;
+wire   [63:0] ln1_rx_data;
+wire   [63:0] ln2_rx_data;
+wire   [63:0] ln3_rx_data;
+wire   [63:0] ln4_rx_data;
+wire   [63:0] ln5_rx_data;
+wire   [63:0] ln6_rx_data;
+wire   [63:0] ln7_rx_data;
+wire   [1:0]  ln0_tx_header;
+wire   [1:0]  ln1_tx_header;
+wire   [1:0]  ln2_tx_header;
+wire   [1:0]  ln3_tx_header;
+wire   [1:0]  ln4_tx_header;
+wire   [1:0]  ln5_tx_header;
+wire   [1:0]  ln6_tx_header;
+wire   [1:0]  ln7_tx_header;
+wire   [1:0]  ln0_tx_seq;
+wire   [1:0]  ln1_tx_seq;
+wire   [1:0]  ln2_tx_seq;
+wire   [1:0]  ln3_tx_seq;
+wire   [1:0]  ln4_tx_seq;
+wire   [1:0]  ln5_tx_seq;
+wire   [1:0]  ln6_tx_seq;
+wire   [1:0]  ln7_tx_seq;
+wire   [63:0] ln0_tx_data;
+wire   [63:0] ln1_tx_data;
+wire   [63:0] ln2_tx_data;
+wire   [63:0] ln3_tx_data;
+wire   [63:0] ln4_tx_data;
+wire   [63:0] ln5_tx_data;
+wire   [63:0] ln6_tx_data;
+wire   [63:0] ln7_tx_data;
+
+
+wire   [1:0]  dev_ln0_rx_header;
+wire   [1:0]  dev_ln1_rx_header;
+wire   [1:0]  dev_ln2_rx_header;
+wire   [1:0]  dev_ln3_rx_header;
+wire   [1:0]  dev_ln4_rx_header;
+wire   [1:0]  dev_ln5_rx_header;
+wire   [1:0]  dev_ln6_rx_header;
+wire   [1:0]  dev_ln7_rx_header;
+wire   [63:0] dev_ln0_rx_data;
+wire   [63:0] dev_ln1_rx_data;
+wire   [63:0] dev_ln2_rx_data;
+wire   [63:0] dev_ln3_rx_data;
+wire   [63:0] dev_ln4_rx_data;
+wire   [63:0] dev_ln5_rx_data;
+wire   [63:0] dev_ln6_rx_data;
+wire   [63:0] dev_ln7_rx_data;
+wire   [1:0]  dev_ln0_tx_header;
+wire   [1:0]  dev_ln1_tx_header;
+wire   [1:0]  dev_ln2_tx_header;
+wire   [1:0]  dev_ln3_tx_header;
+wire   [1:0]  dev_ln4_tx_header;
+wire   [1:0]  dev_ln5_tx_header;
+wire   [1:0]  dev_ln6_tx_header;
+wire   [1:0]  dev_ln7_tx_header;
+wire   [1:0]  dev_ln0_tx_seq;
+wire   [1:0]  dev_ln1_tx_seq;
+wire   [1:0]  dev_ln2_tx_seq;
+wire   [1:0]  dev_ln3_tx_seq;
+wire   [1:0]  dev_ln4_tx_seq;
+wire   [1:0]  dev_ln5_tx_seq;
+wire   [1:0]  dev_ln6_tx_seq;
+wire   [1:0]  dev_ln7_tx_seq;
+wire   [63:0] dev_ln0_tx_data;
+wire   [63:0] dev_ln1_tx_data;
+wire   [63:0] dev_ln2_tx_data;
+wire   [63:0] dev_ln3_tx_data;
+wire   [63:0] dev_ln4_tx_data;
+wire   [63:0] dev_ln5_tx_data;
+wire   [63:0] dev_ln6_tx_data;
+wire   [63:0] dev_ln7_tx_data;
 
 assign ln0_rx_valid = 1'b1;
 assign ln0_rx_header = dev_ln0_tx_header;
@@ -277,9 +362,9 @@ omi_dev #() dev (
    .gtwiz_userclk_rx_active_in(gtwiz_userclk_rx_active_in)  ,  // --  < input
    .send_first(~send_first),
    .gtwiz_reset_rx_datapath_out(gtwiz_reset_rx_datapath_out),   // --  > output
-   .tsm_state2_to_3(tsm_state2_to_3),
-   .tsm_state4_to_5(tsm_state4_to_5),
-   .tsm_state6_to_1(tsm_state6_to_1)
+   .tsm_state2_to_3(dev_tsm_state2_to_3),
+   .tsm_state4_to_5(dev_tsm_state4_to_5),
+   .tsm_state6_to_1(dev_tsm_state6_to_1)
 );
 
 

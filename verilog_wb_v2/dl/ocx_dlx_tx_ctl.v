@@ -831,8 +831,9 @@ begin
 end
 endfunction
 
+   `define TSM_RESET 3'b000  //wtf
     wire [2:0]   tsm_din;
-    (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q  /*verilator public*/ = 3'b110;
+    (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q  /*verilator public*/ = `TSM_RESET;
     wire [7:0]   good_tx_lanes_din;
     reg [2:0]   tsm_int;
     reg  [7:0]   good_tx_lanes_q;
@@ -1004,36 +1005,36 @@ begin
                                                   3'b000;
 
         3'b001 : tsm_int[2:0] =
-                                dlx_reset       ? 3'b110:     // -- dl going into reset
+                                dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                                 pat_a_done      ? 3'b010:     // -- pattern a detected for appropriate time
                                                   3'b001;
 
         3'b010 : tsm_int[2:0] =
-                                dlx_reset       ? 3'b110:     // -- dl going into reset
+                                dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                      ~tsm_state2_to_3_d1_q      ? 3'b010:
                                 pat_b_done      ? 3'b011:     // -- pattern b detected for appropriate time
                                                   3'b010;
 
         3'b011 : tsm_int[2:0]  =
-                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                                  sync_done       ? 3'b100:     // -- sync done
                                                    3'b011;
 
         3'b100 : tsm_int[2:0]  =
-                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                     ~tsm_state4_to_5_d1_q        ? 3'b100 :    //--for stepping through training
                     rx_tx_deskew_done & block_locked &           // -- block lock and deskew done, and
                     (ts1_done | ts2_done)        ? 3'b101:     // -- receiving TS1's or TS2's (other side may block lock and send TS2's before we block lock)
                                                    3'b100;
 
         3'b101 : tsm_int[2:0]  =
-                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                                  start_retrain_q ? 3'b100:     // -- start retraining
                                  ts2_done        ? 3'b110:     // -- ts2 done
                                                    3'b101;
 
         3'b110 : tsm_int[2:0]  =
-                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                                  start_retrain_q ? 3'b100:     // -- start retraining
                      tsm_state6_to_1_d1_q        ? 3'b001 :    //-- for stepping through training
                  (tsm_advance & ts3_done & flt_ready_q)
@@ -1041,13 +1042,13 @@ begin
                                                    3'b110;
 
         3'b111 : tsm_int[2:0]  =
-                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
                                  start_retrain_q ? 3'b100:     // -- start retraining
                                                    3'b111;
       endcase
 end
 
-    assign tsm_din[2:0] = reset_q ? 3'b110 : tsm_int[2:0];
+    assign tsm_din[2:0] = reset_q ? `TSM_RESET : tsm_int[2:0];
     assign ltch_lane_cfg = (tsm_q[2:0] != 3'b100) && (tsm_int[2:0] == 3'b100);
 //-- wait for a lot of pattern a's, this is so the transeiver has a chance to lock on all lanes
     assign pat_a_done              = tsm_advance & |(a_cnt_q[3:0]);

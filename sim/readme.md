@@ -50,4 +50,4 @@ sed -Ei 's/(.*\(\s*\*mark_debug = "true"\s*\*\).*?)(\/\*verilator public\*\/)?;/
 #   (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q  /*verilator public*/ = 3'b110;
 ```
 
-
+* switch to sim_host_dev and use back-to-back dl's so don't have to emulate phy

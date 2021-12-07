@@ -222,7 +222,7 @@ input  [31:0]     tlx_dlx_debug_info;
 
 input             opt_gckn;
 input             ocde;
-input  [31:0]     reg_04_val;
+input  [31:0]     reg_04_val /*verilator public*/;
 output            reg_04_hwwe;
 output [31:0]     reg_04_update;
 output            reg_05_hwwe;

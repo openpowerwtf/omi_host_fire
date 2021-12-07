@@ -46,11 +46,13 @@ void tick(void) {
 
    // rising
    m->clk = 1;
+   m->clk_156_25MHz = 1;
    m->eval();
    if (t) t->dump(main_time*10);
 
    // falling
    m->clk = 0;
+   m->clk_156_25MHz = 0;
    m->eval();
    if (t) {
       t->dump(main_time*10+5);
@@ -76,7 +78,7 @@ int main(int argc, char **argv) {
    bool done = false;
    int i;
    unsigned int quiescing = 0;
-   unsigned int runCycles = 2500;
+   unsigned int runCycles = 50000;
    unsigned adrMask = 0x0000003C; // restrict address range
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
@@ -105,21 +107,26 @@ int main(int argc, char **argv) {
    //cout << "Debug Mode (data=~adr)" << endl;
    //m->cfg |= (unsigned int)0x40000000;
 
-   //guessing!
-   m->clk_156_25MHz = 0;
+   // m->clk_156_25MHz = 0; this needs to run if emulating xil phy
    m->hb_gtwiz_reset_all_in = 0;
    /* need to release this
    assign dlx_reset = (send_first)                ? ~(gtwiz_reset_tx_done_in & gtwiz_buffbypass_tx_done_in) :
                       (rec_first_xtsm_q == 1'b0)  ? ~(gtwiz_reset_rx_done_in & gtwiz_buffbypass_rx_done_in) :
                                                     1'b0;
+
    */
-   m->send_first = 1;
+   /* need to enable this
+    assign io_pb_o0_rx_init_done = (xtsm_q == pulse_done) ? {8{gtwiz_reset_rx_done_in & gtwiz_buffbypass_rx_done_in & gtwiz_userclk_rx_active_in}} :
+                                                          8'b0;
+   */
+   m->send_first = 1; // 1=host 0=dev
    m->gtwiz_reset_rx_done_in = 0;
    m->gtwiz_reset_tx_done_in = 0;
-   m->gtwiz_buffbypass_rx_done_in = 1;
-   m->gtwiz_buffbypass_tx_done_in = 1;
+   m->gtwiz_buffbypass_rx_done_in = 0;
+   m->gtwiz_buffbypass_tx_done_in = 0;
    m->gtwiz_userclk_rx_active_in = 0;
    m->gtwiz_userclk_tx_active_in = 0;
+
 
    cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
@@ -137,8 +144,19 @@ int main(int argc, char **argv) {
    //cout << "Enabling link..." << endl;
    //m->cfg &= 0x7FFFFFFF;      // enable link after phy clock running
 
+   /*
+   assign io_pb_o0_rx_init_done = (xtsm_q == pulse_done) ? {8{gtwiz_reset_rx_done_in & gtwiz_buffbypass_rx_done_in & gtwiz_userclk_rx_active_in}} :
+   */
    m->gtwiz_reset_rx_done_in = 1;
+   m->gtwiz_buffbypass_rx_done_in = 1;
+   m->gtwiz_userclk_rx_active_in = 1;
+
    m->gtwiz_reset_tx_done_in = 1;
+   m->gtwiz_buffbypass_tx_done_in = 1;
+   m->gtwiz_userclk_tx_active_in = 1;
+
+   //m->top->host->omi_host->dl->reg_04_val = 0x00800000;
+   //m->top->dev->dl->reg_04_val = 0x00800000;
 
    dlx_config_info = m->top->host->omi_host->dlx_config_info;
    cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;
@@ -160,22 +178,32 @@ int main(int argc, char **argv) {
          cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;
       }
 
-      if (tsm_state2_to_3 != m->tsm_state2_to_3) {
-         tsm_state2_to_3 = m->tsm_state2_to_3;
-         cout << "tsm_state2_to_3=" << setw(1) << tsm_state2_to_3 << endl;
-      }
-      if (tsm_state4_to_5 != m->tsm_state4_to_5) {
-         tsm_state4_to_5 = m->tsm_state4_to_5;
-         cout << "tsm_state4_to_5=" << setw(1) << tsm_state4_to_5 << endl;
-      }
-      if (tsm_state6_to_1 != m->tsm_state6_to_1) {
-         tsm_state6_to_1 = m->tsm_state6_to_1;
-         cout << "tsm_state6_to_1=" << setw(1) << tsm_state6_to_1 << endl;
-      }
       if (startRetrain != m->top->host->omi_host->dl->tx->ctl->start_retrain_q) {
          startRetrain = m->top->host->omi_host->dl->tx->ctl->start_retrain_q;
          cout << "startRetrain=" << setw(1) << startRetrain << endl;
       }
+
+      if (m->top->host->omi_host->dl->tx->ctl->tsm_q == 6) {
+         m->host_tsm_state6_to_1 = 1; //wtf kick seq into action
+         cout << "Setting host tsm 6->1..." << endl;
+      }
+
+      if (m->top->dev->dl->tx->ctl->tsm_q == 6) {
+         m->dev_tsm_state6_to_1 = 1; //wtf kick seq into action
+         cout << "Setting device tsm 6->1..." << endl;
+      }
+
+      /*
+      if (m->top->host->omi_host->dl->tx->ctl->tsm_q == 2) {
+         m->host_tsm_state2_to_3 = 1;
+         cout << "Setting host tsm 2->3..." << endl;
+      }
+      if (m->top->dev->dl->tx->ctl->tsm_q == 2) {
+         m->dev_tsm_state2_to_3 = 1;
+         cout << "Setting device tsm 2->3..." << endl;
+      }
+      */
+
 
       if ((main_time %100) == 0) {
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time << endl; //" count=" << m->rootp->top__DOT__dufimem__DOT__count_q + 0 << endl;
