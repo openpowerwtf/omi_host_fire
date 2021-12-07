@@ -27,6 +27,7 @@ const char *vcdFile = f.c_str();
 #else
 unsigned int t = 0;
 #endif
+bool tracing = false;   // based on start time
 
 Vtop* m;
 
@@ -42,19 +43,19 @@ void tick(void) {
    main_time++;
 
    m->eval();
-   if (t) t->dump(main_time*10-2);
+   if (t && tracing) t->dump(main_time*10-2);
 
    // rising
    m->clk = 1;
    m->clk_156_25MHz = 1;
    m->eval();
-   if (t) t->dump(main_time*10);
+   if (t && tracing) t->dump(main_time*10);
 
    // falling
    m->clk = 0;
    m->clk_156_25MHz = 0;
    m->eval();
-   if (t) {
+   if (t && tracing) {
       t->dump(main_time*10+5);
       t->flush();
    }
@@ -78,7 +79,8 @@ int main(int argc, char **argv) {
    bool done = false;
    int i;
    unsigned int quiescing = 0;
-   unsigned int runCycles = 50000;
+   unsigned int runCycles = 500000;
+   unsigned int startTrace = 450000;
    unsigned adrMask = 0x0000003C; // restrict address range
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
@@ -127,6 +129,7 @@ int main(int argc, char **argv) {
    m->gtwiz_userclk_rx_active_in = 0;
    m->gtwiz_userclk_tx_active_in = 0;
 
+   if (startTrace == 0) tracing = true;
 
    cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
@@ -163,6 +166,8 @@ int main(int argc, char **argv) {
 
    // Sim loop
    while (!Verilated::gotFinish() && !done) {
+
+      if (!tracing && startTrace <= main_time) tracing = true;
 
       if (quiescing) {
          quiescing--;
@@ -203,6 +208,15 @@ int main(int argc, char **argv) {
          cout << "Setting device tsm 2->3..." << endl;
       }
       */
+      //tie these in top level instead, and remove from inputs
+      m->host_tsm_state6_to_1 = 1;
+      m->host_tsm_state2_to_3 = 1;
+      m->host_tsm_state4_to_5 = 1;
+      m->dev_tsm_state6_to_1 = 1;
+      m->dev_tsm_state2_to_3 = 1;
+      m->dev_tsm_state4_to_5 = 1;
+
+
 
 
       if ((main_time %100) == 0) {

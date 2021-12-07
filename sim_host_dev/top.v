@@ -32,12 +32,12 @@ module top #(
       input gtwiz_userclk_rx_active_in ,   // --  < input
       input send_first                  ,  // --  < input
       output gtwiz_reset_rx_datapath_out  , // --  > output
-   input host_tsm_state2_to_3,
-   input host_tsm_state4_to_5,
-   input host_tsm_state6_to_1,
-   input dev_tsm_state2_to_3,
-   input dev_tsm_state4_to_5,
-   input dev_tsm_state6_to_1
+      input host_tsm_state2_to_3,
+      input host_tsm_state4_to_5,
+      input host_tsm_state6_to_1,
+      input dev_tsm_state2_to_3,
+      input dev_tsm_state4_to_5,
+      input dev_tsm_state6_to_1
 );
 
 wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
