@@ -18,12 +18,12 @@
 // *! The background Specification upon which this is based is managed by and available from
 // *! the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 // *!***************************************************************************
- 
+
 `timescale 1ns / 1ps
 
 
 module ocx_dlx_tx_que (
-    
+
      ctl_que_lane                         // -- <  input  [2:0]
 
     ,ctl_que_reset                        // -- <  input        // ---- run and valid need to be set to get clock gating to work when reset is active.
@@ -31,19 +31,19 @@ module ocx_dlx_tx_que (
 
     ,flt_que_data                        // -- <  input  [63:0]
 
-    ,ctl_que_use_neighbor                 // -- <  input    
+    ,ctl_que_use_neighbor                 // -- <  input
     ,neighbor1_in_data                    // -- <  input  [63:0]
     ,neighbor2_in_data                    // -- <  input  [63:0]
     ,neighbor3_in_data                    // -- <  input  [63:0]
     ,neighbor_out_data                    // -- >  output [63:0]
- 
+
     // ---- training signals
-    ,ctl_que_tx_ts0                       // -- <  input     // ---- control header with all zero data.  
-    ,ctl_que_tx_ts1                       // -- <  input    
-    ,ctl_que_tx_ts2                       // -- <  input   
-    ,ctl_que_tx_ts3                       // -- <  input   
+    ,ctl_que_tx_ts0                       // -- <  input     // ---- control header with all zero data.
+    ,ctl_que_tx_ts1                       // -- <  input
+    ,ctl_que_tx_ts2                       // -- <  input
+    ,ctl_que_tx_ts3                       // -- <  input
     ,ctl_que_good_lanes                   // -- <  input  [15:0]
-    ,ctl_que_deskew                       // -- <  input  [23:0]    
+    ,ctl_que_deskew                       // -- <  input  [23:0]
     ,ctl_que_lane_scrambler               // -- <  input  [63:0]
 
     ,que_gb_data                          // -- >  output [63:0]
@@ -51,7 +51,7 @@ module ocx_dlx_tx_que (
 
   //--   ,gnd                                  // -- <> inout
   //--   ,vdn                                  // -- <> inout
-    ,dlx_clk                             // -- <  input  
+    ,dlx_clk                             // -- <  input
     );
 
     input  [2:0]  ctl_que_lane;
@@ -75,7 +75,7 @@ module ocx_dlx_tx_que (
     input         ctl_que_tx_ts1;
     input         ctl_que_tx_ts2;
     input         ctl_que_tx_ts3;
-    input [15:0]  ctl_que_good_lanes;   
+    input [15:0]  ctl_que_good_lanes;
     input [23:0]  ctl_que_deskew;
     input [63:0]  ctl_que_lane_scrambler;
 
@@ -105,10 +105,9 @@ endfunction
 
     assign ts_count_din[4:0]      = ctl_que_reset ? 5'b00000            :    //-- reset training count to zero when the link is reset
                                     ctl_que_stall ? ts_count_q[4:0]     :    //-- stall counter when gearbox needs to catch up
-                                                    ts_count_q[4:0] + 5'b00001 ; 
+                                                    ts_count_q[4:0] + 5'b00001 ;
 
     assign tp_deskew              = ts_count_q[4:0] == 5'b11111;   //-- send deskew pattern every 32 training set patterns
-
 
     assign dl_train_pattern[63:0] = tp_deskew        ? {40'h4B1E1E1E1E, ctl_que_deskew[23:5], 2'b00, ctl_que_lane[2:0]} :    // -- deskew pattern
                                     ctl_que_tx_ts1   ?  64'h4B4A4A4A4A4A4A4A                                           :    // -- TS1 pattern
@@ -138,7 +137,7 @@ endfunction
                                        reverse8(next_data[55:48]),
                                        reverse8(next_data[63:56])} ^ ctl_que_lane_scrambler[63:0]; //-- reverse each byte and then scramble
 
-    assign que_gb_odd = ^next_data[63:0];                                       
+    assign que_gb_odd = ^next_data[63:0];
 
 always @(posedge (dlx_clk)) begin
    ts_count_q[4:0]    <= ts_count_din[4:0];

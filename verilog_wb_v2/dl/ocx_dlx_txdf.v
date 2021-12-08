@@ -21,7 +21,9 @@
 
 `timescale 1ns / 1ps
 
-module ocx_dlx_txdf #() (
+module ocx_dlx_txdf #(
+   parameter GEMINI_NOT_APOLLO = 0
+) (
  dlx_tlx_init_flit_depth        // --  > output [2:0]
 ,dlx_tlx_flit_credit            // --  > output
 ,tlx_dlx_flit_valid             // --  < input
@@ -318,7 +320,7 @@ assign EDPL_max_cnt_reset = reg_val[25];
 
 assign no_one_home = 64'b0;
 
-ocx_dlx_tx_ctl #() ctl (
+ocx_dlx_tx_ctl #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) ctl (
      .rx_tx_tx_lane_swap                   (rx_tx_tx_lane_swap)         // --  < input
     ,.rx_tx_retrain                        (rx_tx_retrain)              // --  < input
     ,.user_retrain                         (force_retrain)              // --  < input

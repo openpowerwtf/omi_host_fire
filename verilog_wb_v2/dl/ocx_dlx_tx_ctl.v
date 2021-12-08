@@ -22,8 +22,9 @@
 `timescale 1ns / 1ps
 
   `define DLX_VERSION_NUMBER      32'h18102500 //-- Added reset conditions to latches to fix pointer errors
-module ocx_dlx_tx_ctl #() (
-
+module ocx_dlx_tx_ctl #(
+   parameter GEMINI_NOT_APOLLO = 0
+) (
      rx_tx_tx_lane_swap                   // --  < input
     ,rx_tx_crc_error                      // --  < input
     ,rx_tx_retrain                        // --  < input
@@ -831,7 +832,7 @@ begin
 end
 endfunction
 
-   `define TSM_RESET 3'b000  //wtf
+   `define TSM_RESET 3'b000 // wtf: 3'b110 = wait for input 6->1, 3'b000 = start after reset
     wire [2:0]   tsm_din;
     (*mark_debug = "true"*) (*keep = "true"*)reg  [2:0]   tsm_q  /*verilator public*/ = `TSM_RESET;
     wire [7:0]   good_tx_lanes_din;
@@ -966,7 +967,7 @@ endfunction
     //-- read only variable via config memory: DVSEC
     assign dlx_version_din[31:0] = `DLX_VERSION_NUMBER;
     assign ro_dlx_version[31:0]  = dlx_version_q[31:0];
-    assign quick_sim = 1'b0;
+    assign quick_sim = 1'b1;  //wtf or low-latency wires
 
     assign lfsr_din[0:22]              = reset_q      ? 23'b01111000101110110010010:
                                          lfsr_advance ? advance64(lfsr_q[0:22]) :
@@ -1017,7 +1018,7 @@ begin
 
         3'b011 : tsm_int[2:0]  =
                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
-                                 sync_done       ? 3'b100:     // -- sync done
+                                 sync_done       ? 3'b100:     // -- sync done - wtf:this auto advances; below doesnt wait for det_sync_q
                                                    3'b011;
 
         3'b100 : tsm_int[2:0]  =
@@ -1052,9 +1053,14 @@ end
     assign ltch_lane_cfg = (tsm_q[2:0] != 3'b100) && (tsm_int[2:0] == 3'b100);
 //-- wait for a lot of pattern a's, this is so the transeiver has a chance to lock on all lanes
     assign pat_a_done              = tsm_advance & |(a_cnt_q[3:0]);
-    assign pat_b_done              = tsm_advance & (det_sync_q | (b_cnt_q[3] & b_cnt_q[2]));        //-- only need 16, but there are alignment cases, so send ~20
+//wtf
+//    assign pat_b_done              = tsm_advance & (det_sync_q | (b_cnt_q[3] & b_cnt_q[2]));        //-- only need 16, but there are alignment cases, so send ~20
+    assign pat_b_done              = tsm_advance & (det_sync_q | (b_cnt_q >= 'd3));
+
+//wtf
 //--    assign sync_done               = (tsm_advance &  det_sync_q);
-    assign sync_done               = (tsm_advance &  (tsm_q[2:0] == 3'b011));
+//    assign sync_done               = (tsm_advance &  (tsm_q[2:0] == 3'b011));
+    assign sync_done               = (tsm_advance &  det_sync_q);
     assign ts1_done                = ((rx_tx_TS1[7:0]        | disabled_rx_lanes_q[7:0]) == 8'b11111111) | ((rx_tx_TS2[7:0]  | disabled_rx_lanes_q[7:0]) == 8'b11111111);
     assign ts2_done                = ((rx_tx_TS2[7:0]        | disabled_rx_lanes_q[7:0]) == 8'b11111111) | ((rx_tx_TS3[7:0]  | disabled_rx_lanes_q[7:0]) == 8'b11111111);
     assign ts3_done                = (((rx_tx_TS3[7:0]       | disabled_rx_lanes_q[7:0]) == 8'b11111111) );
@@ -1063,7 +1069,7 @@ end
 
     assign timer_din[9:0]          = tpulse ? 10'b0 : timer_q[9:0] + 10'b0000000001;
     assign pulse_1us               = (timer_q[9:0] == 10'd402);
-    assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd20)) ;
+    assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd13)) ;  //wtf was 20
 
 
     assign mask_pattern_a = {~(x8_degrade_to_inside | x4_degrade_to_inside) & rx_tx_pattern_a[7],
@@ -1146,7 +1152,14 @@ end
                                        {8'b0,4'b0010, good_rx_insides_q, good_rx_outsides_q,2'b00};         // DL3.1 format
 
 
-   assign dl_deskew_version = 6'b001001;
+   generate
+      if (GEMINI_NOT_APOLLO == 1) begin
+        assign dl_deskew_version = 6'b001000;
+      end
+      else begin
+        assign dl_deskew_version = 6'b001001;
+      end
+   endgenerate
 
    assign ctl_que_deskew[23:0]        = {4'b0000,            //--23:20
                                          2'b00  ,            //--19:18
@@ -1154,7 +1167,7 @@ end
                                          (x4OL_mode | x4_degrade_to_outside | x4_degrade_to_inside),          // x4OL supported
                                          ~(x8_mode | x4OL_mode), // 15 degrade supported
                                          1'b0,              //--14
-                                         dl_deskew_version,  //--13:8  version number
+                                         dl_deskew_version,  //--13:8  (version number, Gemini Sends x8)
                                          1'b0,               //--7
                                          rx_tx_tx_lane_swap, //--6
                                          6'b000000};         //--5:0
@@ -1200,15 +1213,26 @@ end
 
     assign ctl_que_stall               = ctl_gb_seq_int[6];
 //--    assign tsm_advance                 = (seq_cnt_q[7:1] == 7'b1000001);
-    assign tsm_advance                 = tsm_q[2] ? (seq_cnt_q[8:2] == 7'b1000001) :
-                                                    (seq_cnt_q[8:2] == 7'b0111111) ;
+
+///wtf was is this based on?
+//    assign tsm_advance                 = tsm_q[2] ? (seq_cnt_q[8:2] == 7'b1000001) :
+//                                                    (seq_cnt_q[8:2] == 7'b0111111) ;
+    assign tsm_advance                 = tsm_q[2] ? (seq_cnt_q[8:2] == seq_cnt_max) :
+                                                    (seq_cnt_q[6:2] == 7'b01111) ;
 
 //-- in x8 mode need to stall 2 cycles after 64,  in x4 mode do the same except stall every other cycle in addition
 //-- in x2 mode need to stall 3 out of every 4 cycles
+/*
+//wtf why is this?  timing-related to bitrate vs dl impl???
+// dont know what the extra count to 41 is doing to the logic, but the hiccup whacks the scrambling even though lfsr are sync'ed ; there are other
+//
     assign ctl_flt_stall               = x2_tx_mode_q && (seq_cnt_q[6:0] == 7'b1000001) ? 1'b0 :
                                          x2_tx_mode_q && (seq_cnt_q[6:0] != 7'b1000001) ? (seq_cnt_q[6:0] == 7'b0111111) || (seq_cnt_q[6:0] == 7'b1000000) || ~(seq_cnt_q[1] & seq_cnt_q[0]):
                                          x4_not_x8_tx_mode_q  ? (seq_cnt_q[7:1] == 7'b0111100) || (seq_cnt_q[7:1] == 7'b0111101) || ~seq_cnt_q[1]:  // -- two cycles early to keep things pipelined
                                                                 (seq_cnt_q[8:2] == 7'b0111100) || (seq_cnt_q[8:2] == 7'b0111101)                ;  // -- two cycles early to keep things pipelined
+                                                                */
+    assign ctl_flt_stall = 0;
+    wire [6:0] seq_cnt_max = 7'h3F;
 
     assign ctl_x4_not_x8_tx_mode = x4_not_x8_tx_mode_q;
     assign ctl_x2_tx_mode = x2_tx_mode_q;
@@ -1216,11 +1240,12 @@ end
 //-- go to 8 bits to support x4 mode.  need to stall every other cycle in this mode, so needed the low order bit.
 //-- 26/07/19 go to 9 bits to support x2 mode. need to stall 3 cycles in 4 in this mode
     assign seq_cnt_din[8:0]            =  dlx_reset | dl_reset_q                                                                     ?  9'b100000000         :
-                                         ~x4_not_x8_tx_mode_q & ~x2_tx_mode_q & (seq_cnt_q[8:2] == 7'b1000001)                       ?  9'b000000000         :
-                                          (x4_not_x8_tx_mode_q | x2_tx_mode_q) &  ctl_gb_train_int & (seq_cnt_q[8:2] == 7'b1000001)  ?  9'b000000000         :
-                                          x4_not_x8_tx_mode_q & ~ctl_gb_train_int & (seq_cnt_q[7:1] == 7'b1000001)                   ?  9'b000000000         :
+//wtf                                         ~x4_not_x8_tx_mode_q & ~x2_tx_mode_q & (seq_cnt_q[8:2] == 7'b1000001)                       ?  9'b000000000         :
+                                         ~x4_not_x8_tx_mode_q & ~x2_tx_mode_q & (seq_cnt_q[8:2] == seq_cnt_max)                      ?  9'b000000000         :
+                                          (x4_not_x8_tx_mode_q | x2_tx_mode_q) &  ctl_gb_train_int & (seq_cnt_q[8:2] == seq_cnt_max) ?  9'b000000000         :
+                                          x4_not_x8_tx_mode_q & ~ctl_gb_train_int & (seq_cnt_q[7:1] == seq_cnt_max)                  ?  9'b000000000         :
                                           x4_not_x8_tx_mode_q & ~ctl_gb_train_int                                                    ?  (seq_cnt_q[8:0] + 9'b000000010):
-                                          x2_tx_mode_q & ~ctl_gb_train_int & (seq_cnt_q[6:0] == 7'b1000001)                          ?  9'b000000000         :
+                                          x2_tx_mode_q & ~ctl_gb_train_int & (seq_cnt_q[6:0] == seq_cnt_max)                         ?  9'b000000000         :
                                           x2_tx_mode_q & ~ctl_gb_train_int                                                           ?  (seq_cnt_q[8:0] + 9'b000000001):
                                                                                                                                         (seq_cnt_q[8:0] + 9'b000000100);            //-- x8 mode
     assign dl_reset_din                = dlx_reset;

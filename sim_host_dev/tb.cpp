@@ -75,13 +75,16 @@ int main(int argc, char **argv) {
       t->open(vcdFile);
 #endif
 
+
+   unsigned int runCycles =  10000;
+   unsigned int startTrace = 0;
+   unsigned adrMask = 0x0000003C; // restrict address range
+
+
    bool ok = true;
    bool done = false;
    int i;
    unsigned int quiescing = 0;
-   unsigned int runCycles = 500000;
-   unsigned int startTrace = 450000;
-   unsigned adrMask = 0x0000003C; // restrict address range
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
    bool reqPending = false, reqRd, reqWr;
@@ -95,7 +98,7 @@ int main(int argc, char **argv) {
                 gtwiz_buffbypass_rx_done_in, gtwiz_buffbypass_tx_done_in,
                 gtwiz_userclk_rx_active_in, gtwiz_userclk_tx_active_in,
                 gtwiz_reset_all_out, gtwiz_reset_rx_datapath_out;
-   unsigned int dlx_config_info, tsm_state2_to_3 = -1, tsm_state4_to_5 = -1, tsm_state6_to_1 = -1;
+   unsigned int dlx_config_info;
    unsigned int startRetrain = -1;
 
    unsigned int mem[1024/4];
@@ -135,12 +138,13 @@ int main(int argc, char **argv) {
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
 
    // Reset
-   cout << "Resetting..." << endl;
-   m->rst = 1;
+   cout << "Resetting host, holding dev.." << endl;
+   m->rst_host = 1;
+   m->rst_dev = 1;
    tick();
    tick();
    tick();
-   m->rst = 0;
+   m->rst_host = 0;
    tick();
    cout << "Go!" << endl;
    tick();
@@ -160,6 +164,9 @@ int main(int argc, char **argv) {
 
    //m->top->host->omi_host->dl->reg_04_val = 0x00800000;
    //m->top->dev->dl->reg_04_val = 0x00800000;
+
+   // device enable
+   m->ocde = 1;
 
    dlx_config_info = m->top->host->omi_host->dlx_config_info;
    cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;
@@ -188,36 +195,10 @@ int main(int argc, char **argv) {
          cout << "startRetrain=" << setw(1) << startRetrain << endl;
       }
 
-      if (m->top->host->omi_host->dl->tx->ctl->tsm_q == 6) {
-         m->host_tsm_state6_to_1 = 1; //wtf kick seq into action
-         cout << "Setting host tsm 6->1..." << endl;
+      if (main_time > 50 && m->rst_host == 1) {
+         cout << "Releasing dev.." << endl;
+         m->rst_dev = 0;
       }
-
-      if (m->top->dev->dl->tx->ctl->tsm_q == 6) {
-         m->dev_tsm_state6_to_1 = 1; //wtf kick seq into action
-         cout << "Setting device tsm 6->1..." << endl;
-      }
-
-      /*
-      if (m->top->host->omi_host->dl->tx->ctl->tsm_q == 2) {
-         m->host_tsm_state2_to_3 = 1;
-         cout << "Setting host tsm 2->3..." << endl;
-      }
-      if (m->top->dev->dl->tx->ctl->tsm_q == 2) {
-         m->dev_tsm_state2_to_3 = 1;
-         cout << "Setting device tsm 2->3..." << endl;
-      }
-      */
-      //tie these in top level instead, and remove from inputs
-      m->host_tsm_state6_to_1 = 1;
-      m->host_tsm_state2_to_3 = 1;
-      m->host_tsm_state4_to_5 = 1;
-      m->dev_tsm_state6_to_1 = 1;
-      m->dev_tsm_state2_to_3 = 1;
-      m->dev_tsm_state4_to_5 = 1;
-
-
-
 
       if ((main_time %100) == 0) {
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time << endl; //" count=" << m->rootp->top__DOT__dufimem__DOT__count_q + 0 << endl;

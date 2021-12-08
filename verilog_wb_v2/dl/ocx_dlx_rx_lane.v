@@ -18,7 +18,7 @@
 // *! The background Specification upon which this is based is managed by and available from
 // *! the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 // *!***************************************************************************
- 
+
 `timescale 1ns / 1ps
 
 
@@ -26,10 +26,10 @@
 module ocx_dlx_rx_lane (
 
   //-- phy interface through rx
-  valid_in              // < input  
- ,header_in             // < input  
- ,data_in               // < input  
- ,slip_out              // > output 
+  valid_in              // < input
+ ,header_in             // < input
+ ,data_in               // < input
+ ,slip_out              // > output
 
   //-- part 1 interface through rx
  ,found_pattern_a       // < input
@@ -43,34 +43,34 @@ module ocx_dlx_rx_lane (
  ,nghbr_data_out        // < output
 
   //-- rx interface
- ,rx_clk_in             // < input  
- ,rx_reset              // < input  
- ,rx_data_out           // > output 
+ ,rx_clk_in             // < input
+ ,rx_reset              // < input
+ ,rx_data_out           // > output
  ,rx_tx_last_byte_ts3   // > output  [7:0]
- ,training_enable       // < input  
- ,phy_training          // < input  
- ,deskew_enable         // < input  
+ ,training_enable       // < input
+ ,phy_training          // < input
+ ,deskew_enable         // < input
 
- ,deskew_all_valid      // < input  
- ,deskew_reset          // < input  
- ,deskew_valid          // > output 
- ,deskew_overflow       // > output 
+ ,deskew_all_valid      // < input
+ ,deskew_reset          // < input
+ ,deskew_valid          // > output
+ ,deskew_overflow       // > output
  ,x4_hold_data          // < input
  ,x2_hold_data          // < input
- ,x2_outside_write      // < input 
+ ,x2_outside_write      // < input
  ,x2_outside_data       // < input
  ,x2_inside_write       // < input
  ,x2_inside_data        // < input
 
- ,pattern_a             // > output 
- ,pattern_b             // > output 
- ,pattern_sync          // > output 
- ,pattern_TS1           // > output 
- ,pattern_TS2           // > output 
- ,pattern_TS3           // > output 
- ,block_lock            // > output 
- ,data_flit             // > output 
- 
+ ,pattern_a             // > output
+ ,pattern_b             // > output
+ ,pattern_sync          // > output
+ ,pattern_TS1           // > output
+ ,pattern_TS2           // > output
+ ,pattern_TS3           // > output
+ ,block_lock            // > output
+ ,data_flit             // > output
+
  ,EDPL_cfg_err_thres    // < input
  ,EDPL_ena              // < input
  ,EDPL_max_cnt_reset    // < input
@@ -79,8 +79,8 @@ module ocx_dlx_rx_lane (
  ,EDPL_error_out      // > output
  ,EDPL_ready_out      // > output
  ,rx_tx_EDPL_thres_reached // > output
- 
- 
+
+
 
 //--  ,gnd                   // <> inout
 //--  ,vdn                   // <> inout
@@ -91,7 +91,7 @@ module ocx_dlx_rx_lane (
 
 //-- phy interface through rx
 input           valid_in;       //-- data from phy is valid
-input [1:0]     header_in;      //-- header from the phy                           
+input [1:0]     header_in;      //-- header from the phy
 input [63:0]    data_in;        //-- data from the phy
 output          slip_out;       //-- tell phy to slip
 
@@ -369,7 +369,7 @@ reg             training_enable_dlyd2_q;
 wire            training_enable_dlyd2_din;
 reg             EDPL_ready_q;
 wire            EDPL_ready_din;
-   
+
 wire  [63:0]  data_in_d1_din;
 wire  [63:0] data_in_d2_din;
 reg  [63:0]  data_in_d1_q;
@@ -411,7 +411,7 @@ endfunction
 //-- lfsr functions
 function [0:22] advance64;      //-- advance the 23 bit lfsr by 64 bits
 input [0:22] lfsr;
-begin 
+begin
 advance64[22] =    lfsr[2]  ^ lfsr[4]  ^ lfsr[6]  ^ lfsr[13] ^ lfsr[15] ^ lfsr[18] ^
                    lfsr[19] ^ lfsr[20] ^ lfsr[22];
 advance64[21] =    lfsr[1]  ^ lfsr[3]  ^ lfsr[5]  ^ lfsr[12] ^ lfsr[14] ^ lfsr[17] ^
@@ -461,7 +461,7 @@ advance64[0]  =    lfsr[0]  ^ lfsr[1]  ^ lfsr[2]  ^ lfsr[4]  ^ lfsr[6]  ^ lfsr[8
                    lfsr[19] ^ lfsr[21] ^ lfsr[22];
 
 
-end 
+end
 endfunction
 
 function [0:63] next64;         //-- get the next 64 bits from the 23 bit lfsr (doesn't advance the lfsr)
@@ -546,9 +546,12 @@ assign phy_training_done = (~phy_training & phy_training_d1_q);                 
 
 assign count_pattern_a = phy_training & ~reset;    //-- find and count pattern A's so long as we are training
 
-assign found_pattern_a_din = found_pattern_a;  //-- added to fix timing                                                                 
-                                                               
-assign found_pattern_b_din = found_pattern_b & a_cntr_q[6];  //-- added to fix timing (ensuring we are seeing enough A's before finding a B.                                                                
+assign found_pattern_a_din = found_pattern_a;  //-- added to fix timing
+
+// wtf why the reqt for 64+?  in sim with dl-nophy-dl, a_cntr only gets to ~28-2D; is this cuz of no wire latency??
+//assign found_pattern_b_din = found_pattern_b & a_cntr_q[6];  //-- added to fix timing (ensuring we are seeing enough A's before finding a B.
+wire a_cnt_hit = a_cntr_q[5] | a_cntr_q[6];
+assign found_pattern_b_din = found_pattern_b & a_cnt_hit;
 
 assign count_pattern_b = ( (count_pattern_a_q & found_pattern_b_q) | count_pattern_b_q ) & phy_training & ~reset;      //-- find and count pattern B's from the time we find one til we are done training
 assign find_ts =  training_enable;                                    //-- enter state when phy done training, maintain until training complete
@@ -562,7 +565,7 @@ assign find_ts_din = find_ts;
 //-- Note: these are used by the lanes to determine when slipping is allowed
 assign find_a = count_pattern_a & ~count_pattern_b;     //-- training starts up through found a pattern B
 assign find_b = count_pattern_b & ~find_ts;             //-- found pattern B up through find ts
-assign find_first_b = a_cntr_q[6] & ~count_pattern_b & ~find_ts;         //-- found enough A to look for an inverted pattern B.
+assign find_first_b = a_cnt_hit & ~count_pattern_b & ~find_ts;         //-- found enough A to look for an inverted pattern B.
 //---------------------------------------- end states ------------------------------------------------
 //---------------------------------------- rx training outputs ----------------------------------------------
 
@@ -585,15 +588,18 @@ assign pattern_b_cntr_din[3:0] = reset                                          
 //-- eventually support 128/130 encoding, would need to set counter to 16 when found pattern B's
 
 assign pattern_a_din = ( (count_pattern_a & a_cntr_q[4]) | found_pattern_b_q | (pattern_a_q & |(a_cntr_q[6:0])) ) & ~reset & phy_training;     //-- enter if finding pattern A and counter's reached 16 or found a pattern B, maintain til counter reaches 0 or reset or not training
-assign pattern_b_din = ( (count_pattern_b & b_cntr_q[3]) | (pattern_b_q & |(b_cntr_q[6:0])) ) & ~reset & phy_training;                       //-- enter if finding pattern B and cntr's reached 64, maintain until counter reaches 0 or reset or not training
-
-assign pattern_sync_din = ( (count_pattern_b_q & found_sync_pattern & b_cntr_q[3]) | pattern_sync_q ) & ~reset & phy_training;                             //-- set when see sync pattern after seeing pattern B's, maintain until reset or not training 
- 
+//wtf
+//assign pattern_b_din = ( (count_pattern_b & b_cntr_q[3]) | (pattern_b_q & |(b_cntr_q[6:0])) ) & ~reset & phy_training;                       //-- enter if finding pattern B and cntr's reached 64, maintain until counter reaches 0 or reset or not training
+wire b_cnt_hit = count_pattern_b & (b_cntr_q > 3);
+assign pattern_b_din = (b_cnt_hit  | (pattern_b_q & |(b_cntr_q[6:0])) ) & ~reset & phy_training;
+//wtf b_cntr isn't high enough to be nonzero; think this is supposed to be the (one) sync after pattern b is detected (they are detected before the b pattern too)
+//changed tx_ctl and send unlatched version (dont use this), checked in tsm3
+//assign pattern_sync_din = ( (count_pattern_b_q & found_sync_pattern & b_cntr_q[3]) | pattern_sync_q ) & ~reset & phy_training;                             //-- set when see sync pattern after seeing pattern B's, maintain until reset or not training
+//assign pattern_sync     = pattern_sync_q;
+assign pattern_sync     = count_pattern_b_q & found_sync_pattern;
 
 assign pattern_a        = pattern_a_q;
 assign pattern_b        = pattern_b_q;
-assign pattern_sync     = pattern_sync_q;
-
 
 assign ts1_cntr_din[3:0] = ( reset | ~training_enable )                                              ? 4'b0000 :                      //-- reset -> zero
                            ( valid_q  & find_ts &   ~ts_type_d1c_q[1] & ts_type_d1c_q[0]  & ~ts1_cntr_q[3] )     ? (ts1_cntr_q[3:0] + 4'b0001) :  //-- is TS1 and counter is not maxed (8) -> increment the counter
@@ -700,7 +706,7 @@ assign pre_deskew_data[63:0] = ((~header_in[1] & header_in[0]) |
 assign deskew_buffer0_din[63:0] =  x4_hold_data & deskew_all_valid                     ? nghbr_data_in[63:0]:
 	                               x2_outside_write                                    ? x2_outside_data[63:0]: // Either lane 7 or lane 0 sending data for store
 	                               x2_inside_write                                     ? x2_inside_data[63:0]:  // Either lane 5 or lane 2 sending data for store
-                                   x4_hold_data | x2_hold_data                         ? deskew_buffer0_q[63:0]:                                   
+                                   x4_hold_data | x2_hold_data                         ? deskew_buffer0_q[63:0]:
                                   (deskew_write & (deskew_write_ptr_q[2:0] == 3'b000)) ? pre_deskew_data[63:0] :
                                                                                         deskew_buffer0_q[63:0];     //-- write to block, or maintain current value
 
@@ -757,7 +763,7 @@ assign deskew_buffer7_din[63:0] =  x4_hold_data & deskew_all_valid              
 assign nghbr_data_out[63:0] = deskewed_data[63:0];
 
 
-assign deskewed_data[63:0] = 
+assign deskewed_data[63:0] =
                              ( {64{deskew_read_ptr_q[2:0] == 3'b000}} & (deskew_buffer0_q[63:0]) ) |     //-- read block, which is passed out to rx
                              ( {64{deskew_read_ptr_q[2:0] == 3'b001}} & (deskew_buffer1_q[63:0]) ) |
                              ( {64{deskew_read_ptr_q[2:0] == 3'b010}} & (deskew_buffer2_q[63:0]) ) |
@@ -774,10 +780,10 @@ assign deskewed_data[63:0] =
 assign rx_data_out[63:0] =  deskewed_data[63:0];         //-- data from phy has been (possibly inverted,) byte-reversed, descrambled, and deskewed, just latched in replay buffer now output to rx
 
 //-- Note: data_flit must be buffered with the data it corresponds to so it lines up when passed to the rx, who cannot see the header
-      assign found_data_flit = valid_in & 
+      assign found_data_flit = valid_in &
                                ((~header_in[1] & header_in[0]) |
                                 (~^header_in[1:0] & EDPL_ena));
-                               
+
 
 
 assign data_flit0_din = reset                                                 ? 1'b0:
@@ -805,7 +811,7 @@ assign data_flit7_din = reset                                                 ? 
                         ( deskew_write & (deskew_write_ptr_q[2:0] == 3'b111) ) ? found_data_flit :
                                                                                 data_flit7_q;
 //-- output flag that this is a 'data_flit'
-assign data_flit = 
+assign data_flit =
                   ((deskew_read_ptr_q[2:0] == 3'b000) &  deskew_read & data_flit0_q) |  //-- read data_flit out to rx
                   ((deskew_read_ptr_q[2:0] == 3'b001) & ~deskew_read & data_flit0_q) |  //-- read data_flit out to rx
 
@@ -842,11 +848,11 @@ assign training_enable_dlyd2_din = training_enable_dlyd_q;
 assign deskew_slot_written_din[0] = deskew_write & found_data_flit &
                                     (deskew_write_ptr_q[2:0] == 3'b000);
 assign deskew_slot_written_din[1] = deskew_write & found_data_flit &
-                                    (deskew_write_ptr_q[2:0] == 3'b001);   
+                                    (deskew_write_ptr_q[2:0] == 3'b001);
 assign deskew_slot_written_din[2] = deskew_write & found_data_flit &
-                                    (deskew_write_ptr_q[2:0] == 3'b010);  
+                                    (deskew_write_ptr_q[2:0] == 3'b010);
 assign deskew_slot_written_din[3] = deskew_write & found_data_flit &
-                                    (deskew_write_ptr_q[2:0] == 3'b011); 
+                                    (deskew_write_ptr_q[2:0] == 3'b011);
 assign deskew_slot_written_din[4] = deskew_write & found_data_flit &
                                     (deskew_write_ptr_q[2:0] == 3'b100);
 assign deskew_slot_written_din[5] = deskew_write & found_data_flit &
@@ -854,10 +860,10 @@ assign deskew_slot_written_din[5] = deskew_write & found_data_flit &
 assign deskew_slot_written_din[6] = deskew_write & found_data_flit &
                                     (deskew_write_ptr_q[2:0] == 3'b110);
 assign deskew_slot_written_din[7] = deskew_write & found_data_flit &
-                                    (deskew_write_ptr_q[2:0] == 3'b111);                                    
+                                    (deskew_write_ptr_q[2:0] == 3'b111);
 
 assign chk_data_din[63:0] = reset ? 64'h0000000000000000 :
-	                        deskew_slot_written_or ? 
+	                        deskew_slot_written_or ?
 	                        (deskew_buffer0_q[63:0] & {64{deskew_slot_written_q[0]}})
                           | (deskew_buffer1_q[63:0] & {64{deskew_slot_written_q[1]}})
                           | (deskew_buffer2_q[63:0] & {64{deskew_slot_written_q[2]}})
@@ -868,12 +874,12 @@ assign chk_data_din[63:0] = reset ? 64'h0000000000000000 :
                           | (deskew_buffer7_q[63:0] & {64{deskew_slot_written_q[7]}}) :
                           chk_data_q[63:0];
 
-assign EDPL_pchk = ~(^{deskew_sync_hdr_q[1:0],chk_data_q[63:0]});                             
-                             
-assign EDPL_parity_error = EDPL_ena & ~phy_training & ~training_enable & 
+assign EDPL_pchk = ~(^{deskew_sync_hdr_q[1:0],chk_data_q[63:0]});
+
+assign EDPL_parity_error = EDPL_ena & ~phy_training & ~training_enable &
                            ~training_enable_dlyd_q & check_EDPL_q & EDPL_pchk &
                            (deskew_sync_hdr_q[1:0] != 2'b10);
-                           
+
 //-- Only grab 6 most significant bits when counting to 64 or 128 errors.
 //-- At these thresholds, the actual count is 4*reported_count and can be off by up to +3. Otherwise, exact count is displayed.
 //-- e.g.: reported count = 6'b01_0010 = 18 --> Actual count is 72-75
@@ -899,7 +905,7 @@ assign EDPL_cntr_din[7:0]         = (tx_rx_EDPL_cntr_reset | reset) ? 8'h00 :
                                     EDPL_cntr_inc   ? EDPL_cntr_q[7:0] + 8'b00000001 :
                                                       EDPL_cntr_q[7:0];
 
-assign EDPL_max_cnt_din[7:0]      = ( (EDPL_max_cnt_q[7:0] & {8{EDPL_max_cnt_q[7:0] >=  EDPL_cntr_q[7:0]}}) | 
+assign EDPL_max_cnt_din[7:0]      = ( (EDPL_max_cnt_q[7:0] & {8{EDPL_max_cnt_q[7:0] >=  EDPL_cntr_q[7:0]}}) |
                                       (EDPL_cntr_q[7:0]    & {8{EDPL_max_cnt_q[7:0] <   EDPL_cntr_q[7:0]}}) ) & {8{~(EDPL_max_cnt_reset | reset)}};
 
 assign EDPL_thres_reached_din     = EDPL_err_thres[8] & (EDPL_cntr_q[7:0] >= EDPL_err_thres[7:0]);
@@ -909,13 +915,13 @@ assign deskew_slot_written_or = |(deskew_slot_written_q[7:0]);
 
 assign check_EDPL_din = valid_in & ~reset & EDPL_ready_q;
 
-assign EDPL_ready_din = (valid_in ? ~phy_training & ~training_enable & 
+assign EDPL_ready_din = (valid_in ? ~phy_training & ~training_enable &
                         ~training_enable_dlyd_q & ~training_enable_dlyd2_q :
                         EDPL_ready_q) & ~reset;
-assign EDPL_ready_out = EDPL_ready_q;                        
-                        
+assign EDPL_ready_out = EDPL_ready_q;
+
 assign EDPL_error_din = EDPL_parity_error;
-                             
+
 assign deskew_sync_hdr_din[1:0] = reset ? 2'b00 :
 	                              valid_in ? header_in[1:0] : deskew_sync_hdr_q;
 
@@ -931,7 +937,7 @@ assign lfsr_din[0:22] = ~valid_in     ? lfsr_q[0:22]:                //-- this c
                         load_pattern2 ? final_lfsr2[0:22]:           //-- load initial LFSR pattern 2
                         lfsr_advance  ? advance64(lfsr_q[0:22]):     //-- advance LFSR 64 bits
                         ~lfsr_unlock  ? lfsr_q[0:22]:                //-- otherwise hold, but clear if unlock
-                                        23'b0;  
+                                        23'b0;
 
 assign lfsr_cntr_din[0:2] = ( ~valid_in )                                                               ? lfsr_cntr_q[0:2] :              //-- cycle not valid -> don't count it
                             ( data_aligned & lfsr_running_q & ~lfsr_locked_q & is_any_TS & is_same_TS ) ? (lfsr_cntr_q[0:2] + 3'b001) :   //-- finding 8 same TS in a row -> increment
@@ -1122,7 +1128,7 @@ ts1_cntr_q[3:0]         <= ts1_cntr_din[3:0];
 ts2_cntr_q[3:0]         <= ts2_cntr_din[3:0];
 ts3_cntr_q[3:0]         <= ts3_cntr_din[3:0];
 block_locked_q          <= block_locked_din;
-is_deskew_q             <= is_deskew_din; 
+is_deskew_q             <= is_deskew_din;
 found_pattern_a_q       <= found_pattern_a_din;
 found_pattern_b_q       <= found_pattern_b_din;
 rx_tx_last_byte_ts3_q   <= rx_tx_last_byte_ts3_din;

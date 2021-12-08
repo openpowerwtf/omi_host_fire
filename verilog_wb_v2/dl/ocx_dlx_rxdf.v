@@ -23,6 +23,7 @@
 
 
 module ocx_dlx_rxdf #(
+parameter  GEMINI_NOT_APOLLO = 0
 ) (
 //-- phy interface
   ln0_rx_valid                   // < input
@@ -280,7 +281,7 @@ wire [63:0]     ln6_data;
 wire [63:0]     ln7_data;
 //-- from lanes
 wire [7:0]      data_flit;
-(*mark_debug = "true" *)wire [7:0]      deskew_valid 		/*verilator public*/;
+(*mark_debug = "true" *)wire [7:0]      deskew_valid     /*verilator public*/;
 wire [7:0]      deskew_overflow;
 
 wire            deskew_all_valid_l0;
@@ -336,7 +337,7 @@ assign x2_nghbr_data_ln5[63:0] = nghbr_data_5to4[63:0];
 assign x2_nghbr_data_ln7[63:0] = nghbr_data_7to6[63:0];
 
 
-ocx_dlx_rx_main #() main (
+ocx_dlx_rx_main #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) main (
     .reset              ( reset )
    ,.training_enable    ( any_training )
    ,.train_ts2          ( train_ts2 )
@@ -413,7 +414,7 @@ wire [7:0] found_sync;
 wire [7:0] find_a;
 wire [7:0] find_b;
 wire [7:0] find_first_b;
-(*mark_debug = "true" *)wire [7:0] valid_ln 		/*verilator public*/;
+(*mark_debug = "true" *)wire [7:0] valid_ln     /*verilator public*/;
 wire [7:0] slip_ln;
 //-------------------------------------------
 wire [63:0] data_ln0;

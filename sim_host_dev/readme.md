@@ -8,8 +8,6 @@ verilator --cc --exe --trace -Wno-fatal -Wno-Litendian -Isrc -I./src/dl -I./src/
 cd obj_dir;make -f Vtop.mk;cd ..
 obj_dir/Vtop
 
-
-
 gtkwave wtf.vcd wtf.gtkw
 
 # optional - looks like it creats 'aet'-like file, which is wayyy smaller
@@ -31,6 +29,17 @@ vcd2fst wtf.vcd wtf.fst
 
 * pattern_a (bits) completes but pattern_b (alignment) not being detected
 
-<img width=1200px src="./pattern_b.png">
+<img width=800px src="./pattern_b.png">
+
+* during pattern a, b, sync, there is no header data; so the 64b shifts over the 66b hdr+data
+
+* link up
+
+   * took several changes to counters - because they assume a minimum wire length?  need to be configurable
+
+   * removed 2-flit forced hiccup - tuning req'd for specific fire implementation on xil?
+
+<img width=800px src="./trained.png">
+
 
 

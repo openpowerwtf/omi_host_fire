@@ -6,7 +6,8 @@ module top #(
    parameter PHY_BITS = 64
 ) (
    input                       clk,
-   input                       rst,
+   input                       rst_host,
+   input                       rst_dev,
    input                       wb_stb,
    input                       wb_cyc,
    input  [31:0]               wb_adr,
@@ -31,18 +32,22 @@ module top #(
       input gtwiz_userclk_tx_active_in   , // --  < input
       input gtwiz_userclk_rx_active_in ,   // --  < input
       input send_first                  ,  // --  < input
-      output gtwiz_reset_rx_datapath_out  , // --  > output
-      input host_tsm_state2_to_3,
-      input host_tsm_state4_to_5,
-      input host_tsm_state6_to_1,
-      input dev_tsm_state2_to_3,
-      input dev_tsm_state4_to_5,
-      input dev_tsm_state6_to_1
+      output gtwiz_reset_rx_datapath_out,   // --  > output
+   input ocde
 );
+
+//wtf if these are exposed they should be tied to csr bits (along with reset, config bits, etc.)
+// 6_to_1 needs to be reset before the link trains!  or start it at 0 and set tsm=0 on reset;
+wire host_tsm_state2_to_3 = 1;
+wire host_tsm_state4_to_5 = 1;
+//wire host_tsm_state6_to_1 = 1;
+wire dev_tsm_state2_to_3 = 1;
+wire dev_tsm_state4_to_5 = 1;
+//wire dev_tsm_state6_to_1 = 1;
 
 wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
    .clk(clk),
-   .rst(rst),
+   .rst(rst_host),
    .wb_stb(wb_stb),
    .wb_cyc(wb_cyc),
    .wb_adr(wb_adr),
@@ -280,7 +285,7 @@ assign dev_ln7_rx_slip = 1'b0;
 
 omi_dev #() dev (
    .clk(clk),
-   .rst(rst),
+   .rst(rst_dev),
    .ln0_rx_valid(dev_ln0_rx_valid),
    .ln0_rx_header(dev_ln0_rx_header),
    .ln0_rx_data(dev_ln0_rx_data),

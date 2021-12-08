@@ -1,0 +1,18 @@
+#~/usr/bin/bash
+
+verilator --cc --exe --trace -Wno-fatal -Wno-Litendian -Isrc -I./src/dl -I./src/tl top.v tb.cpp
+
+if [[ -n "$rc" ]]; then
+   echo $rc
+   exit $rc
+fi
+
+cd obj_dir;make -f Vtop.mk;cd ..
+
+if [[ -z "$1" ]] ; then
+
+   obj_dir/Vtop
+   vcd2fst wtf.vcd wtf.fst
+   gtkwave wtf.fst wtf.gtkw
+
+fi

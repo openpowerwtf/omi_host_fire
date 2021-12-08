@@ -22,7 +22,9 @@
 `timescale 1ns / 1ps
 
 
-module ocx_dlx_top #() (
+module ocx_dlx_top #(
+   parameter  GEMINI_NOT_APOLLO = 0
+) (
 // ----------------------
 // -- RX interface
 // ----------------------
@@ -346,7 +348,7 @@ assign reg_07_update = reg_EDPL_error[7:0];
 assign          dlx_reset = dlx_reset_int;
 
 // -- pull in the rxdf macro
-ocx_dlx_rxdf #() rx (
+ocx_dlx_rxdf #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) rx (
  .ln0_rx_valid                  (ln0_rx_valid_int)              // --  < input
 ,.ln0_rx_data                   (ln0_rx_data)                   // --  < input  [63:0]
 ,.ln0_rx_header                 (ln0_rx_header)                 // --  < input  [1:0]
@@ -430,7 +432,7 @@ ocx_dlx_rxdf #() rx (
 );
 
 // -- pull in the txdf macro
-ocx_dlx_txdf #() tx (
+ocx_dlx_txdf #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) tx (
  .dlx_tlx_init_flit_depth       (dlx_tlx_init_flit_depth)       // --  > output [2:0]
 ,.dlx_tlx_flit_credit           (dlx_tlx_flit_credit)           // --  > output
 ,.tlx_dlx_flit_valid            (tlx_dlx_flit_valid)            // --  < input

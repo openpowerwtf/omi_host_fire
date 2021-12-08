@@ -23,7 +23,9 @@
 
 
 
-module ocx_dlx_rx_main #() (
+module ocx_dlx_rx_main #(
+   parameter  GEMINI_NOT_APOLLO = 0
+) (
   reset                         // < input
  ,training_enable               // < input
  ,train_ts2                     // < input
@@ -678,7 +680,14 @@ assign retrain_d3_din = retrain_d2_q;
 assign rx_tx_retrain = retrain_q & retrain_d1_q & retrain_d2_q;
 
 //--  mux data out of outside/inside sets for degraded mode.
-assign disabled_lanes_din = disabled_lanes;
+generate
+  if (GEMINI_NOT_APOLLO == 0) begin
+    assign disabled_lanes_din = disabled_lanes;
+  end
+  else begin
+    assign disabled_lanes_din = 8'b00000000;
+  end
+endgenerate
 
 assign good_insides                   = (~(disabled_lanes_q[6] | disabled_lanes_q[4] | disabled_lanes_q[3] | disabled_lanes_q[1]) & (x8_mode | x8_degrade_to_inside)) |
                                         (~(disabled_lanes_q[5] | disabled_lanes_q[2]) & (x4OL_mode | x4_degrade_to_inside));

@@ -18,17 +18,17 @@
 // *! The background Specification upon which this is based is managed by and available from
 // *! the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 // *!***************************************************************************
- 
+
 `timescale 1ns / 1ps
 
 
 module ocx_dlx_tx_gbx (
-	
+
      orx_otx_train_failed                 // -- <  input
 
     ,ctl_gb_train                         // -- <  input          // ---- link is being trained.  control sync headers should be sent
     ,ctl_gb_reset                         // -- <  input          // ---- reset all counter and pointer
-    ,ctl_gb_seq                           // -- <  input  [6:0]   // ---- 33 cycle sequence counter,  every 33 cycle we need to pause to allow room for sync headers 
+    ,ctl_gb_seq                           // -- <  input  [6:0]   // ---- 33 cycle sequence counter,  every 33 cycle we need to pause to allow room for sync headers
     ,ctl_gb_stall                         // -- <  input
 
     ,que_gb_data                          // -- <  input  [63:0]
@@ -39,18 +39,18 @@ module ocx_dlx_tx_gbx (
     ,dlx_phy_tx_data                      // -- <  output [63:0]
 
     // ---- traing signals
-    ,ctl_gb_tx_a_pattern                  // -- <  input  
+    ,ctl_gb_tx_a_pattern                  // -- <  input
     ,ctl_gb_tx_b_pattern                  // -- <  input
-    ,ctl_gb_tx_sync_pattern               // -- <  input   
+    ,ctl_gb_tx_sync_pattern               // -- <  input
     ,ctl_gb_tx_zeros                      // -- <  input
-    
+
     ,edpl_ena                             // -- <  input
     ,edpl_inj                             // -- <  input
     ,qb_hwwe                              // -- >  output
 
 //--     ,gnd                                  // -- <> inout
 //--     ,vdn                                  // -- <> inout
-    ,dlx_clk                              // -- <  input  
+    ,dlx_clk                              // -- <  input
     );
 
     input         orx_otx_train_failed;
@@ -71,7 +71,7 @@ module ocx_dlx_tx_gbx (
     input         ctl_gb_tx_b_pattern;
     input         ctl_gb_tx_sync_pattern;
     input         ctl_gb_tx_zeros;
-    
+
     //-- EDPL
     input edpl_ena;
     input edpl_inj;
@@ -95,7 +95,7 @@ module ocx_dlx_tx_gbx (
     reg  [63:0]  out_data_q;
     wire [127:0] carry_over_data_din;
     reg  [127:0] carry_over_data_q;
-    reg  [65:0]  gb_data; 
+    reg  [65:0]  gb_data;
     wire [63:0]  phy_train_data;
     wire         phy_training;
     wire         disable_tx;
@@ -107,11 +107,11 @@ module ocx_dlx_tx_gbx (
     wire         inv_parity;
     reg          inv_parity_q;
     wire         inv_parity_din;
-    
+
     assign odd_din = ctl_gb_stall ? odd_q :
     	              (que_gb_odd ^ inv_parity) &
                       ~(disable_tx | phy_training | ctl_gb_train); // Indicates odd number of 1's in current que_gb_data
-    
+
     assign phy_train_data[63:0]   = ctl_gb_tx_sync_pattern ?  64'hFF00FF00FF0000FF                                :    // -- sync pattern
                                     ctl_gb_tx_b_pattern    ?  64'hFF00FF00FFFF0000                                :    // -- pattern B
                                                               64'hFF00FF00FF00FF00                                ;    // -- pattern A
@@ -185,38 +185,38 @@ begin
         6'b111101 : gb_data[65:0] = {carry_over_data_q[ 5:0],phy_train_data[63: 4]};
         6'b111110 : gb_data[65:0] = {carry_over_data_q[ 3:0],phy_train_data[63: 2]};
         6'b111111 : gb_data[65:0] = {carry_over_data_q[ 1:0],phy_train_data[63: 0]};
-      endcase       
+      endcase
  end
-     
-    assign disable_tx             = ctl_gb_tx_zeros | orx_otx_train_failed | ctl_gb_reset ; 
+
+    assign disable_tx             = ctl_gb_tx_zeros | orx_otx_train_failed | ctl_gb_reset ;
     assign phy_training           = ctl_gb_tx_a_pattern | ctl_gb_tx_b_pattern | ctl_gb_tx_sync_pattern;
 
 
     assign out_seq_din[5:0]       = ctl_gb_seq[6:1];
 
     assign out_header_din[1:0]    = disable_tx          ?  2'b00                                              :    // -- drive zeros
-                                    phy_training        ?  gb_data[65:64]                                     :    // -- phy training 
+                                    phy_training        ?  gb_data[65:64]                                     :    // -- phy training
                                     ctl_gb_train        ?  2'b10                                              :    // -- control sync header
-                                                           data_hdr[1:0]                                      ;    // -- data sync header  
+                                                           data_hdr[1:0]                                      ;    // -- data sync header
 
     assign data_hdr[1:0] = ~edpl_ena | (edpl_ena & ~odd_q) ? 2'b01 : // standard data sync header or even number of 1's
     	                   {odd_hdr_q,odd_hdr_q};
-                                                           
+
     assign out_data_din[63:0]     = disable_tx          ?  64'h0000000000000000                               :    // -- drive zeros
-                                    phy_training        ?  gb_data[63:0]                                      :    // -- phy training 
+                                    phy_training        ?  gb_data[63:0]                                      :    // -- phy training
                                                            que_gb_data[63:0]                                  ;    // -- data from tx_que
 
     assign odd_hdr_din = disable_tx ? 1'b0 :
     	                 ctl_gb_stall ? odd_hdr_q :
-                         odd_q & edpl_ena ? 
+                         odd_q & edpl_ena ?
                          ~odd_hdr_q :
                          odd_hdr_q;
-    
+
     assign inv_parity = edpl_ena & edpl_inj;
     assign inv_parity_din = inv_parity;
-                      
-    assign qb_hwwe = inv_parity & ~inv_parity_q;                      
-                         
+
+    assign qb_hwwe = inv_parity & ~inv_parity_q;
+
     assign dlx_phy_tx_seq[5:0]    = out_seq_q[5:0];
     assign dlx_phy_tx_header[1:0] = out_header_q[1:0];
     assign dlx_phy_tx_data[63:0]  = out_data_q[63:0];
@@ -225,7 +225,7 @@ begin
 always @(posedge (dlx_clk)) begin
    out_header_q[1:0]          <= out_header_din[1:0];
    out_data_q[63:0]           <= out_data_din[63:0];
-   carry_over_data_q[127:0]   <= carry_over_data_din[127:0]; 
+   carry_over_data_q[127:0]   <= carry_over_data_din[127:0];
    out_seq_q[5:0]             <= out_seq_din[5:0];
    odd_q                      <= odd_din;
    odd_hdr_q                  <= odd_hdr_din;

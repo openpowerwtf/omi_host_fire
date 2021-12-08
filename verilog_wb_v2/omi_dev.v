@@ -385,7 +385,7 @@ ocx_tlx_top #() tl
    .tlx_cfg_oc3_tlx_version(tlx_cfg_oc3_tlx_version)
 );
 
-ocx_dlx_top #() dl
+ocx_dlx_top #(.GEMINI_NOT_APOLLO(1)) dl
 (
    .dlx_tlx_flit_valid(dlx_tlx_flit_valid),
    .dlx_tlx_flit(dlx_tlx_flit),
