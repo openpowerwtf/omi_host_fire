@@ -25,7 +25,7 @@
 
 * init verilator tb
 
-* train link; dl/dlx yapping, woke up tl/tlx, tlx ready for host/dev owners
+* train link; dl/dlx yapping, woke up tl/tlx, tl are ready for host/dev owners
 
 ## ToDo
 
