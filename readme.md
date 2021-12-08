@@ -25,9 +25,11 @@
 
 * init verilator tb
 
+* train link; dl/dlx yapping, woke up tl/tlx, tlx ready for host/dev owners
+
 ## ToDo
 
-* get link up in verilator
+* get some packets going
 
 ### /verilog_wb_3
 
