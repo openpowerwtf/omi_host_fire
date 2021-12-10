@@ -48,7 +48,7 @@ vcd2fst wtf.vcd wtf.fst
 
       * added GEMINI_NOT_APOLLO to tl and swap 01/08 opcodes based on that (rx and tx)
 
-      * so far 1/4 vc (vc0, tl) got credits :( or :)
+      * so far 1/4 vc (vc0, tl) got credits 😄 or 😢
 
 
 
