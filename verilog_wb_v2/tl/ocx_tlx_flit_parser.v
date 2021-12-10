@@ -20,7 +20,9 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
-module ocx_tlx_flit_parser(
+module ocx_tlx_flit_parser #(
+    parameter GEMINI_NOT_APOLLO = 0
+) (
     input tlx_clk,
     input reset_n,
     input [511:0] dlx_tlx_flit,
@@ -42,7 +44,7 @@ module ocx_tlx_flit_parser(
     output [5:0] ctl_template,
     output [3:0] run_length,
     output crc_error
-    );
+);
 //Internal signal declarations
 wire [511:0] flit_din;
 wire [511:0] ctl_flit_din;
@@ -285,7 +287,16 @@ always @(posedge tlx_clk)
     assign pars_ctl_valid_din = parse_inprog;
     assign pars_ctl_valid = pars_ctl_valid_dout;
     assign credit_return = credit_buffer_dout;
-    assign credit_return_v = credit_flag_dout & credit_buffer_dout[7:0] == 8'b00001000; //template 0 control flit return credit
+    //wtf try to massage this into working for both tl/tlx...
+    wire   [7:0] CRD_RTN_OPCODE;
+    generate
+       if (GEMINI_NOT_APOLLO) begin
+          assign CRD_RTN_OPCODE = 8'h01;
+       end else begin
+          assign CRD_RTN_OPCODE = 8'h08;
+      end
+    endgenerate
+    assign credit_return_v = credit_flag_dout & credit_buffer_dout[7:0] == CRD_RTN_OPCODE; //template 0 control flit return credit
     assign pars_data_flit = data_flit_dout;
     assign pars_data_valid = data_flit_valid_dout;
     //Debug Error Signals

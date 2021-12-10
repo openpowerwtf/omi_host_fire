@@ -25,8 +25,10 @@
 // ==============================================================================================================================
 // @@@  Module Declaration
 // ==============================================================================================================================
-module ocx_tlx_top
-    (
+module ocx_tlx_top #(
+      parameter GEMINI_NOT_APOLLO = 0
+)
+(
         // -----------------------------------
         // TLX Parser to AFU Receive Interface
         // -----------------------------------
@@ -415,7 +417,7 @@ module ocx_tlx_top
     // ----------
     // TLX Parser
     // ----------
-    ocx_tlx_rcv_top OCX_TLX_PARSER (
+    ocx_tlx_rcv_top #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) OCX_TLX_PARSER (
 
         // -----------------------------------
         // DLX to TLX Interface
@@ -532,7 +534,7 @@ module ocx_tlx_top
     // ----------
     // TLX Framer
     // ----------
-    ocx_tlx_framer OCX_TLX_FRAMER (
+    ocx_tlx_framer #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) OCX_TLX_FRAMER (
 
         // -----------------------------------
         // AFU Command/Response/Data Interface

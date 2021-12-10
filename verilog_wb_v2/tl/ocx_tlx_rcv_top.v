@@ -20,7 +20,9 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
-module ocx_tlx_rcv_top(
+module ocx_tlx_rcv_top#(
+   parameter GEMINI_NOT_APOLLO = 0
+)(
     output tlx_afu_resp_valid,
     output [7:0] tlx_afu_resp_opcode,
     output [15:0] tlx_afu_resp_afutag,
@@ -68,14 +70,14 @@ module ocx_tlx_rcv_top(
     //CFG AFU
     input cfg_tlx_credit_return,
     input [3:0] cfg_tlx_initial_credit,
-    output tlx_cfg_valid,     
+    output tlx_cfg_valid,
     output [7:0] tlx_cfg_opcode,
     output [63:0] tlx_cfg_pa,
     output tlx_cfg_t,
     output [2:0] tlx_cfg_pl,
     output [15:0] tlx_cfg_capptag,
     output tlx_cfg_data_bdi,
-    output [31:0] tlx_cfg_data_bus,     
+    output [31:0] tlx_cfg_data_bus,
     output tlx_afu_ready,
     output tlx_cfg_in_rcv_tmpl_capability_0,
     output tlx_cfg_in_rcv_tmpl_capability_1,
@@ -137,7 +139,7 @@ assign tlx_cfg_in_rcv_tmpl_capability_1 = 1'b1;
 assign tlx_cfg_in_rcv_tmpl_capability_2 = 1'b1;
 assign tlx_cfg_in_rcv_tmpl_capability_3 = 1'b1;
 //Minimum rate limit for templates
-assign tlx_cfg_in_rcv_rate_capability_0 = 4'b0000; 
+assign tlx_cfg_in_rcv_rate_capability_0 = 4'b0000;
 assign tlx_cfg_in_rcv_rate_capability_1 = 4'b0011;
 assign tlx_cfg_in_rcv_rate_capability_2 = 4'b0111;
 assign tlx_cfg_in_rcv_rate_capability_3 = 4'b0010;
@@ -156,9 +158,9 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .rcv_xmt_credit_vcx3        (rcv_xmt_tlx_credit_vc3),
         .rcv_xmt_credit_dcpx0       (rcv_xmt_tlx_credit_dcp0),
         .rcv_xmt_credit_dcpx3       (rcv_xmt_tlx_credit_dcp3),
-        .data_arb_vc_v              (data_arb_vc_v),          
-        .data_arb_flit_cnt          (data_arb_flit_cnt),          
-        .run_length                 (run_length),          
+        .data_arb_vc_v              (data_arb_vc_v),
+        .data_arb_flit_cnt          (data_arb_flit_cnt),
+        .run_length                 (run_length),
         .dlx_tlx_flit               (dlx_tlx_flit),
         .dlx_tlx_flit_valid         (dlx_tlx_flit_valid),
         .dlx_tlx_flit_crc_err       (dlx_tlx_flit_crc_err),
@@ -167,19 +169,19 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .control_parsing_start      (control_parsing_start),
         .control_parsing_end        (control_parsing_end),
         .ctl_flit_start             (ctl_flit_start),
-        .bad_data_indicator         (bad_data_indicator),            
+        .bad_data_indicator         (bad_data_indicator),
         .bookend_flit_v             (bookend_flit_v),
         .good_crc                   (good_crc),
         .crc_flush_inprog           (crc_flush_inprog),
-        .crc_flush_done             (crc_flush_done),        
+        .crc_flush_done             (crc_flush_done),
         .parser_inprog              (parser_inprog),
         .template0_slot0            (template0_slot0),
         .template0_slot0_v          (template0_slot0_v),
-        .ctl_template               (ctl_template),  
+        .ctl_template               (ctl_template),
         .pars_ctl_info      (pars_ctl_info),            //Output
-        .pars_ctl_valid     (pars_ctl_valid),           //Output   
+        .pars_ctl_valid     (pars_ctl_valid),           //Output
 //      .credit_return_out(credit_return_out),
-//      .credit_return_v_out(credit_return_v_out),           
+//      .credit_return_v_out(credit_return_v_out),
         .crc_error                  (crc_error),
         .bdi_cfg_hint(bdi_cfg_hint),
         .cfg_data_v                 (cfg_data_v),
@@ -187,17 +189,17 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .cfg_data_bus               (cfg_data_bus),
         .cmd_credit_enable          (cmd_credit_enable),
         .reset_n                    (reset_n),
-        .tlx_clk                    (tlx_clk) 
+        .tlx_clk                    (tlx_clk)
         );
     ocx_tlx_rcv_mac TLX_RCV_FIFO(
         //Bad data indicator
         .bad_data_indicator         (bad_data_indicator),
         .bookend_flit_v             (bookend_flit_v),
-        .data_arb_vc_v              (data_arb_vc_v),          
-        .data_arb_flit_cnt          (data_arb_flit_cnt),          
+        .data_arb_vc_v              (data_arb_vc_v),
+        .data_arb_flit_cnt          (data_arb_flit_cnt),
         .run_length                 (run_length),
         .control_parsing_start      (control_parsing_start),
-        .control_parsing_end        (control_parsing_end),        
+        .control_parsing_end        (control_parsing_end),
         //Parser Inputs
         .fp_rcv_cmd_valid(fp_rcv_cmd_valid),
         .fp_rcv_cmd_info(fp_rcv_cmd_info),
@@ -250,7 +252,7 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .tlx_afu_cmd_pl(tlx_afu_cmd_pl),
         .tlx_afu_cmd_be(tlx_afu_cmd_be),
         //TLX CMD data flow
-        .tlx_afu_cmd_data_bdi(tlx_afu_cmd_data_bdi),            
+        .tlx_afu_cmd_data_bdi(tlx_afu_cmd_data_bdi),
         .tlx_afu_cmd_data_valid(tlx_afu_cmd_data_valid),
         .tlx_afu_cmd_data_bus(tlx_afu_cmd_data_bus),
         .afu_tlx_cmd_rd_req(afu_tlx_cmd_rd_req),
@@ -258,31 +260,31 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .afu_tlx_cmd_credit(afu_tlx_cmd_credit),
         .afu_tlx_cmd_initial_credit(afu_tlx_cmd_initial_credit),
         .cfg_tlx_credit_return(cfg_tlx_credit_return),
-        .cfg_tlx_initial_credit(cfg_tlx_initial_credit), 
+        .cfg_tlx_initial_credit(cfg_tlx_initial_credit),
         .tlx_cfg_valid(tlx_cfg_valid),
         .tlx_cfg_opcode(tlx_cfg_opcode),
         .tlx_cfg_pa(tlx_cfg_pa),
         .tlx_cfg_t(tlx_cfg_t),
         .tlx_cfg_capptag(tlx_cfg_capptag),
-        .tlx_cfg_pl(tlx_cfg_pl), 
-        .tlx_afu_cfg_data_bdi(tlx_cfg_data_bdi), 
-        .tlx_cfg_data_bus(tlx_cfg_data_bus),             
+        .tlx_cfg_pl(tlx_cfg_pl),
+        .tlx_afu_cfg_data_bdi(tlx_cfg_data_bdi),
+        .tlx_cfg_data_bus(tlx_cfg_data_bus),
         .data_hold_vc0(data_hold_vc0),
         .data_hold_vc1(data_hold_vc1),
         .ctl_flit_start(ctl_flit_start),
         .good_crc(good_crc),
         .crc_flush_inprog(crc_flush_inprog),
-        .crc_flush_done(crc_flush_done),         
+        .crc_flush_done(crc_flush_done),
         .tlx_clk(tlx_clk),
         .crc_error(crc_error),
         .reset_n(reset_n)
          );
-         
+
     ocx_tlx_parser_err_mac TLX_PAR_ERR(
         //Bad opcode and template combination
         .ctl_template       (ctl_template),
-        .pars_ctl_info      (pars_ctl_info),//can be used as inprog            
-        .pars_ctl_valid     (pars_ctl_valid),           
+        .pars_ctl_info      (pars_ctl_info),//can be used as inprog
+        .pars_ctl_valid     (pars_ctl_valid),
         //Bad template x"00" format & control rate limit violation
         //Reserved opcode used & return credit command found outside slot 0
         //use pars_info
@@ -300,9 +302,9 @@ assign tlx_afu_ready = dlx_tlx_link_up;
         .rcv_xmt_debug_fatal(rcv_xmt_debug_fatal),
         .tlx_clk(tlx_clk),
         //.crc_error(crc_error),
-        .reset_n(reset_n) 
-        );     
-        
-          
-//!! Bugspray include : ocx_tlx_parser_bs.bil         
+        .reset_n(reset_n)
+        );
+
+
+//!! Bugspray include : ocx_tlx_parser_bs.bil
 endmodule

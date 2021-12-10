@@ -47,6 +47,7 @@ wire dev_tsm_state4_to_5 = 1;
 
 wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
    .clk(clk),
+   .opt_gckn(clk),
    .rst(rst_host),
    .wb_stb(wb_stb),
    .wb_cyc(wb_cyc),
@@ -285,6 +286,7 @@ assign dev_ln7_rx_slip = 1'b0;
 
 omi_dev #() dev (
    .clk(clk),
+   .opt_gckn(clk),
    .rst(rst_dev),
    .ln0_rx_valid(dev_ln0_rx_valid),
    .ln0_rx_header(dev_ln0_rx_header),
@@ -342,7 +344,6 @@ omi_dev #() dev (
    .dlx_l5_tx_seq(dev_ln5_tx_seq),
    .dlx_l6_tx_seq(dev_ln6_tx_seq),
    .dlx_l7_tx_seq(ln7_tx_seq),
-   .opt_gckn(~clk),
    .ocde(ocde),
    .reg_04_val(reg_04_val),
    .reg_04_hwwe(reg_04_hwwe),

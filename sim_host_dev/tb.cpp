@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 #endif
 
 
-   unsigned int runCycles =  10000;
+   unsigned int runCycles =  1000;
    unsigned int startTrace = 0;
    unsigned adrMask = 0x0000003C; // restrict address range
 
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
    bool reqPending = false, reqRd, reqWr;
    unsigned int reqAdr, reqSel, reqData, adr, data, mask;
 
-   unsigned int linkUp = 0, tlReady = 0, phy_rx_valid[8], phy_rx_header[8], phy_rx_data[8],
+   unsigned int dlLinkUp = 0, dlxLinkUp = 0, tlReady = 0, tlxReady = 0, phy_rx_valid[8], phy_rx_header[8], phy_rx_data[8],
                                          phy_tx_header[8], phy_tx_data[8];
 
    unsigned int clk_156_25MHz, hb_gtwiz_reset_all_in, send_first,
@@ -195,12 +195,11 @@ int main(int argc, char **argv) {
          cout << "startRetrain=" << setw(1) << startRetrain << endl;
       }
 
-      if (main_time > 50 && m->rst_host == 1) {
+      if (main_time > 50 && (int)m->rst_dev == 1) {
          cout << "Releasing dev.." << endl;
          m->rst_dev = 0;
       }
-
-      if ((main_time %100) == 0) {
+      if ((main_time % 100) == 0) {
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time << endl; //" count=" << m->rootp->top__DOT__dufimem__DOT__count_q + 0 << endl;
       }
       if (!reqPending) {
@@ -291,9 +290,9 @@ int main(int argc, char **argv) {
          reqPending = false;
       }
 
-      if (!linkUp) {
-         linkUp = m->rootp->top->host->omi_host->dlx_tlx_link_up;
-         if (linkUp) {
+      if (!dlLinkUp) {
+         dlLinkUp = m->rootp->top->host->omi_host->dlx_tlx_link_up;
+         if (dlLinkUp) {
             cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
             cout << " DL says link is up!" << endl;
          }
@@ -304,6 +303,22 @@ int main(int argc, char **argv) {
          if (tlReady) {
             cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
             cout << " TL says ready!" << endl;
+         }
+      }
+
+      if (!dlxLinkUp) {
+         dlxLinkUp = m->rootp->top->dev->dlx_tlx_link_up;
+         if (dlxLinkUp) {
+            cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
+            cout << " DLX says link is up!" << endl;
+         }
+      }
+
+      if (!tlxReady) {
+         tlxReady = m->rootp->top->dev->tlx_ready;
+         if (tlReady) {
+            cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
+            cout << " TLX says ready!" << endl;
          }
       }
 

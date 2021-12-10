@@ -267,7 +267,7 @@ wire   [2:0]      dlx_tlx_init_flit_depth;
 //wire   [31:0]     dlx_tlx_dlx_config_info;
 wire   [31:0]     dlx_config_info /* verilator public */;
 
-ocx_tlx_top #() tl
+ocx_tlx_top #(.GEMINI_NOT_APOLLO(0)) tl
 (
    .clk(clk),
    .rst(rst),

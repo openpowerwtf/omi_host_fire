@@ -68,6 +68,7 @@ module wb_omi_host #(
 )
 (
         input                       clk,
+        input                       opt_gckn,
         input                       rst,
 
         input                       wb_cyc,
@@ -137,7 +138,6 @@ module wb_omi_host #(
         output  [1:0]               dlx_l7_tx_seq,
 
         //wtf are these config bits for dl?? i think gckn is clk_n?
-        //input                       opt_gckn,
         input                       ocde,
         input                       reg_04_val,
         output                      reg_04_hwwe,
@@ -185,8 +185,8 @@ module wb_omi_host #(
 
     ) ;
 
-   reg    [1:0]         cmdseq_q;
-   wire   [1:0]         cmdseq_d;
+   reg    [2:0]         cmdseq_q;
+   wire   [2:0]         cmdseq_d;
    reg                  ack_q;
    wire                 ack_d;
    reg    [15:0]        error_q;
@@ -220,20 +220,20 @@ module wb_omi_host #(
    wire   [511:0]       rsp_data_bus;
    wire                 rsp_bad;
 
-   wire   [3:0]         cmd_initial_credits;
-   wire   [3:0]         cmd_data_initial_credits;
-   wire   [6:0]         rsp_initial_credits;
-   wire                 init;
    reg    [3:0]         cmd_credits_q;
    wire   [3:0]         cmd_credits_d;
+   wire   [3:0]         cmd_initial_credits;
    wire                 cmd_credits_inc;
    wire                 cmd_credits_dec;
    wire                 cmd_credits_hold;
    reg    [5:0]         cmd_data_credits_q;
    wire   [5:0]         cmd_data_credits_d;
+   wire   [5:0]         cmd_data_initial_credits;
    wire                 cmd_data_credits_inc;
    wire                 cmd_data_credits_dec;
    wire                 cmd_data_credits_hold;
+   wire   [6:0]         rsp_initial_credits;
+   wire                 init;
    wire                 trans_error;
 
    // FF
@@ -241,9 +241,9 @@ module wb_omi_host #(
       if (rst) begin
          error_q <= 'h0;
          ack_q <= 'b0;
-         cmdseq_q <= 'b11;
-         cmd_credits_q <= 'h0;
-         cmd_data_credits_q <= 'h0;
+         cmdseq_q <= 'b111;
+         cmd_credits_q <= cmd_initial_credits;
+         cmd_data_credits_q <= cmd_data_initial_credits;
       end else begin
          error_q <= error_d;
          ack_q <= ack_d;
@@ -329,44 +329,51 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
                           ({4{cmd_credits_dec}} & cmd_credits_q - 1) |
                           ({4{cmd_credits_hold}} & cmd_credits_q);
 
-   assign cmd_credit_ok = (cmd_credits_q != 0) & (cmd_data_credits_q != 0);
+   assign cmd_credit_ok = (cmd_credits_q != 0) & (~wb_cmd_we | (cmd_data_credits_q != 0));
 
    assign cmd_data_credits_inc = cmd_data_credit & ~cmd_tkn;
    assign cmd_data_credits_dec = cmd_tkn & wb_cmd_we & ~cmd_credit;  //wtf how many bytes per credit??? think it's 1 cmd's worth
    assign cmd_data_credits_hold = ~cmd_data_credits_inc & ~cmd_data_credits_dec;
 
-   assign cmd_data_credits_d = ({4{cmd_data_credits_inc}} & cmd_data_credits_q + 1) |
-                               ({4{cmd_data_credits_dec}} & cmd_data_credits_q - 1) |
-                               ({4{cmd_data_credits_hold}} & cmd_data_credits_q);
+   assign cmd_data_credits_d = ({6{cmd_data_credits_inc}} & cmd_data_credits_q + 1) |
+                               ({6{cmd_data_credits_dec}} & cmd_data_credits_q - 1) |
+                               ({6{cmd_data_credits_hold}} & cmd_data_credits_q);
 
    assign rsp_credit = ack_q;
 
    // does ack also need to check rsp_data_valid? assume not since it's a pr_rd
 
    //tbl cmdseq
-   //n cmdseq_q                         cmdseq_d
-   //n |  wb_cmd_val                    |  cmd_tkn
-   //n |  |cmd_credit_ok                |  |
-   //n |  || rsp_valid                  |  |
-   //n |  || |rsp_bad                   |  | ack_d
-   //n |  || ||                         |  | | idle
-   //n |  || ||                         |  | | | trans_error
-   //n |  || ||                         |  | | | |
-   //b 10 || ||                         10 | | | |
-   //t ii ii ii                         oo o o o o
+   //n cmdseq_q                            cmdseq_d
+   //n |   tl_ready                        |
+   //n |   | wb_cmd_val                    |   cmd_tkn
+   //n |   | |cmd_credit_ok                |   |
+   //n |   | || rsp_valid                  |   |
+   //n |   | || |rsp_bad                   |   | ack_d
+   //n |   | || ||                         |   | | idle
+   //n |   | || ||                         |   | | | trans_error
+   //n |   | || ||                         |   | | | |
+   //b 210 | || ||                         210 | | | |
+   //t iii i ii ii                         ooo o o o o
    //*------------------------------------------------
+   //* TL Not Ready **********************************
+   //s 111 - -- --                         --- 0 0 1 0
+   //s 111 0 -- --                         111 - - - -
+   //s 111 1 -- --                         001 - - - -
    //* Idle ******************************************
-   //s 11 0- --                         11 0 0 1 0         * ...zzz...
-   //s 11 10 --                         11 0 0 1 0         * need credits
-   //s 11 11 --                         01 1 0 0 0         * start transaction
+   //s 001 0 -- --                         --- - 0 1 0         *
+   //s 001 0 -- --                         111 0 - - -         *
+   //s 001 1 0- --                         001 0 - - -         * ...zzz...
+   //s 001 1 10 --                         001 0 - - -         * need credits
+   //s 001 1 11 --                         010 1 - - -         * start transaction
    //* Transaction Pending ***************************
-   //s 01 -- 0-                         01 0 0 0 0
-   //s 01 -- 10                         10 0 0 0 0
-   //s 01 -- 11                         00 0 1 0 0
+   //s 010 - -- 0-                         010 0 0 0 0
+   //s 010 - -- 10                         011 0 0 0 0
+   //s 010 - -- 11                         000 0 1 0 0
    //* Response Send **********************************
-   //s 10 -- --                         11 0 0 0 0         * wb_ack=1
+   //s 011 - -- --                         001 0 0 0 0         * wb_ack=1
    //* Epic Failure **********************************
-   //s 00 -- --                         00 0 0 0 1
+   //s 000 - -- --                         000 0 0 0 1
    //*------------------------------------------------
    //tbl cmdseq
 
@@ -452,7 +459,7 @@ omi_host #() omi_host
    .afu_tlx_cdata_bus(cmd_data_bus),
    .afu_tlx_cdata_bdi(cmd_data_bdi),
 
-   .afu_tlx_resp_initial_credit(rsp_initial_credit),
+   .afu_tlx_resp_initial_credit(rsp_initial_credits),
    .afu_tlx_resp_credit(rsp_credit),
    .tlx_afu_resp_valid(rsp_valid),
    .tlx_afu_resp_opcode(rsp_opcode),
@@ -582,7 +589,7 @@ omi_host #() omi_host
    .dlx_l6_tx_seq(dlx_l6_tx_seq),
    .dlx_l7_tx_seq(dlx_l7_tx_seq),
 
-   .opt_gckn(~clk),
+   .opt_gckn(opt_gckn),
    .dlx_reset(dlx_reset),  //wtf for phy??
    .ocde(ocde),
    .reg_04_val(reg_04_val),
@@ -615,26 +622,32 @@ omi_host #() omi_host
 
 // Generated
 //vtable cmdseq
-assign cmdseq_d[1] =
-  (cmdseq_q[1] & cmdseq_q[0] & ~wb_cmd_val) +
-  (cmdseq_q[1] & cmdseq_q[0] & wb_cmd_val & ~cmd_credit_ok) +
-  (~cmdseq_q[1] & cmdseq_q[0] & rsp_valid & ~rsp_bad) +
-  (cmdseq_q[1] & ~cmdseq_q[0]);
-assign cmdseq_d[0] =
-  (cmdseq_q[1] & cmdseq_q[0] & ~wb_cmd_val) +
-  (cmdseq_q[1] & cmdseq_q[0] & wb_cmd_val & ~cmd_credit_ok) +
-  (cmdseq_q[1] & cmdseq_q[0] & wb_cmd_val & cmd_credit_ok) +
-  (~cmdseq_q[1] & cmdseq_q[0] & ~rsp_valid) +
-  (cmdseq_q[1] & ~cmdseq_q[0]);
-assign cmd_tkn =
-  (cmdseq_q[1] & cmdseq_q[0] & wb_cmd_val & cmd_credit_ok);
-assign ack_d =
-  (~cmdseq_q[1] & cmdseq_q[0] & rsp_valid & rsp_bad);
-assign idle =
-  (cmdseq_q[1] & cmdseq_q[0] & ~wb_cmd_val) +
-  (cmdseq_q[1] & cmdseq_q[0] & wb_cmd_val & ~cmd_credit_ok);
-assign trans_error =
-  (~cmdseq_q[1] & ~cmdseq_q[0]);
+assign cmdseq_d[2] = 
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready);
+assign cmdseq_d[1] = 
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & cmd_credit_ok) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_valid) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & ~rsp_bad);
+assign cmdseq_d[0] = 
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tl_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & ~wb_cmd_val) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & ~cmd_credit_ok) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & ~rsp_bad) +
+  (~cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0]);
+assign cmd_tkn = 
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & cmd_credit_ok);
+assign ack_d = 
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & rsp_bad);
+assign idle = 
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0]) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready);
+assign trans_error = 
+  (~cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0]);
 //vtable cmdseq
 
 endmodule

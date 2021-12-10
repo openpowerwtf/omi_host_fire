@@ -20,13 +20,15 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
-`define OCX_TLX_FRAMER_VERSION  11_Feb_2019
+`define OCX_TLX_FRAMER_VERSION  wtf!
 
 // ==============================================================================================================================
 // @@@  Module Declaration
 // ==============================================================================================================================
-module ocx_tlx_framer
-    (
+module ocx_tlx_framer #(
+   parameter GEMINI_NOT_APOLLO = 1
+)
+(
         // -----------------------------------
         // AFU Command/Response/Data Interface
         // -----------------------------------
@@ -147,6 +149,7 @@ module ocx_tlx_framer
 // ==============================================================================================================================
 // @@@  Parameters
 // ==============================================================================================================================
+
 
         // Config Response Injector FSM States
         parameter    [4:0]   CFG_IDLE            = 5'b00001 ;   // 1
@@ -292,8 +295,6 @@ module ocx_tlx_framer
         // -----------------------------------
         input              clock                             ;
         input              reset_n                           ;
-
-
 
 
 // ==============================================================================================================================
@@ -787,8 +788,6 @@ module ocx_tlx_framer
    reg               send_cmd_dflit_q;
    reg               valid_cmd_leaving_fifo_q;
 
-
-
 // ==============================================================================================================================
 // @@@  Ties and Hard-coded  Assignments
 // ==============================================================================================================================
@@ -1087,6 +1086,16 @@ module ocx_tlx_framer
     // @@@ TL Credit Packet
     // ---------------
 
+    //wtf try to massage this into working for both tl/tlx...
+    wire   [7:0] CRD_RTN_OPCODE;
+    generate
+       if (GEMINI_NOT_APOLLO) begin
+          assign CRD_RTN_OPCODE = 8'h08;
+       end else begin
+          assign CRD_RTN_OPCODE = 8'h01;
+      end
+    endgenerate
+
     // Capture 2-slot Credit Packet
     // Note - in the current design, sometimes the credits may be packed into the control flit even when xredy=0.
     // This can happen when the packer needs to fill slots 0,1 to prevent a six-slot command from going into slots 0,1.
@@ -1099,8 +1108,8 @@ module ocx_tlx_framer
                                                                   vc1_tlcrd_counter_snd,            // 23:20  actually tlx.vc3 in apollo
                                                                   8'h00,                            // 19:12
                                                                   vc0_tlcrd_counter_snd,            // 11:8
-                                                                  8'b00000001         };            // Pack slots 0,1 with TL credits.  AP Credit packet opcode = 00000001.
-        else if (clear_credit_packet) credit_packet_din[55:0] = { 48'h000000000000, 8'b00000001 };  // Pack slots 0,1 with zero TL credits.  AP Credit packet opcode = 00000001.
+                                                                  CRD_RTN_OPCODE      };           // Pack slots 0,1 with TL credits.  AP Credit packet opcode = 00000001.
+        else if (clear_credit_packet) credit_packet_din[55:0] = { 48'h000000000000, CRD_RTN_OPCODE };  // Pack slots 0,1 with zero TL credits.  AP Credit packet opcode = 00000001.
         else                          credit_packet_din[55:0] = credit_packet ;                     // Hold credit packet until it is taken.
     end
     always @ (posedge clock) begin
@@ -3382,7 +3391,7 @@ module ocx_tlx_framer
                                               vc3_tlxcrd_overflow_err,
                                               2'b00,
                                               vc0_tlxcrd_overflow_err,
-                                              8'b00000001                 // Error signature and Opcode for TLX credit return from TL
+                                              CRD_RTN_OPCODE                 // Error signature and Opcode for TLX credit return from TL
                                             } ;
      end
      always @ (posedge clock) begin   // Add latches here for timing

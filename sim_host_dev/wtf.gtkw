@@ -1,90 +1,75 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Wed Dec  8 16:44:44 2021
+[*] Fri Dec 10 01:03:38 2021
 [*]
 [dumpfile] "/home/wtf/projects/omi_host_fire/sim_host_dev/wtf.fst"
-[dumpfile_mtime] "Wed Dec  8 16:37:54 2021"
-[dumpfile_size] 16418920
+[dumpfile_mtime] "Thu Dec  9 23:50:24 2021"
+[dumpfile_size] 1534895
 [savefile] "/home/wtf/projects/omi_host_fire/sim_host_dev/wtf.gtkw"
-[timestart] 6104
+[timestart] 6550
 [size] 4118 2513
 [pos] 264 161
-*-6.000000 6515 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-5.000000 6703 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top.
-[treeopen] TOP.top.dev.dl.
+[treeopen] TOP.top.dev.
 [treeopen] TOP.top.dev.dl.rx.
 [treeopen] TOP.top.dev.dl.rx.lane0.
 [treeopen] TOP.top.dev.dl.rx.phy0.
 [treeopen] TOP.top.dev.dl.tx.
+[treeopen] TOP.top.dev.tl.
+[treeopen] TOP.top.dev.tl.OCX_TLX_FRAMER.
+[treeopen] TOP.top.dev.tl.OCX_TLX_PARSER.
+[treeopen] TOP.top.dev.tl.OCX_TLX_PARSER.TLX_RCV_FIFO.
 [treeopen] TOP.top.host.
 [treeopen] TOP.top.host.omi_host.
-[treeopen] TOP.top.host.omi_host.dl.
 [treeopen] TOP.top.host.omi_host.dl.rx.
 [treeopen] TOP.top.host.omi_host.dl.rx.lane0.
 [treeopen] TOP.top.host.omi_host.dl.rx.main.
 [treeopen] TOP.top.host.omi_host.dl.tx.
+[treeopen] TOP.top.host.omi_host.tl.
+[treeopen] TOP.top.host.omi_host.tl.OCX_TLX_PARSER.
+[treeopen] TOP.top.host.omi_host.tl.OCX_TLX_PARSER.TLX_Parser.
 [sst_width] 626
-[signals_width] 802
+[signals_width] 1002
 [sst_expanded] 1
 [sst_vpaned_height] 788
 @28
 TOP.clk
-TOP.top.host.omi_host.opt_gckn
-TOP.top.host.omi_host.dl.hb_gtwiz_reset_all_in
-TOP.top.host.omi_host.dl.gtwiz_reset_rx_done_in
-TOP.top.host.omi_host.dl.gtwiz_reset_tx_done_in
-TOP.top.host.omi_host.dl.gtwiz_userclk_rx_active_in
-TOP.top.host.omi_host.dl.gtwiz_userclk_tx_active_in
-TOP.top.host.omi_host.dl.gtwiz_buffbypass_rx_done_in
-TOP.top.host.omi_host.dl.gtwiz_buffbypass_tx_done_in
-TOP.top.host.omi_host.dl.gtwiz_reset_all_out
-TOP.top.host.omi_host.dl.gtwiz_reset_rx_datapath_out
-TOP.top.host_tsm_state6_to_1
-TOP.top.dev_tsm_state6_to_1
-TOP.top.reg_04_update
-TOP.top.reg_05_update
-TOP.top.reg_06_update
-TOP.top.reg_07_update
-TOP.top.ln0_rx_valid
-@22
-TOP.top.ln0_tx_data[63:0]
-TOP.top.ln1_tx_data[63:0]
-TOP.top.ln2_tx_data[63:0]
-TOP.top.ln3_tx_data[63:0]
-TOP.top.ln4_tx_data[63:0]
-TOP.top.ln5_tx_data[63:0]
-TOP.top.ln6_tx_data[63:0]
-TOP.top.ln7_tx_data[63:0]
-@28
-TOP.top.dev_ln0_rx_valid
-@22
-TOP.top.dev_ln0_tx_data[63:0]
-TOP.top.dev_ln1_tx_data[63:0]
-TOP.top.dev_ln2_tx_data[63:0]
-TOP.top.dev_ln3_tx_data[63:0]
-TOP.top.dev_ln4_tx_data[63:0]
-TOP.top.dev_ln5_tx_data[63:0]
-TOP.top.dev_ln6_tx_data[63:0]
-TOP.top.dev_ln7_tx_data[63:0]
 @200
 -Descrambled Link
 @22
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane0.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane1.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane2.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane3.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane4.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane5.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane6.descrambled_data[0:63]
+[color] 3
 TOP.top.host.omi_host.dl.rx.lane7.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane0.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane1.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane2.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane3.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane4.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane5.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane6.descrambled_data[0:63]
+[color] 3
 TOP.top.dev.dl.rx.lane7.descrambled_data[0:63]
 @200
 -WB
@@ -110,126 +95,111 @@ TOP.wb_adr[31:0]
 TOP.wb_dat_o[31:0]
 @200
 -WB_OMI_HOST
+@22
+TOP.top.host.omi_host.tl.afu_tlx_cmd_initial_credit[6:0]
+TOP.top.host.omi_host.tl.afu_tlx_resp_initial_credit[6:0]
+TOP.top.host.omi_host.tl.cfg_tlx_initial_credit[3:0]
+TOP.top.host.omi_host.tl.tlx_afu_cmd_data_initial_credit[5:0]
+TOP.top.host.omi_host.tl.tlx_afu_cmd_initial_credit[3:0]
+TOP.top.host.omi_host.tl.tlx_afu_resp_initial_credit[3:0]
+TOP.top.host.cmd_credits_q[3:0]
+TOP.top.host.cmd_data_credits_q[5:0]
+TOP.top.host.cmd_data_initial_credits[5:0]
 @28
-TOP.top.host.send_first
 TOP.top.host.wb_cmd_val
-TOP.top.host.cmdseq_q[1:0]
+TOP.top.host.tl_ready
 TOP.top.host.cmd_valid
+TOP.top.host.cmd_data_valid
+TOP.top.host.omi_host.tl.afu_tlx_cdata_valid
+TOP.top.host.omi_host.tl.afu_tlx_cmd_valid
+TOP.top.host.omi_host.tl.afu_tlx_rdata_valid
+TOP.top.host.omi_host.tl.afu_tlx_resp_valid
+TOP.top.host.omi_host.tl.cfg_tlx_resp_valid
+TOP.top.host.omi_host.tl.tlx_afu_cmd_valid
+TOP.top.host.omi_host.tl.tlx_afu_resp_valid
+TOP.top.host.omi_host.tl.tlx_cfg_valid
+TOP.top.host.omi_host.tl.tlx_dlx_flit_valid
+@22
+TOP.top.host.omi_host.tl.tlx_dlx_flit[511:0]
+@28
+TOP.top.host.omi_host.tl.tlx_afu_resp_data_valid
+TOP.top.host.omi_host.tlx_afu_resp_valid
 @200
 -TL
 @28
-[color] 3
-TOP.top.host.omi_host.tl.tlx_afu_ready
-[color] 3
-TOP.top.host.omi_host.tl.afu_tlx_cmd_valid
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.rcv_xmt_tl_credit_vc0_valid
+@22
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.rcv_xmt_tlx_credit_vc0[3:0]
+@28
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.rcv_xmt_tl_credit_vc1_valid
+@23
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.rcv_xmt_tlx_credit_vc3[3:0]
+@22
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.tlx_afu_resp_opcode[7:0]
+@28
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.TLX_Parser.control_fsm.credit_return_v
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.TLX_Parser.control_fsm.ctl_vc0_v
+TOP.top.host.omi_host.tl.OCX_TLX_PARSER.TLX_Parser.control_fsm.ctl_vc1_v
 @200
 -DL
 @22
-TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_seq[6:0]
-@29
-TOP.top.host.omi_host.dl.tx.ctl.tsm_advance
-@22
-[color] 1
 TOP.top.host.omi_host.dl.tx.ctl.tsm_q[2:0]
 @28
-TOP.top.host.omi_host.dl.tx.ctl.ctl_flt_stall
-TOP.top.host.omi_host.dl.tx.ctl.lfsr_advance
+TOP.top.host.omi_host.dlx_tlx_flit_valid
 @22
-TOP.top.host.omi_host.dl.tx.ctl.lfsr_q[0:22]
-@28
-TOP.top.host.omi_host.dl.tx.ctl.ts3_done
-TOP.top.host.omi_host.dl.tx.ctl.flt_ready_q
-@22
-TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
-TOP.top.host.omi_host.dl.tx.ctl.b_cnt_q[3:0]
-@28
-TOP.top.host.omi_host.dl.tx.gbx0.phy_training
-@22
-TOP.top.dev.dl.tx.ctl.lfsr_q[0:22]
-TOP.top.dev.dl.rx.block_lock_int[7:0]
-@28
-TOP.top.dev.dl.rx.lane0.find_ts
-TOP.top.dev.dl.rx.lane0.deskew_enable
-TOP.top.dev.dl.tx.q0.tp_deskew
-TOP.top.dev.dl.tx.q0.dl_training
-TOP.top.dev.dl.tx.q0.ctl_que_tx_ts1
-@22
-TOP.top.dev.dl.tx.q0.dl_train_pattern[63:0]
-TOP.top.dev.dl.tx.q0.dl_train_pattern_rev[63:0]
-TOP.top.dev.dl.tx.q0.que_gb_data[63:0]
-@28
-TOP.top.host.omi_host.dl.tx.ctl.rx_tx_deskew_done
-TOP.top.dev.dl.rx.lane0.deskew_valid
-TOP.top.dev.dl.rx.lane0.deskew_found
-TOP.top.dev.dl.rx.lane0.deskew_all_valid
-TOP.top.host.omi_host.dl.rx.lane0.data_aligned
-TOP.top.host.omi_host.dl.rx.lane0.valid_in
-TOP.top.host.omi_host.dl.rx.lane0.find_ts
-TOP.top.host.omi_host.dl.rx.lane0.training_enable
-TOP.top.host.omi_host.dl.rx.tx_rx_training
-TOP.top.host.omi_host.dl.tx.ctl.det_sync_q
-@22
-TOP.top.host.omi_host.dl.tx.ctl.rx_tx_sync[7:0]
-TOP.top.host.omi_host.dl.rx.lane0.ts1_cntr_q[3:0]
-@28
-TOP.top.dev.dl.rx.lane0.find_ts
-TOP.top.dev.dl.rx.lane0.ts_type_d1c_q[1:0]
-TOP.top.dev.dl.rx.lane0.pattern_TS1_q
-TOP.top.dev.dl.rx.lane0.pattern_TS2_q
-TOP.top.dev.dl.rx.lane0.pattern_TS3_q
-TOP.top.dev.dl.rx.lane0.is_deskew_q
-TOP.top.dev.dl.rx.lane0.find_header_q
-TOP.top.dev.dl.rx.lane0.found_header
-@22
-TOP.top.dev.dl.rx.lane0.header_cntr_q[6:0]
-@28
-TOP.top.dev.dl.rx.lane0.block_locked_q
-TOP.top.dev.dl.rx.lane0.bad_ts_d1_q
-TOP.top.dev.dl.rx.lane0.bad_ts_d2_q
+TOP.top.host.omi_host.dlx_tlx_flit[511:0]
 @200
 -Device
+@28
+TOP.top.dev.tlx_ready
 @22
-[color] 1
+[color] 4
 TOP.top.dev.dl.tx.ctl.tsm_q[2:0]
+TOP.top.dev.rsp_credits_q[6:0]
 @28
-TOP.top.dev.dl.tx.ctl.lfsr_advance
-TOP.top.dev.dl.rx.lane0.lfsr_locked_q
+TOP.top.dev.cmdseq_q[2:0]
+TOP.top.dev.rsp_valid
 @22
-TOP.top.dev.dl.tx.ctl.lfsr_q[0:22]
-TOP.top.dev.dl.rx.lane0.ts1_cntr_q[3:0]
+TOP.top.dev.rsp_opcode[7:0]
 @28
-TOP.top.dev.dl.tx.ctl.ctl_gb_tx_b_pattern
+TOP.top.dev.rsp_tkn
+TOP.top.dev.rsp_credit
+@200
+-TLX
+@28
+TOP.top.dev.tl.OCX_TLX_FRAMER.rcv_xmt_tl_credit_vc0_valid
 @22
-TOP.top.dev.dl.rx.found_sync[7:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.rcv_xmt_tlx_credit_vc0[3:0]
 @28
-TOP.top.dev.dl.rx.phy0.cycle_cntr_q[2:0]
-TOP.top.dev.dl.rx.phy0.header[1:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.rcv_xmt_tl_credit_vc1_valid
 @22
-TOP.top.dev.dl.rx.phy0.ln_data_in[63:0]
-TOP.top.dev.dl.rx.phy0.ln_data_q[63:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.rcv_xmt_tlx_credit_vc3[3:0]
 @28
-TOP.top.dev.dl.rx.phy0.found_pattern_a
-TOP.top.dev.dl.rx.phy0.found_pattern_b
+TOP.top.dev.tl.OCX_TLX_FRAMER.rcv_xmt_tlx_credit_valid
 @22
-TOP.top.dev.dl.rx.found_b[7:0]
-TOP.top.dev.dl.rx.lane0.a_cntr_q[6:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.framer_state[4:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc0_tlcrd_counter[7:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc0_tlxcrd_counter[15:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc1_tlcrd_counter[7:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc3_tlxcrd_counter[15:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.rsp_packet_reg[58:0]
 @28
-TOP.top.dev.dl.rx.lane0.valid_q
-TOP.top.dev.dl.rx.lane0.found_pattern_b
+TOP.top.dev.tl.OCX_TLX_FRAMER.afu_tlx_resp_valid
+TOP.top.dev.tl.OCX_TLX_FRAMER.rsp_credit_ok
+TOP.top.dev.tl.OCX_TLX_FRAMER.rsp_credit_return
+TOP.top.dev.tl.OCX_TLX_FRAMER.afu_reg_resp_valid
+TOP.top.dev.tl.OCX_TLX_FRAMER.rsp_pipe_stall
 @22
-TOP.top.dev.dl.rx.lane0.b_cntr_q[6:0]
+TOP.top.dev.tl.OCX_TLX_FRAMER.afu_reg_resp_opcode[7:0]
 @28
-TOP.top.host.omi_host.dl.rx.lane0.count_pattern_b_q
-TOP.top.host.omi_host.dl.rx.lane0.found_sync_pattern
+TOP.top.dev.tlx_dlx_flit_valid
 @22
-TOP.top.dev.dl.rx.rx_tx_pattern_b[7:0]
+TOP.top.dev.tlx_dlx_flit[511:0]
+@200
+-DLX
 @28
-TOP.top.dev.dl.tx.ctl.tsm_advance
-TOP.top.dev.dl.tx.ctl.tpulse
+TOP.top.dev.dl.dlx_tlx_flit_valid
 @22
-TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
-TOP.top.dev.dl.tx.ctl.b_cnt_q[3:0]
-@28
-TOP.top.dev.dl.tx.ctl.pat_b_done
+TOP.top.dev.dl.dlx_tlx_flit[511:0]
 [pattern_trace] 1
 [pattern_trace] 0

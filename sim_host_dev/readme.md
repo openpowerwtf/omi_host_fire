@@ -41,5 +41,19 @@ vcd2fst wtf.vcd wtf.fst
 
 <img width=800px src="./trained.png">
 
+## device tl
+
+   * host tl (..tlx..v) can't be used w/o modification because crediting is built into
+   tl logic (rtl above tl can't send a credit return rsp since it's not detected as special (credit-ignore)), but there is dedicated logic to do framer/parser credit tx/rx
+
+      * added GEMINI_NOT_APOLLO to tl and swap 01/08 opcodes based on that (rx and tx)
+
+      * so far 1/4 vc (vc0, tl) got credits :( or :)
+
+
+
+
+
+
 
 

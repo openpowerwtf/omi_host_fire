@@ -20,7 +20,10 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
-module ocx_tlx_parse_mac(
+module ocx_tlx_parse_mac #(
+   parameter GEMINI_NOT_APOLLO = 0
+)
+(
     output fp_rcv_cmd_valid,
     output [167:0] fp_rcv_cmd_info,
     output fp_rcv_cmd_data_v,
@@ -50,7 +53,7 @@ module ocx_tlx_parse_mac(
     output ctl_flit_start,
     output template0_slot0_v,
     output [27:0] template0_slot0,
-    output parser_inprog,    
+    output parser_inprog,
     output [5:0] ctl_template,
     output [167:0] pars_ctl_info,
     output pars_ctl_valid,
@@ -66,7 +69,7 @@ module ocx_tlx_parse_mac(
     input dlx_tlx_flit_crc_err,
     input reset_n,
     input tlx_clk
-    );   
+    );
     wire [55:0] credit_return;
     wire credit_return_v;
     wire [167:0] pars_ctl_info_wire;
@@ -75,7 +78,7 @@ module ocx_tlx_parse_mac(
     wire [1:0] data_arb_vc_v_wire;
     wire [1:0] data_arb_flit_cnt_wire;
     wire [511:0] pars_data_flit;
-    wire pars_data_valid;  
+    wire pars_data_valid;
     wire crc_error_int;
     wire data_arb_cfg_hint;
     wire [3:0] data_arb_cfg_offset;
@@ -95,16 +98,16 @@ module ocx_tlx_parse_mac(
     assign ctl_flit_start = ctl_flit_parsed;
     assign pars_ctl_info = pars_ctl_info_wire;
     assign pars_ctl_valid = pars_ctl_valid_wire;
-    ocx_tlx_flit_parser flit_parser(
+    ocx_tlx_flit_parser flit_parser #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) ( )
         .tlx_clk            (tlx_clk),                  //Input
-        .reset_n            (reset_n),                  //Input                 
+        .reset_n            (reset_n),                  //Input
         .dlx_tlx_flit       (dlx_tlx_flit),             //Input
         .dlx_tlx_flit_valid (dlx_tlx_flit_valid),       //Input
         .dlx_tlx_flit_crc_err (dlx_tlx_flit_crc_err),       //Input
         .pars_ctl_info      (pars_ctl_info_wire),            //Output
         .pars_ctl_valid     (pars_ctl_valid_wire),           //Output
         .pars_data_flit     (pars_data_flit),           //Output
-        .pars_data_valid    (pars_data_valid),          //Output              
+        .pars_data_valid    (pars_data_valid),          //Output
         .bad_data_indicator (bad_data_indicator),            //Output
         .crc_error          (crc_error_int),        //Output
         .bookend_flit_v     (bookend_flit_v_wire),           //Output
@@ -112,12 +115,12 @@ module ocx_tlx_parse_mac(
         .parser_inprog      (parser_inprog),
         .template0_slot0    (template0_slot0),
         .template0_slot0_v  (template0_slot0_v),
-        .ctl_flit_parsed    (ctl_flit_parsed),   
-        .ctl_flit_parse_end (ctl_flit_parse_end),  
-        .ctl_template       (ctl_template),   
+        .ctl_flit_parsed    (ctl_flit_parsed),
+        .ctl_flit_parse_end (ctl_flit_parse_end),
+        .ctl_template       (ctl_template),
         .credit_return      (credit_return),       //Output
         .credit_return_v    (credit_return_v)    //Output
-        );      
+        );
     assign bookend_flit_v         = bookend_flit_v_wire;
     assign run_length             = run_length_wire;
     assign control_parsing_start  = control_parsing_start_wire;
@@ -125,7 +128,7 @@ module ocx_tlx_parse_mac(
 
     ocx_tlx_data_arb data_arb(
         .tlx_clk            (tlx_clk),                  //Input
-        .reset_n            (reset_n),                  //Input 
+        .reset_n            (reset_n),                  //Input
         .dcp0_data_v        (fp_rcv_resp_data_v),              //Output
         .dcp1_data_v        (fp_rcv_cmd_data_v),              //Output
         .dcp0_data          (fp_rcv_resp_data_bus),                //Output
@@ -138,7 +141,7 @@ module ocx_tlx_parse_mac(
         .data_arb_vc_v      (data_arb_vc_v_wire),          //Input
         .data_arb_flit_cnt  (data_arb_flit_cnt_wire),          //Input
         .pars_data_flit     (pars_data_flit),           //Input
-        .pars_data_valid    (pars_data_valid),          //Input              
+        .pars_data_valid    (pars_data_valid),          //Input
         .bookend_flit_v     (bookend_flit_v_wire),           //Input
         .run_length         (run_length_wire),           //Input
         .data_arb_cfg_hint  (data_arb_cfg_hint),
@@ -150,7 +153,7 @@ module ocx_tlx_parse_mac(
         );
     ocx_tlx_ctl_fsm control_fsm(
         .tlx_clk                (tlx_clk),              //Input
-        .reset_n                (reset_n),                  //Input 
+        .reset_n                (reset_n),                  //Input
         .credit_return          (credit_return),   //Input
         .credit_return_v        (credit_return_v), //Input
         .pars_ctl_info          (pars_ctl_info_wire),        //Input
@@ -160,12 +163,12 @@ module ocx_tlx_parse_mac(
         .data_arb_vc_v          (data_arb_vc_v_wire),          //Output
         .data_arb_flit_cnt      (data_arb_flit_cnt_wire),          //Output
         .data_bdi_vc_V          (data_arb_vc_v),          //Output
-        .data_bdi_flit_cnt      (data_arb_flit_cnt),          //Output 
+        .data_bdi_flit_cnt      (data_arb_flit_cnt),          //Output
         .data_arb_cfg_hint      (data_arb_cfg_hint),
         .data_arb_cfg_offset    (data_arb_cfg_offset),
-        .bdi_cfg_hint           (bdi_cfg_hint),  
-        .cmd_credit_enable      (cmd_credit_enable),     
-        .ctl_flit_parsed        (ctl_flit_parsed), 
+        .bdi_cfg_hint           (bdi_cfg_hint),
+        .cmd_credit_enable      (cmd_credit_enable),
+        .ctl_flit_parsed        (ctl_flit_parsed),
         .ctl_flit_parse_end     (ctl_flit_parse_end),
         .control_parsing_start  (control_parsing_start_wire),
         .control_parsing_end    (control_parsing_end_wire),

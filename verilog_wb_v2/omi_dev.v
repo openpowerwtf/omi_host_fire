@@ -19,221 +19,121 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
+// Simple OMI Device
+//
+// Internal memory
+// One TL credit
+//
+// OC Transactions used:
+//   pr_read_mem, 4B (32B with prefetch option)
+//   > mem_rd_fail, mem_rd_response
+//   pr_write_mem, 4B (with PABE extension to OC)
+//   > mem_wr_fail, mem_wr_response
+//  Plus:
+//   return_tl_credits (TL rsp)
+//   return_tlx_credits (TLx rsp)
+//
+// Spec claims intrp_req, intrp_req.d are mandatory tlx commands, but intrp_rdy is only mandatory
+//   when afu issues intrp_req.
+
+
+// Implemented transaction packets
+//`define TL_CMD_NOP 0x00
+//`define TL_CMD_PR_RD_MEM 8'h28
+//`define TL_CMD_PR_WR_MEM 8'h86
+//`define TL_RSP_NOP 8'h00
+//`define TL_RSP_RTN_TLX_CREDITS 8'h01
+
+//`define TLX_CMD_NOP 8'h00
+`define TLX_RSP_NOP 8'h00
+`define TLX_RSP_RTN_TL_CREDITS 8'h08
+`define TLX_RSP_RD_RESPONSE 8'h01
+`define TLX_RSP_RD_FAILED 8'h02
+`define TLX_RSP_WR_RESPONSE 8'h04
+`define TLX_RSP_WR_FAILED 8'h05
+
+`define RSP_INITIAL_CREDITS 7'h7F
 
 `timescale 1ns / 10ps
 
-module omi_dev #()
+module omi_dev #(
+        parameter PHY_BITS = 8,
+        parameter MEM_SIZE = 1024   // words
+)
 (
-        input                       clk,
-        input                       rst,
+        input                             clk,
+        input                             rst,
 
-        output                      tlx_afu_ready,
-        input   [6:0]                    afu_tlx_cmd_initial_credit,
-        input                       afu_tlx_cmd_credit,
-        output                      tlx_afu_cmd_valid,
-        output  [7:0]                    tlx_afu_cmd_opcode,
-        output  [1:0]                    tlx_afu_cmd_dl                    ,
-        output                      tlx_afu_cmd_end                   ,
-        output  [63:0]                    tlx_afu_cmd_pa                    ,
-        output  [3:0]                    tlx_afu_cmd_flag                  ,
-        output                      tlx_afu_cmd_os                    ,
-        output  [15:0]                    tlx_afu_cmd_capptag               ,
-        output  [2:0]                    tlx_afu_cmd_pl                    ,
-        output  [63:0]                    tlx_afu_cmd_be                    ,
+        output  [31:0]                    ro_dlx_version,
+        input                             ln0_rx_valid,
+        input   [1:0]                     ln0_rx_header,
+        input   [63:0]                    ln0_rx_data,
+        output                            ln0_rx_slip,
+        input                             ln1_rx_valid,
+        input   [1:0]                     ln1_rx_header,
+        input   [63:0]                    ln1_rx_data,
+        output                            ln1_rx_slip,
+        input                             ln2_rx_valid,
+        input   [1:0]                     ln2_rx_header,
+        input   [63:0]                    ln2_rx_data,
+        output                            ln2_rx_slip,
+        input                             ln3_rx_valid,
+        input   [1:0]                     ln3_rx_header,
+        input   [63:0]                    ln3_rx_data,
+        output                            ln3_rx_slip,
+        input                             ln4_rx_valid,
+        input   [1:0]                     ln4_rx_header,
+        input   [63:0]                    ln4_rx_data,
+        output                            ln4_rx_slip,
+        input                             ln5_rx_valid,
+        input   [1:0]                     ln5_rx_header,
+        input   [63:0]                    ln5_rx_data,
+        output                            ln5_rx_slip,
+        input                             ln6_rx_valid,
+        input   [1:0]                     ln6_rx_header,
+        input   [63:0]                    ln6_rx_data,
+        output                            ln6_rx_slip,
+        input                             ln7_rx_valid,
+        input   [1:0]                     ln7_rx_header,
+        input   [63:0]                    ln7_rx_data,
+        output                            ln7_rx_slip,
+        output  [63:0]                    dlx_l0_tx_data,
+        output  [63:0]                    dlx_l1_tx_data,
+        output  [63:0]                    dlx_l2_tx_data,
+        output  [63:0]                    dlx_l3_tx_data,
+        output  [63:0]                    dlx_l4_tx_data,
+        output  [63:0]                    dlx_l5_tx_data,
+        output  [63:0]                    dlx_l6_tx_data,
+        output  [63:0]                    dlx_l7_tx_data,
+        output  [1:0]                     dlx_l0_tx_header,
+        output  [1:0]                     dlx_l1_tx_header,
+        output  [1:0]                     dlx_l2_tx_header,
+        output  [1:0]                     dlx_l3_tx_header,
+        output  [1:0]                     dlx_l4_tx_header,
+        output  [1:0]                     dlx_l5_tx_header,
+        output  [1:0]                     dlx_l6_tx_header,
+        output  [1:0]                     dlx_l7_tx_header,
+        output  [1:0]                     dlx_l0_tx_seq,
+        output  [1:0]                     dlx_l1_tx_seq,
+        output  [1:0]                     dlx_l2_tx_seq,
+        output  [1:0]                     dlx_l3_tx_seq,
+        output  [1:0]                     dlx_l4_tx_seq,
+        output  [1:0]                     dlx_l5_tx_seq,
+        output  [1:0]                     dlx_l6_tx_seq,
+        output  [1:0]                     dlx_l7_tx_seq,
 
-        // Config Command interface to AFU
-        input   [3:0]                    cfg_tlx_initial_credit            ,
-        input                       cfg_tlx_credit_return             ,
-        output                      tlx_cfg_valid                     ,
-        output  [7:0]                    tlx_cfg_opcode                    ,
-        output  [63:0]                    tlx_cfg_pa                        ,
-        output                      tlx_cfg_t                         ,
-        output  [2:0]                   tlx_cfg_pl                        ,
-        output  [15:0]                    tlx_cfg_capptag                   ,
-        output  [31:0]                    tlx_cfg_data_bus                  ,
-        output                      tlx_cfg_data_bdi                  ,
-
-        // Response interface to AFU
-        input   [6:0]                    afu_tlx_resp_initial_credit       ,
-        input                       afu_tlx_resp_credit               ,
-        output                      tlx_afu_resp_valid                ,
-        output  [7:0]                    tlx_afu_resp_opcode               ,
-        output  [15:0]                    tlx_afu_resp_afutag               ,
-        output  [3:0]                    tlx_afu_resp_code                 ,
-        output  [5:0]                    tlx_afu_resp_pg_size              ,
-        output  [1:0]                    tlx_afu_resp_dl                   ,
-        output  [1:0]                    tlx_afu_resp_dp                   ,
-        output  [23:0]                    tlx_afu_resp_host_tag             ,
-        output  [3:0]                    tlx_afu_resp_cache_state          ,
-        output  [17:0]                    tlx_afu_resp_addr_tag             ,
-
-        // Command data interface to AFU
-        input                       afu_tlx_cmd_rd_req                ,
-        input   [2:0]                    afu_tlx_cmd_rd_cnt                ,
-        output                      tlx_afu_cmd_data_valid            ,
-        output  [511:0]                    tlx_afu_cmd_data_bus              ,
-        output                      tlx_afu_cmd_data_bdi              ,
-
-        // Response data interface to AFU
-        input                       afu_tlx_resp_rd_req               ,
-        input    [2:0]                   afu_tlx_resp_rd_cnt               ,
-        output                      tlx_afu_resp_data_valid           ,
-        output  [511:0]                    tlx_afu_resp_data_bus             ,
-        output                      tlx_afu_resp_data_bdi             ,
-
-        // -----------------------------------
-        // AFU to TLX Framer Transmit Interface
-        // -----------------------------------
-
-        // --- Commands from AFU
-        output  [3:0]                    tlx_afu_cmd_initial_credit        ,
-        output                      tlx_afu_cmd_credit                ,
-        input                       afu_tlx_cmd_valid                 ,
-        input   [7:0]                     afu_tlx_cmd_opcode                ,
-        input   [63:0]                    afu_tlx_cmd_pa_or_obj             ,
-        input   [15:0]                    afu_tlx_cmd_afutag                ,
-        input   [1:0]                    afu_tlx_cmd_dl                    ,
-        input   [2:0]                    afu_tlx_cmd_pl                    ,
-        input   [63:0]                    afu_tlx_cmd_be                    ,
-        input   [3:0]                    afu_tlx_cmd_flag                  ,
-        input   [15:0]                    afu_tlx_cmd_bdf                   ,
-        input   [3:0]                    afu_tlx_cmd_resp_code             ,
-        input   [15:0]                    afu_tlx_cmd_capptag               ,
-
-        // --- Command data from AFU
-        output  [5:0]                    tlx_afu_cmd_data_initial_credit   ,
-        output                      tlx_afu_cmd_data_credit           ,
-        input                       afu_tlx_cdata_valid               ,
-        input   [511:0]                    afu_tlx_cdata_bus                 ,
-        input                       afu_tlx_cdata_bdi                 ,
-
-        // --- Responses from AFU
-        output  [3:0]                    tlx_afu_resp_initial_credit       ,
-        output                      tlx_afu_resp_credit               ,
-        input                       afu_tlx_resp_valid                ,
-        input   [7:0]                    afu_tlx_resp_opcode               ,
-        input   [1:0]                    afu_tlx_resp_dl                   ,
-        input   [15:0]                    afu_tlx_resp_capptag              ,
-        input   [1:0]                    afu_tlx_resp_dp                   ,
-        input   [3:0]                    afu_tlx_resp_code                 ,
-
-        // --- Response data from AFU
-        output  [5:0]                   tlx_afu_resp_data_initial_credit  ,
-        output                      tlx_afu_resp_data_credit          ,
-        input                       afu_tlx_rdata_valid               ,
-        input   [511:0]                    afu_tlx_rdata_bus                 ,
-        input                       afu_tlx_rdata_bdi                 ,
-
-        // --- Config Responses from AFU
-        input                       cfg_tlx_resp_valid                ,
-        input   [7:0]                    cfg_tlx_resp_opcode               ,
-        input   [15:0]                    cfg_tlx_resp_capptag              ,
-        input   [3:0]                    cfg_tlx_resp_code                 ,
-        output                      tlx_cfg_resp_ack                  ,
-
-        // --- Config Response data from AFU
-        input   [3:0]                    cfg_tlx_rdata_offset              ,
-        input   [31:0]                    cfg_tlx_rdata_bus                 ,
-        input                       cfg_tlx_rdata_bdi                 ,
-
-        // -----------------------------------
-        // Configuration Ports
-        // -----------------------------------
-        input                       cfg_tlx_xmit_tmpl_config_0        ,
-        input                       cfg_tlx_xmit_tmpl_config_1        ,
-        input                       cfg_tlx_xmit_tmpl_config_2        ,
-        input                       cfg_tlx_xmit_tmpl_config_3        ,
-        input   [3:0]                    cfg_tlx_xmit_rate_config_0        ,
-        input   [3:0]                    cfg_tlx_xmit_rate_config_1        ,
-        input   [3:0]                    cfg_tlx_xmit_rate_config_2        ,
-        input   [3:0]                    cfg_tlx_xmit_rate_config_3        ,
-
-        output                      tlx_cfg_in_rcv_tmpl_capability_0  ,
-        output                      tlx_cfg_in_rcv_tmpl_capability_1  ,
-        output                      tlx_cfg_in_rcv_tmpl_capability_2  ,
-        output                      tlx_cfg_in_rcv_tmpl_capability_3  ,
-        output  [3:0]                    tlx_cfg_in_rcv_rate_capability_0  ,
-        output  [3:0]                    tlx_cfg_in_rcv_rate_capability_1  ,
-        output  [3:0]                    tlx_cfg_in_rcv_rate_capability_2  ,
-        output  [3:0]                    tlx_cfg_in_rcv_rate_capability_3  ,
-
-        output  [31:0]                    tlx_cfg_oc3_tlx_version,
-
-        output  [31:0]                    ro_dlx_version,                // --  > output [31:0]
-        input                       ln0_rx_valid,               // --  < input
-        input   [1:0]                    ln0_rx_header,              // --  < input  [1:0]
-        input   [63:0]                    ln0_rx_data,             // --  < input  [63:0]
-        output                      ln0_rx_slip,            // --  < output
-        input                       ln1_rx_valid,           // --  < input
-        input   [1:0]                    ln1_rx_header,          // --  < input  [1:0]
-        input   [63:0]                    ln1_rx_data,         // --  < input  [63:0]
-        output                      ln1_rx_slip,        // --  < output
-        input                       ln2_rx_valid,       // --  < input
-        input   [1:0]                    ln2_rx_header,      // --  < input  [1:0]
-        input   [63:0]                    ln2_rx_data,     // --  < input  [63:0]
-        output                      ln2_rx_slip,    // --  < output
-        input                       ln3_rx_valid,   // --  < input
-        input   [1:0]                    ln3_rx_header,  // --  < input  [1:0]
-        input   [63:0]                    ln3_rx_data,                   // --  < input  [63:0]
-        output                      ln3_rx_slip,                  // --  < output
-        input                       ln4_rx_valid,                 // --  < input
-        input   [1:0]                    ln4_rx_header,                // --  < input  [1:0]
-        input   [63:0]                    ln4_rx_data,               // --  < input  [63:0]
-        output                      ln4_rx_slip,              // --  < output
-        input                       ln5_rx_valid,             // --  < input
-        input   [1:0]                    ln5_rx_header,            // --  < input  [1:0]
-        input   [63:0]                    ln5_rx_data,           // --  < input  [63:0]
-        output                      ln5_rx_slip,          // --  < output
-        input                       ln6_rx_valid,         // --  < input
-        input   [1:0]                    ln6_rx_header,        // --  < input  [1:0]
-        input   [63:0]                    ln6_rx_data,       // --  < input  [63:0]
-        output                      ln6_rx_slip,      // --  < output
-        input                       ln7_rx_valid,     // --  < input
-        input   [1:0]                    ln7_rx_header,    // --  < input  [1:0]
-        input   [63:0]                    ln7_rx_data,   // --  < input  [63:0]
-        output                      ln7_rx_slip,  // --  < output
-        output  [63:0]                    dlx_l0_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l1_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l2_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l3_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l4_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l5_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l6_tx_data,                // --  > output [63:0]
-        output  [63:0]                    dlx_l7_tx_data,                // --  > output [63:0]
-        output  [1:0]                    dlx_l0_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l1_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l2_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l3_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l4_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l5_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l6_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l7_tx_header,              // --  > output [1:0]
-        output  [1:0]                    dlx_l0_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l1_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l2_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l3_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l4_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l5_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l6_tx_seq,                 // --  > output [5:0]
-        output  [1:0]                    dlx_l7_tx_seq,                 // --  > output [5:0]
-
-        input                       opt_gckn,
-        input                       ocde,
-        input                       reg_04_val,
-        output                      reg_04_hwwe,                      // -- output
-        output  [31:0]                    reg_04_update,                    // -- output [31:0]
-        output                      reg_05_hwwe,                   // -- output
-        output  [31:0]                    reg_05_update,                 // -- output [31:0]
-        output                      reg_06_hwwe,                   // -- output
-        output  [31:0]                    reg_06_update,                 // -- output [31:0]
-        output                      reg_07_hwwe,                   // -- output
-        output  [31:0]                    reg_07_update,                 // -- output [31:0]
-        output                      dlx_reset,                     // -- output
-
-        // wtf generic i/o for various possible real/virt phy's
-        input   [3:0]                phy_id,
-        input   [31:0]               phy_in,
-        output  [31:0]               phy_out,
+        input                             opt_gckn,
+        input                             ocde,
+        input                             reg_04_val,
+        output                            reg_04_hwwe,
+        output  [31:0]                    reg_04_update,
+        output                            reg_05_hwwe,
+        output  [31:0]                    reg_05_update,
+        output                            reg_06_hwwe,
+        output  [31:0]                    reg_06_update,
+        output                            reg_07_hwwe,
+        output  [31:0]                    reg_07_update,
+        output                            dlx_reset,
 
     //wtf need some for phy reset?
     //-- Xilinx PHY interface with DLx
@@ -253,28 +153,147 @@ module omi_dev #()
       input tsm_state6_to_1
     ) ;
 
+   reg    [MEM_SIZE-1:0] mem[31:0];
 
-wire   [511:0]    dlx_tlx_flit;
-wire   [511:0]    tlx_dlx_flit;
-wire              tlx_dlx_flit_valid;
-wire   [3:0]      tlx_dlx_debug_encode;
-wire   [31:0]     tlx_dlx_debug_info;
-wire              dlx_tlx_flit_valid;
-wire              dlx_tlx_flit_crc_err;
-wire              dlx_tlx_link_up /* verilator public */;
-wire              dlx_tlx_flit_credit;
-wire   [2:0]      dlx_tlx_init_flit_depth;
-//wire   [31:0]     dlx_tlx_dlx_config_info;
-wire   [31:0]     dlx_config_info /* verilator public */;
+   reg    [2:0]         cmdseq_q;
+   wire   [2:0]         cmdseq_d;
+   reg    [15:0]        error_q;
+   wire   [15:0]        error_d;
+   reg    [6:0]         rsp_credits_q;
+   wire   [6:0]         rsp_credits_d;
 
-ocx_tlx_top #() tl
+   wire                 tlx_ready /* verilator public */;
+   wire                 cmd_valid;
+   wire                 rsp_valid;
+   wire   [7:0]         rsp_opcode;
+   wire   [63:0]        rsp_pa;
+   wire   [15:0]        rsp_afutag;
+   wire   [1:0]         rsp_dl;
+   wire   [2:0]         rsp_pl;
+   wire   [63:0]        rsp_be;
+   wire   [3:0]         rsp_flag;
+   wire   [15:0]        rsp_bdf;
+   wire   [3:0]         rsp_resp_code;
+   wire                 send_credit;
+   wire                 dev_error;
+   wire                 rsp_tkn;
+   wire                 rsp_credits_inc;
+   wire                 rsp_credits_dec;
+   wire                 rsp_credits_hold;
+   wire                 rsp_credit_ok;
+
+   wire   [6:0]         rsp_initial_credits;
+   wire                 rsp_credit;
+   wire                 tlx_ready;
+   wire                 tlx_cmd_valid;
+   wire   [511:0]       dlx_tlx_flit;
+   wire   [511:0]       tlx_dlx_flit;
+   wire                 tlx_dlx_flit_valid;
+   wire   [3:0]         tlx_dlx_debug_encode;
+   wire   [31:0]        tlx_dlx_debug_info;
+   wire                 dlx_tlx_flit_valid;
+   wire                 dlx_tlx_flit_crc_err;
+   wire                 dlx_tlx_link_up /* verilator public */;
+   wire                 dlx_tlx_flit_credit;
+   wire   [2:0]         dlx_tlx_init_flit_depth;
+   //wire   [31:0]      dlx_tlx_dlx_config_info;
+   wire   [31:0]        dlx_config_info /* verilator public */;
+
+   // FF
+   always @(posedge clk) begin
+      if (rst) begin
+         error_q <= 'h0;
+         cmdseq_q <= 'b111;
+         rsp_credits_q <= rsp_initial_credits;
+      end else begin
+         error_q <= error_d;
+         cmdseq_q <= cmdseq_d;
+         rsp_credits_q <= rsp_credits_d;
+      end
+   end
+
+   // Setup
+
+   assign tl_xmit_tmpl_config_0 = 1;
+   assign tl_xmit_tmpl_config_1 = 0;
+   assign tl_xmit_tmpl_config_2 = 0;
+   assign tl_xmit_tmpl_config_3 = 0;
+   assign tl_xmit_rate_config_0 = 0;
+   assign tl_xmit_rate_config_1 = 0;
+   assign tl_xmit_rate_config_2 = 0;
+   assign tl_xmit_rate_config_3 = 0;
+   assign rcv_tmpl_capability_0 = 1;
+   assign rcv_tmpl_capability_1 = 0;
+   assign rcv_tmpl_capability_2 = 0;
+   assign rcv_tmpl_capability_3 = 0;
+   assign rcv_rate_capability_0 = 0;
+   assign rcv_rate_capability_1 = 0;
+   assign rcv_rate_capability_2 = 0;
+   assign rcv_rate_capability_3 = 0;
+
+   // Do something
+
+   //tbl cmdseq
+   //n cmdseq_q                         cmdseq_d
+   //n |   tlx_ready                    |   send_credit
+   //n |   | tlx_cmd_valid              |   |
+   //n |   | | rsp_tkn                  |   |
+   //n |   | | |                        |   |
+   //n |   | | |                        |   |
+   //n |   | | |                        |   |    dev_error
+   //n |   | | |                        |   |    |
+   //b 210 | | |                        210 |    |
+   //t iii i i i                        ooo o    o
+   //*------------------------------------------------
+   //* Reset *****************************************
+   //s 111 0 - -                        111 0    0         * wait for TLX
+   //s 111 1 - -                        001 1    0         * initialize TL
+   //* Idle ******************************************
+   //s 001 - 0 -                        001 0    0         * ...zzz...
+   //s 001 - 1 -                        010 0    0         * TL wants somethin
+   //* Command Rcvd **********************************
+   //s 010 - - 0                        010 0    0         * processing...
+   //s 010 - - 1                        001 1    0         * responding (rsp + credit)    CANT DO AT SAME TIME?
+   //* Response Send *********************************
+   //* Credit Send ***********************************
+   //* Inglorious Ending *****************************
+   //s 000 - -                          000 0    1         * seq error
+   //*------------------------------------------------
+   //tbl cmdseq
+
+
+   assign rsp_credits_inc = rsp_credit & ~rsp_tkn;
+   assign rsp_credits_dec = rsp_tkn & ~rsp_credit;
+   assign rsp_credits_hold = ~rsp_credits_inc & ~rsp_credits_dec;
+
+   assign rsp_credits_d = ({4{rsp_credits_inc}} & rsp_credits_q + 1) |
+                          ({4{rsp_credits_dec}} & rsp_credits_q - 1) |
+                          ({4{rsp_credits_hold}} & rsp_credits_q);
+
+   assign rsp_credit_ok = (rsp_credits_q != 0);
+
+   assign rsp_valid = 1'b0; //send_credit;
+   assign rsp_tkn = 1'b1;
+   assign rsp_opcode = `TLX_RSP_RTN_TL_CREDITS;
+
+ocx_tlx_top #(.GEMINI_NOT_APOLLO(1)) tl
 (
    .clk(clk),
    .rst(rst),
-   .tlx_afu_ready(tlx_afu_ready),
+   .tlx_afu_ready(tlx_ready),
+
+   .tlx_afu_resp_initial_credit(rsp_initial_credits),
+   .tlx_afu_resp_credit(rsp_credit),
+   .afu_tlx_resp_valid(rsp_valid),
+   .afu_tlx_resp_opcode(rsp_opcode),
+   .afu_tlx_resp_dl(rsp_dl),
+   .afu_tlx_resp_capptag(rsp_capptag),
+   .afu_tlx_resp_dp(rsp_dp),
+   .afu_tlx_resp_code(rsp_code),
+
    .afu_tlx_cmd_initial_credit(afu_tlx_cmd_initial_credit),
    .afu_tlx_cmd_credit(afu_tlx_cmd_credit),
-   .tlx_afu_cmd_valid(tlx_afu_cmd_valid),
+   .tlx_afu_cmd_valid(tlx_cmd_valid),
    .tlx_afu_cmd_opcode(tlx_afu_cmd_opcode),
    .tlx_afu_cmd_dl(tlx_afu_cmd_dl),
    .tlx_afu_cmd_end(tlx_afu_cmd_end),
@@ -313,6 +332,8 @@ ocx_tlx_top #() tl
    .tlx_afu_cmd_data_bdi(tlx_afu_cmd_data_bdi),
    .afu_tlx_resp_rd_req(afu_tlx_resp_rd_req),
    .afu_tlx_resp_rd_cnt(afu_tlx_resp_rd_cnt),
+   .tlx_afu_resp_data_initial_credit(tlx_afu_resp_data_initial_credit),
+   .tlx_afu_resp_data_credit(tlx_afu_resp_data_credit),
    .tlx_afu_resp_data_valid(tlx_afu_resp_data_valid),
    .tlx_afu_resp_data_bus(tlx_afu_resp_data_bus),
    .tlx_afu_resp_data_bdi(tlx_afu_resp_data_bdi),
@@ -334,16 +355,6 @@ ocx_tlx_top #() tl
    .afu_tlx_cdata_valid(afu_tlx_cdata_valid),
    .afu_tlx_cdata_bus(afu_tlx_cdata_bus),
    .afu_tlx_cdata_bdi(afu_tlx_cdata_bdi),
-   .tlx_afu_resp_initial_credit(tlx_afu_resp_initial_credit),
-   .tlx_afu_resp_credit(tlx_afu_resp_credit),
-   .afu_tlx_resp_valid(afu_tlx_resp_valid),
-   .afu_tlx_resp_opcode(afu_tlx_resp_opcode),
-   .afu_tlx_resp_dl(afu_tlx_resp_dl),
-   .afu_tlx_resp_capptag(afu_tlx_resp_capptag),
-   .afu_tlx_resp_dp(afu_tlx_resp_dp),
-   .afu_tlx_resp_code(afu_tlx_resp_code),
-   .tlx_afu_resp_data_initial_credit(tlx_afu_resp_data_initial_credit),
-   .tlx_afu_resp_data_credit(tlx_afu_resp_data_credit),
    .afu_tlx_rdata_valid(afu_tlx_rdata_valid),
    .afu_tlx_rdata_bus(afu_tlx_rdata_bus),
    .afu_tlx_rdata_bdi(afu_tlx_rdata_bdi),
@@ -489,5 +500,26 @@ ocx_dlx_top #(.GEMINI_NOT_APOLLO(1)) dl
    .tsm_state4_to_5(tsm_state4_to_5),
    .tsm_state6_to_1(tsm_state6_to_1)
 );
+
+
+//Generated...
+//vtable cmdseq
+assign cmdseq_d[2] =
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready);
+assign cmdseq_d[1] =
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_cmd_valid) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn);
+assign cmdseq_d[0] =
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready) +
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tlx_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_cmd_valid) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
+assign send_credit =
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tlx_ready) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
+assign dev_error =
+  (~cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0]);
+//vtable cmdseq
 
 endmodule
