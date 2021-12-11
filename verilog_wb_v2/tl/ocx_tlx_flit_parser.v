@@ -291,9 +291,9 @@ always @(posedge tlx_clk)
     wire   [7:0] CRD_RTN_OPCODE;
     generate
        if (GEMINI_NOT_APOLLO) begin
-          assign CRD_RTN_OPCODE = 8'h01;
+          assign CRD_RTN_OPCODE = 8'h01;  // dcp3 xxxx xxxx dcp0 ... vc3 xxx xxx vc0
        end else begin
-          assign CRD_RTN_OPCODE = 8'h08;
+          assign CRD_RTN_OPCODE = 8'h08;  // xxxx xxxx dcp1 dcp0 ... xxx xxx vc1 vc0
       end
     endgenerate
     assign credit_return_v = credit_flag_dout & credit_buffer_dout[7:0] == CRD_RTN_OPCODE; //template 0 control flit return credit

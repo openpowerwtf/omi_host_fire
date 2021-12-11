@@ -51,6 +51,88 @@ vcd2fst wtf.vcd wtf.fst
       * so far 1/4 vc (vc0, tl) got credits 😄 or 😢
 
 
+## halfway
+
+```
+Seed=08675309
+Resetting host, holding dev..
+Go!
+DLX Config: 00000000
+startRetrain=0
+cyc=00000007 Write @0000033c sel=6 data=731e58f3 mem=3a31333b->3a1e583b
+Releasing dev..
+cyc=00000100
+cyc=00000200
+cyc=00000300
+cyc=00000400
+cyc=00000500
+cyc=00000600
+cyc=00000651 DL says link is up!
+cyc=00000651 TL says ready!
+cyc=00000651 DLX says link is up!
+cyc=00000651 TLX says ready!
+cyc=00000700
+cyc=00000800
+cyc=00000900
+cyc=00001000
+Quiescing...
+Quiescing...
+Request is outstanding!
+Done.
+
+You are worthless and weak!
+
+Seed=08675309
+```
+
+## yapping wb->omi_host->omi_dev->omi_host->wb
+
+```
+...
+cyc=00999300
+cyc=00999336 ACK RD  data=15c6b3bc
+cyc=00999337 Write @00000010 sel=6 data=726dbd77 mem=7e779a6e->7e6dbd6e
+cyc=00999391 ACK WR
+cyc=00999395 Write @00000020 sel=0 data=05d9f50e mem=626ccf86->626ccf86
+cyc=00999400
+cyc=00999449 ACK WR
+cyc=00999453 Read @00000004
+cyc=00999500
+cyc=00999507 ACK RD  data=18aae923
+cyc=00999508 Read @00000038
+cyc=00999562 ACK RD  data=2fe73d16
+cyc=00999564 Read @0000003c
+cyc=00999600
+cyc=00999618 ACK RD  data=15c6b3bc
+cyc=00999620 Read @00000014
+cyc=00999674 ACK RD  data=0f203882
+cyc=00999675 Read @00000008
+cyc=00999700
+cyc=00999729 ACK RD  data=67217a93
+cyc=00999732 Write @0000000c sel=1 data=49cd9874 mem=2afc6d7e->2afc6d74
+cyc=00999786 ACK WR
+cyc=00999787 Write @00000028 sel=8 data=551c9319 mem=7634bdbe->5534bdbe
+cyc=00999800
+cyc=00999841 ACK WR
+cyc=00999842 Read @0000003c
+cyc=00999896 ACK RD  data=15c6b3bc
+cyc=00999897 Write @00000008 sel=6 data=3f2ebe1f mem=67217a93->672ebe93
+cyc=00999900
+cyc=00999951 ACK WR
+cyc=00999955 Read @00000028
+cyc=01000000
+Quiescing...
+cyc=01000009 ACK RD  data=5534bdbe
+cyc=01000100
+Quiescing...
+Done.
+
+You has opulence.
+
+Seed=08675309
+
+```
+
 
 
 

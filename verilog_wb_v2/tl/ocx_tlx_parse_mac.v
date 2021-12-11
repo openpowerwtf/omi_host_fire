@@ -98,7 +98,7 @@ module ocx_tlx_parse_mac #(
     assign ctl_flit_start = ctl_flit_parsed;
     assign pars_ctl_info = pars_ctl_info_wire;
     assign pars_ctl_valid = pars_ctl_valid_wire;
-    ocx_tlx_flit_parser flit_parser #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) ( )
+    ocx_tlx_flit_parser #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) flit_parser (
         .tlx_clk            (tlx_clk),                  //Input
         .reset_n            (reset_n),                  //Input
         .dlx_tlx_flit       (dlx_tlx_flit),             //Input
@@ -151,7 +151,7 @@ module ocx_tlx_parse_mac #(
         .cfg_data_bus       (cfg_data_bus),
         .crc_error          (crc_error_int)
         );
-    ocx_tlx_ctl_fsm control_fsm(
+    ocx_tlx_ctl_fsm #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) control_fsm (
         .tlx_clk                (tlx_clk),              //Input
         .reset_n                (reset_n),                  //Input
         .credit_return          (credit_return),   //Input

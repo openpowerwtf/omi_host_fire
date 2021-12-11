@@ -39,8 +39,8 @@
 
 // Implemented transaction packets
 //`define TL_CMD_NOP 0x00
-//`define TL_CMD_PR_RD_MEM 8'h28
-//`define TL_CMD_PR_WR_MEM 8'h86
+`define TL_CMD_PR_RD_MEM 8'h28
+`define TL_CMD_PR_WR_MEM 8'h86
 //`define TL_RSP_NOP 8'h00
 //`define TL_RSP_RTN_TLX_CREDITS 8'h01
 
@@ -52,7 +52,10 @@
 `define TLX_RSP_WR_RESPONSE 8'h04
 `define TLX_RSP_WR_FAILED 8'h05
 
-`define RSP_INITIAL_CREDITS 7'h7F
+`define CMD_INITIAL_CREDITS 6'h3F
+`define CFG_CMD_INITIAL_CREDITS 6'h3F
+
+//`define RSP_INITIAL_CREDITS 7'h7F
 
 `timescale 1ns / 10ps
 
@@ -153,7 +156,7 @@ module omi_dev #(
       input tsm_state6_to_1
     ) ;
 
-   reg    [MEM_SIZE-1:0] mem[31:0];
+   reg    [31:0]        mem[MEM_SIZE-1:0];
 
    reg    [2:0]         cmdseq_q;
    wire   [2:0]         cmdseq_d;
@@ -161,22 +164,17 @@ module omi_dev #(
    wire   [15:0]        error_d;
    reg    [6:0]         rsp_credits_q;
    wire   [6:0]         rsp_credits_d;
+   reg    [31:0]        mem_adr_q;
+   wire   [31:0]        mem_adr_d;
+   reg    [3:0]         mem_be_q;
+   wire   [3:0]         mem_be_d;
+   reg    [31:0]        mem_datr_q;
+   wire   [31:0]        mem_datr_d;
+   reg    [31:0]        mem_datw_q;
+   wire   [31:0]        mem_datw_d;
 
    wire                 tlx_ready /* verilator public */;
-   wire                 cmd_valid;
-   wire                 rsp_valid;
-   wire   [7:0]         rsp_opcode;
-   wire   [63:0]        rsp_pa;
-   wire   [15:0]        rsp_afutag;
-   wire   [1:0]         rsp_dl;
-   wire   [2:0]         rsp_pl;
-   wire   [63:0]        rsp_be;
-   wire   [3:0]         rsp_flag;
-   wire   [15:0]        rsp_bdf;
-   wire   [3:0]         rsp_resp_code;
-   wire                 send_credit;
    wire                 dev_error;
-   wire                 rsp_tkn;
    wire                 rsp_credits_inc;
    wire                 rsp_credits_dec;
    wire                 rsp_credits_hold;
@@ -185,7 +183,6 @@ module omi_dev #(
    wire   [6:0]         rsp_initial_credits;
    wire                 rsp_credit;
    wire                 tlx_ready;
-   wire                 tlx_cmd_valid;
    wire   [511:0]       dlx_tlx_flit;
    wire   [511:0]       tlx_dlx_flit;
    wire                 tlx_dlx_flit_valid;
@@ -199,16 +196,61 @@ module omi_dev #(
    //wire   [31:0]      dlx_tlx_dlx_config_info;
    wire   [31:0]        dlx_config_info /* verilator public */;
 
+   wire                 tlx_cmd_valid;
+   wire                 tlx_cmd_credit;
+   wire   [7:0]         tlx_cmd_opcode;
+   wire   [1:0]         tlx_cmd_dl;
+   wire                 tlx_cmd_end;
+   wire   [63:0]        tlx_cmd_pa;
+   wire   [3:0]         tlx_cmd_flag;
+   wire                 tlx_cmd_os;
+   wire   [2:0]         tlx_cmd_pl;
+   wire   [63:0]        tlx_cmd_be;
+   wire   [15:0]        tlx_cmd_capptag;
+   wire                 tlx_cdata_valid;
+   wire   [511:0]       tlx_cdata_bus;
+   wire                 tlx_cdata_bdi;
+   wire                 tlx_cmd_rd_req;
+   wire   [2:0]         tlx_cmd_rd_cnt;
+   wire                 tlx_rd;
+   wire                 tlx_wr;
+   wire                 do_read;
+   wire                 do_write;
+   wire                 rsp_valid;
+   wire                 send_credit;
+   wire                 rsp_tkn;
+   wire   [7:0]         rsp_opcode;
+   wire   [63:0]        rsp_pa;
+   wire   [15:0]        rsp_afutag;
+   wire   [1:0]         rsp_dl;
+   wire   [2:0]         rsp_pl;
+   wire   [63:0]        rsp_be;
+   wire   [3:0]         rsp_flag;
+   wire   [15:0]        rsp_bdf;
+   wire   [3:0]         rsp_code;
+   wire                 rdata_valid;
+   wire   [511:0]       rdata_bus;
+   wire                 rdata_bdi;
+
+
    // FF
    always @(posedge clk) begin
       if (rst) begin
          error_q <= 'h0;
          cmdseq_q <= 'b111;
          rsp_credits_q <= rsp_initial_credits;
+         mem_adr_q <= 'h0;
+         mem_be_q <= 'h0;
+         mem_datr_q <= 'h0;
+         mem_datw_q <= 'h0;
       end else begin
          error_q <= error_d;
          cmdseq_q <= cmdseq_d;
          rsp_credits_q <= rsp_credits_d;
+         mem_adr_q <= mem_adr_d;
+         mem_be_q <= mem_be_d;
+         mem_datr_q <= mem_datr_d;
+         mem_datw_q <= mem_datw_d;
       end
    end
 
@@ -231,36 +273,51 @@ module omi_dev #(
    assign rcv_rate_capability_2 = 0;
    assign rcv_rate_capability_3 = 0;
 
+   assign tlx_rd = tlx_cmd_valid & (tlx_cmd_opcode == `TL_CMD_PR_RD_MEM);
+   assign tlx_wr = tlx_cmd_valid & (tlx_cmd_opcode == `TL_CMD_PR_WR_MEM);
+
    // Do something
 
+   //wtf can write data come ahead of write cmd?
+   //wtf need to do anything if tlx goes nonready?
+
    //tbl cmdseq
-   //n cmdseq_q                         cmdseq_d
-   //n |   tlx_ready                    |   send_credit
-   //n |   | tlx_cmd_valid              |   |
-   //n |   | | rsp_tkn                  |   |
-   //n |   | | |                        |   |
-   //n |   | | |                        |   |
-   //n |   | | |                        |   |    dev_error
-   //n |   | | |                        |   |    |
-   //b 210 | | |                        210 |    |
-   //t iii i i i                        ooo o    o
+   //n cmdseq_q                          cmdseq_d
+   //n |   tlx_ready                     |   do_read
+   //n |   | tlx_rd                      |   |do_write
+   //n |   | |tlx_wr                     |   || send_credit
+   //n |   | ||tlx_cdata_valid           |   || |
+   //n |   | ||| rsp_tkn                 |   || |
+   //n |   | ||| |                       |   || | dev_error
+   //n |   | ||| |                       |   || | |
+   //b 210 | ||| |                       210 || | |
+   //t iii i iii i                       ooo oo o o
    //*------------------------------------------------
    //* Reset *****************************************
-   //s 111 0 - -                        111 0    0         * wait for TLX
-   //s 111 1 - -                        001 1    0         * initialize TL
+   //s 111 0 --- -                       111 00 0 0         * wait for TLx
+   //s 111 1 --- -                       001 00 0 0         *
    //* Idle ******************************************
-   //s 001 - 0 -                        001 0    0         * ...zzz...
-   //s 001 - 1 -                        010 0    0         * TL wants somethin
-   //* Command Rcvd **********************************
-   //s 010 - - 0                        010 0    0         * processing...
-   //s 010 - - 1                        001 1    0         * responding (rsp + credit)    CANT DO AT SAME TIME?
-   //* Response Send *********************************
-   //* Credit Send ***********************************
+   //s 001 - 000 -                       001 00 0 0         * ...zzz...
+   //s 001 - 1-- -                       010 00 0 0         * TL read
+   //s 001 - -10 -                       100 00 0 0         * TL write, wait for data
+   //s 001 - -01 -                       101 00 0 0         * TL write data, wait for cmd
+   //s 001 - -11 -                       110 00 0 0         * TL write with data
+   //* Read ******************************************
+   //s 010 - --- 0                       010 10 0 0         * processing...
+   //s 010 - --- 1                       001 10 1 0         * responding
+   //* Write, Data Pending ***************************
+   //s 100 - --0 -                       100 00 0 0         * waiting for data
+   //s 100 - --1 -                       101 00 0 0         *
+   //* Write, Cmd Pending ****************************
+   //s 101 - -0- -                       101 00 0 0         * waiting for cmd
+   //s 101 - -1- -                       110 00 0 0         *
+   //* Write *****************************************
+   //s 110 - --- 0                       110 01 0 0         * processing...
+   //s 110 - --- 1                       001 01 1 0         * responding
    //* Inglorious Ending *****************************
-   //s 000 - -                          000 0    1         * seq error
+   //s 000 - --- -                       000 0    1         * seq error
    //*------------------------------------------------
    //tbl cmdseq
-
 
    assign rsp_credits_inc = rsp_credit & ~rsp_tkn;
    assign rsp_credits_dec = rsp_tkn & ~rsp_credit;
@@ -272,38 +329,77 @@ module omi_dev #(
 
    assign rsp_credit_ok = (rsp_credits_q != 0);
 
-   assign rsp_valid = 1'b0; //send_credit;
-   assign rsp_tkn = 1'b1;
-   assign rsp_opcode = `TLX_RSP_RTN_TL_CREDITS;
+   assign mem_adr_d = (tlx_rd | tlx_wr) ? tlx_cmd_pa[31:0] : mem_adr_q;
+   assign mem_be_d = tlx_wr ? tlx_cmd_pa[63:60] : mem_be_q;
+   assign mem_datr_d = (tlx_rd | tlx_wr) ? mem[tlx_cmd_pa[31:2]] : mem_datr_q;  // word addr
+   assign mem_datw_d = tlx_cdata_valid ? tlx_cdata_bus[31:0] : mem_datw_q;
+
+   always @ (*) begin
+      if (do_write) begin
+         mem[mem_adr_q[31:2]] = {mem_be_q[3] ? mem_datw_q[31:24] : mem_datr_q[31:24],
+                                 mem_be_q[2] ? mem_datw_q[23:16] : mem_datr_q[23:16],
+                                 mem_be_q[1] ? mem_datw_q[15:8]  : mem_datr_q[15:8] ,
+                                 mem_be_q[0] ? mem_datw_q[7:0]   : mem_datr_q[7:0]  };
+      end
+   end
+
+   assign rsp_valid = do_read | do_write;
+   assign rsp_tkn = rsp_valid & rsp_credit_ok;
+   assign rsp_opcode = do_read ? `TLX_RSP_RD_RESPONSE : `TLX_RSP_WR_RESPONSE;
+   assign rsp_dl = 2'b01;
+   assign rsp_afutag = 16'h0;
+   assign rsp_dp = 2'b00;
+   assign rsp_code = 4'h0; // fail only
+
+   assign rdata_valid = do_read;  //wtf credits? dont see any
+   assign rdata_bus = {{480{1'b1}}, mem_datr_q};
+   assign rdata_bdi = 1'b0; //wtf?
+
+   assign tlx_cmd_credit = send_credit;
+
+   assign tlx_cmd_rd_req = 1; // this reads cmd data - could wait till after get cmd; also don't have to latch it here i guess
+   assign tlx_cmd_rd_cnt = 3'd0;
 
 ocx_tlx_top #(.GEMINI_NOT_APOLLO(1)) tl
 (
    .clk(clk),
    .rst(rst),
    .tlx_afu_ready(tlx_ready),
-
+   // r/w
+   .afu_tlx_cmd_initial_credit(`CMD_INITIAL_CREDITS),
+   .afu_tlx_cmd_credit(tlx_cmd_credit),
+   .tlx_afu_cmd_valid(tlx_cmd_valid),
+   .tlx_afu_cmd_opcode(tlx_cmd_opcode),
+   .tlx_afu_cmd_dl(tlx_cmd_dl),
+   .tlx_afu_cmd_end(tlx_cmd_end),
+   .tlx_afu_cmd_pa(tlx_cmd_pa),
+   .tlx_afu_cmd_flag(tlx_cmd_flag),
+   .tlx_afu_cmd_os(tlx_cmd_os),
+   .tlx_afu_cmd_capptag(tlx_cmd_capptag),
+   .tlx_afu_cmd_pl(tlx_cmd_pl),
+   .tlx_afu_cmd_be(tlx_cmd_be),
+   // w
+   .tlx_afu_cmd_data_valid(tlx_cdata_valid),
+   .tlx_afu_cmd_data_bus(tlx_cdata_bus),
+   .tlx_afu_cmd_data_bdi(tlx_cdata_bdi),
+   // r/w
    .tlx_afu_resp_initial_credit(rsp_initial_credits),
    .tlx_afu_resp_credit(rsp_credit),
    .afu_tlx_resp_valid(rsp_valid),
    .afu_tlx_resp_opcode(rsp_opcode),
    .afu_tlx_resp_dl(rsp_dl),
-   .afu_tlx_resp_capptag(rsp_capptag),
+   .afu_tlx_resp_capptag(rsp_afutag),
    .afu_tlx_resp_dp(rsp_dp),
    .afu_tlx_resp_code(rsp_code),
+   // rd
+   .afu_tlx_rdata_valid(rdata_valid),
+   .afu_tlx_rdata_bus(rdata_bus),
+   .afu_tlx_rdata_bdi(rdata_bdi),
 
-   .afu_tlx_cmd_initial_credit(afu_tlx_cmd_initial_credit),
-   .afu_tlx_cmd_credit(afu_tlx_cmd_credit),
-   .tlx_afu_cmd_valid(tlx_cmd_valid),
-   .tlx_afu_cmd_opcode(tlx_afu_cmd_opcode),
-   .tlx_afu_cmd_dl(tlx_afu_cmd_dl),
-   .tlx_afu_cmd_end(tlx_afu_cmd_end),
-   .tlx_afu_cmd_pa(tlx_afu_cmd_pa),
-   .tlx_afu_cmd_flag(tlx_afu_cmd_flag),
-   .tlx_afu_cmd_os(tlx_afu_cmd_os),
-   .tlx_afu_cmd_capptag(tlx_afu_cmd_capptag),
-   .tlx_afu_cmd_pl(tlx_afu_cmd_pl),
-   .tlx_afu_cmd_be(tlx_afu_cmd_be),
-   .cfg_tlx_initial_credit(cfg_tlx_initial_credit),
+   .afu_tlx_cmd_rd_req(tlx_cmd_rd_req), //dont know what this junk is (yet :)
+   .afu_tlx_cmd_rd_cnt(tlx_cmd_rd_cnt),
+
+   .cfg_tlx_initial_credit(`CFG_CMD_INITIAL_CREDITS),  // tl wants this > 0
    .cfg_tlx_credit_return(cfg_tlx_credit_return),
    .tlx_cfg_valid(tlx_cfg_valid),
    .tlx_cfg_opcode(tlx_cfg_opcode),
@@ -325,11 +421,6 @@ ocx_tlx_top #(.GEMINI_NOT_APOLLO(1)) tl
    .tlx_afu_resp_host_tag(tlx_afu_resp_host_tag),
    .tlx_afu_resp_cache_state(tlx_afu_resp_cache_state),
    .tlx_afu_resp_addr_tag(tlx_afu_resp_addr_tag),
-   .afu_tlx_cmd_rd_req(afu_tlx_cmd_rd_req),
-   .afu_tlx_cmd_rd_cnt(afu_tlx_cmd_rd_cnt),
-   .tlx_afu_cmd_data_valid(tlx_afu_cmd_data_valid),
-   .tlx_afu_cmd_data_bus(tlx_afu_cmd_data_bus),
-   .tlx_afu_cmd_data_bdi(tlx_afu_cmd_data_bdi),
    .afu_tlx_resp_rd_req(afu_tlx_resp_rd_req),
    .afu_tlx_resp_rd_cnt(afu_tlx_resp_rd_cnt),
    .tlx_afu_resp_data_initial_credit(tlx_afu_resp_data_initial_credit),
@@ -355,9 +446,6 @@ ocx_tlx_top #(.GEMINI_NOT_APOLLO(1)) tl
    .afu_tlx_cdata_valid(afu_tlx_cdata_valid),
    .afu_tlx_cdata_bus(afu_tlx_cdata_bus),
    .afu_tlx_cdata_bdi(afu_tlx_cdata_bdi),
-   .afu_tlx_rdata_valid(afu_tlx_rdata_valid),
-   .afu_tlx_rdata_bus(afu_tlx_rdata_bus),
-   .afu_tlx_rdata_bdi(afu_tlx_rdata_bdi),
    .cfg_tlx_resp_valid(cfg_tlx_resp_valid),
    .cfg_tlx_resp_opcode(cfg_tlx_resp_opcode),
    .cfg_tlx_resp_capptag(cfg_tlx_resp_capptag),
@@ -505,19 +593,40 @@ ocx_dlx_top #(.GEMINI_NOT_APOLLO(1)) dl
 //Generated...
 //vtable cmdseq
 assign cmdseq_d[2] =
-  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready);
+  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_wr & ~tlx_cdata_valid) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_wr & tlx_cdata_valid) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_wr & tlx_cdata_valid) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0] & ~tlx_cdata_valid) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0] & tlx_cdata_valid) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_wr) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_wr) +
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn);
 assign cmdseq_d[1] =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready) +
-  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_cmd_valid) +
-  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn);
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_rd) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_wr & tlx_cdata_valid) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tlx_wr) +
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn);
 assign cmdseq_d[0] =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tlx_ready) +
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tlx_ready) +
-  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_cmd_valid) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_rd & ~tlx_wr & ~tlx_cdata_valid) +
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_wr & tlx_cdata_valid) +
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0] & tlx_cdata_valid) +
+  (cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tlx_wr) +
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
+assign do_read =
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn) +
   (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
+assign do_write =
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_tkn) +
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
 assign send_credit =
-  (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tlx_ready) +
-  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn) +
+  (cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_tkn);
 assign dev_error =
   (~cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0]);
 //vtable cmdseq

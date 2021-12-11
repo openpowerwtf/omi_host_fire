@@ -290,6 +290,7 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    assign wb_cmd_adr = wb_adr;
    assign wb_cmd_dat = wb_dat_i;
 
+   assign wb_ack = ack_q;
    assign wb_dat_o = rsp_data_bus[31:0];  //wtf or where is it???
 
 // TL Command
@@ -361,15 +362,15 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    //s 111 0 -- --                         111 - - - -
    //s 111 1 -- --                         001 - - - -
    //* Idle ******************************************
-   //s 001 0 -- --                         --- - 0 1 0         *
+   //s 001 - -- --                         --- - 0 1 0         *
    //s 001 0 -- --                         111 0 - - -         *
    //s 001 1 0- --                         001 0 - - -         * ...zzz...
    //s 001 1 10 --                         001 0 - - -         * need credits
    //s 001 1 11 --                         010 1 - - -         * start transaction
    //* Transaction Pending ***************************
    //s 010 - -- 0-                         010 0 0 0 0
-   //s 010 - -- 10                         011 0 0 0 0
-   //s 010 - -- 11                         000 0 1 0 0
+   //s 010 - -- 10                         011 0 1 0 0
+   //s 010 - -- 11                         000 0 0 0 0
    //* Response Send **********************************
    //s 011 - -- --                         001 0 0 0 0         * wb_ack=1
    //* Epic Failure **********************************
@@ -380,20 +381,21 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    assign cmd_valid = cmd_tkn;
    assign cmd_opcode = wb_cmd_we ? `TL_CMD_PR_WR_MEM : `TL_CMD_PR_RD_MEM;
    assign cmd_pa = {
-      wb_cmd_we ? cmd_be : 4'b0,    // or just always ignore 63:60 in device
+      wb_cmd_we ? wb_cmd_be : 4'b0,    // or just always ignore 63:60 in device
       28'b0,
       wb_cmd_adr
    };
    assign cmd_afutag = 0;        // xlate_done, intrp_rdy
    assign cmd_dl = 2'b01;        // resp?
    assign cmd_pl = 3'b010;       // 4B
-   assign cmd_be = 0;            // write_mem.be
-   assign cmd_flag = 0;          // amo, mem_cntl
-   assign cmd_bdf = 0;           // tlx
-   assign cmd_resp_code = 0;     // xlate_done, intrp_rdy
-   assign cmd_capptag = 0;
-   assign cmd_data_valid = cmd_tkn;
-   assign cmd_data_bus = {480'b0, wb_cmd_dat};   //wtf or vice versa????
+   assign cmd_be = 64'h0;        // write_mem.be
+   assign cmd_flag = 4'h0;       // amo, mem_cntl
+   assign cmd_bdf = 16'h0;       // tlx
+   assign cmd_resp_code = 3'h0;  // xlate_done, intrp_rdy
+   assign cmd_capptag = 16'h0;
+   // assume this is always taken when cmd is
+   assign cmd_data_valid = wb_cmd_we & cmd_valid;
+   assign cmd_data_bus = {{480{1'b1}}, wb_cmd_dat};   //wtf or vice versa????
    assign cmd_data_bdi = 0; //wtf ?
 
 // TLx Response
@@ -402,7 +404,7 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
 
    //wtf will this ensure rsp_data_valid same cycle as rsp_valid??? since just using pr_rd
    assign rsp_rd_req = 1;
-   assign rsp_rd_cnt = 'b111; //wtf? what do i want
+   assign rsp_rd_cnt = 'b000; //wtf? what do i want
 
    assign rsp_ok = (rsp_opcode == `TLX_RSP_RD_RESPONSE) | (rsp_opcode == `TLX_RSP_WR_RESPONSE);
 
@@ -622,16 +624,16 @@ omi_host #() omi_host
 
 // Generated
 //vtable cmdseq
-assign cmdseq_d[2] = 
+assign cmdseq_d[2] =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready);
-assign cmdseq_d[1] = 
+assign cmdseq_d[1] =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & cmd_credit_ok) +
   (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & ~rsp_valid) +
   (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & ~rsp_bad);
-assign cmdseq_d[0] = 
+assign cmdseq_d[0] =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0] & tl_ready) +
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready) +
@@ -639,14 +641,14 @@ assign cmdseq_d[0] =
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & ~cmd_credit_ok) +
   (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & ~rsp_bad) +
   (~cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0]);
-assign cmd_tkn = 
+assign cmd_tkn =
   (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & tl_ready & wb_cmd_val & cmd_credit_ok);
-assign ack_d = 
-  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & rsp_bad);
-assign idle = 
+assign ack_d =
+  (~cmdseq_q[2] & cmdseq_q[1] & ~cmdseq_q[0] & rsp_valid & ~rsp_bad);
+assign idle =
   (cmdseq_q[2] & cmdseq_q[1] & cmdseq_q[0]) +
-  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0] & ~tl_ready);
-assign trans_error = 
+  (~cmdseq_q[2] & ~cmdseq_q[1] & cmdseq_q[0]);
+assign trans_error =
   (~cmdseq_q[2] & ~cmdseq_q[1] & ~cmdseq_q[0]);
 //vtable cmdseq
 

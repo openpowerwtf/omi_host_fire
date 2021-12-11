@@ -1024,6 +1024,40 @@ module ocx_tlx_framer #(
     // These TL credit counters handle max of 255 credits per VC and 255 credits per DCP
     // Subtract the credits from these counters when the credits are put into the credit pactet register.  (Not when packed into control flit.)
 
+    //wtf try to massage this into working for both tl/tlx...
+    //  TL: consume vc1/dcp1 for cmd, provide vc0/dcp0 for rsp
+    // TLx: consume vc0/dcp0 for rsp, provide vc1/dcp1 for cmd
+    //
+    //  return TL: xxxx xxxx dcp1 dcp0 ... xxx xxx vc1 vc0 08
+    // return TLx: dcp3 xxxx xxxx dcp0 ... vc3 xxx xxx vc0 01
+    // so name facilities vc13/dcp13 and parse from flit correctly depending on end
+    // simplified master-slave only uses vc1/dcp1 cmd -> vc0/dcp0 rsp
+    // but this is whack - the logic was already changed to use stuff named vc3/dcp3 as vc1/dcp1!!!  so may be able to just adjust in
+    //   credit flit parser
+    // wonder why they didn't do some changeall's
+
+    wire   [7:0] CRD_RTN_OPCODE;
+    wire   [3:0] vc1_tlcrd_counter_wtf;
+    wire   [3:0] vc3_tlcrd_counter_wtf;
+    wire   [5:0] dcp1_tlcrd_counter_wtf;
+    wire   [5:0] dcp3_tlcrd_counter_wtf;
+
+    generate
+       if (GEMINI_NOT_APOLLO) begin
+          assign CRD_RTN_OPCODE = 8'h08;
+          assign vc1_tlcrd_counter_wtf = vc1_tlcrd_counter_snd;   // 1=1
+          assign vc3_tlcrd_counter_wtf = 4'b0;
+          assign dcp1_tlcrd_counter_wtf = dcp1_tlcrd_counter_snd;
+          assign dcp3_tlcrd_counter_wtf = 6'b0;
+       end else begin
+          assign CRD_RTN_OPCODE = 8'h01;
+          assign vc1_tlcrd_counter_wtf = 4'b0;                    // 3=1
+          assign vc3_tlcrd_counter_wtf = vc1_tlcrd_counter_snd;
+          assign dcp1_tlcrd_counter_wtf = 6'b0;
+          assign dcp3_tlcrd_counter_wtf = dcp1_tlcrd_counter_snd;
+      end
+    endgenerate
+
     always @ (*) begin
         if (vc0_tlcrd_counter > 8'b00001111)  vc0_tlcrd_counter_snd = 4'b1111 ;                 // If there are more than 15 credits, send 15 of them.
         else                                  vc0_tlcrd_counter_snd = vc0_tlcrd_counter[3:0] ;  // Otherwise, send all of them in the counter
@@ -1086,22 +1120,12 @@ module ocx_tlx_framer #(
     // @@@ TL Credit Packet
     // ---------------
 
-    //wtf try to massage this into working for both tl/tlx...
-    wire   [7:0] CRD_RTN_OPCODE;
-    generate
-       if (GEMINI_NOT_APOLLO) begin
-          assign CRD_RTN_OPCODE = 8'h08;
-       end else begin
-          assign CRD_RTN_OPCODE = 8'h01;
-      end
-    endgenerate
-
     // Capture 2-slot Credit Packet
     // Note - in the current design, sometimes the credits may be packed into the control flit even when xredy=0.
     // This can happen when the packer needs to fill slots 0,1 to prevent a six-slot command from going into slots 0,1.
     // So, the logic needs to have a credit packet ready to go at all times, even if it is a credit packet of zeros.
     always @ (*) begin
-        if    (capture_credit_packet) credit_packet_din[55:0] = { dcp1_tlcrd_counter_snd,
+/*        if    (capture_credit_packet) credit_packet_din[55:0] = { dcp1_tlcrd_counter_snd,
                                                                   12'b000000000000,
                                                                   dcp0_tlcrd_counter_snd,
                                                                   8'h00,
@@ -1109,8 +1133,19 @@ module ocx_tlx_framer #(
                                                                   8'h00,                            // 19:12
                                                                   vc0_tlcrd_counter_snd,            // 11:8
                                                                   CRD_RTN_OPCODE      };           // Pack slots 0,1 with TL credits.  AP Credit packet opcode = 00000001.
-        else if (clear_credit_packet) credit_packet_din[55:0] = { 48'h000000000000, CRD_RTN_OPCODE };  // Pack slots 0,1 with zero TL credits.  AP Credit packet opcode = 00000001.
-        else                          credit_packet_din[55:0] = credit_packet ;                     // Hold credit packet until it is taken.
+*/
+        if    (capture_credit_packet) credit_packet_din[55:0] = { dcp3_tlcrd_counter_wtf,
+                                                                  6'h0,
+                                                                  dcp1_tlcrd_counter_wtf,
+                                                                  dcp0_tlcrd_counter_snd,
+                                                                  8'h00,
+                                                                  vc3_tlcrd_counter_wtf,
+                                                                  4'h0,
+                                                                  vc1_tlcrd_counter_wtf,
+                                                                  vc0_tlcrd_counter_snd,
+                                                                  CRD_RTN_OPCODE      };              // Pack slots 0,1 with credits.
+        else if (clear_credit_packet) credit_packet_din[55:0] = { 48'h000000000000, CRD_RTN_OPCODE }; // Pack slots 0,1 with zero credits.
+        else                          credit_packet_din[55:0] = credit_packet ;                       // Hold credit packet until it is taken.
     end
     always @ (posedge clock) begin
         if      (!reset_n)    credit_packet    <= 56'h0;

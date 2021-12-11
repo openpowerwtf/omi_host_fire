@@ -20,7 +20,9 @@
 // the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 //
 
-module ocx_tlx_ctl_fsm(
+module ocx_tlx_ctl_fsm #(
+    parameter GEMINI_NOT_APOLLO = 0
+) (
     input tlx_clk,
     input reset_n,
     input [55:0] credit_return,
@@ -50,7 +52,7 @@ module ocx_tlx_ctl_fsm(
     output control_parsing_start,
     output [1:0] data_bdi_flit_cnt,
     output [1:0] data_arb_flit_cnt
-    );
+);
 //Signal Declarations
 wire [55:0] credit_return_din;
 reg  [55:0] credit_return_dout;
@@ -74,7 +76,7 @@ wire ctl_vc0_valid;
 wire ctl_vc1_valid;
 wire data_vc0_valid;
 wire data_vc1_valid;
-always @(posedge tlx_clk) 
+always @(posedge tlx_clk)
     begin
         if(!reset_n)
         begin
@@ -100,8 +102,8 @@ always @(posedge tlx_clk)
         data_arb_flit_cnt_dout <= data_arb_flit_cnt_din;
         cfg_hint_dout <= cfg_hint_din;
         end
-    end   
-    
+    end
+
 //Credit Return
 assign credit_return_din[55:0] = credit_return_v ? credit_return[55:0] : credit_return_dout;
 assign credit_return_v_din = credit_return_v;
@@ -111,49 +113,56 @@ assign pars_ctl_info_din[167:0] = pars_ctl_info[167:0];
 assign pars_ctl_valid_din = pars_ctl_valid;
 assign ctl_vc0_valid = ~(~pars_ctl_info_dout[0] & ~pars_ctl_info_dout[1] & ~pars_ctl_info_dout[2] & ~pars_ctl_info_dout[4]) //Not credit return opcode "08" or NOP "00"
                     & (~pars_ctl_info_dout[7] & ~pars_ctl_info_dout[6] & ~pars_ctl_info_dout[5]) & pars_ctl_valid_dout; //VC0 = decimal 2-31
-assign ctl_vc0_v = ctl_vc0_valid;  
-assign ctl_vc0_bus[55:0] = pars_ctl_info_dout[55:0];                  
-                    
-assign ctl_vc1_valid = (pars_ctl_info_dout[5] | pars_ctl_info_dout[7] | pars_ctl_info_dout[6]) & pars_ctl_valid_dout; //VC1 = decimal 32 - 255                   
+assign ctl_vc0_v = ctl_vc0_valid;
+assign ctl_vc0_bus[55:0] = pars_ctl_info_dout[55:0];
+
+assign ctl_vc1_valid = (pars_ctl_info_dout[5] | pars_ctl_info_dout[7] | pars_ctl_info_dout[6]) & pars_ctl_valid_dout; //VC1 = decimal 32 - 255
 assign ctl_vc1_v = ctl_vc1_valid;
 assign ctl_vc1_bus[167:0] = pars_ctl_info_dout[167:0];
 //Data Arbiter Outputs
 assign data_vc0_valid = ~(~pars_ctl_info[0] & ~pars_ctl_info[1] & ~pars_ctl_info[2] & ~pars_ctl_info[4]) //Not credit return opcode "08" or NOP "00"
                        & (~pars_ctl_info[7] & ~pars_ctl_info[6] & ~pars_ctl_info[5]) & pars_ctl_valid; //VC0 = decimal 2-31
-assign data_vc1_valid = (pars_ctl_info[5] | pars_ctl_info[7] | pars_ctl_info[6]) & pars_ctl_valid; //VC1 = decimal 32 - 255                    
+assign data_vc1_valid = (pars_ctl_info[5] | pars_ctl_info[7] | pars_ctl_info[6]) & pars_ctl_valid; //VC1 = decimal 32 - 255
 assign data_arb_vc_v_din[0] = data_vc0_valid & ((pars_ctl_info[7:0] == 8'h01) | (pars_ctl_info[7:0] == 8'h03));
 assign data_arb_vc_v_din[1] = data_vc1_valid & ((pars_ctl_info[7:0] == 8'h81) |
                                            (pars_ctl_info[7:0] == 8'h82) |
                                            (pars_ctl_info[7:0] == 8'h86) |
                                            (pars_ctl_info[7:0] == 8'hE1));
-assign cfg_hint_din = data_vc1_valid & pars_ctl_info[7:0] == 8'hE1;                                           
-assign data_arb_cfg_hint = cfg_hint_din;    
-assign data_arb_cfg_offset[3:0] = pars_ctl_info[33:30];                                      
-assign data_arb_vc_v[1:0] = data_arb_vc_v_din[1:0];  
-assign data_bdi_vc_V[1:0] = data_arb_vc_v_dout[1:0]; 
-assign bdi_cfg_hint = cfg_hint_dout;             
-//hold commands with data until valid data is received  
-assign cmd_credit_enable = ctl_vc1_valid & ((pars_ctl_info_dout[7:0] != 8'hE1) | (pars_ctl_info_dout[7:0] != 8'hE0));                                          
+assign cfg_hint_din = data_vc1_valid & pars_ctl_info[7:0] == 8'hE1;
+assign data_arb_cfg_hint = cfg_hint_din;
+assign data_arb_cfg_offset[3:0] = pars_ctl_info[33:30];
+assign data_arb_vc_v[1:0] = data_arb_vc_v_din[1:0];
+assign data_bdi_vc_V[1:0] = data_arb_vc_v_dout[1:0];
+assign bdi_cfg_hint = cfg_hint_dout;
+//hold commands with data until valid data is received
+assign cmd_credit_enable = ctl_vc1_valid & ((pars_ctl_info_dout[7:0] != 8'hE1) | (pars_ctl_info_dout[7:0] != 8'hE0));
 assign data_hold_vc0 = ctl_vc0_valid & ((pars_ctl_info_dout[7:0] == 8'h01) | (pars_ctl_info_dout[7:0] == 8'h03));
 assign data_hold_vc1 = ctl_vc1_valid & ((pars_ctl_info_dout[7:0] == 8'h81) |
                        (pars_ctl_info_dout[7:0] == 8'h82) |
                        (pars_ctl_info_dout[7:0] == 8'h86) |
-                       (pars_ctl_info_dout[7:0] == 8'hE1));                                           
+                       (pars_ctl_info_dout[7:0] == 8'hE1));
 assign data_arb_flit_cnt_din[1:0] = (data_vc0_valid && (pars_ctl_info[7:0] == 8'h01 || pars_ctl_info[7:0] == 8'h03)) ? pars_ctl_info[27:26] : //vc0 commands with dLength
                                 (data_vc1_valid && pars_ctl_info[7:0] == 8'h81) ? pars_ctl_info[111:110] : //vc1 commands with dLength
                                 (data_vc1_valid && (pars_ctl_info[7:0] == 8'h82 || pars_ctl_info[7:0] == 8'h86 || pars_ctl_info[7:0] == 8'hE1)) ? 2'b01 : //vc1 commands with pLength or BE 64B
                                 2'b00;
 assign data_arb_flit_cnt = data_arb_flit_cnt_din;
-assign data_bdi_flit_cnt = data_arb_flit_cnt_dout;                                
+assign data_bdi_flit_cnt = data_arb_flit_cnt_dout;
 assign ctl_flit_parsed_din = ctl_flit_parsed ? 1'b1 :
-                             ctl_flit_parsed_dout && (ctl_vc0_valid || ctl_vc1_valid) ? 1'b0 : ctl_flit_parsed_dout; 
-assign ctl_flit_parse_end_din = ctl_flit_parse_end;                                               
+                             ctl_flit_parsed_dout && (ctl_vc0_valid || ctl_vc1_valid) ? 1'b0 : ctl_flit_parsed_dout;
+assign ctl_flit_parse_end_din = ctl_flit_parse_end;
 assign control_parsing_start = ctl_flit_parsed_dout & (ctl_vc0_valid | ctl_vc1_valid); //first valid cmd or response has been parsed blocks null/credit flits
 assign control_parsing_end = ctl_flit_parse_end_dout;
-//Assign Outputs                                 
+
+//Assign Outputs
 assign rcv_xmt_credit_vcx0 = credit_return_dout[11:8];
-assign rcv_xmt_credit_vcx3 = credit_return_dout[15:12];
 assign rcv_xmt_credit_dcpx0 = credit_return_dout[37:32];
-assign rcv_xmt_credit_dcpx3 = credit_return_dout[43:38];
+//wtf triple-lindy-double-reverse-swap ftw!!!
+if (GEMINI_NOT_APOLLO) begin
+   assign rcv_xmt_credit_vcx3 = credit_return_dout[23:20];   // 3=3
+   assign rcv_xmt_credit_dcpx3 = credit_return_dout[55:50];
+end else begin
+   assign rcv_xmt_credit_vcx3 = credit_return_dout[15:12];   // 3=1
+   assign rcv_xmt_credit_dcpx3 = credit_return_dout[43:38];
+end
 assign rcv_xmt_credit_tlx_v = credit_return_v_dout;
 endmodule

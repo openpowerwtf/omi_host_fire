@@ -76,8 +76,8 @@ int main(int argc, char **argv) {
 #endif
 
 
-   unsigned int runCycles =  1000;
-   unsigned int startTrace = 0;
+   unsigned int runCycles =  1000000;
+   unsigned int startTrace = 2000000;
    unsigned adrMask = 0x0000003C; // restrict address range
 
 
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
    unsigned int quiescing = 0;
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
-   bool reqPending = false, reqRd, reqWr;
+   bool reqPending = false, reqRd = false, reqWr = false;
    unsigned int reqAdr, reqSel, reqData, adr, data, mask;
 
    unsigned int dlLinkUp = 0, dlxLinkUp = 0, tlReady = 0, tlxReady = 0, phy_rx_valid[8], phy_rx_header[8], phy_rx_data[8],
@@ -102,6 +102,10 @@ int main(int argc, char **argv) {
    unsigned int startRetrain = -1;
 
    unsigned int mem[1024/4];
+   for (i =0; i < 1024/4; i++) {
+      mem[i] = 0;
+   }
+
    // Init I/O
 
    //cout << "PHY Clk = 2:1" << endl;
@@ -274,9 +278,8 @@ int main(int argc, char **argv) {
          data = m->wb_dat_o;
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
          cout << " ACK RD  data=" << setw(8) << setfill('0') << hex << data << endl;
-         adr = reqAdr & 0x000000FF;
-         if (data != mem[adr]) {
-            cout << " ** MISCOMPARE Exp=@" << setw(8) << setfill('0') << hex << adr << "=" << mem[adr] << " **" << endl;
+         if (data != mem[reqAdr]) {
+            cout << " ** MISCOMPARE Exp @" << setw(8) << setfill('0') << hex << reqAdr << "=" << setw(8) << mem[reqAdr] << " **" << endl;
             quiescing = 100;
             ok = false;
          }
@@ -324,7 +327,7 @@ int main(int argc, char **argv) {
 
       if ((main_time > runCycles) & !quiescing) {
          cout << "Quiescing..." << endl;
-         quiescing = 10;
+         quiescing = 100;
       }
 
    }

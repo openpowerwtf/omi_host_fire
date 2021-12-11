@@ -144,7 +144,7 @@ assign tlx_cfg_in_rcv_rate_capability_1 = 4'b0011;
 assign tlx_cfg_in_rcv_rate_capability_2 = 4'b0111;
 assign tlx_cfg_in_rcv_rate_capability_3 = 4'b0010;
 assign tlx_afu_ready = dlx_tlx_link_up;
-    ocx_tlx_parse_mac TLX_Parser(
+    ocx_tlx_parse_mac #(.GEMINI_NOT_APOLLO(GEMINI_NOT_APOLLO)) TLX_Parser(
         .fp_rcv_cmd_valid           (fp_rcv_cmd_valid),
         .fp_rcv_cmd_info            (fp_rcv_cmd_info),
         .fp_rcv_cmd_data_v          (fp_rcv_cmd_data_v),
