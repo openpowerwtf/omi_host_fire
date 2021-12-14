@@ -1,0 +1,335 @@
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_id'
+  392 | omi_host #() omi_host
+      |              ^~~~~~~~
+                     ... For warning description see https://verilator.org/warn/PINMISSING?v=4.215
+                     ... Use "/* verilator lint_off PINMISSING */" and lint_on around source to disable this message.
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_in'
+  392 | omi_host #() omi_host
+      |              ^~~~~~~~
+%Warning-PINMISSING: wb_omi_host.v:392:14: Cell has missing pin: 'phy_out'
+  392 | omi_host #() omi_host
+      |              ^~~~~~~~
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'clk_156_25MHz'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_all_out'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'hb_gtwiz_reset_all_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_tx_done_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_rx_done_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_buffbypass_tx_done_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_buffbypass_rx_done_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_userclk_tx_active_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_userclk_rx_active_in'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'send_first'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'gtwiz_reset_rx_datapath_out'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state2_to_3'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state4_to_5'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-PINMISSING: omi_host.v:372:17: Cell has missing pin: 'tsm_state6_to_1'
+  372 | ocx_dlx_top #() dl
+      |                 ^~
+                     wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: dl/ocx_dlx_tx_flt.v:756:40: Operator COND expects 12 bits on the Conditional True, but Conditional True's CONST '7'h0' generates 7 bits.
+                                          : ... In instance wb_omi_host.omi_host.dl.tx.flt
+  756 | assign rx_ack_ptr_din[11:0] = reset_q  ? 7'b0000000:
+      |                                        ^
+                dl/ocx_dlx_txdf.v:403:1: ... note: In file included from ocx_dlx_txdf.v
+                dl/ocx_dlx_top.v:435:1: ... note: In file included from ocx_dlx_top.v
+                omi_host.v:374:1: ... note: In file included from omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: dl/ocx_dlx_tx_flt.v:781:52: Operator COND expects 12 bits on the Conditional True, but Conditional True's CONST '7'h0' generates 7 bits.
+                                          : ... In instance wb_omi_host.omi_host.dl.tx.flt
+  781 | assign tx_ack_ptr_din[11:0] = reset_q              ? 7'b0000000:
+      |                                                    ^
+                dl/ocx_dlx_txdf.v:403:1: ... note: In file included from ocx_dlx_txdf.v
+                dl/ocx_dlx_top.v:435:1: ... note: In file included from ocx_dlx_top.v
+                omi_host.v:374:1: ... note: In file included from omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: dl/ocx_dlx_rx_main.v:476:28: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's CONST '2'h0' generates 2 bits.
+                                           : ... In instance wb_omi_host.omi_host.dl.rx.main
+  476 | assign x2_inside_write[2]  = 2'b0;  
+      |                            ^
+                dl/ocx_dlx_rxdf.v:341:1: ... note: In file included from ocx_dlx_rxdf.v
+                dl/ocx_dlx_top.v:351:1: ... note: In file included from ocx_dlx_top.v
+                omi_host.v:374:1: ... note: In file included from omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: dl/ocx_dlx_top.v:345:22: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
+                                       : ... In instance wb_omi_host.omi_host.dl
+  345 | assign reg_07_update = reg_EDPL_error[7:0];
+      |                      ^
+                omi_host.v:374:1: ... note: In file included from omi_host.v
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:434:5: Output port connection 'dlx_l0_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l0_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  434 |    .dlx_l0_tx_seq(dlx_l0_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:435:5: Output port connection 'dlx_l1_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l1_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  435 |    .dlx_l1_tx_seq(dlx_l1_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:436:5: Output port connection 'dlx_l2_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l2_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  436 |    .dlx_l2_tx_seq(dlx_l2_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:437:5: Output port connection 'dlx_l3_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l3_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  437 |    .dlx_l3_tx_seq(dlx_l3_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:438:5: Output port connection 'dlx_l4_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l4_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  438 |    .dlx_l4_tx_seq(dlx_l4_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:439:5: Output port connection 'dlx_l5_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l5_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  439 |    .dlx_l5_tx_seq(dlx_l5_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:440:5: Output port connection 'dlx_l6_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l6_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  440 |    .dlx_l6_tx_seq(dlx_l6_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:441:5: Output port connection 'dlx_l7_tx_seq' expects 6 bits on the pin connection, but pin connection's VARREF 'dlx_l7_tx_seq' generates 2 bits.
+                                : ... In instance wb_omi_host.omi_host
+  441 |    .dlx_l7_tx_seq(dlx_l7_tx_seq),
+      |     ^~~~~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Warning-WIDTH: omi_host.v:444:5: Input port connection 'reg_04_val' expects 32 bits on the pin connection, but pin connection's VARREF 'reg_04_val' generates 1 bits.
+                                : ... In instance wb_omi_host.omi_host
+  444 |    .reg_04_val(reg_04_val),
+      |     ^~~~~~~~~~
+                wb_omi_host.v:394:1: ... note: In file included from wb_omi_host.v
+%Error: wb_omi_host.v:267:34: Illegal bit or array select; type does not have a bit range, or bad dimension: data type is 'logic'
+                            : ... In instance wb_omi_host
+  267 |    assign wb_dat_o = rsp_data_bus[31:0];   
+      |                                  ^
+%Warning-SELRANGE: wb_omi_host.v:267:34: Extracting 32 bits from only 1 bit number
+                                       : ... In instance wb_omi_host
+  267 |    assign wb_dat_o = rsp_data_bus[31:0];   
+      |                                  ^
+%Warning-WIDTH: wb_omi_host.v:312:59: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  312 |    assign cmd_data_credits_d = ({4{cmd_data_credits_inc}} & cmd_data_credits_q + 1) |
+      |                                                           ^
+%Warning-WIDTH: wb_omi_host.v:313:59: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  313 |                                ({4{cmd_data_credits_dec}} & cmd_data_credits_q - 1) |
+      |                                                           ^
+%Warning-WIDTH: wb_omi_host.v:314:60: Operator AND expects 32 or 6 bits on the LHS, but LHS's REPLICATE generates 4 bits.
+                                    : ... In instance wb_omi_host
+  314 |                                ({4{cmd_data_credits_hold}} & cmd_data_credits_q);
+      |                                                            ^
+%Warning-WIDTH: wb_omi_host.v:358:17: Operator COND expects 64 bits on the Conditional False, but Conditional False's CONST '4'h0' generates 4 bits.
+                                    : ... In instance wb_omi_host
+  358 |       wb_cmd_we ? cmd_be : 4'b0,     
+      |                 ^
+%Warning-WIDTH: wb_omi_host.v:357:18: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's REPLICATE generates 124 bits.
+                                    : ... In instance wb_omi_host
+  357 |    assign cmd_pa = {
+      |                  ^
+%Warning-WIDTH: wb_omi_host.v:381:22: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's CONST '?32?h7' generates 32 or 3 bits.
+                                    : ... In instance wb_omi_host
+  381 |    assign rsp_rd_cnt = 'b111;  
+      |                      ^
+%Warning-WIDTH: wb_omi_host.v:383:32: Operator EQ expects 8 bits on the LHS, but LHS's VARREF 'rsp_opcode' generates 1 bits.
+                                    : ... In instance wb_omi_host
+  383 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |                                ^~
+%Warning-WIDTH: wb_omi_host.v:383:56: Operator EQ expects 8 bits on the LHS, but LHS's VARREF 'rsp_opcode' generates 1 bits.
+                                    : ... In instance wb_omi_host
+  383 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |                                                        ^~
+%Warning-WIDTH: wb_omi_host.v:402:5: Input port connection 'cfg_tlx_xmit_rate_config_0' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_0' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  402 |    .cfg_tlx_xmit_rate_config_0(tl_xmit_rate_config_0),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:403:5: Input port connection 'cfg_tlx_xmit_rate_config_1' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_1' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  403 |    .cfg_tlx_xmit_rate_config_1(tl_xmit_rate_config_1),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:404:5: Input port connection 'cfg_tlx_xmit_rate_config_2' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_2' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  404 |    .cfg_tlx_xmit_rate_config_2(tl_xmit_rate_config_2),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:405:5: Input port connection 'cfg_tlx_xmit_rate_config_3' expects 4 bits on the pin connection, but pin connection's VARREF 'tl_xmit_rate_config_3' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  405 |    .cfg_tlx_xmit_rate_config_3(tl_xmit_rate_config_3),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:410:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_0' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_0' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  410 |    .tlx_cfg_in_rcv_rate_capability_0(rcv_rate_capability_0),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:411:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_1' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_1' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  411 |    .tlx_cfg_in_rcv_rate_capability_1(rcv_rate_capability_1),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:412:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_2' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_2' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  412 |    .tlx_cfg_in_rcv_rate_capability_2(rcv_rate_capability_2),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:413:5: Output port connection 'tlx_cfg_in_rcv_rate_capability_3' expects 4 bits on the pin connection, but pin connection's VARREF 'rcv_rate_capability_3' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  413 |    .tlx_cfg_in_rcv_rate_capability_3(rcv_rate_capability_3),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:425:5: Input port connection 'afu_tlx_cmd_bdf' expects 16 bits on the pin connection, but pin connection's VARREF 'acmd_bdf' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  425 |    .afu_tlx_cmd_bdf(acmd_bdf),
+      |     ^~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:428:5: Output port connection 'tlx_afu_cmd_data_initial_credit' expects 6 bits on the pin connection, but pin connection's VARREF 'cmd_data_initial_credits' generates 4 bits.
+                                   : ... In instance wb_omi_host
+  428 |    .tlx_afu_cmd_data_initial_credit(cmd_data_initial_credits),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:434:5: Input port connection 'afu_tlx_resp_initial_credit' expects 7 bits on the pin connection, but pin connection's VARREF 'rsp_initial_credit' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  434 |    .afu_tlx_resp_initial_credit(rsp_initial_credit),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:437:5: Output port connection 'tlx_afu_resp_opcode' expects 8 bits on the pin connection, but pin connection's VARREF 'rsp_opcode' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  437 |    .tlx_afu_resp_opcode(rsp_opcode),
+      |     ^~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:438:5: Output port connection 'tlx_afu_resp_afutag' expects 16 bits on the pin connection, but pin connection's VARREF 'rsp_afutag' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  438 |    .tlx_afu_resp_afutag(rsp_afutag),
+      |     ^~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:439:5: Output port connection 'tlx_afu_resp_code' expects 4 bits on the pin connection, but pin connection's VARREF 'rsp_code' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  439 |    .tlx_afu_resp_code(rsp_code),
+      |     ^~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:440:5: Output port connection 'tlx_afu_resp_pg_size' expects 6 bits on the pin connection, but pin connection's VARREF 'rsp_pg_size' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  440 |    .tlx_afu_resp_pg_size(rsp_pg_size),
+      |     ^~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:441:5: Output port connection 'tlx_afu_resp_dl' expects 2 bits on the pin connection, but pin connection's VARREF 'rsp_dl' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  441 |    .tlx_afu_resp_dl(rsp_dl),
+      |     ^~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:442:5: Output port connection 'tlx_afu_resp_dp' expects 2 bits on the pin connection, but pin connection's VARREF 'rsp_dp' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  442 |    .tlx_afu_resp_dp(rsp_dp),
+      |     ^~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:443:5: Output port connection 'tlx_afu_resp_host_tag' expects 24 bits on the pin connection, but pin connection's VARREF 'rsp_host_tag' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  443 |    .tlx_afu_resp_host_tag(rsp_host_tag),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:444:5: Output port connection 'tlx_afu_resp_cache_state' expects 4 bits on the pin connection, but pin connection's VARREF 'rsp_cache_state' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  444 |    .tlx_afu_resp_cache_state(rsp_cache_state),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:445:5: Output port connection 'tlx_afu_resp_addr_tag' expects 18 bits on the pin connection, but pin connection's VARREF 'rsp_addr_tag' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  445 |    .tlx_afu_resp_addr_tag(rsp_addr_tag),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:449:5: Input port connection 'afu_tlx_resp_rd_cnt' expects 3 bits on the pin connection, but pin connection's VARREF 'rsp_rd_cnt' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  449 |    .afu_tlx_resp_rd_cnt(rsp_rd_cnt),
+      |     ^~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:451:5: Output port connection 'tlx_afu_resp_data_bus' expects 512 bits on the pin connection, but pin connection's VARREF 'rsp_data_bus' generates 1 bits.
+                                   : ... In instance wb_omi_host
+  451 |    .tlx_afu_resp_data_bus(rsp_data_bus),
+      |     ^~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:509:5: Input port connection 'ln0_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln0_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  509 |    .ln0_rx_data(ln0_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:513:5: Input port connection 'ln1_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln1_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  513 |    .ln1_rx_data(ln1_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:517:5: Input port connection 'ln2_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln2_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  517 |    .ln2_rx_data(ln2_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:521:5: Input port connection 'ln3_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln3_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  521 |    .ln3_rx_data(ln3_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:525:5: Input port connection 'ln4_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln4_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  525 |    .ln4_rx_data(ln4_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:529:5: Input port connection 'ln5_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln5_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  529 |    .ln5_rx_data(ln5_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:533:5: Input port connection 'ln6_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln6_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  533 |    .ln6_rx_data(ln6_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:537:5: Input port connection 'ln7_rx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'ln7_rx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  537 |    .ln7_rx_data(ln7_rx_data),
+      |     ^~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:539:5: Output port connection 'dlx_l0_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l0_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  539 |    .dlx_l0_tx_data(dlx_l0_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:540:5: Output port connection 'dlx_l1_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l1_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  540 |    .dlx_l1_tx_data(dlx_l1_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:541:5: Output port connection 'dlx_l2_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l2_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  541 |    .dlx_l2_tx_data(dlx_l2_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:542:5: Output port connection 'dlx_l3_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l3_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  542 |    .dlx_l3_tx_data(dlx_l3_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:543:5: Output port connection 'dlx_l4_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l4_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  543 |    .dlx_l4_tx_data(dlx_l4_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:544:5: Output port connection 'dlx_l5_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l5_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  544 |    .dlx_l5_tx_data(dlx_l5_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:545:5: Output port connection 'dlx_l6_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l6_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  545 |    .dlx_l6_tx_data(dlx_l6_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Warning-WIDTH: wb_omi_host.v:546:5: Output port connection 'dlx_l7_tx_data' expects 64 bits on the pin connection, but pin connection's VARREF 'dlx_l7_tx_data' generates 8 bits.
+                                   : ... In instance wb_omi_host
+  546 |    .dlx_l7_tx_data(dlx_l7_tx_data),
+      |     ^~~~~~~~~~~~~~
+%Error: Exiting due to 1 error(s)

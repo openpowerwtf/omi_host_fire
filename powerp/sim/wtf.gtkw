@@ -1,0 +1,246 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Tue Dec 14 15:50:21 2021
+[*]
+[dumpfile] "/home/wtf/projects/omi_host_fire/powerp/sim/wtf.fst"
+[dumpfile_mtime] "Mon Dec 13 23:54:42 2021"
+[dumpfile_size] 25561160
+[savefile] "/home/wtf/projects/omi_host_fire/powerp/sim/wtf.gtkw"
+[timestart] 8157
+[size] 4464 2576
+[pos] 944 613
+*-6.000000 8530 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.top.
+[treeopen] TOP.top.dev.dl.rx.
+[treeopen] TOP.top.dev.dl.rx.lane0.
+[treeopen] TOP.top.dev.dl.rx.phy0.
+[treeopen] TOP.top.dev.dl.tx.
+[treeopen] TOP.top.dev.tl.
+[treeopen] TOP.top.dev.tl.OCX_TLX_FRAMER.
+[treeopen] TOP.top.dev.tl.OCX_TLX_PARSER.
+[treeopen] TOP.top.dev.tl.OCX_TLX_PARSER.TLX_RCV_FIFO.
+[treeopen] TOP.top.dev.tl.OCX_TLX_PARSER.TLX_RCV_FIFO.CMD_FIFO_MAC.
+[treeopen] TOP.top.host.
+[treeopen] TOP.top.host.omi_host.
+[treeopen] TOP.top.host.omi_host.dl.
+[treeopen] TOP.top.host.omi_host.dl.rx.
+[treeopen] TOP.top.host.omi_host.dl.rx.lane0.
+[treeopen] TOP.top.host.omi_host.dl.rx.main.
+[treeopen] TOP.top.host.omi_host.dl.tx.
+[treeopen] TOP.top.host.omi_host.tl.
+[treeopen] TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.
+[treeopen] TOP.top.host.omi_host.tl.OCX_TLX_PARSER.
+[treeopen] TOP.top.host.omi_host.tl.OCX_TLX_PARSER.TLX_Parser.
+[sst_width] 626
+[signals_width] 1202
+[sst_expanded] 1
+[sst_vpaned_height] 635
+@28
+TOP.clk
+TOP.top.dev_phy.tx_clk
+@22
+TOP.top.host_phy.DL_BITS[31:0]
+TOP.top.host_phy.GPIO_RX_TX[31:0]
+@28
+TOP.top.host_phy.ln0_tx_header[1:0]
+@22
+TOP.top.host_phy.ln0_tx_data[63:0]
+TOP.top.host_phy.tx_ln0_d[65:0]
+TOP.top.host_phy.tx_dat[511:0]
+@28
+TOP.top.dev_phy.rx_clk
+@22
+TOP.top.dev_phy.rx_dat[511:0]
+TOP.top.dev_phy.rx_ln0_q[65:0]
+TOP.top.dev_phy.tx_dat[511:0]
+@28
+TOP.top.dev_phy.tx_clk
+@22
+TOP.top.host_phy.rx_ln0_q[65:0]
+TOP.top.host_phy.ln0_rx_data[63:0]
+TOP.top.host_phy.ln0_rx_data[63:0]
+@200
+-Descrambled Link
+@22
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane0.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane1.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane2.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane3.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane4.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane5.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane6.descrambled_data[0:63]
+[color] 3
+TOP.top.host.omi_host.dl.rx.lane7.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane0.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane1.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane2.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane3.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane4.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane5.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane6.descrambled_data[0:63]
+[color] 3
+TOP.top.dev.dl.rx.lane7.descrambled_data[0:63]
+@200
+-WB
+@28
+[color] 2
+TOP.wb_cyc
+[color] 2
+TOP.wb_stb
+[color] 2
+TOP.wb_we
+@22
+[color] 2
+TOP.wb_sel[3:0]
+[color] 2
+TOP.wb_dat_i[31:0]
+@28
+[color] 2
+TOP.wb_ack
+@22
+[color] 2
+TOP.wb_adr[31:0]
+[color] 2
+TOP.wb_dat_o[31:0]
+@200
+-WB_OMI_HOST
+@28
+TOP.top.host.cmdseq_q[2:0]
+@22
+TOP.top.host.omi_host.tl.afu_tlx_cmd_initial_credit[6:0]
+TOP.top.host.omi_host.tl.afu_tlx_resp_initial_credit[6:0]
+TOP.top.host.omi_host.tl.cfg_tlx_initial_credit[3:0]
+TOP.top.host.omi_host.tl.tlx_afu_cmd_data_initial_credit[5:0]
+TOP.top.host.omi_host.tl.tlx_afu_cmd_initial_credit[3:0]
+TOP.top.host.omi_host.tl.tlx_afu_resp_initial_credit[3:0]
+TOP.top.host.cmd_credits_q[3:0]
+TOP.top.host.cmd_data_credits_q[5:0]
+TOP.top.host.cmd_data_initial_credits[5:0]
+@28
+TOP.top.host.tl_ready
+TOP.top.host.cmd_valid
+@22
+TOP.top.host.cmd_pa[63:0]
+@28
+TOP.top.host.cmd_pl[2:0]
+@29
+TOP.top.host.cmd_data_valid
+@22
+TOP.top.host.cmd_data_bus[511:0]
+@28
+TOP.top.host.rsp_valid
+TOP.top.host.rsp_data_valid
+@22
+TOP.top.host.rsp_data_bus[511:0]
+@200
+-TL
+@24
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.vc0_tlcrd_counter[7:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.vc1_tlcrd_counter[7:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.dcp0_tlcrd_counter[7:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.dcp1_tlcrd_counter[7:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.vc0_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.vc3_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.dcp0_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.host.omi_host.tl.OCX_TLX_FRAMER.dcp3_tlxcrd_counter[15:0]
+@22
+TOP.top.host.omi_host.tl.tlx_dlx_flit[511:0]
+@200
+-DL
+@22
+TOP.top.host.omi_host.dl.tx.ctl.tsm_q[2:0]
+@28
+TOP.top.host.omi_host.dlx_tlx_flit_valid
+@22
+TOP.top.host.omi_host.dlx_tlx_flit[511:0]
+@200
+-Device
+@28
+TOP.top.dev.cmdseq_q[2:0]
+@22
+TOP.top.dev.mem_adr_q[31:0]
+TOP.top.dev.mem_be_q[3:0]
+TOP.top.dev.mem_datr_q[31:0]
+TOP.top.dev.mem_datw_q[31:0]
+@28
+TOP.top.dev.tlx_ready
+TOP.top.dev.tlx_rd
+TOP.top.dev.tlx_wr
+@22
+TOP.top.dev.tlx_cmd_pa[63:0]
+@28
+TOP.top.dev.tlx_cdata_valid
+@22
+TOP.top.dev.tlx_cdata_bus[511:0]
+TOP.top.dev.rsp_credits_q[6:0]
+@28
+TOP.top.dev.rsp_valid
+@22
+TOP.top.dev.rsp_opcode[7:0]
+@28
+TOP.top.dev.rdata_valid
+@22
+TOP.top.dev.rdata_bus[511:0]
+@28
+TOP.top.dev.rsp_credit
+@200
+-TLX
+@24
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc0_tlcrd_counter[7:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc1_tlcrd_counter[7:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.dcp0_tlcrd_counter[7:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.dcp1_tlcrd_counter[7:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc0_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.vc3_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.dcp0_tlxcrd_counter[15:0]
+[color] 3
+TOP.top.dev.tl.OCX_TLX_FRAMER.dcp3_tlxcrd_counter[15:0]
+@28
+TOP.top.dev.tlx_dlx_flit_valid
+@22
+TOP.top.dev.tlx_dlx_flit[511:0]
+@200
+-DLX
+@22
+[color] 4
+TOP.top.dev.dl.tx.ctl.tsm_q[2:0]
+@28
+TOP.top.dev.dl.dlx_tlx_flit_valid
+@22
+TOP.top.dev.dl.dlx_tlx_flit[511:0]
+@28
+TOP.top.dev.tl.OCX_TLX_PARSER.fp_rcv_cmd_data_v
+@22
+TOP.top.dev.tl.OCX_TLX_PARSER.fp_rcv_cmd_data_bus[511:0]
+[pattern_trace] 1
+[pattern_trace] 0

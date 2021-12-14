@@ -1,0 +1,817 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Wolf <claire@symbioticeda.com>          |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9+3672 (git sha1 014c7e26, gcc 9.3.0-17ubuntu1~20.04 -fPIC -Os)
+
+
+-- Executing script file `synth_wb.ys' --
+
+1. Executing Verilog-2005 frontend: tl/bram_syn_test.v
+Parsing Verilog input from `tl/bram_syn_test.v' to AST representation.
+Generating RTLIL representation for module `\bram_syn_test'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: tl/dram_syn_test.v
+Parsing Verilog input from `tl/dram_syn_test.v' to AST representation.
+Generating RTLIL representation for module `\dram_syn_test'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: tl/ocx_leaf_inferd_regfile.v
+Parsing Verilog input from `tl/ocx_leaf_inferd_regfile.v' to AST representation.
+Generating RTLIL representation for module `\ocx_leaf_inferd_regfile'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: tl/ocx_tlx_513x32_fifo.v
+Parsing Verilog input from `tl/ocx_tlx_513x32_fifo.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_513x32_fifo'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: tl/ocx_tlx_514x16_fifo.v
+Parsing Verilog input from `tl/ocx_tlx_514x16_fifo.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_514x16_fifo'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: tl/ocx_tlx_bdi_mac.v
+Parsing Verilog input from `tl/ocx_tlx_bdi_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_bdi_mac'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: tl/ocx_tlx_cfg_mac.v
+Parsing Verilog input from `tl/ocx_tlx_cfg_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_cfg_mac'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: tl/ocx_tlx_cmd_fifo_mac.v
+Parsing Verilog input from `tl/ocx_tlx_cmd_fifo_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_cmd_fifo_mac'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: tl/ocx_tlx_ctl_fsm.v
+Parsing Verilog input from `tl/ocx_tlx_ctl_fsm.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_ctl_fsm'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: tl/ocx_tlx_data_arb.v
+Parsing Verilog input from `tl/ocx_tlx_data_arb.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_data_arb'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: tl/ocx_tlx_data_fifo_mac.v
+Parsing Verilog input from `tl/ocx_tlx_data_fifo_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_data_fifo_mac'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: tl/ocx_tlx_dcp_fifo_ctl.v
+Parsing Verilog input from `tl/ocx_tlx_dcp_fifo_ctl.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_dcp_fifo_ctl'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: tl/ocx_tlx_fifo_cntlr.v
+Parsing Verilog input from `tl/ocx_tlx_fifo_cntlr.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_fifo_cntlr'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: tl/ocx_tlx_flit_parser.v
+Parsing Verilog input from `tl/ocx_tlx_flit_parser.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_flit_parser'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: tl/ocx_tlx_framer.v
+Parsing Verilog input from `tl/ocx_tlx_framer.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_framer'.
+Successfully finished Verilog frontend.
+
+16. Executing Verilog-2005 frontend: tl/ocx_tlx_framer_cmd_fifo.v
+Parsing Verilog input from `tl/ocx_tlx_framer_cmd_fifo.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_framer_cmd_fifo'.
+Successfully finished Verilog frontend.
+
+17. Executing Verilog-2005 frontend: tl/ocx_tlx_framer_rsp_fifo.v
+Parsing Verilog input from `tl/ocx_tlx_framer_rsp_fifo.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_framer_rsp_fifo'.
+Successfully finished Verilog frontend.
+
+18. Executing Verilog-2005 frontend: tl/ocx_tlx_parse_mac.v
+Parsing Verilog input from `tl/ocx_tlx_parse_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_parse_mac'.
+Successfully finished Verilog frontend.
+
+19. Executing Verilog-2005 frontend: tl/ocx_tlx_parser_err_mac.v
+Parsing Verilog input from `tl/ocx_tlx_parser_err_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_parser_err_mac'.
+Successfully finished Verilog frontend.
+
+20. Executing Verilog-2005 frontend: tl/ocx_tlx_rcv_mac.v
+Parsing Verilog input from `tl/ocx_tlx_rcv_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_rcv_mac'.
+Successfully finished Verilog frontend.
+
+21. Executing Verilog-2005 frontend: tl/ocx_tlx_rcv_top.v
+Parsing Verilog input from `tl/ocx_tlx_rcv_top.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_rcv_top'.
+Successfully finished Verilog frontend.
+
+22. Executing Verilog-2005 frontend: tl/ocx_tlx_resp_fifo_mac.v
+Parsing Verilog input from `tl/ocx_tlx_resp_fifo_mac.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_resp_fifo_mac'.
+Successfully finished Verilog frontend.
+
+23. Executing Verilog-2005 frontend: tl/ocx_tlx_top.v
+Parsing Verilog input from `tl/ocx_tlx_top.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_top'.
+Successfully finished Verilog frontend.
+
+24. Executing Verilog-2005 frontend: tl/ocx_tlx_vc0_fifo_ctl.v
+Parsing Verilog input from `tl/ocx_tlx_vc0_fifo_ctl.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_vc0_fifo_ctl'.
+Successfully finished Verilog frontend.
+
+25. Executing Verilog-2005 frontend: tl/ocx_tlx_vc1_fifo_ctl.v
+Parsing Verilog input from `tl/ocx_tlx_vc1_fifo_ctl.v' to AST representation.
+Generating RTLIL representation for module `\ocx_tlx_vc1_fifo_ctl'.
+Successfully finished Verilog frontend.
+
+26. Executing Verilog-2005 frontend: dl/ocx_bram_infer.v
+Parsing Verilog input from `dl/ocx_bram_infer.v' to AST representation.
+Generating RTLIL representation for module `\ocx_bram_infer'.
+Successfully finished Verilog frontend.
+
+27. Executing Verilog-2005 frontend: dl/ocx_dlx_crc.v
+Parsing Verilog input from `dl/ocx_dlx_crc.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_crc'.
+Successfully finished Verilog frontend.
+
+28. Executing Verilog-2005 frontend: dl/ocx_dlx_crc16.v
+Parsing Verilog input from `dl/ocx_dlx_crc16.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_crc16'.
+Successfully finished Verilog frontend.
+
+29. Executing Verilog-2005 frontend: dl/ocx_dlx_rx_bs.v
+Parsing Verilog input from `dl/ocx_dlx_rx_bs.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_rx_bs'.
+Successfully finished Verilog frontend.
+
+30. Executing Verilog-2005 frontend: dl/ocx_dlx_rx_lane.v
+Parsing Verilog input from `dl/ocx_dlx_rx_lane.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_rx_lane'.
+dl/ocx_dlx_rx_lane.v:871: Warning: Identifier `\EDPL_pchk' is implicitly declared.
+Successfully finished Verilog frontend.
+
+31. Executing Verilog-2005 frontend: dl/ocx_dlx_rx_lane_66.v
+Parsing Verilog input from `dl/ocx_dlx_rx_lane_66.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_rx_lane_66'.
+Successfully finished Verilog frontend.
+
+32. Executing Verilog-2005 frontend: dl/ocx_dlx_rx_main.v
+Parsing Verilog input from `dl/ocx_dlx_rx_main.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_rx_main'.
+Successfully finished Verilog frontend.
+
+33. Executing Verilog-2005 frontend: dl/ocx_dlx_rxdf.v
+Parsing Verilog input from `dl/ocx_dlx_rxdf.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_rxdf'.
+Successfully finished Verilog frontend.
+
+34. Executing Verilog-2005 frontend: dl/ocx_dlx_top.v
+Parsing Verilog input from `dl/ocx_dlx_top.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_top'.
+Successfully finished Verilog frontend.
+
+35. Executing Verilog-2005 frontend: dl/ocx_dlx_tx_ctl.v
+Parsing Verilog input from `dl/ocx_dlx_tx_ctl.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_tx_ctl'.
+Successfully finished Verilog frontend.
+
+36. Executing Verilog-2005 frontend: dl/ocx_dlx_tx_flt.v
+Parsing Verilog input from `dl/ocx_dlx_tx_flt.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_tx_flt'.
+dl/ocx_dlx_tx_flt.v:950: Warning: Identifier `\fsm_rpl_start' is implicitly declared.
+Successfully finished Verilog frontend.
+
+37. Executing Verilog-2005 frontend: dl/ocx_dlx_tx_gbx.v
+Parsing Verilog input from `dl/ocx_dlx_tx_gbx.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_tx_gbx'.
+Note: Assuming pure combinatorial block at dl/ocx_dlx_tx_gbx.v:121.5-189.5 in
+compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
+use of @* instead of @(...) for better match of synthesis and simulation.
+Successfully finished Verilog frontend.
+
+38. Executing Verilog-2005 frontend: dl/ocx_dlx_tx_que.v
+Parsing Verilog input from `dl/ocx_dlx_tx_que.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_tx_que'.
+Successfully finished Verilog frontend.
+
+39. Executing Verilog-2005 frontend: dl/ocx_dlx_txdf.v
+Parsing Verilog input from `dl/ocx_dlx_txdf.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_txdf'.
+Successfully finished Verilog frontend.
+
+40. Executing Verilog-2005 frontend: dl/ocx_dlx_xlx_if.v
+Parsing Verilog input from `dl/ocx_dlx_xlx_if.v' to AST representation.
+Generating RTLIL representation for module `\ocx_dlx_xlx_if'.
+Successfully finished Verilog frontend.
+
+41. Executing Verilog-2005 frontend: ./omi_host.v
+Parsing Verilog input from `./omi_host.v' to AST representation.
+Generating RTLIL representation for module `\omi_host'.
+Successfully finished Verilog frontend.
+
+42. Executing Verilog-2005 frontend: ./wb_omi_host.v
+Parsing Verilog input from `./wb_omi_host.v' to AST representation.
+Generating RTLIL representation for module `\wb_omi_host'.
+./wb_omi_host.v:195: Warning: Identifier `\tlx_afu_ready' is implicitly declared.
+./wb_omi_host.v:196: Warning: Identifier `\afu_tlx_cmd_initial_credit' is implicitly declared.
+./wb_omi_host.v:197: Warning: Identifier `\afu_tlx_cmd_credit' is implicitly declared.
+./wb_omi_host.v:198: Warning: Identifier `\tlx_afu_cmd_valid' is implicitly declared.
+./wb_omi_host.v:199: Warning: Identifier `\tlx_afu_cmd_opcode' is implicitly declared.
+./wb_omi_host.v:200: Warning: Identifier `\tlx_afu_cmd_dl' is implicitly declared.
+./wb_omi_host.v:201: Warning: Identifier `\tlx_afu_cmd_end' is implicitly declared.
+./wb_omi_host.v:202: Warning: Identifier `\tlx_afu_cmd_pa' is implicitly declared.
+./wb_omi_host.v:203: Warning: Identifier `\tlx_afu_cmd_flag' is implicitly declared.
+./wb_omi_host.v:204: Warning: Identifier `\tlx_afu_cmd_os' is implicitly declared.
+./wb_omi_host.v:205: Warning: Identifier `\tlx_afu_cmd_capptag' is implicitly declared.
+./wb_omi_host.v:206: Warning: Identifier `\tlx_afu_cmd_pl' is implicitly declared.
+./wb_omi_host.v:207: Warning: Identifier `\tlx_afu_cmd_be' is implicitly declared.
+./wb_omi_host.v:208: Warning: Identifier `\cfg_tlx_initial_credit' is implicitly declared.
+./wb_omi_host.v:209: Warning: Identifier `\cfg_tlx_credit_return' is implicitly declared.
+./wb_omi_host.v:210: Warning: Identifier `\tlx_cfg_valid' is implicitly declared.
+./wb_omi_host.v:211: Warning: Identifier `\tlx_cfg_opcode' is implicitly declared.
+./wb_omi_host.v:212: Warning: Identifier `\tlx_cfg_pa' is implicitly declared.
+./wb_omi_host.v:213: Warning: Identifier `\tlx_cfg_t' is implicitly declared.
+./wb_omi_host.v:214: Warning: Identifier `\tlx_cfg_pl' is implicitly declared.
+./wb_omi_host.v:215: Warning: Identifier `\tlx_cfg_capptag' is implicitly declared.
+./wb_omi_host.v:216: Warning: Identifier `\tlx_cfg_data_bus' is implicitly declared.
+./wb_omi_host.v:217: Warning: Identifier `\tlx_cfg_data_bdi' is implicitly declared.
+./wb_omi_host.v:218: Warning: Identifier `\afu_tlx_resp_initial_credit' is implicitly declared.
+./wb_omi_host.v:219: Warning: Identifier `\afu_tlx_resp_credit' is implicitly declared.
+./wb_omi_host.v:220: Warning: Identifier `\tlx_afu_resp_valid' is implicitly declared.
+./wb_omi_host.v:221: Warning: Identifier `\tlx_afu_resp_opcode' is implicitly declared.
+./wb_omi_host.v:222: Warning: Identifier `\tlx_afu_resp_afutag' is implicitly declared.
+./wb_omi_host.v:223: Warning: Identifier `\tlx_afu_resp_code' is implicitly declared.
+./wb_omi_host.v:224: Warning: Identifier `\tlx_afu_resp_pg_size' is implicitly declared.
+./wb_omi_host.v:225: Warning: Identifier `\tlx_afu_resp_dl' is implicitly declared.
+./wb_omi_host.v:226: Warning: Identifier `\tlx_afu_resp_dp' is implicitly declared.
+./wb_omi_host.v:227: Warning: Identifier `\tlx_afu_resp_host_tag' is implicitly declared.
+./wb_omi_host.v:228: Warning: Identifier `\tlx_afu_resp_cache_state' is implicitly declared.
+./wb_omi_host.v:229: Warning: Identifier `\tlx_afu_resp_addr_tag' is implicitly declared.
+./wb_omi_host.v:230: Warning: Identifier `\afu_tlx_cmd_rd_req' is implicitly declared.
+./wb_omi_host.v:231: Warning: Identifier `\afu_tlx_cmd_rd_cnt' is implicitly declared.
+./wb_omi_host.v:232: Warning: Identifier `\tlx_afu_cmd_data_valid' is implicitly declared.
+./wb_omi_host.v:233: Warning: Identifier `\tlx_afu_cmd_data_bus' is implicitly declared.
+./wb_omi_host.v:234: Warning: Identifier `\tlx_afu_cmd_data_bdi' is implicitly declared.
+./wb_omi_host.v:235: Warning: Identifier `\afu_tlx_resp_rd_req' is implicitly declared.
+./wb_omi_host.v:236: Warning: Identifier `\afu_tlx_resp_rd_cnt' is implicitly declared.
+./wb_omi_host.v:237: Warning: Identifier `\tlx_afu_resp_data_valid' is implicitly declared.
+./wb_omi_host.v:238: Warning: Identifier `\tlx_afu_resp_data_bus' is implicitly declared.
+./wb_omi_host.v:239: Warning: Identifier `\tlx_afu_resp_data_bdi' is implicitly declared.
+./wb_omi_host.v:240: Warning: Identifier `\tlx_afu_cmd_initial_credit' is implicitly declared.
+./wb_omi_host.v:241: Warning: Identifier `\tlx_afu_cmd_credit' is implicitly declared.
+./wb_omi_host.v:242: Warning: Identifier `\afu_tlx_cmd_valid' is implicitly declared.
+./wb_omi_host.v:243: Warning: Identifier `\afu_tlx_cmd_opcode' is implicitly declared.
+./wb_omi_host.v:244: Warning: Identifier `\afu_tlx_cmd_pa_or_obj' is implicitly declared.
+./wb_omi_host.v:245: Warning: Identifier `\afu_tlx_cmd_afutag' is implicitly declared.
+./wb_omi_host.v:246: Warning: Identifier `\afu_tlx_cmd_dl' is implicitly declared.
+./wb_omi_host.v:247: Warning: Identifier `\afu_tlx_cmd_pl' is implicitly declared.
+./wb_omi_host.v:248: Warning: Identifier `\afu_tlx_cmd_be' is implicitly declared.
+./wb_omi_host.v:249: Warning: Identifier `\afu_tlx_cmd_flag' is implicitly declared.
+./wb_omi_host.v:250: Warning: Identifier `\afu_tlx_cmd_bdf' is implicitly declared.
+./wb_omi_host.v:251: Warning: Identifier `\afu_tlx_cmd_resp_code' is implicitly declared.
+./wb_omi_host.v:252: Warning: Identifier `\afu_tlx_cmd_capptag' is implicitly declared.
+./wb_omi_host.v:253: Warning: Identifier `\tlx_afu_cmd_data_initial_credit' is implicitly declared.
+./wb_omi_host.v:254: Warning: Identifier `\tlx_afu_cmd_data_credit' is implicitly declared.
+./wb_omi_host.v:255: Warning: Identifier `\afu_tlx_cdata_valid' is implicitly declared.
+./wb_omi_host.v:256: Warning: Identifier `\afu_tlx_cdata_bus' is implicitly declared.
+./wb_omi_host.v:257: Warning: Identifier `\afu_tlx_cdata_bdi' is implicitly declared.
+./wb_omi_host.v:258: Warning: Identifier `\tlx_afu_resp_initial_credit' is implicitly declared.
+./wb_omi_host.v:259: Warning: Identifier `\tlx_afu_resp_credit' is implicitly declared.
+./wb_omi_host.v:260: Warning: Identifier `\afu_tlx_resp_valid' is implicitly declared.
+./wb_omi_host.v:261: Warning: Identifier `\afu_tlx_resp_opcode' is implicitly declared.
+./wb_omi_host.v:262: Warning: Identifier `\afu_tlx_resp_dl' is implicitly declared.
+./wb_omi_host.v:263: Warning: Identifier `\afu_tlx_resp_capptag' is implicitly declared.
+./wb_omi_host.v:264: Warning: Identifier `\afu_tlx_resp_dp' is implicitly declared.
+./wb_omi_host.v:265: Warning: Identifier `\afu_tlx_resp_code' is implicitly declared.
+./wb_omi_host.v:266: Warning: Identifier `\tlx_afu_resp_data_initial_credit' is implicitly declared.
+./wb_omi_host.v:267: Warning: Identifier `\tlx_afu_resp_data_credit' is implicitly declared.
+./wb_omi_host.v:268: Warning: Identifier `\afu_tlx_rdata_valid' is implicitly declared.
+./wb_omi_host.v:269: Warning: Identifier `\afu_tlx_rdata_bus' is implicitly declared.
+./wb_omi_host.v:270: Warning: Identifier `\afu_tlx_rdata_bdi' is implicitly declared.
+./wb_omi_host.v:271: Warning: Identifier `\cfg_tlx_resp_valid' is implicitly declared.
+./wb_omi_host.v:272: Warning: Identifier `\cfg_tlx_resp_opcode' is implicitly declared.
+./wb_omi_host.v:273: Warning: Identifier `\cfg_tlx_resp_capptag' is implicitly declared.
+./wb_omi_host.v:274: Warning: Identifier `\cfg_tlx_resp_code' is implicitly declared.
+./wb_omi_host.v:275: Warning: Identifier `\tlx_cfg_resp_ack' is implicitly declared.
+./wb_omi_host.v:276: Warning: Identifier `\cfg_tlx_rdata_offset' is implicitly declared.
+./wb_omi_host.v:277: Warning: Identifier `\cfg_tlx_rdata_bus' is implicitly declared.
+./wb_omi_host.v:278: Warning: Identifier `\cfg_tlx_rdata_bdi' is implicitly declared.
+./wb_omi_host.v:279: Warning: Identifier `\cfg_tlx_xmit_tmpl_config_0' is implicitly declared.
+./wb_omi_host.v:280: Warning: Identifier `\cfg_tlx_xmit_tmpl_config_1' is implicitly declared.
+./wb_omi_host.v:281: Warning: Identifier `\cfg_tlx_xmit_tmpl_config_2' is implicitly declared.
+./wb_omi_host.v:282: Warning: Identifier `\cfg_tlx_xmit_tmpl_config_3' is implicitly declared.
+./wb_omi_host.v:283: Warning: Identifier `\cfg_tlx_xmit_rate_config_0' is implicitly declared.
+./wb_omi_host.v:284: Warning: Identifier `\cfg_tlx_xmit_rate_config_1' is implicitly declared.
+./wb_omi_host.v:285: Warning: Identifier `\cfg_tlx_xmit_rate_config_2' is implicitly declared.
+./wb_omi_host.v:286: Warning: Identifier `\cfg_tlx_xmit_rate_config_3' is implicitly declared.
+./wb_omi_host.v:287: Warning: Identifier `\tlx_cfg_in_rcv_tmpl_capability_0' is implicitly declared.
+./wb_omi_host.v:288: Warning: Identifier `\tlx_cfg_in_rcv_tmpl_capability_1' is implicitly declared.
+./wb_omi_host.v:289: Warning: Identifier `\tlx_cfg_in_rcv_tmpl_capability_2' is implicitly declared.
+./wb_omi_host.v:290: Warning: Identifier `\tlx_cfg_in_rcv_tmpl_capability_3' is implicitly declared.
+./wb_omi_host.v:291: Warning: Identifier `\tlx_cfg_in_rcv_rate_capability_0' is implicitly declared.
+./wb_omi_host.v:292: Warning: Identifier `\tlx_cfg_in_rcv_rate_capability_1' is implicitly declared.
+./wb_omi_host.v:293: Warning: Identifier `\tlx_cfg_in_rcv_rate_capability_2' is implicitly declared.
+./wb_omi_host.v:294: Warning: Identifier `\tlx_cfg_in_rcv_rate_capability_3' is implicitly declared.
+./wb_omi_host.v:295: Warning: Identifier `\tlx_cfg_oc3_tlx_version' is implicitly declared.
+./wb_omi_host.v:296: Warning: Identifier `\ro_dlx_version' is implicitly declared.
+./wb_omi_host.v:353: Warning: Identifier `\opt_gckn' is implicitly declared.
+Successfully finished Verilog frontend.
+
+43. Executing HIERARCHY pass (managing design hierarchy).
+
+43.1. Analyzing design hierarchy..
+Top module:  \wb_omi_host
+Used module:     \omi_host
+Used module:         \ocx_dlx_top
+Used module:             \ocx_dlx_xlx_if
+Used module:             \ocx_dlx_txdf
+Used module:                 \ocx_dlx_tx_gbx
+Used module:                 \ocx_dlx_tx_que
+Used module:                 \ocx_dlx_tx_flt
+Used module:                     \ocx_bram_infer
+Used module:                     \ocx_dlx_crc16
+Used module:                     \ocx_dlx_crc
+Used module:                 \ocx_dlx_tx_ctl
+Used module:             \ocx_dlx_rxdf
+Used module:                 \ocx_dlx_rx_lane_66
+Used module:                 \ocx_dlx_rx_lane
+Used module:                 \ocx_dlx_rx_main
+Used module:                     \ocx_dlx_rx_bs
+Used module:         \ocx_tlx_top
+Used module:             \ocx_tlx_framer
+Used module:                 \ocx_tlx_513x32_fifo
+Used module:                     \ocx_tlx_fifo_cntlr
+Used module:                     \ocx_leaf_inferd_regfile
+Used module:                 \ocx_tlx_514x16_fifo
+Used module:                 \ocx_tlx_framer_cmd_fifo
+Used module:                 \ocx_tlx_framer_rsp_fifo
+Used module:             \ocx_tlx_rcv_top
+Used module:                 \ocx_tlx_parser_err_mac
+Used module:                 \ocx_tlx_rcv_mac
+Used module:                     \ocx_tlx_cfg_mac
+Used module:                         \dram_syn_test
+Used module:                     \ocx_tlx_data_fifo_mac
+Used module:                         \ocx_tlx_bdi_mac
+Used module:                         \bram_syn_test
+Used module:                         \ocx_tlx_dcp_fifo_ctl
+Used module:                     \ocx_tlx_resp_fifo_mac
+Used module:                         \ocx_tlx_vc0_fifo_ctl
+Used module:                     \ocx_tlx_cmd_fifo_mac
+Used module:                         \ocx_tlx_vc1_fifo_ctl
+Used module:                 \ocx_tlx_parse_mac
+Used module:                     \ocx_tlx_ctl_fsm
+Used module:                     \ocx_tlx_data_arb
+Used module:                     \ocx_tlx_flit_parser
+Parameter \FIFO_ADDR_WIDTH = 5
+
+43.2. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_fifo_cntlr'.
+Parameter \FIFO_ADDR_WIDTH = 5
+Generating RTLIL representation for module `$paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=5'.
+Parameter \REGFILE_DEPTH = 32
+Parameter \REGFILE_WIDTH = 513
+Parameter \ADDR_WIDTH = 5
+
+43.3. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_leaf_inferd_regfile'.
+Parameter \REGFILE_DEPTH = 32
+Parameter \REGFILE_WIDTH = 513
+Parameter \ADDR_WIDTH = 5
+Generating RTLIL representation for module `$paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=32\REGFILE_WIDTH=513\ADDR_WIDTH=5'.
+Parameter \FIFO_ADDR_WIDTH = 4
+
+43.4. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_fifo_cntlr'.
+Parameter \FIFO_ADDR_WIDTH = 4
+Generating RTLIL representation for module `$paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=4'.
+Parameter \REGFILE_DEPTH = 16
+Parameter \REGFILE_WIDTH = 514
+Parameter \ADDR_WIDTH = 4
+
+43.5. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_leaf_inferd_regfile'.
+Parameter \REGFILE_DEPTH = 16
+Parameter \REGFILE_WIDTH = 514
+Parameter \ADDR_WIDTH = 4
+Generating RTLIL representation for module `$paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=16\REGFILE_WIDTH=514\ADDR_WIDTH=4'.
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 32
+Parameter \DEPTH = 64
+
+43.6. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_syn_test'.
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 32
+Parameter \DEPTH = 64
+Generating RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=32\DEPTH=64'.
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 168
+Parameter \DEPTH = 64
+
+43.7. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_syn_test'.
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 168
+Parameter \DEPTH = 64
+Generating RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=168\DEPTH=64'.
+Parameter \addr_width = 6
+Parameter \DATA_WIDTH = 168
+
+43.8. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_vc1_fifo_ctl'.
+Parameter \addr_width = 6
+Parameter \DATA_WIDTH = 168
+Generating RTLIL representation for module `$paramod\ocx_tlx_vc1_fifo_ctl\addr_width=6\DATA_WIDTH=168'.
+Parameter \resp_addr_width = 8
+Parameter \cmd_addr_width = 7
+
+43.9. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_bdi_mac'.
+Parameter \resp_addr_width = 8
+Parameter \cmd_addr_width = 7
+Generating RTLIL representation for module `$paramod\ocx_tlx_bdi_mac\resp_addr_width=8\cmd_addr_width=7'.
+Parameter \ADDRESSWIDTH = 8
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 256
+
+43.10. Executing AST frontend in derive mode using pre-parsed AST for module `\bram_syn_test'.
+Parameter \ADDRESSWIDTH = 8
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 256
+Generating RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256'.
+Parameter \ADDRESSWIDTH = 8
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 256
+Found cached RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256'.
+Parameter \addr_width = 8
+
+43.11. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_dcp_fifo_ctl'.
+Parameter \addr_width = 8
+Generating RTLIL representation for module `$paramod\ocx_tlx_dcp_fifo_ctl\addr_width=8'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 128
+
+43.12. Executing AST frontend in derive mode using pre-parsed AST for module `\dram_syn_test'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 128
+Generating RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 128
+Found cached RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128'.
+Parameter \addr_width = 7
+
+43.13. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_dcp_fifo_ctl'.
+Parameter \addr_width = 7
+Generating RTLIL representation for module `$paramod\ocx_tlx_dcp_fifo_ctl\addr_width=7'.
+Parameter \addr_width = 6
+
+43.14. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_cfg_mac'.
+Parameter \addr_width = 6
+Generating RTLIL representation for module `$paramod\ocx_tlx_cfg_mac\addr_width=6'.
+Parameter \cmd_addr_width = 7
+Parameter \resp_addr_width = 8
+
+43.15. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_data_fifo_mac'.
+Parameter \cmd_addr_width = 7
+Parameter \resp_addr_width = 8
+Generating RTLIL representation for module `$paramod\ocx_tlx_data_fifo_mac\cmd_addr_width=7\resp_addr_width=8'.
+Parameter \resp_addr_width = 7
+
+43.16. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_resp_fifo_mac'.
+Parameter \resp_addr_width = 7
+Generating RTLIL representation for module `$paramod\ocx_tlx_resp_fifo_mac\resp_addr_width=7'.
+Parameter \cmd_addr_width = 6
+
+43.17. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_cmd_fifo_mac'.
+Parameter \cmd_addr_width = 6
+Generating RTLIL representation for module `$paramod\ocx_tlx_cmd_fifo_mac\cmd_addr_width=6'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 56
+Parameter \DEPTH = 128
+
+43.18. Executing AST frontend in derive mode using pre-parsed AST for module `\bram_syn_test'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 56
+Parameter \DEPTH = 128
+Generating RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=7\BITWIDTH=56\DEPTH=128'.
+Parameter \addr_width = 7
+Parameter \DATA_WIDTH = 56
+
+43.19. Executing AST frontend in derive mode using pre-parsed AST for module `\ocx_tlx_vc0_fifo_ctl'.
+Parameter \addr_width = 7
+Parameter \DATA_WIDTH = 56
+Generating RTLIL representation for module `$paramod\ocx_tlx_vc0_fifo_ctl\addr_width=7\DATA_WIDTH=56'.
+
+43.20. Analyzing design hierarchy..
+Top module:  \wb_omi_host
+Used module:     \omi_host
+Used module:         \ocx_dlx_top
+Used module:             \ocx_dlx_xlx_if
+Used module:             \ocx_dlx_txdf
+Used module:                 \ocx_dlx_tx_gbx
+Used module:                 \ocx_dlx_tx_que
+Used module:                 \ocx_dlx_tx_flt
+Used module:                     \ocx_bram_infer
+Used module:                     \ocx_dlx_crc16
+Used module:                     \ocx_dlx_crc
+Used module:                 \ocx_dlx_tx_ctl
+Used module:             \ocx_dlx_rxdf
+Used module:                 \ocx_dlx_rx_lane_66
+Used module:                 \ocx_dlx_rx_lane
+Used module:                 \ocx_dlx_rx_main
+Used module:                     \ocx_dlx_rx_bs
+Used module:         \ocx_tlx_top
+Used module:             \ocx_tlx_framer
+Used module:                 \ocx_tlx_513x32_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=5
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=32\REGFILE_WIDTH=513\ADDR_WIDTH=5
+Used module:                 \ocx_tlx_514x16_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=4
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=16\REGFILE_WIDTH=514\ADDR_WIDTH=4
+Used module:                 \ocx_tlx_framer_cmd_fifo
+Used module:                 \ocx_tlx_framer_rsp_fifo
+Used module:             \ocx_tlx_rcv_top
+Used module:                 \ocx_tlx_parser_err_mac
+Used module:                 \ocx_tlx_rcv_mac
+Used module:                     $paramod\ocx_tlx_cfg_mac\addr_width=6
+Used module:                         \dram_syn_test
+Used module:                     $paramod\ocx_tlx_data_fifo_mac\cmd_addr_width=7\resp_addr_width=8
+Used module:                         \ocx_tlx_bdi_mac
+Used module:                         \bram_syn_test
+Used module:                         \ocx_tlx_dcp_fifo_ctl
+Used module:                     $paramod\ocx_tlx_resp_fifo_mac\resp_addr_width=7
+Used module:                         \ocx_tlx_vc0_fifo_ctl
+Used module:                     $paramod\ocx_tlx_cmd_fifo_mac\cmd_addr_width=6
+Used module:                         \ocx_tlx_vc1_fifo_ctl
+Used module:                 \ocx_tlx_parse_mac
+Used module:                     \ocx_tlx_ctl_fsm
+Used module:                     \ocx_tlx_data_arb
+Used module:                     \ocx_tlx_flit_parser
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 32
+Parameter \DEPTH = 64
+Found cached RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=32\DEPTH=64'.
+Parameter \resp_addr_width = 8
+Parameter \cmd_addr_width = 7
+Found cached RTLIL representation for module `$paramod\ocx_tlx_bdi_mac\resp_addr_width=8\cmd_addr_width=7'.
+Parameter \ADDRESSWIDTH = 8
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 256
+Found cached RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256'.
+Parameter \ADDRESSWIDTH = 8
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 256
+Found cached RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256'.
+Parameter \addr_width = 8
+Found cached RTLIL representation for module `$paramod\ocx_tlx_dcp_fifo_ctl\addr_width=8'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 128
+Found cached RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 256
+Parameter \DEPTH = 128
+Found cached RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128'.
+Parameter \addr_width = 7
+Found cached RTLIL representation for module `$paramod\ocx_tlx_dcp_fifo_ctl\addr_width=7'.
+Parameter \ADDRESSWIDTH = 7
+Parameter \BITWIDTH = 56
+Parameter \DEPTH = 128
+Found cached RTLIL representation for module `$paramod\bram_syn_test\ADDRESSWIDTH=7\BITWIDTH=56\DEPTH=128'.
+Parameter \addr_width = 7
+Parameter \DATA_WIDTH = 56
+Found cached RTLIL representation for module `$paramod\ocx_tlx_vc0_fifo_ctl\addr_width=7\DATA_WIDTH=56'.
+Parameter \ADDRESSWIDTH = 6
+Parameter \BITWIDTH = 168
+Parameter \DEPTH = 64
+Found cached RTLIL representation for module `$paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=168\DEPTH=64'.
+Parameter \addr_width = 6
+Parameter \DATA_WIDTH = 168
+Found cached RTLIL representation for module `$paramod\ocx_tlx_vc1_fifo_ctl\addr_width=6\DATA_WIDTH=168'.
+
+43.21. Analyzing design hierarchy..
+Top module:  \wb_omi_host
+Used module:     \omi_host
+Used module:         \ocx_dlx_top
+Used module:             \ocx_dlx_xlx_if
+Used module:             \ocx_dlx_txdf
+Used module:                 \ocx_dlx_tx_gbx
+Used module:                 \ocx_dlx_tx_que
+Used module:                 \ocx_dlx_tx_flt
+Used module:                     \ocx_bram_infer
+Used module:                     \ocx_dlx_crc16
+Used module:                     \ocx_dlx_crc
+Used module:                 \ocx_dlx_tx_ctl
+Used module:             \ocx_dlx_rxdf
+Used module:                 \ocx_dlx_rx_lane_66
+Used module:                 \ocx_dlx_rx_lane
+Used module:                 \ocx_dlx_rx_main
+Used module:                     \ocx_dlx_rx_bs
+Used module:         \ocx_tlx_top
+Used module:             \ocx_tlx_framer
+Used module:                 \ocx_tlx_513x32_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=5
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=32\REGFILE_WIDTH=513\ADDR_WIDTH=5
+Used module:                 \ocx_tlx_514x16_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=4
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=16\REGFILE_WIDTH=514\ADDR_WIDTH=4
+Used module:                 \ocx_tlx_framer_cmd_fifo
+Used module:                 \ocx_tlx_framer_rsp_fifo
+Used module:             \ocx_tlx_rcv_top
+Used module:                 \ocx_tlx_parser_err_mac
+Used module:                 \ocx_tlx_rcv_mac
+Used module:                     $paramod\ocx_tlx_cfg_mac\addr_width=6
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=32\DEPTH=64
+Used module:                     $paramod\ocx_tlx_data_fifo_mac\cmd_addr_width=7\resp_addr_width=8
+Used module:                         $paramod\ocx_tlx_bdi_mac\resp_addr_width=8\cmd_addr_width=7
+Used module:                         $paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256
+Used module:                         $paramod\ocx_tlx_dcp_fifo_ctl\addr_width=8
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128
+Used module:                         $paramod\ocx_tlx_dcp_fifo_ctl\addr_width=7
+Used module:                     $paramod\ocx_tlx_resp_fifo_mac\resp_addr_width=7
+Used module:                         $paramod\bram_syn_test\ADDRESSWIDTH=7\BITWIDTH=56\DEPTH=128
+Used module:                         $paramod\ocx_tlx_vc0_fifo_ctl\addr_width=7\DATA_WIDTH=56
+Used module:                     $paramod\ocx_tlx_cmd_fifo_mac\cmd_addr_width=6
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=168\DEPTH=64
+Used module:                         $paramod\ocx_tlx_vc1_fifo_ctl\addr_width=6\DATA_WIDTH=168
+Used module:                 \ocx_tlx_parse_mac
+Used module:                     \ocx_tlx_ctl_fsm
+Used module:                     \ocx_tlx_data_arb
+Used module:                     \ocx_tlx_flit_parser
+
+43.22. Analyzing design hierarchy..
+Top module:  \wb_omi_host
+Used module:     \omi_host
+Used module:         \ocx_dlx_top
+Used module:             \ocx_dlx_xlx_if
+Used module:             \ocx_dlx_txdf
+Used module:                 \ocx_dlx_tx_gbx
+Used module:                 \ocx_dlx_tx_que
+Used module:                 \ocx_dlx_tx_flt
+Used module:                     \ocx_bram_infer
+Used module:                     \ocx_dlx_crc16
+Used module:                     \ocx_dlx_crc
+Used module:                 \ocx_dlx_tx_ctl
+Used module:             \ocx_dlx_rxdf
+Used module:                 \ocx_dlx_rx_lane_66
+Used module:                 \ocx_dlx_rx_lane
+Used module:                 \ocx_dlx_rx_main
+Used module:                     \ocx_dlx_rx_bs
+Used module:         \ocx_tlx_top
+Used module:             \ocx_tlx_framer
+Used module:                 \ocx_tlx_513x32_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=5
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=32\REGFILE_WIDTH=513\ADDR_WIDTH=5
+Used module:                 \ocx_tlx_514x16_fifo
+Used module:                     $paramod\ocx_tlx_fifo_cntlr\FIFO_ADDR_WIDTH=4
+Used module:                     $paramod\ocx_leaf_inferd_regfile\REGFILE_DEPTH=16\REGFILE_WIDTH=514\ADDR_WIDTH=4
+Used module:                 \ocx_tlx_framer_cmd_fifo
+Used module:                 \ocx_tlx_framer_rsp_fifo
+Used module:             \ocx_tlx_rcv_top
+Used module:                 \ocx_tlx_parser_err_mac
+Used module:                 \ocx_tlx_rcv_mac
+Used module:                     $paramod\ocx_tlx_cfg_mac\addr_width=6
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=32\DEPTH=64
+Used module:                     $paramod\ocx_tlx_data_fifo_mac\cmd_addr_width=7\resp_addr_width=8
+Used module:                         $paramod\ocx_tlx_bdi_mac\resp_addr_width=8\cmd_addr_width=7
+Used module:                         $paramod\bram_syn_test\ADDRESSWIDTH=8\BITWIDTH=256\DEPTH=256
+Used module:                         $paramod\ocx_tlx_dcp_fifo_ctl\addr_width=8
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=7\BITWIDTH=256\DEPTH=128
+Used module:                         $paramod\ocx_tlx_dcp_fifo_ctl\addr_width=7
+Used module:                     $paramod\ocx_tlx_resp_fifo_mac\resp_addr_width=7
+Used module:                         $paramod\bram_syn_test\ADDRESSWIDTH=7\BITWIDTH=56\DEPTH=128
+Used module:                         $paramod\ocx_tlx_vc0_fifo_ctl\addr_width=7\DATA_WIDTH=56
+Used module:                     $paramod\ocx_tlx_cmd_fifo_mac\cmd_addr_width=6
+Used module:                         $paramod\dram_syn_test\ADDRESSWIDTH=6\BITWIDTH=168\DEPTH=64
+Used module:                         $paramod\ocx_tlx_vc1_fifo_ctl\addr_width=6\DATA_WIDTH=168
+Used module:                 \ocx_tlx_parse_mac
+Used module:                     \ocx_tlx_ctl_fsm
+Used module:                     \ocx_tlx_data_arb
+Used module:                     \ocx_tlx_flit_parser
+Removing unused module `\ocx_tlx_vc1_fifo_ctl'.
+Removing unused module `\ocx_tlx_vc0_fifo_ctl'.
+Removing unused module `\ocx_tlx_resp_fifo_mac'.
+Removing unused module `\ocx_tlx_fifo_cntlr'.
+Removing unused module `\ocx_tlx_dcp_fifo_ctl'.
+Removing unused module `\ocx_tlx_data_fifo_mac'.
+Removing unused module `\ocx_tlx_cmd_fifo_mac'.
+Removing unused module `\ocx_tlx_cfg_mac'.
+Removing unused module `\ocx_tlx_bdi_mac'.
+Removing unused module `\ocx_leaf_inferd_regfile'.
+Removing unused module `\dram_syn_test'.
+Removing unused module `\bram_syn_test'.
+Removed 12 unused modules.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l7_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l6_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l5_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l4_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l3_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l2_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l1_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.dlx_l0_tx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln7_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln6_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln5_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln4_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln3_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln2_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln1_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ln0_rx_data from 8 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.ro_dlx_version from 1 bits to 32 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_oc3_tlx_version from 1 bits to 32 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_in_rcv_rate_capability_3 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_in_rcv_rate_capability_2 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_in_rcv_rate_capability_1 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_in_rcv_rate_capability_0 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_xmit_rate_config_3 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_xmit_rate_config_2 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_xmit_rate_config_1 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_xmit_rate_config_0 from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_rdata_bus from 1 bits to 32 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_rdata_offset from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_resp_code from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_resp_capptag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_resp_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_rdata_bus from 1 bits to 512 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_data_initial_credit from 1 bits to 6 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_code from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_dp from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_capptag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_dl from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_initial_credit from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cdata_bus from 1 bits to 512 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_data_initial_credit from 1 bits to 6 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_capptag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_resp_code from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_bdf from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_flag from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_be from 1 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_pl from 1 bits to 3 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_dl from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_afutag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_pa_or_obj from 1 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_initial_credit from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_data_bus from 1 bits to 512 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_rd_cnt from 1 bits to 3 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_data_bus from 1 bits to 512 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_rd_cnt from 1 bits to 3 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_addr_tag from 1 bits to 18 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_cache_state from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_host_tag from 1 bits to 24 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_dp from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_dl from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_pg_size from 1 bits to 6 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_code from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_afutag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_resp_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_resp_initial_credit from 1 bits to 7 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_data_bus from 1 bits to 32 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_capptag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_pl from 1 bits to 3 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_pa from 1 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_cfg_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.cfg_tlx_initial_credit from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_be from 1 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_pl from 1 bits to 3 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_capptag from 1 bits to 16 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_flag from 1 bits to 4 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_pa from 1 bits to 64 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_dl from 1 bits to 2 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.tlx_afu_cmd_opcode from 1 bits to 8 bits.
+Warning: Resizing cell port wb_omi_host.omi_host.afu_tlx_cmd_initial_credit from 1 bits to 7 bits.
+Warning: Resizing cell port omi_host.dl.reg_04_val from 1 bits to 32 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l7_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l6_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l5_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l4_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l3_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l2_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l1_tx_seq from 2 bits to 6 bits.
+Warning: Resizing cell port omi_host.dl.dlx_l0_tx_seq from 2 bits to 6 bits.
+
+Warnings: 194 unique messages, 194 total
+End of script. Logfile hash: 590956c235, CPU: user 2.31s system 0.05s, MEM: 146.19 MB peak
+Yosys 0.9+3672 (git sha1 014c7e26, gcc 9.3.0-17ubuntu1~20.04 -fPIC -Os)
+Time spent: 93% 45x read_verilog (2 sec), 6% 1x hierarchy (0 sec)

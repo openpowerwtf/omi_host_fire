@@ -1,0 +1,761 @@
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'ocde'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+                     ... For warning description see https://verilator.org/warn/PINMISSING?v=4.215
+                     ... Use "/* verilator lint_off PINMISSING */" and lint_on around source to disable this message.
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_04_val'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_04_hwwe'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_04_update'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_05_hwwe'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_05_update'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_06_hwwe'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_06_update'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_07_hwwe'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'reg_07_update'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'dlx_reset'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'phy_id'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'phy_in'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:48:36: Cell has missing pin: 'phy_out'
+   48 | wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+      |                                    ^~~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_ready'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_dl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_end'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_pa'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_flag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_os'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_capptag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_pl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_be'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_credit_return'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_pa'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_t'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_pl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_capptag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_data_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_data_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_afutag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_code'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_pg_size'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_dl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_dp'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_host_tag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_cache_state'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_addr_tag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_rd_req'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_rd_cnt'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_data_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_data_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_data_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_rd_req'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_rd_cnt'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_data_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_data_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_data_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_pa_or_obj'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_afutag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_dl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_pl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_be'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_flag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_bdf'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_resp_code'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cmd_capptag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_data_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_cmd_data_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cdata_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cdata_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_cdata_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_dl'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_capptag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_dp'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_resp_code'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_data_initial_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_afu_resp_data_credit'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_rdata_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_rdata_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'afu_tlx_rdata_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_resp_valid'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_resp_opcode'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_resp_capptag'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_resp_code'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_resp_ack'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_rdata_offset'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_rdata_bus'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_rdata_bdi'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_tmpl_config_0'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_tmpl_config_1'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_tmpl_config_2'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_tmpl_config_3'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_rate_config_0'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_rate_config_1'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_rate_config_2'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'cfg_tlx_xmit_rate_config_3'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_tmpl_capability_0'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_tmpl_capability_1'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_tmpl_capability_2'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_tmpl_capability_3'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_rate_capability_0'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_rate_capability_1'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_rate_capability_2'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_in_rcv_rate_capability_3'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'tlx_cfg_oc3_tlx_version'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'ro_dlx_version'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'phy_id'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'phy_in'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: top.v:286:13: Cell has missing pin: 'phy_out'
+  286 | omi_dev #() dev (
+      |             ^~~
+%Warning-PINMISSING: src/wb_omi_host.v:413:14: Cell has missing pin: 'phy_id'
+  413 | omi_host #() omi_host
+      |              ^~~~~~~~
+                     top.v:50:1: ... note: In file included from top.v
+%Warning-PINMISSING: src/wb_omi_host.v:413:14: Cell has missing pin: 'phy_in'
+  413 | omi_host #() omi_host
+      |              ^~~~~~~~
+                     top.v:50:1: ... note: In file included from top.v
+%Warning-PINMISSING: src/wb_omi_host.v:413:14: Cell has missing pin: 'phy_out'
+  413 | omi_host #() omi_host
+      |              ^~~~~~~~
+                     top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/dl/ocx_dlx_tx_flt.v:950:8: Signal definition not found, creating implicitly: 'fsm_rpl_start'
+  950 | assign fsm_rpl_start = o[0];
+      |        ^~~~~~~~~~~~~
+                   src/dl/ocx_dlx_txdf.v:405:1: ... note: In file included from ocx_dlx_txdf.v
+                   src/dl/ocx_dlx_top.v:437:1: ... note: In file included from ocx_dlx_top.v
+                   src/omi_dev.v:390:1: ... note: In file included from omi_dev.v
+                   top.v:288:1: ... note: In file included from top.v
+%Error: src/dl/ocx_dlx_tx_ctl.v:1220:72: Can't find definition of variable: 'seq_cnt_max'
+                                       : ... Suggested alternative: 'seq_cnt_din'
+ 1220 |     assign tsm_advance                 = tsm_q[2] ? (seq_cnt_q[8:2] == seq_cnt_max) :
+      |                                                                        ^~~~~~~~~~~
+        src/dl/ocx_dlx_txdf.v:325:1: ... note: In file included from ocx_dlx_txdf.v
+        src/dl/ocx_dlx_top.v:437:1: ... note: In file included from ocx_dlx_top.v
+        src/omi_dev.v:390:1: ... note: In file included from omi_dev.v
+        top.v:288:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/dl/ocx_dlx_tx_ctl.v:1235:12: Signal definition not found, creating implicitly: 'seq_count_max'
+                                                  : ... Suggested alternative: 'seq_cnt_max'
+ 1235 |     assign seq_count_max = 7'h3F;
+      |            ^~~~~~~~~~~~~
+                   src/dl/ocx_dlx_txdf.v:325:1: ... note: In file included from ocx_dlx_txdf.v
+                   src/dl/ocx_dlx_top.v:437:1: ... note: In file included from ocx_dlx_top.v
+                   src/omi_dev.v:390:1: ... note: In file included from omi_dev.v
+                   top.v:288:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/dl/ocx_dlx_rx_lane.v:877:8: Signal definition not found, creating implicitly: 'EDPL_pchk'
+  877 | assign EDPL_pchk = ~(^{deskew_sync_hdr_q[1:0],chk_data_q[63:0]});
+      |        ^~~~~~~~~
+                   src/dl/ocx_dlx_rxdf.v:424:1: ... note: In file included from ocx_dlx_rxdf.v
+                   src/dl/ocx_dlx_top.v:353:1: ... note: In file included from ocx_dlx_top.v
+                   src/omi_dev.v:390:1: ... note: In file included from omi_dev.v
+                   top.v:288:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:258:11: Signal definition not found, creating implicitly: 'tl_xmit_tmpl_config_0'
+  258 |    assign tl_xmit_tmpl_config_0 = 1;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:259:11: Signal definition not found, creating implicitly: 'tl_xmit_tmpl_config_1'
+                                           : ... Suggested alternative: 'tl_xmit_tmpl_config_0'
+  259 |    assign tl_xmit_tmpl_config_1 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:260:11: Signal definition not found, creating implicitly: 'tl_xmit_tmpl_config_2'
+                                           : ... Suggested alternative: 'tl_xmit_tmpl_config_0'
+  260 |    assign tl_xmit_tmpl_config_2 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:261:11: Signal definition not found, creating implicitly: 'tl_xmit_tmpl_config_3'
+                                           : ... Suggested alternative: 'tl_xmit_tmpl_config_0'
+  261 |    assign tl_xmit_tmpl_config_3 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:262:11: Signal definition not found, creating implicitly: 'tl_xmit_rate_config_0'
+                                           : ... Suggested alternative: 'tl_xmit_tmpl_config_0'
+  262 |    assign tl_xmit_rate_config_0 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:263:11: Signal definition not found, creating implicitly: 'tl_xmit_rate_config_1'
+                                           : ... Suggested alternative: 'tl_xmit_rate_config_0'
+  263 |    assign tl_xmit_rate_config_1 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:264:11: Signal definition not found, creating implicitly: 'tl_xmit_rate_config_2'
+                                           : ... Suggested alternative: 'tl_xmit_rate_config_0'
+  264 |    assign tl_xmit_rate_config_2 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:265:11: Signal definition not found, creating implicitly: 'tl_xmit_rate_config_3'
+                                           : ... Suggested alternative: 'tl_xmit_rate_config_0'
+  265 |    assign tl_xmit_rate_config_3 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:266:11: Signal definition not found, creating implicitly: 'rcv_tmpl_capability_0'
+  266 |    assign rcv_tmpl_capability_0 = 1;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:267:11: Signal definition not found, creating implicitly: 'rcv_tmpl_capability_1'
+                                           : ... Suggested alternative: 'rcv_tmpl_capability_0'
+  267 |    assign rcv_tmpl_capability_1 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:268:11: Signal definition not found, creating implicitly: 'rcv_tmpl_capability_2'
+                                           : ... Suggested alternative: 'rcv_tmpl_capability_0'
+  268 |    assign rcv_tmpl_capability_2 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:269:11: Signal definition not found, creating implicitly: 'rcv_tmpl_capability_3'
+                                           : ... Suggested alternative: 'rcv_tmpl_capability_0'
+  269 |    assign rcv_tmpl_capability_3 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:270:11: Signal definition not found, creating implicitly: 'rcv_rate_capability_0'
+                                           : ... Suggested alternative: 'rcv_tmpl_capability_0'
+  270 |    assign rcv_rate_capability_0 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:271:11: Signal definition not found, creating implicitly: 'rcv_rate_capability_1'
+                                           : ... Suggested alternative: 'rcv_rate_capability_0'
+  271 |    assign rcv_rate_capability_1 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:272:11: Signal definition not found, creating implicitly: 'rcv_rate_capability_2'
+                                           : ... Suggested alternative: 'rcv_rate_capability_0'
+  272 |    assign rcv_rate_capability_2 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:273:11: Signal definition not found, creating implicitly: 'rcv_rate_capability_3'
+                                           : ... Suggested alternative: 'rcv_rate_capability_0'
+  273 |    assign rcv_rate_capability_3 = 0;
+      |           ^~~~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:324:29: Signal definition not found, creating implicitly: 'cmd_credit'
+                                           : ... Suggested alternative: 'cmd_credits_d'
+  324 |    assign cmd_credits_inc = cmd_credit & ~cmd_tkn;
+      |                             ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:324:43: Signal definition not found, creating implicitly: 'cmd_tkn'
+  324 |    assign cmd_credits_inc = cmd_credit & ~cmd_tkn;
+      |                                           ^~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:332:11: Signal definition not found, creating implicitly: 'cmd_credit_ok'
+                                           : ... Suggested alternative: 'cmd_credit'
+  332 |    assign cmd_credit_ok = (cmd_credits_q != 0) & (cmd_data_credits_q != 0);
+      |           ^~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:334:34: Signal definition not found, creating implicitly: 'cmd_data_credit'
+                                           : ... Suggested alternative: 'cmd_data_credits_d'
+  334 |    assign cmd_data_credits_inc = cmd_data_credit & ~cmd_tkn;
+      |                                  ^~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:342:11: Signal definition not found, creating implicitly: 'rsp_credit'
+                                           : ... Suggested alternative: 'cmd_credit'
+  342 |    assign rsp_credit = ack_q;
+      |           ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:388:11: Signal definition not found, creating implicitly: 'cmd_data_valid'
+                                           : ... Suggested alternative: 'rsp_data_valid'
+  388 |    assign cmd_data_valid = cmd_tkn;
+      |           ^~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:397:11: Signal definition not found, creating implicitly: 'rsp_rd_req'
+  397 |    assign rsp_rd_req = 1;
+      |           ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:398:11: Signal definition not found, creating implicitly: 'rsp_rd_cnt'
+                                           : ... Suggested alternative: 'rsp_rd_req'
+  398 |    assign rsp_rd_cnt = 'b111;  
+      |           ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:400:21: Signal definition not found, creating implicitly: 'rsp_opcode'
+                                           : ... Suggested alternative: 'cmd_opcode'
+  400 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |                     ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:400:11: Signal definition not found, creating implicitly: 'rsp_ok'
+  400 |    assign rsp_ok = (rsp_opcode == 8'h01) | (rsp_opcode == 8'h04);
+      |           ^~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:402:26: Signal definition not found, creating implicitly: 'rsp_valid'
+                                           : ... Suggested alternative: 'cmd_valid'
+  402 |    assign error_d[7:0] = rsp_valid & ~rsp_ok ? rsp_opcode : 8'h0;
+      |                          ^~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:446:21: Signal definition not found, creating implicitly: 'acmd_bdf'
+                                           : ... Suggested alternative: 'cmd_bdf'
+  446 |    .afu_tlx_cmd_bdf(acmd_bdf),
+      |                     ^~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:455:33: Signal definition not found, creating implicitly: 'rsp_initial_credit'
+                                           : ... Suggested alternative: 'rsp_initial_credits'
+  455 |    .afu_tlx_resp_initial_credit(rsp_initial_credit),
+      |                                 ^~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:459:25: Signal definition not found, creating implicitly: 'rsp_afutag'
+                                           : ... Suggested alternative: 'cmd_afutag'
+  459 |    .tlx_afu_resp_afutag(rsp_afutag),
+      |                         ^~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:460:23: Signal definition not found, creating implicitly: 'rsp_code'
+                                           : ... Suggested alternative: 'rsp_opcode'
+  460 |    .tlx_afu_resp_code(rsp_code),
+      |                       ^~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:461:26: Signal definition not found, creating implicitly: 'rsp_pg_size'
+  461 |    .tlx_afu_resp_pg_size(rsp_pg_size),
+      |                          ^~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:462:21: Signal definition not found, creating implicitly: 'rsp_dl'
+                                           : ... Suggested alternative: 'rsp_ok'
+  462 |    .tlx_afu_resp_dl(rsp_dl),
+      |                     ^~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:463:21: Signal definition not found, creating implicitly: 'rsp_dp'
+                                           : ... Suggested alternative: 'rsp_dl'
+  463 |    .tlx_afu_resp_dp(rsp_dp),
+      |                     ^~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:464:27: Signal definition not found, creating implicitly: 'rsp_host_tag'
+  464 |    .tlx_afu_resp_host_tag(rsp_host_tag),
+      |                           ^~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:465:30: Signal definition not found, creating implicitly: 'rsp_cache_state'
+  465 |    .tlx_afu_resp_cache_state(rsp_cache_state),
+      |                              ^~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:466:27: Signal definition not found, creating implicitly: 'rsp_addr_tag'
+                                           : ... Suggested alternative: 'rsp_afutag'
+  466 |    .tlx_afu_resp_addr_tag(rsp_addr_tag),
+      |                           ^~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:473:27: Signal definition not found, creating implicitly: 'rsp_data_bdi'
+                                           : ... Suggested alternative: 'rsp_data_bus'
+  473 |    .tlx_afu_resp_data_bdi(rsp_data_bdi),
+      |                           ^~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: src/wb_omi_host.v:504:25: Signal definition not found, creating implicitly: 'tlx_afu_resp_credit'
+  504 |    .tlx_afu_resp_credit(tlx_afu_resp_credit),
+      |                         ^~~~~~~~~~~~~~~~~~~
+                   top.v:50:1: ... note: In file included from top.v
+%Warning-IMPLICIT: top.v:59:18: Signal definition not found, creating implicitly: 'ln0_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_data'
+   59 |    .ln0_rx_valid(ln0_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:62:17: Signal definition not found, creating implicitly: 'ln0_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   62 |    .ln0_rx_slip(ln0_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:63:18: Signal definition not found, creating implicitly: 'ln1_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   63 |    .ln1_rx_valid(ln1_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:66:17: Signal definition not found, creating implicitly: 'ln1_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   66 |    .ln1_rx_slip(ln1_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:67:18: Signal definition not found, creating implicitly: 'ln2_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   67 |    .ln2_rx_valid(ln2_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:70:17: Signal definition not found, creating implicitly: 'ln2_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   70 |    .ln2_rx_slip(ln2_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:71:18: Signal definition not found, creating implicitly: 'ln3_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   71 |    .ln3_rx_valid(ln3_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:74:17: Signal definition not found, creating implicitly: 'ln3_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   74 |    .ln3_rx_slip(ln3_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:75:18: Signal definition not found, creating implicitly: 'ln4_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   75 |    .ln4_rx_valid(ln4_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:78:17: Signal definition not found, creating implicitly: 'ln4_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   78 |    .ln4_rx_slip(ln4_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:79:18: Signal definition not found, creating implicitly: 'ln5_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   79 |    .ln5_rx_valid(ln5_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:82:17: Signal definition not found, creating implicitly: 'ln5_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   82 |    .ln5_rx_slip(ln5_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:83:18: Signal definition not found, creating implicitly: 'ln6_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   83 |    .ln6_rx_valid(ln6_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:86:17: Signal definition not found, creating implicitly: 'ln6_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   86 |    .ln6_rx_slip(ln6_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:87:18: Signal definition not found, creating implicitly: 'ln7_rx_valid'
+                              : ... Suggested alternative: 'ln0_rx_valid'
+   87 |    .ln7_rx_valid(ln7_rx_valid),
+      |                  ^~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:90:17: Signal definition not found, creating implicitly: 'ln7_rx_slip'
+                              : ... Suggested alternative: 'ln0_rx_slip'
+   90 |    .ln7_rx_slip(ln7_rx_slip),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:130:21: Signal definition not found, creating implicitly: 'host_tsm_state6_to_1'
+                               : ... Suggested alternative: 'host_tsm_state2_to_3'
+  130 |    .tsm_state6_to_1(host_tsm_state6_to_1)
+      |                     ^~~~~~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:252:8: Signal definition not found, creating implicitly: 'dev_ln0_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_data'
+  252 | assign dev_ln0_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:255:8: Signal definition not found, creating implicitly: 'dev_ln0_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  255 | assign dev_ln0_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:256:8: Signal definition not found, creating implicitly: 'dev_ln1_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  256 | assign dev_ln1_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:259:8: Signal definition not found, creating implicitly: 'dev_ln1_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  259 | assign dev_ln1_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:260:8: Signal definition not found, creating implicitly: 'dev_ln2_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  260 | assign dev_ln2_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:263:8: Signal definition not found, creating implicitly: 'dev_ln2_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  263 | assign dev_ln2_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:264:8: Signal definition not found, creating implicitly: 'dev_ln3_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  264 | assign dev_ln3_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:267:8: Signal definition not found, creating implicitly: 'dev_ln3_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  267 | assign dev_ln3_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:268:8: Signal definition not found, creating implicitly: 'dev_ln4_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  268 | assign dev_ln4_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:271:8: Signal definition not found, creating implicitly: 'dev_ln4_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  271 | assign dev_ln4_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:272:8: Signal definition not found, creating implicitly: 'dev_ln5_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  272 | assign dev_ln5_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:275:8: Signal definition not found, creating implicitly: 'dev_ln5_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  275 | assign dev_ln5_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:276:8: Signal definition not found, creating implicitly: 'dev_ln6_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  276 | assign dev_ln6_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:279:8: Signal definition not found, creating implicitly: 'dev_ln6_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  279 | assign dev_ln6_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:280:8: Signal definition not found, creating implicitly: 'dev_ln7_rx_valid'
+                              : ... Suggested alternative: 'dev_ln0_rx_valid'
+  280 | assign dev_ln7_rx_valid = 1'b1;
+      |        ^~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:283:8: Signal definition not found, creating implicitly: 'dev_ln7_rx_slip'
+                              : ... Suggested alternative: 'dev_ln0_rx_slip'
+  283 | assign dev_ln7_rx_slip = 1'b0;
+      |        ^~~~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:347:16: Signal definition not found, creating implicitly: 'reg_04_val'
+  347 |    .reg_04_val(reg_04_val),
+      |                ^~~~~~~~~~
+%Warning-IMPLICIT: top.v:348:17: Signal definition not found, creating implicitly: 'reg_04_hwwe'
+  348 |    .reg_04_hwwe(reg_04_hwwe),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:349:19: Signal definition not found, creating implicitly: 'reg_04_update'
+                               : ... Suggested alternative: 'reg_04_hwwe'
+  349 |    .reg_04_update(reg_04_update),
+      |                   ^~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:350:17: Signal definition not found, creating implicitly: 'reg_05_hwwe'
+                               : ... Suggested alternative: 'reg_04_hwwe'
+  350 |    .reg_05_hwwe(reg_05_hwwe),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:351:19: Signal definition not found, creating implicitly: 'reg_05_update'
+                               : ... Suggested alternative: 'reg_04_update'
+  351 |    .reg_05_update(reg_05_update),
+      |                   ^~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:352:17: Signal definition not found, creating implicitly: 'reg_06_hwwe'
+                               : ... Suggested alternative: 'reg_04_hwwe'
+  352 |    .reg_06_hwwe(reg_06_hwwe),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:353:19: Signal definition not found, creating implicitly: 'reg_06_update'
+                               : ... Suggested alternative: 'reg_04_update'
+  353 |    .reg_06_update(reg_06_update),
+      |                   ^~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:354:17: Signal definition not found, creating implicitly: 'reg_07_hwwe'
+                               : ... Suggested alternative: 'reg_04_hwwe'
+  354 |    .reg_07_hwwe(reg_07_hwwe),
+      |                 ^~~~~~~~~~~
+%Warning-IMPLICIT: top.v:355:19: Signal definition not found, creating implicitly: 'reg_07_update'
+                               : ... Suggested alternative: 'reg_04_update'
+  355 |    .reg_07_update(reg_07_update),
+      |                   ^~~~~~~~~~~~~
+%Warning-IMPLICIT: top.v:356:15: Signal definition not found, creating implicitly: 'dlx_reset'
+  356 |    .dlx_reset(dlx_reset),
+      |               ^~~~~~~~~
+%Warning-IMPLICIT: top.v:372:21: Signal definition not found, creating implicitly: 'dev_tsm_state6_to_1'
+                               : ... Suggested alternative: 'dev_tsm_state2_to_3'
+  372 |    .tsm_state6_to_1(dev_tsm_state6_to_1)
+      |                     ^~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 1 error(s)

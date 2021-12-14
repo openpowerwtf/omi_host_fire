@@ -1,0 +1,6 @@
+# yosys synth.ys
+
+read_verilog tl/*
+read_verilog dl/*
+read_verilog ./*.v
+hierarchy -top wb_omi_host
