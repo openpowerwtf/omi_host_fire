@@ -967,11 +967,19 @@ endfunction
     //-- read only variable via config memory: DVSEC
     assign dlx_version_din[31:0] = `DLX_VERSION_NUMBER;
     assign ro_dlx_version[31:0]  = dlx_version_q[31:0];
-    assign quick_sim = 1'b1;  //wtf or low-latency wires
+
+   // wtf IMPORTANT!
+   assign quick_sim = 1'b1;  //wtf - or low-latency wires
+   // assign quick_sim = 1'b0;  //normal
+
 
     assign lfsr_din[0:22]              = reset_q      ? 23'b01111000101110110010010:
                                          lfsr_advance ? advance64(lfsr_q[0:22]) :
                                                         lfsr_q[0:22];         //-- advance LFSR 64 bits
+
+    //wtf can this work?  is the lfsr scrambling needed to prevent false block lock?
+    // debug and non-serial
+    //assign lfsr_din[0:22]              = 23'h0;
 
     assign ctl_q0_lane_scrambler[63:0] = lane0(lfsr_q[0:22]);                         //-- get the PseudoRandom Bit Sequence for this block
     assign ctl_q1_lane_scrambler[63:0] = lane1(lfsr_q[0:22]);                         //-- get the PseudoRandom Bit Sequence for this block
@@ -1069,8 +1077,7 @@ end
 
     assign timer_din[9:0]          = tpulse ? 10'b0 : timer_q[9:0] + 10'b0000000001;
     assign pulse_1us               = (timer_q[9:0] == 10'd402);
-    assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd13)) ;  //wtf was 20
-
+    assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd13)) ;  //wtf (low lat) was 20
 
     assign mask_pattern_a = {~(x8_degrade_to_inside | x4_degrade_to_inside) & rx_tx_pattern_a[7],
                              (x8_mode | x8_degrade_to_inside) & rx_tx_pattern_a[6],

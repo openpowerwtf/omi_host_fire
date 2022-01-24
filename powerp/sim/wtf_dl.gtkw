@@ -1,40 +1,48 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Mon Dec 13 23:15:05 2021
+[*] Sun Jan 23 22:35:33 2022
 [*]
 [dumpfile] "/home/wtf/projects/omi_host_fire/powerp/sim/wtf.fst"
-[dumpfile_mtime] "Mon Dec 13 20:16:00 2021"
-[dumpfile_size] 26776048
+[dumpfile_mtime] "Sun Jan 23 21:13:38 2022"
+[dumpfile_size] 1878320
 [savefile] "/home/wtf/projects/omi_host_fire/powerp/sim/wtf_dl.gtkw"
-[timestart] 3328
-[size] 4137 2513
-[pos] 264 161
-*-6.000000 3460 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 3952
+[size] 2784 1816
+[pos] 706 191
+*-4.481201 4017 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top.
-[treeopen] TOP.top.dev.
 [treeopen] TOP.top.dev.dl.
 [treeopen] TOP.top.dev.dl.rx.
 [treeopen] TOP.top.dev.dl.rx.lane0.
 [treeopen] TOP.top.dev.dl.rx.phy0.
+[treeopen] TOP.top.dev.dl.rx.phy7.
 [treeopen] TOP.top.dev.dl.tx.
 [treeopen] TOP.top.dev.dl.tx.ctl.
+[treeopen] TOP.top.dev_phy.
 [treeopen] TOP.top.host.
 [treeopen] TOP.top.host.omi_host.
 [treeopen] TOP.top.host.omi_host.dl.
 [treeopen] TOP.top.host.omi_host.dl.rx.
 [treeopen] TOP.top.host.omi_host.dl.rx.lane0.
-[treeopen] TOP.top.host.omi_host.dl.rx.main.
+[treeopen] TOP.top.host.omi_host.dl.rx.phy0.
 [treeopen] TOP.top.host.omi_host.dl.tx.
 [treeopen] TOP.top.host.omi_host.dl.tx.ctl.
 [treeopen] TOP.top.host.omi_host.tl.
+[treeopen] TOP.top.host_phy.
 [sst_width] 626
-[signals_width] 802
+[signals_width] 1074
 [sst_expanded] 1
-[sst_vpaned_height] 788
+[sst_vpaned_height] 694
 @28
-TOP.clk
-TOP.top.host.omi_host.opt_gckn
+TOP.clk_wb
+TOP.clk_omi
+TOP.clk_phy
+TOP.rst_host
+TOP.top.rst_dev
+@22
+TOP.top.host_phy.ratio_counter_q[9:0]
+@28
 TOP.top.host.omi_host.dl.hb_gtwiz_reset_all_in
 TOP.top.host.omi_host.dl.gtwiz_reset_rx_done_in
 TOP.top.host.omi_host.dl.gtwiz_reset_tx_done_in
@@ -46,20 +54,51 @@ TOP.top.host.omi_host.dl.gtwiz_reset_all_out
 TOP.top.host.omi_host.dl.gtwiz_reset_rx_datapath_out
 TOP.top.host_tsm_state6_to_1
 TOP.top.dev_tsm_state6_to_1
+[color] 2
+TOP.top.ln0_tx_header[1:0]
+@22
+[color] 2
+TOP.top.ln0_tx_data[63:0]
+TOP.top.dev_phy.rx_dat_q[7:0]
+TOP.top.dev_phy.rx_ln0_d[131:0]
+TOP.top.dev_phy.rx_ln0_q[131:0]
+TOP.top.dev_phy.rx_ln0_slip[65:0]
+TOP.top.dev.dl.rx.phy0.data_beat[63:0]
+@28
+[color] 2
+TOP.top.dev_ln0_rx_header[1:0]
+@22
+[color] 2
+TOP.top.dev_ln0_rx_data[63:0]
+@28
 TOP.top.ln0_rx_valid
+TOP.top.ln0_tx_header[1:0]
 @22
 TOP.top.ln0_tx_data[63:0]
+TOP.top.host_phy.tx_ln0_q[65:0]
 TOP.top.ln1_tx_data[63:0]
+TOP.top.host_phy.tx_ln1_q[65:0]
 TOP.top.ln2_tx_data[63:0]
+TOP.top.host_phy.tx_ln2_q[65:0]
 TOP.top.ln3_tx_data[63:0]
+TOP.top.host_phy.tx_ln3_q[65:0]
 TOP.top.ln4_tx_data[63:0]
+TOP.top.host_phy.tx_ln4_q[65:0]
 TOP.top.ln5_tx_data[63:0]
+TOP.top.host_phy.tx_ln5_q[65:0]
 TOP.top.ln6_tx_data[63:0]
-TOP.top.ln7_tx_data[63:0]
+TOP.top.host_phy.tx_ln6_q[65:0]
+TOP.top.host_phy.tx_ln7_q[65:0]
+TOP.top.host_phy.ln7_tx_data[63:0]
+@28
+TOP.top.ln7_tx_header[1:0]
+@22
+TOP.top.host_phy.tx_dat[7:0]
 @28
 TOP.top.dev_ln0_rx_valid
 @22
 TOP.top.dev_ln0_tx_data[63:0]
+TOP.top.dev_phy.tx_ln0_q[65:0]
 TOP.top.dev_ln1_tx_data[63:0]
 TOP.top.dev_ln2_tx_data[63:0]
 TOP.top.dev_ln3_tx_data[63:0]
@@ -67,6 +106,65 @@ TOP.top.dev_ln4_tx_data[63:0]
 TOP.top.dev_ln5_tx_data[63:0]
 TOP.top.dev_ln6_tx_data[63:0]
 TOP.top.dev_ln7_tx_data[63:0]
+@28
+TOP.top.ln0_rx_slip
+TOP.top.ln1_rx_slip
+TOP.top.ln2_rx_slip
+TOP.top.ln3_rx_slip
+TOP.top.ln4_rx_slip
+TOP.top.ln5_rx_slip
+TOP.top.ln6_rx_slip
+TOP.top.ln7_rx_slip
+TOP.top.dev.dl.rx.lane0.header_in[1:0]
+TOP.top.dev_ln0_rx_slip
+TOP.top.dev_ln1_rx_slip
+TOP.top.dev_ln2_rx_slip
+TOP.top.dev_ln3_rx_slip
+TOP.top.dev_ln4_rx_slip
+TOP.top.dev_ln5_rx_slip
+TOP.top.dev_ln6_rx_slip
+TOP.top.dev_ln7_rx_slip
+TOP.top.ln0_rx_header[1:0]
+@22
+TOP.top.ln0_rx_data[63:0]
+@28
+TOP.top.dev_ln0_rx_header[1:0]
+@22
+TOP.top.dev_ln0_rx_data[63:0]
+@200
+-debug
+@24
+TOP.top.host_phy.ratio_counter_q[9:0]
+@28
+TOP.top.host_phy.ln6_tx_header[1:0]
+@22
+TOP.top.host_phy.ln6_tx_data[63:0]
+@28
+TOP.top.host_phy.ln7_tx_header[1:0]
+@22
+TOP.top.host_phy.ln7_tx_data[63:0]
+TOP.top.host_phy.tx_ln0_q[65:0]
+TOP.top.host_phy.tx_ln1_q[65:0]
+TOP.top.host_phy.tx_ln6_q[65:0]
+@23
+TOP.top.host_phy.tx_ln7_q[65:0]
+@22
+TOP.top.host_phy.tx_dat[7:0]
+TOP.top.dev_phy.rx_dat_q[7:0]
+TOP.top.dev_phy.rx_ln7_q[131:0]
+TOP.top.dev_phy.slip_7_q[6:0]
+TOP.top.dev_phy.rx_ln7_slip[65:0]
+@28
+TOP.top.dev_ln7_rx_header[1:0]
+@22
+TOP.top.dev_ln7_rx_data[63:0]
+TOP.top.dev.dl.rx.lane7.descrambled_data[0:63]
+TOP.top.host.omi_host.dl.rx.lane7.ts1_cntr_q[3:0]
+@28
+TOP.top.host_phy.clk_dl
+TOP.top.dev.dl.rx.lane7.found_header
+TOP.top.dev.dl.rx.lane7.slip
+TOP.top.dev.dl.rx.phy7.need_slip
 @200
 -Descrambled Link
 @22
@@ -86,9 +184,50 @@ TOP.top.dev.dl.rx.lane4.descrambled_data[0:63]
 TOP.top.dev.dl.rx.lane5.descrambled_data[0:63]
 TOP.top.dev.dl.rx.lane6.descrambled_data[0:63]
 TOP.top.dev.dl.rx.lane7.descrambled_data[0:63]
+TOP.top.host.omi_host.dl.tx.ctl.lfsr_q[0:22]
+TOP.top.dev.dl.tx.ctl.lfsr_q[0:22]
+@28
+TOP.top.host.omi_host.dl.rx.lane0.training_enable
+@22
+TOP.top.host.omi_host.dl.rx.lane0.ts1_cntr_q[3:0]
+@200
+-HOST_PHY
+@22
+TOP.top.host_phy.ratio_max[9:0]
+TOP.top.host_phy.slip_q[6:0]
+TOP.top.host.omi_host.dl.tx.ctl.disabled_tx_lanes_q[7:0]
+TOP.top.host.omi_host.dl.tx.ctl.disabled_rx_lanes_q[7:0]
+@200
+-DEV_PHY
+@22
+TOP.top.dev_phy.ratio_max[9:0]
+TOP.top.dev_phy.slip_q[6:0]
+TOP.top.dev_phy.slip_0_q[6:0]
+TOP.top.dev_phy.slip_1_q[6:0]
+TOP.top.dev_phy.slip_2_q[6:0]
+TOP.top.dev_phy.slip_3_q[6:0]
+TOP.top.dev_phy.slip_4_q[6:0]
+TOP.top.dev_phy.slip_5_q[6:0]
+TOP.top.dev_phy.slip_6_q[6:0]
+TOP.top.dev_phy.slip_7_q[6:0]
+@28
+TOP.top.dev_phy.clk_dl
+@22
+TOP.top.dev.dl.tx.ctl.disabled_tx_lanes_q[7:0]
+TOP.top.dev.dl.tx.ctl.disabled_rx_lanes_q[7:0]
 @200
 -WB
 @28
+TOP.top.host_phy.sync_dl_0_q
+TOP.top.host_phy.sync_dl_1_q
+TOP.top.host_phy.sync_dl
+TOP.top.host_phy.synced_dl_q
+@22
+TOP.top.host_phy.ratio_counter_d[9:0]
+TOP.top.host_phy.ratio_counter_q[9:0]
+@28
+TOP.top.host_phy.clk
+TOP.top.host_phy.clk_dl
 [color] 2
 TOP.wb_cyc
 [color] 2
@@ -111,6 +250,8 @@ TOP.wb_dat_o[31:0]
 @200
 -WB_OMI_HOST
 @28
+TOP.top.host.cmdseq_q[2:0]
+TOP.top.host.tl_ready
 TOP.top.host.wb_cmd_val
 TOP.top.host.tl_ready
 @22
@@ -129,6 +270,30 @@ TOP.top.host.omi_host.tl.OCX_TLX_PARSER.dlx_tlx_flit[511:0]
 TOP.top.host.omi_host.tl.OCX_TLX_PARSER.tlx_afu_resp_opcode[7:0]
 @200
 -DL
+@28
+TOP.top.host.dlx_reset
+TOP.top.host.omi_host.dl.dlx_tlx_link_up
+TOP.top.host.omi_host.dl.tx.ctl.tsm_advance
+@22
+[color] 1
+TOP.top.host.omi_host.dl.tx.ctl.tsm_q[2:0]
+@28
+TOP.top.host.omi_host.dl.rx.phy0.found_pattern_a
+TOP.top.host.omi_host.dl.tx.ctl.pat_a_done
+TOP.top.host.omi_host.dl.rx.lane0.pattern_a_q
+@22
+TOP.top.host.omi_host.dl.rx.found_a[7:0]
+TOP.top.host.omi_host.dl.tx.ctl.rx_tx_pattern_a[7:0]
+TOP.top.host.omi_host.dl.tx.ctl.mask_pattern_a[7:0]
+@28
+TOP.top.host.omi_host.dl.tx.ctl.det_a
+TOP.top.host.omi_host.dl.tx.ctl.det_b
+@22
+TOP.top.host.omi_host.dl.tx.ctl.a_cnt_q[3:0]
+TOP.top.host.omi_host.dl.tx.ctl.b_cnt_q[3:0]
+TOP.top.host.omi_host.dl.rx.found_sync[7:0]
+@28
+TOP.top.dev.dl.tx.q0.tp_deskew
 @22
 TOP.top.host.omi_host.dl.rx.lane0.lfsr_q[0:22]
 TOP.top.host.omi_host.dl.tx.ctl.lfsr_q[0:22]
@@ -142,10 +307,6 @@ TOP.top.host.omi_host.dl.rx.lane0.lfsr_unlock
 TOP.top.host.omi_host.dl.tx.gbx0.ctl_gb_seq[6:0]
 @28
 TOP.top.host.omi_host.dl.tx.ctl.tsm_advance
-@22
-[color] 1
-TOP.top.host.omi_host.dl.tx.ctl.tsm_q[2:0]
-@28
 TOP.top.host.omi_host.dl.tx.ctl.ctl_flt_stall
 TOP.top.host.omi_host.dl.tx.ctl.lfsr_advance
 @22
@@ -153,10 +314,6 @@ TOP.top.host.omi_host.dl.tx.ctl.lfsr_q[0:22]
 @28
 TOP.top.host.omi_host.dl.tx.ctl.ts3_done
 TOP.top.host.omi_host.dl.tx.ctl.flt_ready_q
-@22
-TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
-TOP.top.host.omi_host.dl.tx.ctl.b_cnt_q[3:0]
-@28
 TOP.top.host.omi_host.dl.tx.gbx0.phy_training
 @22
 TOP.top.dev.dl.tx.ctl.lfsr_q[0:22]
@@ -164,7 +321,6 @@ TOP.top.dev.dl.rx.block_lock_int[7:0]
 @28
 TOP.top.dev.dl.rx.lane0.find_ts
 TOP.top.dev.dl.rx.lane0.deskew_enable
-TOP.top.dev.dl.tx.q0.tp_deskew
 TOP.top.dev.dl.tx.q0.dl_training
 TOP.top.dev.dl.tx.q0.ctl_que_tx_ts1
 @22
@@ -202,10 +358,44 @@ TOP.top.dev.dl.rx.lane0.bad_ts_d1_q
 TOP.top.dev.dl.rx.lane0.bad_ts_d2_q
 @200
 -Device
+@22
+[color] 1
+TOP.top.dev.dl.tx.ctl.tsm_q[2:0]
+TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
 @28
+TOP.top.dev.dl.tx.ctl.det_a
+@22
+TOP.top.dev.dl.tx.ctl.mask_pattern_a[7:0]
+TOP.top.dev.dl.tx.ctl.rx_tx_pattern_a[7:0]
+@28
+TOP.top.dev.dl.rx.lane0.data_aligned
+TOP.top.dev.dl.rx.lane1.data_aligned
+TOP.top.dev.dl.rx.lane2.data_aligned
+TOP.top.dev.dl.rx.lane3.data_aligned
+TOP.top.dev.dl.rx.lane4.data_aligned
+TOP.top.dev.dl.rx.lane5.data_aligned
+TOP.top.dev.dl.rx.lane6.data_aligned
+TOP.top.dev.dl.rx.lane7.data_aligned
+@22
+TOP.top.dev.dl.tx.ctl.rx_tx_pattern_a[7:0]
+TOP.top.dev.dl.tx.ctl.mask_pattern_a[7:0]
+@28
+TOP.top.dev.dl.rx.lane0.pattern_a_q
+TOP.top.dev.dl.tx.ctl.det_a
+TOP.top.dev.dl.tx.ctl.det_b
 TOP.top.dev.dl.rx.lane0.lfsr_init_check
 TOP.top.dev.dl.rx.lane0.match_pattern1
 @22
+TOP.top.dev.dl.rx.found_sync[7:0]
+@28
+TOP.top.dev.dl.tx.ctl.tpulse
+TOP.top.dev.dl.rx.phy0.found_pattern_a
+TOP.top.dev.dl.rx.phy0.found_pattern_b
+@22
+TOP.top.dev.dl.rx.found_b[7:0]
+TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
+TOP.top.dev.dl.tx.ctl.b_cnt_q[3:0]
+TOP.top.dev.dl.rx.lane0.b_cntr_q[6:0]
 TOP.top.dev.dl.rx.lane0.lfsr_q[0:22]
 @28
 TOP.top.dev.dl.rx.lane0.lfsr_running_q
@@ -221,8 +411,6 @@ TOP.top.dev.rsp_credits_q[6:0]
 TOP.top.dev.rsp_valid
 @22
 TOP.top.dev.rsp_opcode[7:0]
-[color] 1
-TOP.top.dev.dl.tx.ctl.tsm_q[2:0]
 @28
 TOP.top.dev.dl.tx.ctl.lfsr_advance
 TOP.top.dev.dl.rx.lane0.lfsr_locked_q
@@ -231,37 +419,20 @@ TOP.top.dev.dl.tx.ctl.lfsr_q[0:22]
 TOP.top.dev.dl.rx.lane0.ts1_cntr_q[3:0]
 @28
 TOP.top.dev.dl.tx.ctl.ctl_gb_tx_b_pattern
-@22
-TOP.top.dev.dl.rx.found_sync[7:0]
-@28
 TOP.top.dev.dl.rx.phy0.cycle_cntr_q[2:0]
 TOP.top.dev.dl.rx.phy0.header[1:0]
 @22
 TOP.top.dev.dl.rx.phy0.ln_data_in[63:0]
 TOP.top.dev.dl.rx.phy0.ln_data_q[63:0]
-@28
-TOP.top.dev.dl.rx.phy0.found_pattern_a
-TOP.top.dev.dl.rx.phy0.found_pattern_b
-@22
-TOP.top.dev.dl.rx.found_b[7:0]
 TOP.top.dev.dl.rx.lane0.a_cntr_q[6:0]
 @28
 TOP.top.dev.dl.rx.lane0.valid_q
-TOP.top.dev.dl.rx.lane0.found_pattern_b
-@22
-TOP.top.dev.dl.rx.lane0.b_cntr_q[6:0]
-@28
 TOP.top.host.omi_host.dl.rx.lane0.count_pattern_b_q
 TOP.top.host.omi_host.dl.rx.lane0.found_sync_pattern
 @22
 TOP.top.dev.dl.rx.rx_tx_pattern_b[7:0]
 @28
 TOP.top.dev.dl.tx.ctl.tsm_advance
-TOP.top.dev.dl.tx.ctl.tpulse
-@22
-TOP.top.dev.dl.tx.ctl.a_cnt_q[3:0]
-TOP.top.dev.dl.tx.ctl.b_cnt_q[3:0]
-@28
 TOP.top.dev.dl.tx.ctl.pat_b_done
 [pattern_trace] 1
 [pattern_trace] 0

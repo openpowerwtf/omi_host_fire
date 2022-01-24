@@ -7,6 +7,14 @@ cd obj_dir;make -f Vtop.mk;cd ..
 obj_dir/Vtop
 */
 
+
+/*
+
+
+
+*/
+
+
 // if tracing
 #define TRACING
 
@@ -39,12 +47,19 @@ double sc_time_stamp() {      // $time in verilog
    return main_time;
 }
 
+// driver has to account for stretching signals if > 1
+//unsigned int clk_wb =  1, clk_omi =  1, clk_phy = 1;   // 512+16 gpio
+//unsigned int clk_wb = 1, clk_omi = 64, clk_phy = 1;  // 8+1 gpio
+unsigned int clk_wb = 1, clk_omi = 66, clk_phy = 1;  // 8 gpio
+
+
 void tick(void) {
    main_time++;
 
    m->eval();
    if (t && tracing) t->dump(main_time*10-2);
 
+   /*
    // rising
    m->clk = 1;
    m->clk_156_25MHz = 1;
@@ -54,6 +69,42 @@ void tick(void) {
    // falling
    m->clk = 0;
    m->clk_156_25MHz = 0;
+   m->eval();
+   if (t && tracing) {
+      t->dump(main_time*10+5);
+      t->flush();
+   }
+   */
+   // rising
+   if (clk_wb == 1 || main_time % clk_wb == 0) {
+      m->clk_wb = 1;
+   } else if (main_time % clk_wb == (clk_wb/2)-1) {
+      m->clk_wb = 0;
+   }
+   if (clk_omi == 1 || main_time % clk_omi == 0) {
+      m->clk_omi = 1;
+   } else if (main_time % clk_omi == (clk_omi/2)-1) {
+      m->clk_omi = 0;
+   }
+   if (clk_phy == 1 || main_time % clk_phy == 0) {
+      m->clk_phy = 1;
+   } else if (main_time % clk_phy == (clk_phy/2)-1) {
+      m->clk_phy = 0;
+   }
+
+   m->eval();
+   if (t && tracing) t->dump(main_time*10);
+
+   if (clk_wb == 1) {
+      m->clk_wb = 0;
+   }
+   if (clk_omi == 1) {
+      m->clk_omi = 0;
+   }
+   if (clk_phy == 1) {
+      m->clk_phy = 0;
+   }
+
    m->eval();
    if (t && tracing) {
       t->dump(main_time*10+5);
@@ -75,9 +126,9 @@ int main(int argc, char **argv) {
       t->open(vcdFile);
 #endif
 
-
-   unsigned int runCycles =  1000000;
-   unsigned int startTrace = 2000000;
+   unsigned int runCycles =  7500*clk_omi;
+   unsigned int startTrace = 0000*clk_omi;
+   unsigned int msgCycles = runCycles/25;
    unsigned adrMask = 0x0000003C; // restrict address range
 
 
@@ -142,15 +193,23 @@ int main(int argc, char **argv) {
    cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
 
+   cout << "Clock ratios: wb=" << clk_wb << " omi=" << clk_omi << " phy=" << clk_phy << endl;
+
    // Reset
-   cout << "Resetting host, holding dev.." << endl;
+   //cout << "Resetting host, holding dev.." << endl;
+   cout << "Resetting host, NOT holding dev for now!!!!!" << endl;
    m->rst_host = 1;
    m->rst_dev = 1;
-   tick();
-   tick();
-   tick();
+   for (i = 0; i < clk_omi; i++) {
+      tick();
+      tick();
+      tick();
+   }
    m->rst_host = 0;
-   tick();
+   m->rst_dev = 0;
+   for (i = 0; i < clk_omi; i++) {
+      tick();
+   }
    cout << "Go!" << endl;
    tick();
    //cout << "Enabling link..." << endl;
@@ -159,6 +218,9 @@ int main(int argc, char **argv) {
    /*
    assign io_pb_o0_rx_init_done = (xtsm_q == pulse_done) ? {8{gtwiz_reset_rx_done_in & gtwiz_buffbypass_rx_done_in & gtwiz_userclk_rx_active_in}} :
    */
+
+
+   // should i be emulating these in omi_phygpio?  they would go active after the phy_init
    m->gtwiz_reset_rx_done_in = 1;
    m->gtwiz_buffbypass_rx_done_in = 1;
    m->gtwiz_userclk_rx_active_in = 1;
@@ -177,6 +239,14 @@ int main(int argc, char **argv) {
    cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;
 
    // Sim loop
+
+
+// *****************************************************************************************
+   // this needs to account for clk_wb, etc. not being 1:1
+// *****************************************************************************************
+
+
+
    while (!Verilated::gotFinish() && !done) {
 
       if (!tracing && startTrace <= main_time) tracing = true;
@@ -189,16 +259,6 @@ int main(int argc, char **argv) {
       }
 
       tick();
-
-      if (dlx_config_info != m->top->host->omi_host->dlx_config_info) {
-         dlx_config_info = m->top->host->omi_host->dlx_config_info;
-         cout << "DLX Config: " << setw(8) << hex << dlx_config_info << endl;
-      }
-
-      if (startRetrain != m->top->host->omi_host->dl->tx->ctl->start_retrain_q) {
-         startRetrain = m->top->host->omi_host->dl->tx->ctl->start_retrain_q;
-         cout << "startRetrain=" << setw(1) << startRetrain << endl;
-      }
 
       if (main_time > 50 && (int)m->rst_dev == 1) {
          cout << "Releasing dev.." << endl;
@@ -219,7 +279,7 @@ int main(int argc, char **argv) {
          gtwiz_reset_rx_datapath_out--;
       }
       */
-      if ((main_time % 100) == 0) {
+      if ((main_time % msgCycles) == 0) {
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time << endl; //" count=" << m->rootp->top__DOT__dufimem__DOT__count_q + 0 << endl;
       }
       if (!reqPending) {

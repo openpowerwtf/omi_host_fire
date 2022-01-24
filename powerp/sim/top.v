@@ -1,12 +1,32 @@
+
+/* NEED TO CHECK THIS!
+
+                top.v:411:1: ... note: In file included from top.v
+%Warning-UNOPTFLAT: src/omi_dev.v:219:25: Signal unoptimizable: Feedback to clock or circular logic: 'top.dev.rsp_valid'
+                                        : ... In instance top.dev
+  219 |    wire                 rsp_valid;
+
+
+*/
+
+
+
+
+
+
 // wb_omi_host <-> omi_phygpio <-> omi_phygpio <-> omi_dev
 
 `timescale 1 ns / 1 ns
 
 module top #(
    parameter PHY_BITS = 64,
-   parameter GPIO_RX_TX = 512, GPIO_HDR = 16 // will need TL_DL_CLK_RATIO
+   //parameter GPIO_RX_TX = 512, GPIO_HDR = 16     // phy = 1:1 OMI
+   //parameter GPIO_RX_TX = 8, GPIO_HDR = 1        // phy = 64:1 OMI
+   parameter GPIO_RX_TX = 8, GPIO_HDR = 0          // phy = 6:1 OMI
 ) (
-   input                       clk,
+   input                       clk_wb,
+   input                       clk_omi,
+   input                       clk_phy,
    input                       rst_host,
    input                       rst_dev,
    input                       wb_stb,
@@ -49,7 +69,11 @@ wire dev_tsm_state4_to_5 = 1;
 
 wire                    host_dlx_reset;
 wire                    phy_host_tx_clk;
-wire   [GPIO_HDR-1:0]   phy_host_tx_hdr;
+if (GPIO_HDR > 0)
+   wire   [GPIO_HDR-1:0]   phy_host_tx_hdr;
+else
+   wire                    phy_host_tx_hdr; // unused
+
 wire   [GPIO_RX_TX-1:0] phy_host_tx_dat;
 wire          ln0_rx_valid;
 wire          ln1_rx_valid;
@@ -170,8 +194,8 @@ wire   [GPIO_HDR-1:0]   phy_dev_tx_hdr;
 wire   [GPIO_RX_TX-1:0] phy_dev_tx_dat;
 
 wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
-   .clk(clk),
-   .opt_gckn(clk),
+   .clk(clk_wb),
+   .opt_gckn(clk_omi),
    .rst(rst_host),
    .wb_stb(wb_stb),
    .wb_cyc(wb_cyc),
@@ -257,7 +281,8 @@ wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
 omi_phygpio #(
    .GPIO_RX_TX(GPIO_RX_TX), .GPIO_HDR(GPIO_HDR)
 ) host_phy (
-   .clk(clk),
+   .clk(clk_phy),
+   .clk_dl(clk_omi),
    .rst(rst_host),
    .ln0_rx_valid(ln0_rx_valid),
    .ln0_rx_header(ln0_rx_header),
@@ -328,7 +353,8 @@ omi_phygpio #(
 omi_phygpio #(
    .GPIO_RX_TX(GPIO_RX_TX), .GPIO_HDR(GPIO_HDR)
 ) dev_phy (
-   .clk(clk),
+   .clk(clk_phy),
+   .clk_dl(clk_omi),
    .rst(rst_dev),
    .ln0_rx_valid(dev_ln0_rx_valid),
    .ln0_rx_header(dev_ln0_rx_header),
@@ -397,8 +423,8 @@ omi_phygpio #(
 );
 
 omi_dev #() dev (
-   .clk(clk),
-   .opt_gckn(clk),
+   .clk(clk_omi),
+   .opt_gckn(clk_omi),
    .rst(rst_dev),
    .ln0_rx_valid(dev_ln0_rx_valid),
    .ln0_rx_header(dev_ln0_rx_header),

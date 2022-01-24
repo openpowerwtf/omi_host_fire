@@ -21,6 +21,7 @@ if [[ -z "$1" ]] ; then
 
    obj_dir/Vtop
    vcd2fst wtf.vcd wtf.fst
-   gtkwave wtf.fst wtf.gtkw
+   #gtkwave wtf.fst wtf.gtkw
+   gtkwave wtf.fst wtf_dl.gtkw
 
 fi

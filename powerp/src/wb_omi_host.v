@@ -49,11 +49,10 @@
 `define TL_CMD_PR_RD_MEM 8'h28
 `define TL_CMD_PR_WR_MEM 8'h86
 //`define TL_RSP_NOP 8'h00
-`define TL_RSP_RTN_TLX_CREDITS 8'h01   // will i see these or is it tl-tlx only
-
-`define TLX_CMD_NOP 8'h00              // will i see these
-`define TLX_RSP_NOP 8'h00              // will i see these
-`define TLX_RSP_RTN_TL_CREDITS 8'h01   // will i see these or is it tl-tlx only
+//`define TL_RSP_RTN_TLX_CREDITS 8'h01
+//`define TLX_CMD_NOP 8'h00
+//`define TLX_RSP_NOP 8'h00
+//`define TLX_RSP_RTN_TL_CREDITS 8'h01
 `define TLX_RSP_RD_RESPONSE 8'h01
 `define TLX_RSP_RD_FAILED 8'h02
 `define TLX_RSP_WR_RESPONSE 8'h04
@@ -64,7 +63,8 @@
 `timescale 1ns / 10ps
 
 module wb_omi_host #(
-        parameter PHY_BITS = 8
+        parameter PHY_BITS = 8,
+        parameter OMI_CLK_RATIO = 1
 )
 (
         input                       clk,
@@ -191,16 +191,22 @@ module wb_omi_host #(
    wire                 ack_d;
    reg    [15:0]        error_q;
    wire   [15:0]        error_d;
+   reg    [$clog2(OMI_CLK_RATIO)-1:0] stretcher_q;
+   wire   [$clog2(OMI_CLK_RATIO)-1:0] stretcher_d;
+   reg    [$clog2(OMI_CLK_RATIO)-1:0] shrinker_q;
+   wire   [$clog2(OMI_CLK_RATIO)-1:0] shrinker_d;
+   reg    [3:0]         cmd_credits_q;
+   wire   [3:0]         cmd_credits_d;
+   reg    [5:0]         cmd_data_credits_q;
+   wire   [5:0]         cmd_data_credits_d;
 
    wire                 wb_cmd_val;
    wire                 wb_cmd_we;
    wire   [3:0]         wb_cmd_be;
    wire   [31:0]        wb_cmd_adr;
    wire   [31:0]        wb_cmd_dat;
-
    wire                 idle;
    wire                 tl_ready /* verilator public */;
-
    wire                 cmd_valid;
    wire   [7:0]         cmd_opcode;
    wire   [63:0]        cmd_pa;
@@ -214,20 +220,16 @@ module wb_omi_host #(
    wire   [15:0]        cmd_capptag;
    wire   [511:0]       cmd_data_bus;
    wire                 cmd_data_bdi;
-
+   wire                 tlx_rsp_valid;
+   wire                 rsp_valid;
    wire                 rsp_data_valid;
    wire   [2:0]         rsp_data_cnt;
    wire   [511:0]       rsp_data_bus;
    wire                 rsp_bad;
-
-   reg    [3:0]         cmd_credits_q;
-   wire   [3:0]         cmd_credits_d;
    wire   [3:0]         cmd_initial_credits;
    wire                 cmd_credits_inc;
    wire                 cmd_credits_dec;
    wire                 cmd_credits_hold;
-   reg    [5:0]         cmd_data_credits_q;
-   wire   [5:0]         cmd_data_credits_d;
    wire   [5:0]         cmd_data_initial_credits;
    wire                 cmd_data_credits_inc;
    wire                 cmd_data_credits_dec;
@@ -244,12 +246,16 @@ module wb_omi_host #(
          cmdseq_q <= 'b111;
          cmd_credits_q <= cmd_initial_credits;
          cmd_data_credits_q <= cmd_data_initial_credits;
+         stretcher_q <= 'h0;
+         shrinker_q <= 'h0;
       end else begin
          error_q <= error_d;
          ack_q <= ack_d;
          cmdseq_q <= cmdseq_d;
          cmd_credits_q <= cmd_credits_d;
          cmd_data_credits_q <= cmd_data_credits_d;
+         stretcher_q <= stretcher_d;
+         shrinker_q <= shrinker_d;
       end
    end
 
@@ -378,7 +384,21 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    //*------------------------------------------------
    //tbl cmdseq
 
-   assign cmd_valid = cmd_tkn;
+
+   // hold cmd_valid and cmd_data_valid for n cycles (n=omi:wb clk ratio)
+   // rsp_valid can only be sampled 1 in n cycles (create one cycle pulse that cant come back
+   //   until it goes away (overlap cmd/rsp), or wait for rsp_valid=0 (no overlap))
+
+   assign stretcher_d = cmd_tkn ? OMI_CLK_RATIO - 1 :
+                        cmd_valid ? stretcher_q - 1 : 0;
+   assign cmd_valid = cmd_tkn | stretcher_q != 0;
+   assign cmd_data_valid = cmd_valid & wb_cmd_we;
+
+   assign shrinker_d = tlx_rsp_valid ? OMI_CLK_RATIO - 1 :
+                       shrinker_q > 0 ? shrinker_q - 1 : 0;
+   assign rsp_valid = tlx_rsp_valid & shrinker_q == 0;
+
+   //assign cmd_valid = cmd_tkn;
    assign cmd_opcode = wb_cmd_we ? `TL_CMD_PR_WR_MEM : `TL_CMD_PR_RD_MEM;
    assign cmd_pa = {
       wb_cmd_we ? wb_cmd_be : 4'b0,    // or just always ignore 63:60 in device
@@ -394,7 +414,7 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    assign cmd_resp_code = 3'h0;  // xlate_done, intrp_rdy
    assign cmd_capptag = 16'h0;
    // assume this is always taken when cmd is
-   assign cmd_data_valid = wb_cmd_we & cmd_valid;
+   //assign cmd_data_valid = wb_cmd_we & cmd_valid;
    assign cmd_data_bus = {{480{1'b1}}, wb_cmd_dat};   //wtf or vice versa????
    assign cmd_data_bdi = 0; //wtf ?
 
@@ -463,7 +483,7 @@ omi_host #() omi_host
 
    .afu_tlx_resp_initial_credit(rsp_initial_credits),
    .afu_tlx_resp_credit(rsp_credit),
-   .tlx_afu_resp_valid(rsp_valid),
+   .tlx_afu_resp_valid(tlx_rsp_valid),
    .tlx_afu_resp_opcode(rsp_opcode),
    .tlx_afu_resp_afutag(rsp_afutag),
    .tlx_afu_resp_code(rsp_code),

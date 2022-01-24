@@ -18,10 +18,10 @@
 // *! The background Specification upon which this is based is managed by and available from
 // *! the OpenCAPI Consortium.  More information can be found at https://opencapi.org.
 // *!***************************************************************************
- 
+
 `timescale 1ns / 1ps
 
- 
+
 module ocx_dlx_rx_lane_66 (
 
   ln_valid_in           // < input
@@ -54,7 +54,7 @@ module ocx_dlx_rx_lane_66 (
 
 //-- phy interface through rx
 input           ln_valid_in;            //-- data from phy is valid
-input  [1:0]    ln_header_in;           //-- header from the phy                           
+input  [1:0]    ln_header_in;           //-- header from the phy
 input  [63:0]   ln_data_in;             //-- data from the phy
 output [63:0]   ln_data_out;            //-- data to the common lane
 output          ln_slip_out;            //-- tell phy to slip
@@ -64,7 +64,7 @@ input           slip_in;                //-- common lane needs to slip to align 
 output [1:0]    ln_header_out;          //-- header to the common lane
 output          ln_valid_out;           //-- tell common lane if data is valid
 output          lane_inverted;          //-- This lane is inverted
-    
+
 output          found_pattern_a;        //-- aligned pattern A's detected on this lane
 output          found_pattern_b;        //-- pattern B detected on this lane
 output          found_sync_pattern;     //-- sync pattern detected on this lane
@@ -186,6 +186,7 @@ assign ln_slip_din              = (need_slip & ~(need_slip_d1_q | need_slip_d2_q
 assign need_slip = valid_in & (ab_slip | slip_in) & ~(need_slip_d1_q | need_slip_d2_q | need_slip_d3_q | need_slip_d4_q | need_slip_d5_q | need_slip_d6_q);
 //-- Note: need 3 down cycles between slips to make sure we look at new data before slipping again
 
+//wtf does this need to be a configurable setting?  or ignore in phy based on setting?
 assign need_slip_d1_din = ((valid_in & need_slip)      | (~valid_in & need_slip_d1_q));
 assign need_slip_d2_din = ((valid_in & need_slip_d1_q) | (~valid_in & need_slip_d2_q));
 assign need_slip_d3_din = ((valid_in & need_slip_d2_q) | (~valid_in & need_slip_d3_q));
@@ -210,7 +211,7 @@ assign cycle_cntr_din[2:0] =  (~find_a & ~find_b)              ?  3'b000        
                                                                  (cycle_cntr_q[2:0] );                               //-- default, including not valid or not training -> no change
 
 
-assign found_pattern_a_int = &({found_a[3:0],valid_in}) ;       //-- pattern A in all 4 spots 
+assign found_pattern_a_int = &({found_a[3:0],valid_in}) ;       //-- pattern A in all 4 spots
 assign found_pattern_a = found_pattern_a_int;
 
 assign found_a[0] = ( (cycle_cntr_q[2:0] == 3'd0) & (&(  data_beat[63:57]                   )) & (&(~data_beat[55:49])) ) |       //-- cycle 0: 1111 111x 0000 000x
@@ -274,42 +275,42 @@ assign found_std_pattern_b = (((cycle_cntr_q[2:0] == 3'd0) & (&(data_beat[63:49]
                              ( (cycle_cntr_q[2:0] == 3'd0) & (&(data_beat[31:17])) & (&(~data_beat[15:1 ]))   ) |                                                     //-- FFFF 0000 -- third possible spot
                              ( (cycle_cntr_q[2:0] == 3'd0) & found_partial_pattern_b1_q & (&(~header[1]))   )   |                                                     //-- 3FFF C000 last time and (0x) this time
                              ( (cycle_cntr_q[2:0] == 3'd0) & found_partial_pattern_b2_q & (&( header[1])) & (&(~data_beat[63:49])) ) |                              //-- 3FFF last time and (1x) 0000 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd1) & (&(data_beat[49:35])) & (&(~data_beat[33:19])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd1) & (&(data_beat[33:19])) & (&(~data_beat[17:3 ])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd1) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:51]))   ) |                            //-- FFFF last time and (00) 0003 this time
                              ( (cycle_cntr_q[2:0] == 3'd1) & (&(header[1:0]))         & (&(data_beat[63:51])) & (&(~data_beat[49:35])) ) |                            //-- none last time and (11) FFFC 0003 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd2) & (&(data_beat[51:37])) & (&(~data_beat[35:21])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd2) & (&(data_beat[35:21])) & (&(~data_beat[19:5 ])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd2) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:53])) ) |                              //-- found 3 FFFC last time and (00) 000 this time
                              ( (cycle_cntr_q[2:0] == 3'd2) & found_partial_pattern_b2_q & (&( header[1:0])) & (&( data_beat[63:53])) & (&(~data_beat[51:37])) ) |     //-- found 3 last time and (11) FFF0 000 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd3) & (&(data_beat[53:39])) & (&(~data_beat[37:23])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd3) & (&(data_beat[37:23])) & (&(~data_beat[21:7 ])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd3) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:55])) ) |                              //-- found F FFF0 last time and (00) 003 this time
                              ( (cycle_cntr_q[2:0] == 3'd3) & found_partial_pattern_b2_q & (&( header[1:0])) & (&( data_beat[63:55])) & (&(~data_beat[53:39])) ) |     //-- found F last time and (11) FFC0 003 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd4) & (&(data_beat[55:41])) & (&(~data_beat[39:25])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd4) & (&(data_beat[39:25])) & (&(~data_beat[23:9 ])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd4) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:57])) ) |                              //-- found 3F FFC0 last time and (00) 00 this time
                              ( (cycle_cntr_q[2:0] == 3'd4) & found_partial_pattern_b2_q & (&( header[1:0])) & (&( data_beat[63:57])) & (&(~data_beat[55:41])) ) |     //-- found 3F last time and (11) FF00 00 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd5) & (&(data_beat[57:43])) & (&(~data_beat[41:27])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd5) & (&(data_beat[41:27])) & (&(~data_beat[25:11])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd5) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:59])) ) |                              //-- found FF FF00 last time and (00) 03 this time
                              ( (cycle_cntr_q[2:0] == 3'd5) & found_partial_pattern_b2_q & (&( header[1:0])) & (&( data_beat[63:59])) & (&(~data_beat[57:43])) ) |     //-- found FF last time and (11) FC00 03 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd6) & (&(data_beat[59:45])) & (&(~data_beat[43:29])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd6) & (&(data_beat[43:29])) & (&(~data_beat[27:13])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd6) & found_partial_pattern_b1_q & (&(~header[1:0])) & (&(~data_beat[63:61])) ) |                              //-- found 3FF FC00 last time and (00) 0 this time
                              ( (cycle_cntr_q[2:0] == 3'd6) & found_partial_pattern_b2_q & (&( header[1:0])) & (&( data_beat[63:61])) & (&(~data_beat[59:45])) ) |     //-- found 3FF last time and (11) F000 0 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd7) & (&(data_beat[61:47])) & (&(~data_beat[45:31])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd7) & (&(data_beat[45:31])) & (&(~data_beat[29:15])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd7) & found_partial_pattern_b1_q & (&(~header[1:0])) & (~data_beat[63]) ) |                                    //-- found FFF F000 last time and (00) 3 this time
                              ( (cycle_cntr_q[2:0] == 3'd7) & found_partial_pattern_b2_q & (&( header[1:0])) &  data_beat[63] & (&(~data_beat[61:47])) ));             //-- found FFF last time and (11) C000 3 this time
-                                                                                                                                                                      
+
 assign found_partial_inv_pattern_b1_din = ( ~valid_in ) ? found_partial_inv_pattern_b1_q :                                           //-- if data is not valid, carry over past value
                                          (( (cycle_cntr_q[2:0] == 3'd4) & (&(~data_beat[15:1 ]))                         ) |         //--      FFFF at end of pattern in cycle 0
                                           ( (cycle_cntr_q[2:0] == 3'd5) & (&(~data_beat[17:3 ])) & (  data_beat[0   ]  )) |          //--    3 FFFC at end of pattern in cycle 1
@@ -334,42 +335,42 @@ assign found_inv_pattern_b = (((cycle_cntr_q[2:0] == 3'd4) & (&(~data_beat[63:49
                              ( (cycle_cntr_q[2:0] == 3'd4) & (&(~data_beat[31:17])) & (&(data_beat[15:1 ]))   ) |                                                     //-- FFFF 0000 -- third possible spot
                              ( (cycle_cntr_q[2:0] == 3'd4) & found_partial_inv_pattern_b1_q & (&(header[1]))  ) |                                                    //-- 3FFF C000 last time and (0x) this time
                              ( (cycle_cntr_q[2:0] == 3'd4) & found_partial_inv_pattern_b2_q & (&( ~header[1])) & (&(data_beat[63:49])) ) |                           //-- 3FFF last time and (1x) 0000 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd5) & (&(~data_beat[49:35])) & (&(data_beat[33:19])) ) |                                                       //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd5) & (&(~data_beat[33:19])) & (&(data_beat[17:3 ])) ) |                                                       //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd5) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:51]))   ) |                         //-- FFFF last time and (00) 0003 this time
                              ( (cycle_cntr_q[2:0] == 3'd5) & (&(~header[1:0]))         & (&(~data_beat[63:51])) & (&(data_beat[49:35])) ) |                            //-- none last time and (11) FFFC 0003 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd6) & (&(~data_beat[51:37])) & (&(data_beat[35:21])) ) |                                                          //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd6) & (&(~data_beat[35:21])) & (&(data_beat[19:5 ])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd6) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:53])) ) |                              //-- found 3 FFFC last time and (00) 000 this time
                              ( (cycle_cntr_q[2:0] == 3'd6) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) & (&( ~data_beat[63:53])) & (&(data_beat[51:37])) ) |    //-- found 3 last time and (11) FFF0 000 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd7) & (&(~data_beat[53:39])) & (&(data_beat[37:23])) ) |                                                           //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd7) & (&(~data_beat[37:23])) & (&(data_beat[21:7 ])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd7) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:55])) ) |                              //-- found F FFF0 last time and (00) 003 this time
                              ( (cycle_cntr_q[2:0] == 3'd7) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) & (&( ~data_beat[63:55])) & (&(data_beat[53:39])) ) |    //-- found F last time and (11) FFC0 003 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd0) & (&(~data_beat[55:41])) & (&(data_beat[39:25])) ) |                                                            //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd0) & (&(~data_beat[39:25])) & (&(data_beat[23:9 ])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd0) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:57])) ) |                              //-- found 3F FFC0 last time and (00) 00 this time
                              ( (cycle_cntr_q[2:0] == 3'd0) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) & (&( ~data_beat[63:57])) & (&(data_beat[55:41])) ) |    //-- found 3F last time and (11) FF00 00 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd1) & (&(~data_beat[57:43])) & (&(data_beat[41:27])) ) |                                                          //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd1) & (&(~data_beat[41:27])) & (&(data_beat[25:11])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd1) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:59])) ) |                              //-- found FF FF00 last time and (00) 03 this time
                              ( (cycle_cntr_q[2:0] == 3'd1) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) & (&( ~data_beat[63:59])) & (&(data_beat[57:43])) ) |    //-- found FF last time and (11) FC00 03 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd2) & (&(~data_beat[59:45])) & (&(data_beat[43:29])) ) |                                                          //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd2) & (&(~data_beat[43:29])) & (&(data_beat[27:13])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd2) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (&(data_beat[63:61])) ) |                              //-- found 3FF FC00 last time and (00) 0 this time
                              ( (cycle_cntr_q[2:0] == 3'd2) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) & (&( ~data_beat[63:61])) & (&(data_beat[59:45])) ) |    //-- found 3FF last time and (11) F000 0 this time
-                                                                                                                                                                      
+
                              ( (cycle_cntr_q[2:0] == 3'd3) & (&(~data_beat[61:47])) & (&(data_beat[45:31])) ) |                                                          //-- FFFF 0000 -- first possible spot
                              ( (cycle_cntr_q[2:0] == 3'd3) & (&(~data_beat[45:31])) & (&(data_beat[29:15])) ) |                                                          //-- FFFF 0000 -- second possible spot
                              ( (cycle_cntr_q[2:0] == 3'd3) & found_partial_inv_pattern_b1_q & (&(header[1:0])) & (data_beat[63]) ) |                                    //-- found FFF F000 last time and (00) 3 this time
                              ( (cycle_cntr_q[2:0] == 3'd3) & found_partial_inv_pattern_b2_q & (&( ~header[1:0])) &  ~data_beat[63] & (&(data_beat[61:47])) ));            //-- found FFF last time and (11) C000 3 this time
-                                                                                                                                                                      
+
 assign found_pattern_b_internal = (found_std_pattern_b | found_inv_pattern_b) & ~(|(post_slip_cnt_q[2:0])) & valid_in;     //-- found standard or inverted pattern B this cycle
 assign found_pattern_b          = found_pattern_b_internal;
 
@@ -382,7 +383,7 @@ assign found_partial_sync1_din = ( ~valid_in ) ? found_partial_sync1_q :        
                                   ( (cycle_cntr_q[2:0] == 3'd5) & (&(data_beat[25:19])) & (&(~data_beat[17:3])) & (&(data_beat[1:0])) ) |                             //--  3FC 0003 at end of pattern in cycle 5
                                   ( (cycle_cntr_q[2:0] == 3'd6) & (&(data_beat[27:21])) & (&(~data_beat[19:5])) & (&(data_beat[3:0])) ) |                             //--  FF0 000F at end of pattern in cycle 6
                                   ( (cycle_cntr_q[2:0] == 3'd7) & (&(data_beat[29:23])) & (&(~data_beat[21:7])) & (&(data_beat[5:0])) ));                             //-- 3FC0 003F at end of pattern in cycle 7
-                                                                                                                                                                    
+
 assign found_partial_sync2_din = ( ~valid_in ) ? found_partial_sync2_q :                                                                                              //-- if data is not valid, carry over past value
                                  (( (cycle_cntr_q[2:0] == 3'd1) & (&(data_beat[ 1:0])) ) |                                                                            //--    3 at end of pattern in cycle 1
                                   ( (cycle_cntr_q[2:0] == 3'd2) & (&(data_beat[ 3:0])) ) |                                                                            //--    F at end of pattern in cycle 2
@@ -473,5 +474,5 @@ always @(posedge rx_clk_in) begin
   found_partial_sync1_q           <= found_partial_sync1_din;
   found_partial_sync2_q           <= found_partial_sync2_din;
 end
-  
+
 endmodule //-- ocx_dlx_rx_lane_66
