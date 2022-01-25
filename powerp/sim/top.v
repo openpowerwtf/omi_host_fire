@@ -22,7 +22,8 @@ module top #(
    parameter PHY_BITS = 64,
    //parameter GPIO_RX_TX = 512, GPIO_HDR = 16     // phy = 1:1 OMI
    //parameter GPIO_RX_TX = 8, GPIO_HDR = 1        // phy = 64:1 OMI
-   parameter GPIO_RX_TX = 8, GPIO_HDR = 0          // phy = 6:1 OMI
+   parameter GPIO_RX_TX = 8, GPIO_HDR = 0,         // phy = 66:1 OMI
+   parameter OMI_CLK_RATIO = 66
 ) (
    input                       clk_wb,
    input                       clk_omi,
@@ -193,9 +194,12 @@ wire                    phy_dev_tx_clk;
 wire   [GPIO_HDR-1:0]   phy_dev_tx_hdr;
 wire   [GPIO_RX_TX-1:0] phy_dev_tx_dat;
 
-wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
+wb_omi_host #(
+   .PHY_BITS(PHY_BITS),
+   .OMI_CLK_RATIO(OMI_CLK_RATIO)
+) host (
    .clk(clk_wb),
-   .opt_gckn(clk_omi),
+   .clk_omi(clk_omi),
    .rst(rst_host),
    .wb_stb(wb_stb),
    .wb_cyc(wb_cyc),
@@ -279,7 +283,8 @@ wb_omi_host #(.PHY_BITS(PHY_BITS)) host (
 );
 
 omi_phygpio #(
-   .GPIO_RX_TX(GPIO_RX_TX), .GPIO_HDR(GPIO_HDR)
+   .GPIO_RX_TX(GPIO_RX_TX),
+   .GPIO_HDR(GPIO_HDR)
 ) host_phy (
    .clk(clk_phy),
    .clk_dl(clk_omi),

@@ -68,7 +68,7 @@ module wb_omi_host #(
 )
 (
         input                       clk,
-        input                       opt_gckn,
+        input                       clk_omi,
         input                       rst,
 
         input                       wb_cyc,
@@ -237,6 +237,10 @@ module wb_omi_host #(
    wire   [6:0]         rsp_initial_credits;
    wire                 init;
    wire                 trans_error;
+   wire                 tlx_cmd_credit;
+   wire                 cmd_credit;
+   wire                 tlx_cmd_data_credit;
+   wire                 cmd_data_credit;
 
    // FF
    always @(posedge clk) begin
@@ -386,17 +390,19 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
 
 
    // hold cmd_valid and cmd_data_valid for n cycles (n=omi:wb clk ratio)
-   // rsp_valid can only be sampled 1 in n cycles (create one cycle pulse that cant come back
-   //   until it goes away (overlap cmd/rsp), or wait for rsp_valid=0 (no overlap))
+   // rsp_valid, cmd_credit, cmd_data_credit can only be sampled 1 in n cycles
+   //wtf not sure this is copacetic!
 
    assign stretcher_d = cmd_tkn ? OMI_CLK_RATIO - 1 :
                         cmd_valid ? stretcher_q - 1 : 0;
    assign cmd_valid = cmd_tkn | stretcher_q != 0;
    assign cmd_data_valid = cmd_valid & wb_cmd_we;
 
-   assign shrinker_d = tlx_rsp_valid ? OMI_CLK_RATIO - 1 :
+   assign shrinker_d = (shrinker_q == 0) & (tlx_rsp_valid | tlx_cmd_credit | tlx_cmd_data_credit) ? OMI_CLK_RATIO - 1 :
                        shrinker_q > 0 ? shrinker_q - 1 : 0;
-   assign rsp_valid = tlx_rsp_valid & shrinker_q == 0;
+   assign rsp_valid = tlx_rsp_valid & shrinker_q == OMI_CLK_RATIO-1;
+   assign cmd_credit = tlx_cmd_credit & shrinker_q == OMI_CLK_RATIO-1;
+   assign cmd_data_credit = tlx_cmd_data_credit & shrinker_q == OMI_CLK_RATIO-1;
 
    //assign cmd_valid = cmd_tkn;
    assign cmd_opcode = wb_cmd_we ? `TL_CMD_PR_WR_MEM : `TL_CMD_PR_RD_MEM;
@@ -441,7 +447,7 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
 
 omi_host #() omi_host
 (
-   .clk(clk),
+   .clk(clk_omi),
    .rst(rst),
    .tlx_afu_ready(tl_ready),
 
@@ -463,7 +469,7 @@ omi_host #() omi_host
    .tlx_cfg_in_rcv_rate_capability_3(rcv_rate_capability_3),
 
    .tlx_afu_cmd_initial_credit(cmd_initial_credits),
-   .tlx_afu_cmd_credit(cmd_credit),
+   .tlx_afu_cmd_credit(tlx_cmd_credit),
    .afu_tlx_cmd_valid(cmd_valid),
    .afu_tlx_cmd_opcode(cmd_opcode),
    .afu_tlx_cmd_pa_or_obj(cmd_pa),
@@ -476,7 +482,7 @@ omi_host #() omi_host
    .afu_tlx_cmd_resp_code(cmd_resp_code),
    .afu_tlx_cmd_capptag(cmd_capptag),
    .tlx_afu_cmd_data_initial_credit(cmd_data_initial_credits),
-   .tlx_afu_cmd_data_credit(cmd_data_credit),
+   .tlx_afu_cmd_data_credit(tlx_cmd_data_credit),
    .afu_tlx_cdata_valid(cmd_data_valid),
    .afu_tlx_cdata_bus(cmd_data_bus),
    .afu_tlx_cdata_bdi(cmd_data_bdi),
@@ -611,7 +617,7 @@ omi_host #() omi_host
    .dlx_l6_tx_seq(dlx_l6_tx_seq),
    .dlx_l7_tx_seq(dlx_l7_tx_seq),
 
-   .opt_gckn(opt_gckn),
+   .opt_gckn(clk_omi),
    .dlx_reset(dlx_reset),  //wtf for phy??
    .ocde(ocde),
    .reg_04_val(reg_04_val),

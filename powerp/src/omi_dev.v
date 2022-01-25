@@ -334,7 +334,7 @@ module omi_dev #(
    assign mem_datr_d = (tlx_rd | tlx_wr) ? mem[tlx_cmd_pa[31:2]] : mem_datr_q;  // word addr
    assign mem_datw_d = tlx_cdata_valid ? tlx_cdata_bus[31:0] : mem_datw_q;
 
-   always @ (*) begin
+   always @(posedge clk) begin
       if (do_write) begin
          mem[mem_adr_q[31:2]] = {mem_be_q[3] ? mem_datw_q[31:24] : mem_datr_q[31:24],
                                  mem_be_q[2] ? mem_datw_q[23:16] : mem_datr_q[23:16],

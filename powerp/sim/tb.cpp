@@ -401,9 +401,10 @@ int main(int argc, char **argv) {
          }
       }
 
-      if ((main_time > runCycles) & !quiescing) {
-         cout << "Quiescing..." << endl;
-         quiescing = 100;
+      if ((main_time > runCycles) & !quiescing & !done) {
+         cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
+         cout << " Quiescing..." << endl;
+         quiescing = 5000;
       }
 
    }
