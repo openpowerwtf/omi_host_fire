@@ -193,6 +193,8 @@ module wb_omi_host #(
    wire   [15:0]        error_d;
    reg    [$clog2(OMI_CLK_RATIO)-1:0] stretcher_q;
    wire   [$clog2(OMI_CLK_RATIO)-1:0] stretcher_d;
+   reg    [$clog2(OMI_CLK_RATIO)-1:0] stretcher_1_q;
+   wire   [$clog2(OMI_CLK_RATIO)-1:0] stretcher_1_d;
    reg    [$clog2(OMI_CLK_RATIO)-1:0] shrinker_q;
    wire   [$clog2(OMI_CLK_RATIO)-1:0] shrinker_d;
    reg    [3:0]         cmd_credits_q;
@@ -251,6 +253,7 @@ module wb_omi_host #(
          cmd_credits_q <= cmd_initial_credits;
          cmd_data_credits_q <= cmd_data_initial_credits;
          stretcher_q <= 'h0;
+         stretcher_1_q <= 'h0;
          shrinker_q <= 'h0;
       end else begin
          error_q <= error_d;
@@ -259,6 +262,7 @@ module wb_omi_host #(
          cmd_credits_q <= cmd_credits_d;
          cmd_data_credits_q <= cmd_data_credits_d;
          stretcher_q <= stretcher_d;
+         stretcher_1_q <= stretcher_1_d;
          shrinker_q <= shrinker_d;
       end
    end
@@ -350,8 +354,6 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
                                ({6{cmd_data_credits_dec}} & cmd_data_credits_q - 1) |
                                ({6{cmd_data_credits_hold}} & cmd_data_credits_q);
 
-   assign rsp_credit = ack_q;
-
    // does ack also need to check rsp_data_valid? assume not since it's a pr_rd
 
    //tbl cmdseq
@@ -388,23 +390,30 @@ tl/ocx_tlx_framer.v:    assign   tlx_afu_cmd_data_initial_credit    =   6'b10000
    //*------------------------------------------------
    //tbl cmdseq
 
+   // clock crossing *****
+   //wtf not sure these are entirely copacetic!  close enough for govt work, esp. since no overlapping cmds/rsps
 
-   // hold cmd_valid and cmd_data_valid for n cycles (n=omi:wb clk ratio)
-   // rsp_valid, cmd_credit, cmd_data_credit can only be sampled 1 in n cycles
-   //wtf not sure this is copacetic!
+   // hold cmd_valid, cmd_data_valid, rsp_credit for n cycles (n=omi:wb clk ratio)
 
    assign stretcher_d = cmd_tkn ? OMI_CLK_RATIO - 1 :
                         cmd_valid ? stretcher_q - 1 : 0;
    assign cmd_valid = cmd_tkn | stretcher_q != 0;
    assign cmd_data_valid = cmd_valid & wb_cmd_we;
 
+   assign stretcher_1_d = ack_q ? OMI_CLK_RATIO - 1 :
+                          rsp_credit ? stretcher_1_q - 1 : 0;
+   assign rsp_credit = ack_q | stretcher_1_q != 0;
+
+   // sample rsp_valid, cmd_credit, cmd_data_credit for 1 in n cycles
+
    assign shrinker_d = (shrinker_q == 0) & (tlx_rsp_valid | tlx_cmd_credit | tlx_cmd_data_credit) ? OMI_CLK_RATIO - 1 :
                        shrinker_q > 0 ? shrinker_q - 1 : 0;
    assign rsp_valid = tlx_rsp_valid & shrinker_q == OMI_CLK_RATIO-1;
    assign cmd_credit = tlx_cmd_credit & shrinker_q == OMI_CLK_RATIO-1;
    assign cmd_data_credit = tlx_cmd_data_credit & shrinker_q == OMI_CLK_RATIO-1;
+   // clock crossing *****
 
-   //assign cmd_valid = cmd_tkn;
+
    assign cmd_opcode = wb_cmd_we ? `TL_CMD_PR_WR_MEM : `TL_CMD_PR_RD_MEM;
    assign cmd_pa = {
       wb_cmd_we ? wb_cmd_be : 4'b0,    // or just always ignore 63:60 in device

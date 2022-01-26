@@ -126,8 +126,8 @@ int main(int argc, char **argv) {
       t->open(vcdFile);
 #endif
 
-   unsigned int runCycles =  7500*clk_omi;
-   unsigned int startTrace = 0000*clk_omi;
+   unsigned int runCycles  =  1000000*clk_omi;
+   unsigned int startTrace =   999000*clk_omi;
    unsigned int msgCycles = runCycles/25;
    unsigned adrMask = 0x0000003C; // restrict address range
 
@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
    cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
    srand(0x8675309);  //wtf NOT WORKING??@?@?@
 
-   cout << "Clock ratios: wb=" << clk_wb << " omi=" << clk_omi << " phy=" << clk_phy << endl;
+   cout << "Clock ratios: wb=" << dec << clk_wb << " omi=" << clk_omi << " phy=" << clk_phy << endl;
 
    // Reset
    //cout << "Resetting host, holding dev.." << endl;
@@ -253,7 +253,7 @@ int main(int argc, char **argv) {
 
       if (quiescing) {
          quiescing--;
-         if (quiescing == 0) {
+         if (quiescing == 1) {
             done = true;
          }
       }
@@ -401,13 +401,16 @@ int main(int argc, char **argv) {
          }
       }
 
-      if ((main_time > runCycles) & !quiescing & !done) {
+      if ((main_time > runCycles) & !quiescing) {
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
          cout << " Quiescing..." << endl;
-         quiescing = 5000;
+         quiescing = 100 * clk_omi;
       }
 
    }
+
+   cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
+   cout << " Sim complete." << endl;
 
 #ifdef TRACING
    t->close();

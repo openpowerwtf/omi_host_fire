@@ -19,6 +19,7 @@ fi
 
 if [[ -z "$1" ]] ; then
 
+   #obj_dir/Vtop +verilated+seed=8675309  # this sets verilator seed - can it be done by code??
    obj_dir/Vtop
    vcd2fst wtf.vcd wtf.fst
    #gtkwave wtf.fst wtf.gtkw
