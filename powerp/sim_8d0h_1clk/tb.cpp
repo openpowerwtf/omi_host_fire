@@ -5,16 +5,11 @@ verilator --cc --exe --trace -Wno-fatal -Wno-Litendian -Isrc -I./src/dl -I./src/
 
 cd obj_dir;make -f Vtop.mk;cd ..
 obj_dir/Vtop
-
-m->top->host->omi_host->dl->reg_04_val = 0x00800000;
-
 */
 
 
 /*
-
-
-
+version: all 1:1 clk, with rxvalid throttle
 */
 
 
@@ -25,9 +20,6 @@ m->top->host->omi_host->dl->reg_04_val = 0x00800000;
 #include <iostream>
 #include <iomanip>
 #include <experimental/random>
-#include <time.h>
-#include <chrono>
-#include <iomanip>
 
 #include "Vtop.h"
 #include "verilated.h"
@@ -49,72 +41,15 @@ vluint64_t main_time = 0;     // in units of timeprecision used in verilog or --
 
 using namespace std;
 
-
-/*** configuration *******************************************************************************/
-
-// driver has to account for stretching signals if > 1
-//unsigned int clk_wb =  1, clk_omi =  1, clk_phy = 1;   // 512+16 gpio
-//unsigned int clk_wb = 1, clk_omi = 64, clk_phy = 1;  // 8+1 gpio
-unsigned int clk_wb = 1, clk_omi = 66, clk_phy = 1;  // 8 gpio (h+d combined)
-
-unsigned int seed = -1;           // random
-//unsigned int seed = 0x8675309;  // can also set with +verilator+seed+<value> on cmine; would check that first
-//unsigned int seed = 0x4564c3f0;
-
-/*
-unsigned int runCycles  =  15000*clk_omi;
-unsigned int startTrace =   9990*clk_omi;
-*/
-/**/
-unsigned int runCycles  =   4000*clk_omi;
-unsigned int startTrace =   5000*clk_omi;
-unsigned int msgCycles  = runCycles/25;
-unsigned adrMask = 0x0000003C; // restrict address range
-
-
-// works: 0, 0
-/*
-unsigned int rst_host_cyc =       0 * clk_omi,
-             rst_dev_cyc =      100 * clk_omi;
-*/
-
-unsigned int rst_host_cyc =     -1, // random
-             rst_dev_cyc =      -1; // random
-
-/*
-unsigned int rst_host_cyc =     0, // start
-             rst_dev_cyc =      0; // start
-*/
-
-// seed: 0x8675309
-// from 20-50 for dev,
-// bad: 23,26,27,34,35,42,43.45 (host)   46 (dev)
-/*
-unsigned int rst_host_cyc =     20 * clk_omi,
-             rst_dev_cyc =      20 * clk_omi;
-*/
-// seed: 0x8675309
-// from 20-28 for dev,
-// bad: 26 (host)
-/*
-unsigned int rst_host_cyc =     520,
-             rst_dev_cyc =      528;
-*/
-
-/*** configuration *******************************************************************************/
-
-
-
 double sc_time_stamp() {      // $time in verilog
    return main_time;
 }
 
-tm nowtime() {
-   auto ts = chrono::system_clock::now();
-   time_t now_tt = chrono::system_clock::to_time_t(ts);
-   tm t = *localtime(&now_tt);
-   return(t);
-}
+// driver has to account for stretching signals if > 1
+//unsigned int clk_wb =  1, clk_omi =  1, clk_phy = 1;   // 512+16 gpio
+//unsigned int clk_wb = 1, clk_omi = 64, clk_phy = 1;  // 8+1 gpio
+unsigned int clk_wb = 1, clk_omi = 1, clk_phy = 1;  // 8 gpio
+
 
 void tick(void) {
    main_time++;
@@ -189,43 +124,15 @@ int main(int argc, char **argv) {
       t->open(vcdFile);
 #endif
 
-   /*** seed ***/
-   /*
-   auto ts = chrono::system_clock::now();
-   time_t now_tt = chrono::system_clock::to_time_t(ts);
-   tm tm = *localtime(&now_tt);
-   */
-   int i;
-   tm tm;
+   unsigned int runCycles  =  5000*clk_omi;
+   unsigned int startTrace =     0*clk_omi;
+   unsigned int msgCycles = runCycles/25;
+   unsigned adrMask = 0x0000003C; // restrict address range
 
-   tm = nowtime();
-   cout << "Starting: " << put_time(&tm, "%c %Z") << endl;
-
-   unsigned int mem[1024/4];
-   for (i =0; i < 1024/4; i++) {
-      mem[i] = 0;
-   }
-
-   if (seed == -1) {
-      seed = (time(NULL) << 17) | (time(NULL) >> 15);
-      cout << "Randomizing seed." << endl;
-   }
-   srand(seed);                           // rand(), etc.
-   experimental::reseed(seed);            // experimentals
-   Verilated::randSeed(seed);             // verilator
-   cout << "Seed=0x" << setw(8) << setfill('0') << hex << seed << endl;
-
-   /*** initial randomization ***/
-   if (rst_host_cyc == -1) {
-      rst_host_cyc = experimental::randint(0, 200) * clk_omi;
-   }
-
-   if (rst_dev_cyc == -1) {
-      rst_dev_cyc = experimental::randint(0, 200) * clk_omi;
-   }
 
    bool ok = true;
    bool done = false;
+   int i;
    unsigned int quiescing = 0;
 
    unsigned int tx_data, tx_clk, rx_data, wb_ack;
@@ -240,10 +147,13 @@ int main(int argc, char **argv) {
                 gtwiz_buffbypass_rx_done_in, gtwiz_buffbypass_tx_done_in,
                 gtwiz_userclk_rx_active_in, gtwiz_userclk_tx_active_in,
                 gtwiz_reset_all_out, host_gtwiz_reset_rx_datapath_out, dev_gtwiz_reset_rx_datapath_out;
-   unsigned int dl_tsm, dlx_tsm;
    unsigned int dlx_config_info;
    unsigned int startRetrain = -1;
-   unsigned int countLoads = 0, countStores = 0;
+
+   unsigned int mem[1024/4];
+   for (i =0; i < 1024/4; i++) {
+      mem[i] = 0;
+   }
 
    // Init I/O
 
@@ -278,10 +188,14 @@ int main(int argc, char **argv) {
 
    if (startTrace == 0) tracing = true;
 
+   cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
+   srand(0x8675309);  //wtf NOT WORKING??@?@?@
+
    cout << "Clock ratios: wb=" << dec << clk_wb << " omi=" << clk_omi << " phy=" << clk_phy << endl;
 
    // Reset
-   cout << "Resetting host and dev." << endl;
+   //cout << "Resetting host, holding dev.." << endl;
+   cout << "Resetting host, NOT holding dev for now!!!!!" << endl;
    m->rst_host = 1;
    m->rst_dev = 1;
    for (i = 0; i < clk_omi; i++) {
@@ -289,24 +203,13 @@ int main(int argc, char **argv) {
       tick();
       tick();
    }
-
-   if (rst_host_cyc == 0) {
-      m->rst_host = 0;
-      cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
-      cout << " Releasing host reset." << endl;
+   m->rst_host = 0;
+   m->rst_dev = 0;
+   for (i = 0; i < clk_omi; i++) {
+      tick();
    }
-   if (rst_dev_cyc == 0) {
-      m->rst_dev = 0;
-      cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
-      cout << " Releasing device reset." << endl;
-   }
-
-   //for (i = 0; i < clk_omi; i++) {
-   //   tick();
-   //}
-   // cout << "Go!" << endl;
-   // tick();
-
+   cout << "Go!" << endl;
+   tick();
    //cout << "Enabling link..." << endl;
    //m->cfg &= 0x7FFFFFFF;      // enable link after phy clock running
 
@@ -355,16 +258,9 @@ int main(int argc, char **argv) {
 
       tick();
 
-      if (main_time >= rst_host_cyc && (int)m->rst_host == 1) {
-         m->rst_host = 0;
-         cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
-         cout << " Releasing host reset." << endl;
-      }
-
-      if (main_time >= rst_dev_cyc && (int)m->rst_dev == 1) {
+      if (main_time > 50 && (int)m->rst_dev == 1) {
+         cout << "Releasing dev.." << endl;
          m->rst_dev = 0;
-         cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
-         cout << " Releasing device reset." << endl;
       }
 
       // see if this gets me past tsm=4 with omi_phygpio
@@ -456,7 +352,6 @@ int main(int argc, char **argv) {
          data = m->wb_dat_o;
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
          cout << " ACK RD  data=" << setw(8) << setfill('0') << hex << data << endl;
-         countLoads++;
          if (data != mem[reqAdr]) {
             cout << " ** MISCOMPARE Exp @" << setw(8) << setfill('0') << hex << reqAdr << "=" << setw(8) << mem[reqAdr] << " **" << endl;
             quiescing = 100;
@@ -469,7 +364,6 @@ int main(int argc, char **argv) {
          m->wb_stb = 0;
          cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
          cout << " ACK WR" << endl;
-         countStores++;
          reqPending = false;
       }
 
@@ -499,7 +393,7 @@ int main(int argc, char **argv) {
 
       if (!tlxReady) {
          tlxReady = m->rootp->top->dev->tlx_ready;
-         if (tlxReady) {
+         if (tlReady) {
             cout << "cyc=" << setw(8) << setfill('0') << dec << main_time;
             cout << " TLX says ready!" << endl;
          }
@@ -520,28 +414,10 @@ int main(int argc, char **argv) {
    t->close();
 #endif
 
-   cout << endl;
-   cout << endl;
-
-   if (!dlLinkUp | !dlxLinkUp | !tlReady | !tlxReady) {
-      ok = false;
-      cout << "Links not up!" << endl;;
-      cout << "DL:" << dlLinkUp << "  TL:" << tlReady << "  DLx:" << dlxLinkUp << "  TLx:" << tlxReady;
-      dl_tsm = m->top->host->omi_host->dl->tx->ctl->tsm_q;
-      dlx_tsm = m->top->dev->dl->tx->ctl->tsm_q;
-      cout << "    TSM:  DL=" << dl_tsm << "  DLX=" << dlx_tsm << endl << endl;
-   }
-
    if (reqPending) {
       ok = false;
       cout << "Request is outstanding!" << endl;
    }
-
-   cout << " Loads: " << setw(8) << countLoads << endl;
-   cout << "Stores: " << setw(8) << countStores << endl;
-
-   cout << endl;
-   cout << endl;
 
    cout << "Done." << endl;
    if (ok) {
@@ -549,10 +425,10 @@ int main(int argc, char **argv) {
    } else {
       cout << endl << "You are worthless and weak!" << endl << endl;
    }
-   cout << "Seed=0x" << setw(8) << setfill('0') << hex << seed << endl;
+   cout << "Seed=" << setw(8) << setfill('0') << hex << 0x8675309 << endl;
 
    m->final();
 
-   exit(ok ? EXIT_SUCCESS : EXIT_FAILURE);
+   exit(EXIT_SUCCESS);
 
 }

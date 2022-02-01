@@ -194,11 +194,6 @@ wire                    phy_dev_tx_clk;
 wire   [GPIO_HDR-1:0]   phy_dev_tx_hdr;
 wire   [GPIO_RX_TX-1:0] phy_dev_tx_dat;
 
-//wtf try resetting both phy if either dl indicates - doesnt help
-wire wtf_gtwiz_reset_rx_datapath_out;
-assign wtf_gtwiz_reset_rx_datapath_out = host_gtwiz_reset_rx_datapath_out | dev_gtwiz_reset_rx_datapath_out;
-
-
 wb_omi_host #(
    .PHY_BITS(PHY_BITS),
    .OMI_CLK_RATIO(OMI_CLK_RATIO)

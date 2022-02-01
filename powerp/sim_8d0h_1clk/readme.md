@@ -22,5 +22,7 @@
 
 * 8d0h, all 1:1, using rxvalid to throttle DL
 
+###i don't think this can work because there isn't a throttle (ready) on the tx side!###
+
 
 

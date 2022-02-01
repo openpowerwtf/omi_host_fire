@@ -1,0 +1,44 @@
+#~/usr/bin/bash
+
+loops=1000
+exitOnFail=0
+
+passes=0
+fails=0
+start=`date`
+
+for i in $(seq 1 $loops); do
+   echo ""
+   echo "***************************************************************************"
+   echo "Loop: $i"
+   echo ""
+   obj_dir/Vtop
+   rc=$?
+   if [ $rc -ne 0 ]; then
+      echo ""
+      echo "FAILED!"
+      echo ""
+      if [ $exitOnFail -ne 0 ]; then
+         exit $rc
+      fi
+      fails=$(expr $fails + 1)
+   else
+      passes=$(expr $passes + 1)
+   fi
+done
+
+fini=`date`
+
+echo ""
+echo "***************************************************************************"
+echo "Start: $start"
+echo "  End: $fini"
+echo ""
+
+echo "Passes: $passes"
+if [ $fails -ne 0 ]; then
+   echo "FAILS: $fails"
+fi
+
+exit $fails
+# 114ec3eb

@@ -1,0 +1,229 @@
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_rx_bs.v src/dl/ocx_dlx_rx_bs.v
+155c155
+---
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_rxdf.v src/dl/ocx_dlx_rxdf.v
+284c284
+---
+417c417
+---
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_rx_lane_66.v src/dl/ocx_dlx_rx_lane_66.v
+188a189
+> //wtf does this need to be a configurable setting?  or ignore in phy based on setting?
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_rx_lane.v src/dl/ocx_dlx_rx_lane.v
+279,280c279,280
+---
+290c290
+---
+324c324
+---
+376c376
+---
+380c380
+---
+385c385
+---
+550a551,552
+> //***********************************************************************************
+> // wtf why the reqt for 64+?  in sim with dl-nophy-dl, a_cntr only gets to ~28-2D; is this cuz of no wire latency??
+551a554,556
+> //wtf wire a_cnt_hit = a_cntr_q[5] | a_cntr_q[6];
+> //wtf assign found_pattern_b_din = found_pattern_b & a_cnt_hit;
+> //***********************************************************************************
+564a570,571
+> 
+> //***********************************************************************************
+565a573,576
+> //wtf assign find_first_b = a_cnt_hit & ~count_pattern_b & ~find_ts;         //-- found enough A to look for an inverted pattern B.
+> //***********************************************************************************
+> 
+> 
+589d599
+< 
+592d601
+< 
+596a606,616
+> /*
+> //wtf
+> wire b_cnt_hit = count_pattern_b & (b_cntr_q > 3);
+> assign pattern_b_din = (b_cnt_hit  | (pattern_b_q & |(b_cntr_q[6:0])) ) & ~reset & phy_training;
+> //wtf b_cntr isn't high enough to be nonzero; think this is supposed to be the (one) sync after pattern b is detected (they are detected before the b pattern too)
+> //changed tx_ctl and send unlatched version (dont use this), checked in tsm3
+> //assign pattern_sync_din = ( (count_pattern_b_q & found_sync_pattern & b_cntr_q[3]) | pattern_sync_q ) & ~reset & phy_training;                             //-- set when see sync pattern after seeing pattern B's, maintain until reset or not training
+> //assign pattern_sync     = pattern_sync_q;
+> 
+> assign pattern_sync     = count_pattern_b_q & found_sync_pattern;
+> */
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_rx_main.v src/dl/ocx_dlx_rx_main.v
+98,99d97
+< //!! Bugspray Include : ocx_dlx_rx_main ;
+< 
+179,180c177,178
+---
+182c180
+---
+185c183
+---
+187c185
+---
+215c213
+---
+236c234
+---
+242c240
+---
+284c282
+---
+297c295
+---
+312c310
+---
+314,315c312,313
+---
+317,318c315,316
+---
+325c323
+---
+327c325
+---
+345c343
+---
+349c347
+---
+351c349
+---
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_top.v src/dl/ocx_dlx_top.v
+193c193
+---
+227c227
+< input  [31:0]     reg_04_val;
+---
+269c269
+---
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_tx_ctl.v src/dl/ocx_dlx_tx_ctl.v
+28d27
+< 
+835a835,836
+>    `define TSM_RESET 3'b000 // wtf: 3'b110 = wait for input 6->1, 3'b000 = start after reset
+> 
+837c838
+---
+844c845
+---
+846c847
+---
+858c859
+---
+886c887
+---
+901,905c902,906
+---
+970c971,975
+<     assign quick_sim = 1'b0;
+---
+> 
+>    // wtf IMPORTANT!
+>    //assign quick_sim = 1'b1;  //wtf - or low-latency wires
+>     assign quick_sim = 1'b0;  //normal
+> 
+1009c1014
+<                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1014c1019
+<                                 dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                 dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1020,1021c1025,1026
+<                                  dlx_reset       ? 3'b110:     // -- dl going into reset
+<                                  sync_done       ? 3'b100:     // -- sync done
+---
+>                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+>                                  sync_done       ? 3'b100:     // -- sync done - wtf:this auto advances; below doesnt wait for det_sync_q
+1025c1030
+<                                  dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1032c1037
+<                                  dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1038c1043
+<                                  dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1046c1051
+<                                  dlx_reset       ? 3'b110:     // -- dl going into reset
+---
+>                                  dlx_reset       ? `TSM_RESET:     // -- dl going into reset
+1052c1057
+<     assign tsm_din[2:0] = reset_q ? 3'b110 : tsm_int[2:0];
+---
+>     assign tsm_din[2:0] = reset_q ? `TSM_RESET : tsm_int[2:0];
+1053a1059
+> 
+1055a1062
+> //wtf
+1056a1064,1066
+> //    assign pat_b_done              = tsm_advance & (det_sync_q | (b_cnt_q >= 'd3));
+> 
+> //wtf why was this auto-advancing???
+1057a1068,1069
+> //    assign sync_done               = (tsm_advance &  det_sync_q);
+> //wtf because it's single-ended potentially so the first one then init its phy, who tells the other phy to init also?
+1058a1071
+> 
+1067d1079
+<     assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd20)) ;
+1068a1081,1082
+>     //assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd13)) ;  //wtf (low lat) was 20
+>     assign tpulse                  = (timer_q[9:0] == 10'd402) | (quick_sim & (timer_q[9:0] == 10'd20)) ;
+1210a1225,1226
+> 
+> ///wtf was is this based on? - i guess it's flit length-1 for the 64 and 66 bit patterns?
+1212a1229,1230
+> //wtf    assign tsm_advance                 = tsm_q[2] ? (seq_cnt_q[8:2] == seq_cnt_max) :
+> //wtf                                                    (seq_cnt_q[6:2] == 7'b01111) ;
+1215a1234,1238
+> /*
+> //wtf why is this?  timing-related to bitrate vs dl impl???
+> // dont know what the extra count to 41 is doing to the logic, but the hiccup whacks the scrambling even though lfsr are sync'ed ; there are other
+> //
+>  */
+1220a1244,1246
+>    //wtf assign ctl_flt_stall = 0;
+>    //wtf wire [6:0] seq_cnt_max = 7'h3F;
+> 
+1233a1260
+> 
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_tx_flt.v src/dl/ocx_dlx_tx_flt.v
+91c91
+---
+135c135
+---
+139c139
+---
+141c141
+---
+148c148
+---
+156c156
+---
+158c158
+---
+161c161
+---
+164c164
+---
+192,195c192,195
+---
+197c197
+---
+199,201c199,201
+---
+369c369
+---
+377,378c377,378
+---
+diff -w --strip-trailing-cr src/dl-orig/ocx_dlx_tx_que.v src/dl/ocx_dlx_tx_que.v
+112d111
+< 

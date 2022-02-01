@@ -1,0 +1,28 @@
+#~/usr/bin/bash
+
+verilator --cc --exe --error-limit 1 --trace -Wno-fatal -Wno-Litendian -Isrc -I./src/dl -I./src/tl top.v tb.cpp
+rc=$?
+
+if [[ $rc -ne 0 ]]; then
+   echo $rc
+   exit $rc
+fi
+
+cd obj_dir;make -f Vtop.mk
+rc=$?
+cd ..
+
+if [[ $rc -ne 0 ]]; then
+   echo $rc
+   exit $rc
+fi
+
+if [[ -z "$1" ]] ; then
+
+   #obj_dir/Vtop +verilated+seed=8675309  # this sets verilator seed - can it be done by code??
+   obj_dir/Vtop
+   vcd2fst wtf.vcd wtf.fst
+   #gtkwave wtf.fst wtf.gtkw
+   gtkwave wtf.fst wtf_dl.gtkw
+
+fi
