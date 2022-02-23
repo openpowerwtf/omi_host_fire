@@ -49,17 +49,6 @@
 
 
 //wtf
-// there probably needs to be a 'sample' indicator to qualify when rx sigs should be grabbed - use clk_dl
-// what is the bit granularity of slip?
-// figured out had to reset slip when going to scrambled; guess it never happens after training?
-// either use a sync line (indicates every xfer 0 of n), or actually need to do a 'phy init' when dlx says so
-//  to get tx->rx locked (rx knows when cyc 0 of n is arriving); or, does it work if phy_init does nothing here
-//  and the slip count is retained?  seems so
-
-// would this ever need different slip counters for each lane?
-// believe a sync line is needed for data+header modes.  or are the header bits always ok if they
-//  are continuously transmitted (repeat over all data cycles)
-
 // xil ug471 (v1.10), bitslip submodule
 // reorders the sequence of parallel data going into fpga fabric
 // p 159: bitslip is NOT a barrel shift, though it looks like one in repeating pattern; it adds one bit to the input
