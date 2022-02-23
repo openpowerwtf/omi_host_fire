@@ -1,0 +1,13 @@
+v 4
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "support/signal_resolution_pkg.vhdl" "dc38220a6171350b86f9d7e585e3a823ad8a7a2f" "20220223232742.855":
+  package signal_resolution_pkg at 25( 1175) + 0 on 4;
+  package body signal_resolution_pkg at 59( 2338) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "support/power_logic_pkg.vhdl" "8e0af7f51bae49ad20c4414fb2ad32bae87778ee" "20220223232742.855":
+  package power_logic_pkg at 25( 1175) + 0 on 4;
+  package body power_logic_pkg at 46( 1729) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "support/logic_support_pkg.vhdl" "097ff74304c8c87d4c2a8170b20eae48ff5af9d1" "20220223232742.855":
+  package logic_support_pkg at 25( 1170) + 0 on 4;
+  package body logic_support_pkg at 245( 7616) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "support/design_util_functions_pkg.vhdl" "e620c37181bfa6f0365084493123fbaa58e3bac7" "20220223232742.855":
+  package design_util_functions_pkg at 25( 1175) + 0 on 4;
+  package body design_util_functions_pkg at 162( 5147) + 0 on 4;

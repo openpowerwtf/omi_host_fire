@@ -1,0 +1,16 @@
+v 4
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "latches/c_latch_init_pkg.vhdl" "fcd5643b071364cb22b8099ba0754da1117ab606" "20220223232742.882":
+  package c_latch_init_pkg at 22( 1172) + 3 on 4;
+  package body c_latch_init_pkg at 27( 1314) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "morph/c_morph_dff_1.vhdl" "a7e9fcc91aa4125d40e49633a86a08404c3c7a44" "20220223232742.878":
+  entity c_morph_dff_1 at 22( 1167) + 0 on 4;
+  architecture c_morph_dff_1 of c_morph_dff_1 at 62( 2190) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "morph/c_morph_dff_core_1.vhdl" "d010dd771bf57ee3220909bd2e1b9963dbdad216" "20220223232742.878":
+  entity c_morph_dff_core_1 at 22( 1167) + 0 on 4;
+  architecture c_morph_dff_core_1 of c_morph_dff_core_1 at 48( 1775) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "morph/c_morph_dff_core.vhdl" "4919f8b997b8e8caa40ef2dd9a3e125816f907d3" "20220223232742.878":
+  entity c_morph_dff_core at 22( 1172) + 0 on 4;
+  architecture c_morph_dff_core of c_morph_dff_core at 49( 2117) + 0 on 4;
+file "/home/wtf/projects/omi_host_fire/asic_host/ghdl/" "morph/c_morph_dff.vhdl" "335f4f37297376d2cf0fe06db082b0d7ec04d4ed" "20220223232742.879":
+  entity c_morph_dff at 22( 1172) + 0 on 4;
+  architecture c_morph_dff of c_morph_dff at 61( 2502) + 0 on 4;

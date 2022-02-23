@@ -1,0 +1,11 @@
+{
+   "options": {
+      "ghdl-analysis": [
+         "--workdir=work",
+         "--std=08"
+      ]
+   },
+   "files": [
+      {"file": "tl/omi.vhdl", "language": "vhdl"}
+   ]
+}

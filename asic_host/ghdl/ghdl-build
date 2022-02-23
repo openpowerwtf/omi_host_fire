@@ -1,0 +1,56 @@
+#!/usr/bin/bash
+#
+# import, then can analyzer/make/run
+
+echo ""
+echo "Import libraries..."
+
+ghdl -i --std=08 --workdir=work -Pwork --work=ibm ibm/*.vhdl
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+ghdl -i --std=08 --workdir=work -Pwork --work=support support/*
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+ghdl -i --std=08 --workdir=work -Pwork --work=clib clib/*
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+
+ghdl -i --std=08 --workdir=work -Pwork --work=latches morph/*
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+ghdl -i --std=08 --workdir=work -Pwork --work=latches latches/*
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+echo ""
+echo "Import TL..."
+
+#ghdl -i --workdir=work tl/*
+ghdl -i --std=08 --workdir=work tl/*
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+#echo ""
+#echo "Elab order:"
+#ghdl --elab-order --std=08 --workdir=work -Pwork omi
+
+echo ""
+echo "Make..."
+ghdl -m --std=08 --workdir=work -Pwork omi
+if [ $? -ne 0 ]; then
+   exit
+fi
+
+echo ""
+#hdl -r --workdir=work -Pwork tl/*
+
